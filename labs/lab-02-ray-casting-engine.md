@@ -1,4 +1,4 @@
-# Lab: Wolfenstein-like Ray Casting Engine
+# Lab 02: Wolfenstein-like Ray Casting Engine
 
 ## Goal
 
@@ -38,11 +38,9 @@ Where:
 
 The player is located somewhere inside the map and looks in some direction.
 
-For every vertical column of the screen, the program sends a ray from the player’s position.  
-When the ray hits a wall, the distance to that wall is used to calculate how tall the wall should look on the screen.
+For every vertical column of the screen, the program sends a ray from the player’s position. When the ray hits a wall, the distance to that wall is used to calculate how tall the wall should look on the screen.
 
-Closer wall = taller vertical slice.  
-Farther wall = smaller vertical slice.
+Closer wall = taller vertical slice. Farther wall = smaller vertical slice.
 
 ---
 
@@ -52,17 +50,14 @@ Farther wall = smaller vertical slice.
 flowchart TD
     A[Start application] --> B[Initialize map and player]
     B --> C[Main loop]
-
     C --> D[Read keyboard input]
     D --> E[Update player position and rotation]
     E --> F[Check wall collision]
-
     F --> G[Cast rays across field of view]
     G --> H[Find wall hit for each ray]
     H --> I[Calculate distance to wall]
     I --> J[Calculate wall slice height]
     J --> K[Render pseudo-3D view]
-
     K --> L[Render minimap]
     L --> M[Display frame]
     M --> N{Exit?}
@@ -86,15 +81,6 @@ Your application must have:
 - pseudo-3D wall rendering;
 - a simple minimap or debug 2D view.
 
-You may use any suitable language or framework.
-
-Recommended options:
-
-- C++ with SDL2 / SFML / raylib;
-- JavaScript with Canvas;
-- Python with pygame;
-- C# with a graphics framework.
-
 ---
 
 ## Functional Requirements
@@ -103,24 +89,12 @@ Recommended options:
 
 The map must be stored as a 2D array, string array, or loaded from a file.
 
-Example:
-
-```txt
-111111
-100001
-101001
-100001
-111111
-```
-
 Requirements:
 
 - `1` means wall;
 - `0` means empty space;
 - the player cannot walk through walls;
 - map borders should be closed by walls.
-
----
 
 ### 2. Player Movement
 
@@ -137,10 +111,6 @@ Optional:
 - mouse rotation;
 - sprint mode.
 
-The player must not be able to move through walls.
-
----
-
 ### 3. Ray Casting
 
 The program must cast multiple rays from the player’s position.
@@ -152,17 +122,7 @@ Each ray should:
 - calculate the distance to the wall;
 - return information needed for rendering.
 
-Minimum requirement:
-
-- cast at least **60 rays** per frame.
-
-Recommended:
-
-- make the field of view configurable;
-- reduce fish-eye distortion;
-- draw rays on the minimap for debugging.
-
----
+Minimum requirement: cast at least **60 rays** per frame.
 
 ### 4. Rendering
 
@@ -174,14 +134,6 @@ Requirements:
 - far walls look smaller;
 - the screen updates when the player moves;
 - wall slices are drawn based on ray distances.
-
-Recommended:
-
-- draw ceiling and floor;
-- add simple distance-based shading;
-- use different colors for different wall types.
-
----
 
 ### 5. Minimap
 
@@ -195,15 +147,9 @@ It should show:
 - player direction;
 - optionally, visible rays.
 
-The minimap is important because it helps explain how the algorithm works.
-
 ---
 
 ## Suggested Project Structure
-
-Your code should not be written as one huge file.
-
-Recommended structure:
 
 ```txt
 ray-casting-engine/
@@ -218,16 +164,6 @@ ray-casting-engine/
   maps/
   assets/
 ```
-
-Possible responsibilities:
-
-- `GameMap` — stores the map and checks walls;
-- `Player` — stores position, direction, and movement;
-- `Raycaster` — casts rays and finds wall hits;
-- `Renderer` — draws the pseudo-3D scene and minimap;
-- `InputHandler` — reads keyboard input.
-
-You do not have to use exactly these names, but your project should have clear structure.
 
 ---
 
@@ -245,10 +181,6 @@ Implement:
 - pseudo-3D wall rendering;
 - basic minimap.
 
-This is enough for a passing grade if the code is clean and the student can explain it.
-
----
-
 ### Standard
 
 Implement everything from Basic plus:
@@ -258,12 +190,7 @@ Implement everything from Basic plus:
 - visible rays on minimap;
 - distance-based wall shading;
 - fish-eye correction;
-- map loaded from a file;
-- better project structure.
-
-This is the recommended level.
-
----
+- map loaded from a file.
 
 ### Advanced
 
@@ -275,16 +202,11 @@ Implement some of the following:
 - simple sprites or enemies;
 - mouse control;
 - multiple maps;
-- level editor;
 - optimized DDA ray casting.
-
-Advanced features are optional. The core ray casting engine must work first.
 
 ---
 
 ## Implementation Plan
-
-Recommended steps:
 
 1. Create a 2D map.
 2. Draw the map as a simple 2D view.
@@ -304,28 +226,15 @@ Recommended steps:
 
 ## Testing
 
-You should test at least the following:
+Test at least the following:
 
-### Map
+- wall collisions work
+- rays hit walls
+- distance is calculated
+- program does not crash near map borders
+- map can be changed
 
-- wall cells are detected correctly;
-- empty cells are detected correctly;
-- out-of-map positions do not crash the program.
-
-### Movement
-
-- player can move through empty space;
-- player cannot move through walls;
-- player can rotate left and right.
-
-### Ray Casting
-
-- rays hit walls;
-- distance to wall is calculated;
-- the program does not crash near map borders.
-
-Automated tests are recommended but not strictly required.  
-If you do not write automated tests, describe manual test cases in `README.md`.
+Automated tests are recommended but not strictly required. If you do not write automated tests, describe manual test cases in `README.md`.
 
 ---
 
@@ -333,14 +242,11 @@ If you do not write automated tests, describe manual test cases in `README.md`.
 
 During the demo, show:
 
-- movement inside the map;
-- collision with walls;
-- pseudo-3D rendering;
-- minimap or debug view;
-- project structure;
-- explanation of how one ray finds a wall.
-
-Be ready to change the map and show that the engine still works.
+- move inside the map
+- show collision with walls
+- show pseudo-3D rendering
+- show minimap
+- explain how one ray finds a wall
 
 ---
 
@@ -353,11 +259,10 @@ Your repository must include `README.md` with:
 3. Selected difficulty level.
 4. Technologies used.
 5. How to run the project.
-6. Controls.
-7. Map format.
-8. Short explanation of ray casting.
-9. Screenshots or demo link, if possible.
-10. Known problems or limitations.
+6. Main features.
+7. Short explanation of the main algorithm or architecture.
+8. Screenshots or demo link, if possible.
+9. Known problems or limitations.
 
 ---
 
@@ -367,17 +272,12 @@ Be ready to answer:
 
 1. How is your map stored?
 2. How do you check wall collisions?
-3. What is a ray in your project?
+3. What is a ray?
 4. How do you calculate ray direction?
-5. How do you know that a ray hit a wall?
-6. Why do close walls look taller?
-7. What is field of view?
-8. What is fish-eye distortion?
-9. What does your game loop do?
-10. Which part of your code renders the scene?
-11. Which part stores the player state?
-12. What was the hardest part of this project?
-13. What would you improve next?
+5. Why do close walls look taller?
+6. What is field of view?
+7. What is fish-eye distortion?
+8. What does your game loop do?
 
 ---
 
@@ -389,30 +289,16 @@ Be ready to answer:
 | Player movement and collision detection | 15 |
 | Ray casting logic | 20 |
 | Pseudo-3D rendering | 20 |
-| Minimap / debug view | 10 |
+| Minimap/debug view | 10 |
 | Code structure | 10 |
-| README and explanation | 10 |
+| README | 10 |
 | Demo and defense | 5 |
 | **Total** | **100** |
 
 ---
 
-## Common Mistakes
-
-Avoid these mistakes:
-
-- no collision detection;
-- all code in one very large file;
-- random vertical lines instead of real ray casting;
-- no minimap or debug view;
-- no explanation of the algorithm;
-- program crashes near map borders;
-- README does not explain how to run the project.
-
----
-
 ## Expected Result
 
-At the end of this lab, you should have a small working pseudo-3D engine.
+At the end of this lab, you should have a working project called **Wolfenstein-like Ray Casting Engine**.
 
-The user should be able to move inside a maze, see walls in a first-person view, and understand how the 3D illusion is created from a 2D map.
+The project should demonstrate both programming skills and the ability to structure, explain, and present a small but non-trivial software system.
