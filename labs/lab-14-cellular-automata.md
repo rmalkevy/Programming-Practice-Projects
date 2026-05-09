@@ -129,7 +129,7 @@ The 2-week scope above ships a real, defendable simulator. If you fall in love w
 - **Build an interactive explainable.** A web page in the style of [Bret Victor](http://worrydream.com/) or [Distill.pub](https://distill.pub/) — interactive sliders, narrative text, the user discovers Conway's rules by manipulating cells. *Genuinely rare* portfolio piece.
 - **Hashlife.** Implement Bill Gosper's legendary algorithm — simulates *billions* of generations in seconds via memoization. One of the most elegant algorithms in CS.
 - **3D Cellular Automata.** Lift the rules to three dimensions. Visualize with WebGL / Three.js. Looks alien.
-- **Combine with Lab 32 (neural net).** Train a tiny network to *learn* Conway's rules from data — does it converge to the right rule? A nice toy ML experiment.
+- **Combine with [Lab 32](lab-32-neural-net-from-scratch.md) (neural net).** Train a tiny network to *learn* Conway's rules from data — does it converge to the right rule? A nice toy ML experiment.
 
 ---
 

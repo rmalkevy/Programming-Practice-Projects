@@ -128,8 +128,8 @@ The 2-week scope above ships a real, defendable maze tool. If algorithms or visu
 
 - **Ship to the web.** A TypeScript + canvas port deployed to GitHub Pages. Algorithm visualizers shine on the web.
 - **Build a teaching site.** Multiple generators (Recursive Backtracker, Prim, Wilson, Kruskal) and multiple solvers (BFS, DFS, A\*), each with a narrative explaining why they work and what their visual signature means. Distill.pub / Bret Victor energy.
-- **Combine with Lab 26 (procedural roguelike).** Use your generator algorithms for dungeon levels in your roguelike. Plug-and-play.
-- **Combine with Lab 07 (graph algorithms).** A unified algorithm-visualization library — same engine, mazes and arbitrary graphs.
+- **Combine with [Lab 26](lab-26-procedural-roguelike.md) (procedural roguelike).** Use your generator algorithms for dungeon levels in your roguelike. Plug-and-play.
+- **Combine with [Lab 7](lab-07-graph-route-finder.md) (graph algorithms).** A unified algorithm-visualization library — same engine, mazes and arbitrary graphs.
 - **A real-world maze.** Take a hand-drawn paper maze, scan it, threshold it, run your solver. *Surprisingly* impressive demo.
 - **Open source as an npm package** other students drop into their projects.
 

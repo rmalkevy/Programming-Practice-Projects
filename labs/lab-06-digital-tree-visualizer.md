@@ -123,8 +123,8 @@ The 2-week scope above ships a real, defendable visualizer. If algorithm visuali
 
 - **Ship to the web.** A TypeScript + SVG version deployed to GitHub Pages — shareable URL, instant demo. Algorithm visualizers are uniquely strong portfolio pieces *only* when they're playable in-browser.
 - **Build a teaching website.** Multiple data structures (BST, AVL, red-black, trie, heap) with narrative explanations and step-by-step walks. Distill.pub / Bret Victor energy.
-- **Combine with Lab 22.** A SPA that's *the visualizer* — polished UI, routing between data structures, save/load tree configurations.
-- **Combine with Lab 07 (graph algorithms).** Same engine, but now visualize graph traversals — BFS, DFS, Dijkstra, A\*. Two labs, one beautiful product.
+- **Combine with [Lab 22](lab-22-spa-frontend.md).** A SPA that's *the visualizer* — polished UI, routing between data structures, save/load tree configurations.
+- **Combine with [Lab 7](lab-07-graph-route-finder.md) (graph algorithms).** Same engine, but now visualize graph traversals — BFS, DFS, Dijkstra, A\*. Two labs, one beautiful product.
 - **Open source it.** Ship as an npm package other students can drop into their own pages. *Wildly* impressive.
 
 ---

@@ -134,7 +134,7 @@ The 2-week scope above ships a real, defendable tool. If filesystem hacking pull
 
 - **Ship a real CLI.** Globally installable via `npm i -g` or `dotnet tool install`. Other people install your file explorer and use it. *Surprisingly* impressive on a CV.
 - **Build a TUI in the spirit of Total Commander / Far Manager.** Two panes, keyboard-only, fast as hell. Use it yourself for a month.
-- **Combine with Lab 15 (search).** Add full-text search (your inverted index from Lab 15) over the contents of all text files in a directory tree. A *grep that's faster than ripgrep* on warm cache. Real engineering.
+- **Combine with [Lab 15](lab-15-mini-search-engine.md) (search).** Add full-text search (your inverted index from [Lab 15](lab-15-mini-search-engine.md)) over the contents of all text files in a directory tree. A *grep that's faster than ripgrep* on warm cache. Real engineering.
 - **Build a desktop GUI** with Avalonia or Tauri. Drag-and-drop, modern UI, packaged installer. Looks like a real product.
 - **Open source it.** A license, GitHub Actions CI, contributing guide. Get one external pull request.
 

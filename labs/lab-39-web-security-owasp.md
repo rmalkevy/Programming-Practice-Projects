@@ -42,7 +42,7 @@ If you want a perfect appetizer, spend an evening on the **[PortSwigger Web Secu
 - **Bug-bounty income is real.** A clean OWASP Top 10 walkthrough on your GitHub plus a HackerOne / Intigriti profile with even a handful of valid reports is a credible second income — and a remarkable CV item.
 - **The OWASP Top 10 maps almost 1:1 to CV-readable skills.** "I understand SQL injection / SSRF / IDOR / JWT issues" is what hiring managers literally ask in interviews.
 - **It transfers to AppSec, DevSecOps, and red team careers** — three of the highest-paid junior tracks in tech.
-- **It connects to Lab 21 (REST API + auth)** — your own service is the perfect vulnerable target. Many students skip the rebuild and reuse Lab 21 with toggleable vulnerabilities.
+- **It connects to [Lab 21](lab-21-rest-api-auth.md) (REST API + auth)** — your own service is the perfect vulnerable target. Many students skip the rebuild and reuse [Lab 21](lab-21-rest-api-auth.md) with toggleable vulnerabilities.
 
 ---
 
@@ -147,8 +147,8 @@ For each, you'll demonstrate **at least one concrete exploit**, then patch it. S
 - **Bug bounty submission.** Submit a *valid, accepted* report to a HackerOne, Intigriti, or Bugcrowd program. Even a low-severity acceptance is a real CV item.
 - **Chained vulnerability.** Combine two low-severity bugs in your own app into a critical-severity result. Document the chain.
 - **Add CSRF + clickjacking** as bonuses — both subtle, both common, both not officially in the Top 10 but heavily tested.
-- **Pen-test Lab 21.** With your own permission, attack your Lab 21 service. Document gaps. Patch.
-- **Pen-test Lab 22 / Lab 23 / Lab 27.** Different attack surfaces (frontend XSS, WebSocket auth, real-time game cheating).
+- **Pen-test [Lab 21](lab-21-rest-api-auth.md).** With your own permission, attack your [Lab 21](lab-21-rest-api-auth.md) service. Document gaps. Patch.
+- **Pen-test [Lab 22](lab-22-spa-frontend.md) / [Lab 23](lab-23-realtime-multiplayer.md) / [Lab 27](lab-27-multiplayer-browser-game.md).** Different attack surfaces (frontend XSS, WebSocket auth, real-time game cheating).
 - **Add WAF + bypass.** Stand up Cloudflare's free WAF or `ModSecurity` in front of your app; bypass it; document the lessons.
 - **Threat modeling.** Run a STRIDE threat-modeling session on your own app (write the document).
 - **Container hardening.** Dockerize the app, run `trivy` and `dockle`; fix the findings.
@@ -158,10 +158,10 @@ For each, you'll demonstrate **at least one concrete exploit**, then patch it. S
 
 ## Extension challenges (3–5 weeks)
 
-- **Combine with Lab 21.** Take your Lab 21 service; intentionally remove protections; pen-test it; restore them; produce a *pentest-of-your-own-service* writeup. *Genuinely useful* output for any backend team.
-- **Combine with Lab 22.** Add a deliberate XSS vector to your Lab 22 SPA frontend; exploit it; patch it with CSP and proper encoding.
-- **Combine with Lab 23 / Lab 27.** Multiplayer game security — duplication exploits, client trust, anti-cheat. *Surprisingly* deep rabbit hole.
-- **Combine with Lab 38.** When the web service is implemented in C/C++ (e.g., a small custom backend), web bugs become memory-corruption bugs. Demonstrate.
+- **Combine with [Lab 21](lab-21-rest-api-auth.md).** Take your [Lab 21](lab-21-rest-api-auth.md) service; intentionally remove protections; pen-test it; restore them; produce a *pentest-of-your-own-service* writeup. *Genuinely useful* output for any backend team.
+- **Combine with [Lab 22](lab-22-spa-frontend.md).** Add a deliberate XSS vector to your [Lab 22](lab-22-spa-frontend.md) SPA frontend; exploit it; patch it with CSP and proper encoding.
+- **Combine with [Lab 23](lab-23-realtime-multiplayer.md) / [Lab 27](lab-27-multiplayer-browser-game.md).** Multiplayer game security — duplication exploits, client trust, anti-cheat. *Surprisingly* deep rabbit hole.
+- **Combine with [Lab 38](lab-38-binary-exploitation.md).** When the web service is implemented in C/C++ (e.g., a small custom backend), web bugs become memory-corruption bugs. Demonstrate.
 - **Build a tool.** Write a small custom scanner for one bug class (e.g., a JWT-`none`-detector or an open-redirect scanner). Even a 100-line tool is portfolio gold.
 - **HackTheBox / Root-Me ranking.** Climb to a verifiable rank on a public platform.
 - **Join a CTF team.** Compete in a public web-focused CTF. Document your solves.
@@ -178,7 +178,7 @@ The OWASP Top 10 is universal. The *application context* is yours.
 - **A delivery / order tracker** — server-side request forgery via tracking-URL fetch.
 - **A weather/IoT dashboard** that ingests data — SSRF, deserialization.
 - **A meme-board** — stored XSS, CSRF, file-upload mayhem.
-- **A drone-fleet operator console** (mock!) — connects to Lab 37, broken access control on flight commands. *Important caveat: this is a mock, never a live system.*
+- **A drone-fleet operator console** (mock!) — connects to [Lab 37](lab-37-px4-mavlink-drone-stack.md), broken access control on flight commands. *Important caveat: this is a mock, never a live system.*
 
 You'll defend why you chose it.
 
@@ -191,7 +191,7 @@ Solo: viable. Most pen-testing is solo work.
 Team:
 - *By role:* one person plays *developer* (writing the vulnerable app and the patches), the other plays *attacker* (writing the exploits and the report). Switch on Day 7 if up for it. *This pairs beautifully.*
 - *By bug class:* split the 10 categories into 5+5 or 4+3+3.
-- *Across labs:* one team's Lab 21 service becomes the other's pen-test target.
+- *Across labs:* one team's [Lab 21](lab-21-rest-api-auth.md) service becomes the other's pen-test target.
 
 Two team rules: **git from day one** and **list who did what.** Each member must be able to live-demo at least 4 vulnerabilities and explain their patches.
 

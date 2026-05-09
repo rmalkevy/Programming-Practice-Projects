@@ -119,9 +119,9 @@ Two loops live in your head at once: the **scene loop** (which level the player 
 - **Boss Fight.** A final boss with an attack pattern. Multiple phases.
 - **Gimmick Mechanic.** Gravity flip, time rewind, hookshot, double jump unlocked mid-game, "two characters at once."
 - **Level Editor.** Players design their own level and share via a code or URL. *Massive* portfolio impact.
-- **Speedrun Timer.** With a leaderboard backed by Lab 21's API. Combine labs!
+- **Speedrun Timer.** With a leaderboard backed by [Lab 21](lab-21-rest-api-auth.md)'s API. Combine labs!
 - **Mobile Touch Controls.** Game playable on a phone.
-- **Controller Support.** Gamepad input. (Connects to Lab 19.)
+- **Controller Support.** Gamepad input. (Connects to [Lab 19](lab-19-custom-game-controller.md).)
 - **Original Art.** You drew the sprites, or a friend did. Credit them. *Even crude original art beats a polished asset pack on portfolios.*
 - **Local Co-op.** Two-player on the same keyboard.
 
@@ -130,7 +130,7 @@ Two loops live in your head at once: the **scene loop** (which level the player 
 ## Extension challenges (3–5 weeks)
 
 - **A Polished 10-Minute Game.** 5+ levels, a full story arc, original audio and visual polish. The kind of thing you'd hand a friend without apologizing.
-- **Combine With Lab 27 (Multiplayer).** Add online multiplayer to your platformer — one character per player on the same level. Hard but absurdly impressive.
+- **Combine With [Lab 27](lab-27-multiplayer-browser-game.md) (Multiplayer).** Add online multiplayer to your platformer — one character per player on the same level. Hard but absurdly impressive.
 - **Take It To A Game Jam.** Use your engine + skills to enter a real jam (Ludum Dare, Global Game Jam, GMTK Jam). The deadline pressure of a jam is a different kind of education.
 
 ---
@@ -175,7 +175,7 @@ Two team rules: **git from day one** (engines have specific Git ignore rules —
 **Unity (industry standard)**
 - The most-used engine in the industry.
 - Heavyweight install, more powerful, larger learning curve.
-- C# everywhere. Great if you've used C# before (great Lab 12/Lab 21 transfer).
+- C# everywhere. Great if you've used C# before (great [Lab 12](lab-12-task-tracker.md)/[Lab 21](lab-21-rest-api-auth.md) transfer).
 - Exports to web (WebGL), but the build is large and the export pipeline is finicky.
 - Good if you're sure you want to do game-dev professionally; Godot is enough for this lab.
 

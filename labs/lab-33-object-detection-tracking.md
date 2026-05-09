@@ -119,15 +119,15 @@ The mantra: **detection per frame, association across frames.** Detection is "wh
 - **Sports Analytics.** Track players in a soccer/basketball clip; compute heat maps.
 - **Audio + Video.** Combine with audio classification (e.g., bird call + bird sighting).
 - **Privacy-First.** Blur faces / license plates automatically. Surprisingly useful and ethically interesting.
-- **Connects to Lab 31.** Pipe the detected objects' bounding boxes into an LLM that *describes the scene in natural language* in real time. "There are 3 cars and 2 pedestrians; one car is approaching."
+- **Connects to [Lab 31](lab-31-llm-rag-app.md).** Pipe the detected objects' bounding boxes into an LLM that *describes the scene in natural language* in real time. "There are 3 cars and 2 pedestrians; one car is approaching."
 
 ---
 
 ## Extension challenges (3–5 weeks)
 
 - **A Real Tool.** Take one specific real-world problem (counting wildlife in a forest video, scoring tennis matches, detecting drones over a fence, classifying cars at a parking lot) and ship a polished tool. Distribute it. Document a real user.
-- **Combine With Lab 17 (Self-Balancing Robot).** A robot with a webcam that tracks and follows a colored ball — visual servoing in miniature. *World-class demo*.
-- **Combine With Lab 32 (From-Scratch).** Train your own *tiny* detector from scratch in PyTorch (don't use a pretrained YOLO). Document the painful gap between hand-trained and pre-trained models. *Massive* learning value.
+- **Combine With [Lab 17](lab-17-pid-self-balancer.md) (Self-Balancing Robot).** A robot with a webcam that tracks and follows a colored ball — visual servoing in miniature. *World-class demo*.
+- **Combine With [Lab 32](lab-32-neural-net-from-scratch.md) (From-Scratch).** Train your own *tiny* detector from scratch in PyTorch (don't use a pretrained YOLO). Document the painful gap between hand-trained and pre-trained models. *Massive* learning value.
 
 ---
 
@@ -157,7 +157,7 @@ Solo: feasible. The Ultralytics ecosystem makes the basic pipeline almost embarr
 Team:
 - *By layer:* one person owns the model + inference loop; the other owns the application (counting, UI, deployment).
 - *By feature:* one person hits Basic + tracking; the other tackles fine-tuning or edge deployment.
-- *Across labs:* if the team is also doing Lab 17 (robot) or Lab 18 (sensor monitor), one person can own the vision, the other the embedded side.
+- *Across labs:* if the team is also doing [Lab 17](lab-17-pid-self-balancer.md) (robot) or [Lab 18](lab-18-smart-plant-monitor.md) (sensor monitor), one person can own the vision, the other the embedded side.
 
 Two team rules: **git from day one** and **list who did what.** Each team member must explain at least the detection + tracking pipeline.
 

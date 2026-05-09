@@ -4,7 +4,7 @@
 > — paraphrased from countless DEF CON talks
 
 **Time budget:** ~2 weeks for the core lab, with extension challenges that grow it to 3–5 weeks.
-**Preferred stack:** **Wireshark**, **tcpdump**, **`nmap`**, **Aircrack-ng suite**, **`hashcat`**, plus a Linux VM (Kali strongly recommended). Optionally a **USB Wi-Fi adapter that supports monitor + injection mode**, plus the SDR-curious can add an **RTL-SDR** dongle ($25). For the drone-link section: **MAVLink**, **`pymavlink`**, **PX4 SITL** (reuses Lab 37 setup), **libsodium** or **WireGuard** for the secure version.
+**Preferred stack:** **Wireshark**, **tcpdump**, **`nmap`**, **Aircrack-ng suite**, **`hashcat`**, plus a Linux VM (Kali strongly recommended). Optionally a **USB Wi-Fi adapter that supports monitor + injection mode**, plus the SDR-curious can add an **RTL-SDR** dongle ($25). For the drone-link section: **MAVLink**, **`pymavlink`**, **PX4 SITL** (reuses [Lab 37](lab-37-px4-mavlink-drone-stack.md) setup), **libsodium** or **WireGuard** for the secure version.
 **Working style:** solo, or in a team of up to 3 people.
 
 ---
@@ -43,7 +43,7 @@ If you want a perfect appetizer, watch [**"How To Capture Packets" — David Bom
 
 - **The skill is *deeply* defensive.** Once you can read packets, you can debug, diagnose, harden, and secure. *Most engineers can't.*
 - **Defense and aerospace need this skill, immediately.** Ukrainian defense-tech is hiring engineers who understand RF, MAVLink, and signal-level security. Western primes (Anduril, L3Harris, BAE) are hiring globally for the same.
-- **It pairs unbelievably well with previous labs.** Lab 37's drone simulator becomes a security target. Lab 39's web app becomes the protocol you analyze on the wire. Lab 16's telemetry beacon becomes a real radio-security exercise.
+- **It pairs unbelievably well with previous labs.** [Lab 37](lab-37-px4-mavlink-drone-stack.md)'s drone simulator becomes a security target. [Lab 39](lab-39-web-security-owasp.md)'s web app becomes the protocol you analyze on the wire. [Lab 16](lab-16-smart-telemetry-beacon.md)'s telemetry beacon becomes a real radio-security exercise.
 - **It teaches cryptography in the way that sticks.** "AES-GCM matters" hits different when you've just decrypted your own unauthenticated UDP packets and read the MAVLink commands.
 - **CTF + community.** DEF CON's Aviation Village, RF Village, and Wireless Village publish accessible challenges every year.
 - **It teaches *modesty*.** After this lab you'll never again say "but it's encrypted, so it's fine" without checking what it actually is.
@@ -109,7 +109,7 @@ This lab makes those three things *physical* instead of abstract.
 - **Day 4 — `nmap` and `arp-scan`.** Map the *virtual* network you set up. Practice OS detection, version detection, scripting (`-sV`, `--script vuln`). Document what each scan tells you.
 - **Day 5 — Wi-Fi lab setup.** Set up a separate Wi-Fi AP you own (a phone hotspot or a $15 travel router) with a deliberately weak passphrase. Disconnect it from any production network. *Milestone: monitor mode confirmed, channel hopping working.*
 - **Day 6 — WPA2 handshake capture + crack.** Force a re-association on a device you own. Capture the 4-way handshake. Crack the (weak) passphrase with `aircrack-ng` or `hashcat`. Document time-to-crack vs passphrase entropy.
-- **Day 7 — MAVLink capture (sim).** Bring up PX4 SITL (Lab 37 setup reused). Capture the MAVLink stream between SITL and QGroundControl with Wireshark's MAVLink dissector. *Milestone: read live drone commands and telemetry.*
+- **Day 7 — MAVLink capture (sim).** Bring up PX4 SITL ([Lab 37](lab-37-px4-mavlink-drone-stack.md) setup reused). Capture the MAVLink stream between SITL and QGroundControl with Wireshark's MAVLink dissector. *Milestone: read live drone commands and telemetry.*
 
 **At this point you've completed the Basic level.**
 
@@ -149,9 +149,9 @@ This lab makes those three things *physical* instead of abstract.
 - **Anti-jam reasoning.** Document, with code, frequency-hopping / spread-spectrum strategies in PX4 sim. Compare RF resilience choices.
 - **MAVLink2 signing in production-style.** Implement the full key-rotation mechanism. Document the user-experience trade-offs of secure operation.
 - **WireGuard everywhere.** Stand up a WireGuard mesh between virtual nodes. Use it as the carrier for MAVLink, video, and command links. Benchmark latency and throughput.
-- **Combine with Lab 16.** Your IoT telemetry beacon: capture + replay it; then secure it.
-- **Combine with Lab 35 / 37.** Your own RTOS firmware speaking secured MAVLink.
-- **Combine with Lab 39.** Capture HTTP traffic of your own intentionally-vulnerable web app on the wire — show the same SQL injection request and JWT in plaintext.
+- **Combine with [Lab 16](lab-16-smart-telemetry-beacon.md).** Your IoT telemetry beacon: capture + replay it; then secure it.
+- **Combine with [Lab 35](lab-35-rtos-mini-autopilot.md) / 37.** Your own RTOS firmware speaking secured MAVLink.
+- **Combine with [Lab 39](lab-39-web-security-owasp.md).** Capture HTTP traffic of your own intentionally-vulnerable web app on the wire — show the same SQL injection request and JWT in plaintext.
 - **DEF CON CTF.** Compete in a public wireless / network CTF and document your solves.
 - **Post-quantum aware.** Replace one of your secured links with a hybrid key-exchange (e.g., ML-KEM via `liboqs`). Document compatibility and performance.
 - **Forensics writeup.** Take a publicly-available PCAP from MalwareTrafficAnalysis.net; write a full incident-investigation report.
@@ -160,10 +160,10 @@ This lab makes those three things *physical* instead of abstract.
 
 ## Extension challenges (3–5 weeks)
 
-- **Combine with Lab 37.** Build a *full secure-MAVLink reference implementation* on top of your PX4 SITL stack. Replay attack → fails. Tamper attack → fails. Eavesdrop → only metadata. *Genuinely useful for the Ukrainian defense-tech sector.*
-- **Combine with Lab 35.** Run secured MAVLink on your RTOS firmware. Profile cryptographic overhead. Demonstrate it fits within the real-time budget.
-- **Combine with Lab 16.** Build *secure IoT telemetry from the chip*. WireGuard or a tiny AEAD layer end-to-end.
-- **Combine with Lab 39.** A complete pentest on a small *networked* deployment of your Lab 39 app — TLS audit, header audit, SSRF testing on the AWS-metadata endpoint analog.
+- **Combine with [Lab 37](lab-37-px4-mavlink-drone-stack.md).** Build a *full secure-MAVLink reference implementation* on top of your PX4 SITL stack. Replay attack → fails. Tamper attack → fails. Eavesdrop → only metadata. *Genuinely useful for the Ukrainian defense-tech sector.*
+- **Combine with [Lab 35](lab-35-rtos-mini-autopilot.md).** Run secured MAVLink on your RTOS firmware. Profile cryptographic overhead. Demonstrate it fits within the real-time budget.
+- **Combine with [Lab 16](lab-16-smart-telemetry-beacon.md).** Build *secure IoT telemetry from the chip*. WireGuard or a tiny AEAD layer end-to-end.
+- **Combine with [Lab 39](lab-39-web-security-owasp.md).** A complete pentest on a small *networked* deployment of your [Lab 39](lab-39-web-security-owasp.md) app — TLS audit, header audit, SSRF testing on the AWS-metadata endpoint analog.
 - **A "Drone-Link Security Threat Model"** doc that an actual aviation team could reference — specific to a real platform (Pixhawk + companion + RC). *Possibly publishable.*
 - **A real CVE.** With a maintainer's permission, audit a small open-source MAVLink-adjacent or networking-adjacent project. Find, report, help patch.
 
@@ -175,7 +175,7 @@ The techniques are universal. The *target system you build and defend* is yours.
 
 - **A "smart office" lab** — IoT devices on a local network you protect.
 - **A mock telemedicine app** — what does its traffic look like in flight?
-- **A drone fleet operator console** (sim) — connects to Lab 37; you secure the entire link.
+- **A drone fleet operator console** (sim) — connects to [Lab 37](lab-37-px4-mavlink-drone-stack.md); you secure the entire link.
 - **A meshed sensor network** for a "smart border" or "smart farm" — all secured.
 - **A retro protocol analyzer** — a chosen historical or game protocol you reverse and document.
 - **A radio-security history walkthrough** — KRACK, Dragonblood, GPS spoofing, FlySky/SBus mistakes — recreated in simulation.
@@ -192,7 +192,7 @@ Solo: viable. Most network analysis happens to one person at a keyboard.
 Team:
 - *By layer:* one person owns the wired lab, one the Wi-Fi lab, one the drone-link lab.
 - *By phase:* everyone does Basic together; split for Standard (attacker / defender / reporter).
-- *Across labs:* one team's Lab 37 SITL is the other's MAVLink target; one team's Lab 39 service is the other's wired-lab target.
+- *Across labs:* one team's [Lab 37](lab-37-px4-mavlink-drone-stack.md) SITL is the other's MAVLink target; one team's [Lab 39](lab-39-web-security-owasp.md) service is the other's wired-lab target.
 
 Two team rules: **git from day one** and **list who did what.** Each member must demonstrate one capture and one defense live and explain it.
 
@@ -203,7 +203,7 @@ Two team rules: **git from day one** and **list who did what.** Each member must
 **Sandbox**
 - A **Linux VM** (Kali / Ubuntu / Debian) — Kali if you want everything pre-installed.
 - For Wi-Fi: a **dedicated AP you own** (cheap travel router, an old phone hotspot, or a software AP with `hostapd`). **Keep it disconnected from the internet during testing.**
-- For drone work: PX4 SITL + Gazebo + QGroundControl (Lab 37 install is enough).
+- For drone work: PX4 SITL + Gazebo + QGroundControl ([Lab 37](lab-37-px4-mavlink-drone-stack.md) install is enough).
 
 **Capture and analysis**
 - **[Wireshark](https://www.wireshark.org/)** — your microscope. Learn the display filters; they will save you hours.
@@ -313,7 +313,7 @@ If stuck for 30+ minutes: **swap the experiment for the simplest version that st
 - **Ukrainian defense-tech, aviation, and critical-infrastructure recruiters open this lab first.** A *secured* MAVLink link with replay-resistance and a defender's report is a portfolio item that *very* few juniors anywhere have.
 - **They look at the Wireshark literacy.** Senior engineers can read a packet capture; juniors usually can't. *Show* yours.
 - **They look at the threat model.** A clearly-scoped, plausible threat-model document is a senior practice at junior scale.
-- **They look at the cross-lab combos.** Lab 37 + Lab 40 in particular tells a complete drone-stack story.
+- **They look at the cross-lab combos.** [Lab 37](lab-37-px4-mavlink-drone-stack.md) + Lab 40 in particular tells a complete drone-stack story.
 - **They look at your CTFs.** DEF CON Aviation Village, Wireless Village, and HackTheBox networking ranks are objective signals.
 - **They look at the ethics framing.** Anyone who treats RF / network attacks casually is unhireable in this field; mature framing is itself a credibility signal.
 - **For Ukrainian recruiters specifically:** mention dual-use / defense openness in the README. The hiring channel is open and active.

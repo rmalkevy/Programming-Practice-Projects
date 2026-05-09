@@ -12,7 +12,7 @@
 
 ## The hook
 
-In Lab 04 you built a sensor logger that talked to itself — print to console, write to a file, done. Real avionics doesn't work that way. Every drone, satellite, weather balloon, and aircraft sends its sensor data **somewhere else** — a ground station, a cloud server, a cockpit display, an air-traffic controller's screen. That stream of values, going from a small device into a system that watches and reacts, is called *telemetry*. It's one of the most important and least-taught topics at the 1st-year level.
+In [Lab 4](lab-04-stm32-sensor-logger.md) you built a sensor logger that talked to itself — print to console, write to a file, done. Real avionics doesn't work that way. Every drone, satellite, weather balloon, and aircraft sends its sensor data **somewhere else** — a ground station, a cloud server, a cockpit display, an air-traffic controller's screen. That stream of values, going from a small device into a system that watches and reacts, is called *telemetry*. It's one of the most important and least-taught topics at the 1st-year level.
 
 In this lab you'll close the loop. A small device — an ESP32 the size of a coin — sits anywhere with Wi-Fi. It reads sensor data, packages it into JSON, and pushes it to a tiny backend you wrote, which displays it on a web page that you can open from your phone. Your friend opens the page in another country and sees your sensor moving in real time. That's the entire IoT industry, in 200 lines of code.
 
@@ -27,7 +27,7 @@ If you want a perfect appetizer, browse [**Random Nerd Tutorials**](https://rand
 - **IoT is one of the largest hiring categories in Ukrainian tech.** Drone telemetry, smart-agriculture systems, defense-tech sensor networks, energy monitoring — they all need exactly this skill set.
 - The pipeline you'll build (**device → Wi-Fi → backend → web dashboard**) is the *same shape* as what every modern IoT product uses, from $20 smart bulbs to $200,000 industrial gas analyzers.
 - A working live-dashboard project on your portfolio with a public URL is **memorable in interviews**. The recruiter can open it and *see your device's data*. Few projects achieve that.
-- This lab connects directly to the web track (Labs 21–22) — the backend you write here is the same shape as a real REST API.
+- This lab connects directly to the web track (Labs [21](lab-21-rest-api-auth.md)–[22](lab-22-spa-frontend.md)) — the backend you write here is the same shape as a real REST API.
 
 ---
 
@@ -124,7 +124,7 @@ Three pieces of code — firmware, backend, frontend — talking through HTTP. T
 If you want to grow this into a serious portfolio project:
 
 - **The Drone-Style Telemetry Stack.** Send 50+ values per second (orientation from an IMU, GPS coordinates, battery, throttle, temperature) at high rate. Optimize the protocol — switch from JSON to a binary format (CBOR, MessagePack, or your own). The dashboard shows a live "instrument cluster": artificial horizon, altimeter, battery gauge.
-- **Edge AI Anomaly Detection.** Use TinyML (preview of Lab 34) to detect unusual patterns *on the device* and only transmit when something interesting happens. Massive bandwidth savings; smarter device.
+- **Edge AI Anomaly Detection.** Use TinyML (preview of [Lab 34](lab-34-ai-capstone.md)) to detect unusual patterns *on the device* and only transmit when something interesting happens. Massive bandwidth savings; smarter device.
 - **Ground Station Pairing.** Two devices: one transmitter (the "drone"), one receiver (the "ground station"), connected via LoRa (1–10 km range, ~$5/module). The ground station reposts data over Wi-Fi to the cloud. Real long-range telemetry.
 
 These extensions can take you all the way to a full embedded portfolio capstone — the kind of project that gets shown in job interviews.
@@ -171,7 +171,7 @@ Two team rules: **git from day one with branches**, and **list who did what in t
 - **Node.js + Express / Fastify / Hono** — the fastest path; deploys easily.
 - **ASP.NET Core minimal API** — first-class on Render, full strong typing.
 - **Python + FastAPI** — has the best OpenAPI integration if you want auto-generated docs.
-- All three are free to deploy; pick whichever you'll continue with on Lab 21.
+- All three are free to deploy; pick whichever you'll continue with on [Lab 21](lab-21-rest-api-auth.md).
 
 **Frontend**
 - For the dashboard: **plain HTML + Chart.js** is more than enough. No framework needed.

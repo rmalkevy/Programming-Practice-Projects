@@ -146,9 +146,9 @@ Three pieces — **read, format, write** — wrapped in a clock and a state mach
 
 The 2-week scope above ships a real, defendable logger. If embedded systems pull you in (and at an aviation institute, they should), here's how to grow it into a portfolio centerpiece:
 
-- **Combine with Lab 16 (smart telemetry beacon).** Add Wi-Fi telemetry to a hosted dashboard. Two embedded labs, one product.
-- **Combine with Lab 22 (SPA frontend).** Build a polished web dashboard that visualizes your logger's data live. Charts, history, alerts.
-- **Combine with Lab 33 (computer vision).** Add a small camera (ESP32-CAM); your "logger" now logs *images* alongside numbers — a ground-truthed dataset of plant growth, weather, traffic.
+- **Combine with [Lab 16](lab-16-smart-telemetry-beacon.md) (smart telemetry beacon).** Add Wi-Fi telemetry to a hosted dashboard. Two embedded labs, one product.
+- **Combine with [Lab 22](lab-22-spa-frontend.md) (SPA frontend).** Build a polished web dashboard that visualizes your logger's data live. Charts, history, alerts.
+- **Combine with [Lab 33](lab-33-object-detection-tracking.md) (computer vision).** Add a small camera (ESP32-CAM); your "logger" now logs *images* alongside numbers — a ground-truthed dataset of plant growth, weather, traffic.
 - **A real flight-data recorder.** Add an IMU + GPS + barometer + SD card. Mount on a model rocket or drone. Recover the flight data after a real flight. *Wildly* impressive demo.
 - **Open source the firmware** — license, contributing guide, GitHub Actions building the firmware. Get one external pull request.
 

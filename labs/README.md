@@ -5,12 +5,12 @@
 
 This folder contains the full **42-lab program** for first-year computer-science / software-engineering / aviation-engineering students. Each lab is a self-contained Markdown brief — readable, motivational, defensible, and shaped to leave a portfolio-grade artifact behind.
 
-The program is one year long if a student does ~one lab every two weeks. It is one summer long if a student does the practical-portfolio half intensively. It is the rest of someone's life if Lab 42 turns into a real product.
+The program is one year long if a student does ~one lab every two weeks. It is one summer long if a student does the practical-portfolio half intensively. It is the rest of someone's life if [Lab 42](lab-42-life-the-universe-and-everything.md) turns into a real product.
 
 **Useful companion documents (live one folder up):**
-- `../INSTRUCTOR_HANDBOOK.md` — pacing, grading philosophy, showcase-night logistics, recommended semester recipes.
-- `../TRACK_PICKER.md` — a decision-tree picker that helps a student select 4–6 labs based on what they care about.
-- `../templates/MANIFESTO_TEMPLATE.md` — the ceremonial document for Lab 42.
+- [`../INSTRUCTOR_HANDBOOK.md`](../INSTRUCTOR_HANDBOOK.md) — pacing, grading philosophy, showcase-night logistics, recommended semester recipes.
+- [`../TRACK_PICKER.md`](../TRACK_PICKER.md) — a decision-tree picker that helps a student select 4–6 labs based on what they care about.
+- [`../templates/MANIFESTO_TEMPLATE.md`](../templates/MANIFESTO_TEMPLATE.md) — the ceremonial document for [Lab 42](lab-42-life-the-universe-and-everything.md).
 
 ---
 
@@ -31,48 +31,48 @@ The same lab will appear in multiple groupings. That's the point.
 
 | # | Title | Domain | Default time |
 |---|---|---|---|
-| 01 | Mini Messenger | software / fullstack | 2 weeks |
-| 02 | Wolfenstein-like Ray Casting Engine | graphics / algorithms | 2 weeks |
-| 03 | Simple Ray Tracer | graphics / math | 2 weeks |
-| 04 | Embedded Sensor Logger (STM32 / Arduino / ESP32 / Pico) | embedded | 2 weeks |
-| 05 | Image Processor | algorithms / graphics | 2 weeks |
-| 06 | Digital Tree Visualizer | algorithms / data structures | 2 weeks |
-| 07 | Graph Route Finder | algorithms | 2 weeks |
-| 08 | Fractal Generator | math / graphics | 2 weeks |
-| 09 | Console Paddle Game | game / software | 2 weeks |
-| 10 | Maze Generator and Solver | algorithms / game | 2 weeks |
-| 11 | Mini File Explorer | software | 2 weeks |
-| 12 | Task Tracker | software / fullstack | 2 weeks |
-| 13 | Physics Sandbox | math / simulation | 2 weeks |
-| 14 | Cellular Automata Simulator | simulation / algorithms | 2 weeks |
-| 15 | Mini Search Engine | algorithms / data | 2 weeks |
-| 16 | Smart Telemetry Beacon | embedded / IoT | 2–3 weeks |
-| 17 | PID Self-Balancing Robot | embedded / control | 2–3 weeks |
-| 18 | Smart Plant Monitor | embedded / IoT | 2–3 weeks |
-| 19 | Custom Game Controller | embedded / hardware | 2–3 weeks |
-| 20 | Personal Portfolio Site | web / portfolio | 2 weeks |
-| 21 | REST API With Auth | web / backend | 2–3 weeks |
-| 22 | SPA Frontend | web / frontend | 2–3 weeks |
-| 23 | Real-Time Multiplayer Service | web / realtime | 2–3 weeks |
-| 24 | Browser Extension | web / product | 2 weeks |
-| 25 | Platformer Game | game | 2–3 weeks |
-| 26 | Procedural Roguelike | game / algorithms | 2–3 weeks |
-| 27 | Multiplayer Browser Game | game / realtime | 3 weeks |
-| 28 | Game Jam | game / product | 2 weeks |
-| 29 | Android Native App | mobile | 2–3 weeks |
-| 30 | Cross-Platform App (React Native) | mobile | 2–3 weeks |
-| 31 | LLM RAG App | AI / fullstack | 2–3 weeks |
-| 32 | Neural Net From Scratch (Karpathy-style) | AI / math | 2–3 weeks |
-| 33 | Object Detection And Tracking | AI / vision | 2–3 weeks |
-| 34 | AI Capstone | AI / product | 3 weeks |
-| 35 | RTOS Mini-Autopilot | embedded / RTOS | 3 weeks |
-| 36 | Embedded Linux From The Inside | embedded / Linux | 3 weeks |
-| 37 | PX4 + MAVLink + ROS 2 Drone Stack | embedded / drones | 3 weeks |
-| 38 | Smash The Stack: Binary Exploitation | security | 2–3 weeks |
-| 39 | Web Security By Breaking The OWASP Top 10 | security / web | 2–3 weeks |
-| 40 | Network, Wireless & Drone-Link Security | security / RF | 2–3 weeks |
-| 41 | Mostly Harmless: Orbital Mechanics & Mission Planner | space / math | 2–3 weeks |
-| 42 | Life, The Universe, And Everything (capstone) | meta / portfolio | 3+ weeks |
+| [01](lab-01-messenger.md) | [Mini Messenger](lab-01-messenger.md) | software / fullstack | 2 weeks |
+| [02](lab-02-ray-casting-engine.md) | [Wolfenstein-like Ray Casting Engine](lab-02-ray-casting-engine.md) | graphics / algorithms | 2 weeks |
+| [03](lab-03-ray-tracer.md) | [Simple Ray Tracer](lab-03-ray-tracer.md) | graphics / math | 2 weeks |
+| [04](lab-04-stm32-sensor-logger.md) | [Embedded Sensor Logger (STM32 / Arduino / ESP32 / Pico)](lab-04-stm32-sensor-logger.md) | embedded | 2 weeks |
+| [05](lab-05-image-processor.md) | [Image Processor](lab-05-image-processor.md) | algorithms / graphics | 2 weeks |
+| [06](lab-06-digital-tree-visualizer.md) | [Digital Tree Visualizer](lab-06-digital-tree-visualizer.md) | algorithms / data structures | 2 weeks |
+| [07](lab-07-graph-route-finder.md) | [Graph Route Finder](lab-07-graph-route-finder.md) | algorithms | 2 weeks |
+| [08](lab-08-fractal-generator.md) | [Fractal Generator](lab-08-fractal-generator.md) | math / graphics | 2 weeks |
+| [09](lab-09-console-paddle-game.md) | [Console Paddle Game](lab-09-console-paddle-game.md) | game / software | 2 weeks |
+| [10](lab-10-maze-generator-solver.md) | [Maze Generator and Solver](lab-10-maze-generator-solver.md) | algorithms / game | 2 weeks |
+| [11](lab-11-mini-file-explorer.md) | [Mini File Explorer](lab-11-mini-file-explorer.md) | software | 2 weeks |
+| [12](lab-12-task-tracker.md) | [Task Tracker](lab-12-task-tracker.md) | software / fullstack | 2 weeks |
+| [13](lab-13-physics-sandbox.md) | [Physics Sandbox](lab-13-physics-sandbox.md) | math / simulation | 2 weeks |
+| [14](lab-14-cellular-automata.md) | [Cellular Automata Simulator](lab-14-cellular-automata.md) | simulation / algorithms | 2 weeks |
+| [15](lab-15-mini-search-engine.md) | [Mini Search Engine](lab-15-mini-search-engine.md) | algorithms / data | 2 weeks |
+| [16](lab-16-smart-telemetry-beacon.md) | [Smart Telemetry Beacon](lab-16-smart-telemetry-beacon.md) | embedded / IoT | 2–3 weeks |
+| [17](lab-17-pid-self-balancer.md) | [PID Self-Balancing Robot](lab-17-pid-self-balancer.md) | embedded / control | 2–3 weeks |
+| [18](lab-18-smart-plant-monitor.md) | [Smart Plant Monitor](lab-18-smart-plant-monitor.md) | embedded / IoT | 2–3 weeks |
+| [19](lab-19-custom-game-controller.md) | [Custom Game Controller](lab-19-custom-game-controller.md) | embedded / hardware | 2–3 weeks |
+| [20](lab-20-personal-portfolio.md) | [Personal Portfolio Site](lab-20-personal-portfolio.md) | web / portfolio | 2 weeks |
+| [21](lab-21-rest-api-auth.md) | [REST API With Auth](lab-21-rest-api-auth.md) | web / backend | 2–3 weeks |
+| [22](lab-22-spa-frontend.md) | [SPA Frontend](lab-22-spa-frontend.md) | web / frontend | 2–3 weeks |
+| [23](lab-23-realtime-multiplayer.md) | [Real-Time Multiplayer Service](lab-23-realtime-multiplayer.md) | web / realtime | 2–3 weeks |
+| [24](lab-24-browser-extension.md) | [Browser Extension](lab-24-browser-extension.md) | web / product | 2 weeks |
+| [25](lab-25-platformer-game.md) | [Platformer Game](lab-25-platformer-game.md) | game | 2–3 weeks |
+| [26](lab-26-procedural-roguelike.md) | [Procedural Roguelike](lab-26-procedural-roguelike.md) | game / algorithms | 2–3 weeks |
+| [27](lab-27-multiplayer-browser-game.md) | [Multiplayer Browser Game](lab-27-multiplayer-browser-game.md) | game / realtime | 3 weeks |
+| [28](lab-28-game-jam.md) | [Game Jam](lab-28-game-jam.md) | game / product | 2 weeks |
+| [29](lab-29-android-native-app.md) | [Android Native App](lab-29-android-native-app.md) | mobile | 2–3 weeks |
+| [30](lab-30-cross-platform-app.md) | [Cross-Platform App (React Native)](lab-30-cross-platform-app.md) | mobile | 2–3 weeks |
+| [31](lab-31-llm-rag-app.md) | [LLM RAG App](lab-31-llm-rag-app.md) | AI / fullstack | 2–3 weeks |
+| [32](lab-32-neural-net-from-scratch.md) | [Neural Net From Scratch (Karpathy-style)](lab-32-neural-net-from-scratch.md) | AI / math | 2–3 weeks |
+| [33](lab-33-object-detection-tracking.md) | [Object Detection And Tracking](lab-33-object-detection-tracking.md) | AI / vision | 2–3 weeks |
+| [34](lab-34-ai-capstone.md) | [AI Capstone](lab-34-ai-capstone.md) | AI / product | 3 weeks |
+| [35](lab-35-rtos-mini-autopilot.md) | [RTOS Mini-Autopilot](lab-35-rtos-mini-autopilot.md) | embedded / RTOS | 3 weeks |
+| [36](lab-36-embedded-linux-from-inside.md) | [Embedded Linux From The Inside](lab-36-embedded-linux-from-inside.md) | embedded / Linux | 3 weeks |
+| [37](lab-37-px4-mavlink-drone-stack.md) | [PX4 + MAVLink + ROS 2 Drone Stack](lab-37-px4-mavlink-drone-stack.md) | embedded / drones | 3 weeks |
+| [38](lab-38-binary-exploitation.md) | [Smash The Stack: Binary Exploitation](lab-38-binary-exploitation.md) | security | 2–3 weeks |
+| [39](lab-39-web-security-owasp.md) | [Web Security By Breaking The OWASP Top 10](lab-39-web-security-owasp.md) | security / web | 2–3 weeks |
+| [40](lab-40-network-wireless-drone-security.md) | [Network, Wireless & Drone-Link Security](lab-40-network-wireless-drone-security.md) | security / RF | 2–3 weeks |
+| [41](lab-41-mostly-harmless-orbital-mechanics.md) | [Mostly Harmless: Orbital Mechanics & Mission Planner](lab-41-mostly-harmless-orbital-mechanics.md) | space / math | 2–3 weeks |
+| [42](lab-42-life-the-universe-and-everything.md) | [Life, The Universe, And Everything (capstone)](lab-42-life-the-universe-and-everything.md) | meta / portfolio | 3+ weeks |
 
 Each filename is `lab-NN-slug.md` under this folder.
 
@@ -81,96 +81,96 @@ Each filename is `lab-NN-slug.md` under this folder.
 ## By domain
 
 ### Software fundamentals (great first labs)
-- 01 Messenger · 09 Paddle · 10 Maze · 11 File Explorer · 12 Task Tracker · 15 Search Engine
+- [01 Messenger](lab-01-messenger.md) · [09 Paddle](lab-09-console-paddle-game.md) · [10 Maze](lab-10-maze-generator-solver.md) · [11 File Explorer](lab-11-mini-file-explorer.md) · [12 Task Tracker](lab-12-task-tracker.md) · [15 Search Engine](lab-15-mini-search-engine.md)
 
 ### Graphics, math, and simulation
-- 02 Ray Casting · 03 Ray Tracer · 05 Image Processor · 06 Tree Viz · 08 Fractals · 13 Physics Sandbox · 14 Cellular Automata · 41 Orbital Mechanics
+- [02 Ray Casting](lab-02-ray-casting-engine.md) · [03 Ray Tracer](lab-03-ray-tracer.md) · [05 Image Processor](lab-05-image-processor.md) · [06 Tree Viz](lab-06-digital-tree-visualizer.md) · [08 Fractals](lab-08-fractal-generator.md) · [13 Physics Sandbox](lab-13-physics-sandbox.md) · [14 Cellular Automata](lab-14-cellular-automata.md) · [41 Orbital Mechanics](lab-41-mostly-harmless-orbital-mechanics.md)
 
 ### Algorithms and data structures
-- 06 Tree Viz · 07 Graph Route · 10 Maze · 14 CA · 15 Search Engine
+- [06 Tree Viz](lab-06-digital-tree-visualizer.md) · [07 Graph Route](lab-07-graph-route-finder.md) · [10 Maze](lab-10-maze-generator-solver.md) · [14 CA](lab-14-cellular-automata.md) · [15 Search Engine](lab-15-mini-search-engine.md)
 
 ### Embedded and hardware
-- 04 Sensor Logger · 16 Telemetry Beacon · 17 PID Robot · 18 Plant Monitor · 19 Game Controller · 35 RTOS Autopilot · 36 Embedded Linux · 37 PX4 Drone Stack
+- [04 Sensor Logger](lab-04-stm32-sensor-logger.md) · [16 Telemetry Beacon](lab-16-smart-telemetry-beacon.md) · [17 PID Robot](lab-17-pid-self-balancer.md) · [18 Plant Monitor](lab-18-smart-plant-monitor.md) · [19 Game Controller](lab-19-custom-game-controller.md) · [35 RTOS Autopilot](lab-35-rtos-mini-autopilot.md) · [36 Embedded Linux](lab-36-embedded-linux-from-inside.md) · [37 PX4 Drone Stack](lab-37-px4-mavlink-drone-stack.md)
 
 ### Web and full-stack
-- 12 Task Tracker · 20 Portfolio · 21 REST API · 22 SPA · 23 Realtime · 24 Extension
+- [12 Task Tracker](lab-12-task-tracker.md) · [20 Portfolio](lab-20-personal-portfolio.md) · [21 REST API](lab-21-rest-api-auth.md) · [22 SPA](lab-22-spa-frontend.md) · [23 Realtime](lab-23-realtime-multiplayer.md) · [24 Extension](lab-24-browser-extension.md)
 
 ### Game development
-- 09 Paddle · 10 Maze · 13 Physics · 14 CA · 25 Platformer · 26 Roguelike · 27 Multiplayer Game · 28 Game Jam
+- [09 Paddle](lab-09-console-paddle-game.md) · [10 Maze](lab-10-maze-generator-solver.md) · [13 Physics](lab-13-physics-sandbox.md) · [14 CA](lab-14-cellular-automata.md) · [25 Platformer](lab-25-platformer-game.md) · [26 Roguelike](lab-26-procedural-roguelike.md) · [27 Multiplayer Game](lab-27-multiplayer-browser-game.md) · [28 Game Jam](lab-28-game-jam.md)
 
 ### Mobile
-- 29 Android Native · 30 Cross-Platform (React Native)
+- [29 Android Native](lab-29-android-native-app.md) · [30 Cross-Platform (React Native)](lab-30-cross-platform-app.md)
 
 ### AI / ML
-- 31 LLM RAG · 32 NN From Scratch · 33 Object Detection & Tracking · 34 AI Capstone
+- [31 LLM RAG](lab-31-llm-rag-app.md) · [32 NN From Scratch](lab-32-neural-net-from-scratch.md) · [33 Object Detection & Tracking](lab-33-object-detection-tracking.md) · [34 AI Capstone](lab-34-ai-capstone.md)
 
 ### Security (offensive + defensive)
-- 38 Binary Exploitation · 39 Web/OWASP · 40 Network/Wireless/Drone-Link
+- [38 Binary Exploitation](lab-38-binary-exploitation.md) · [39 Web/OWASP](lab-39-web-security-owasp.md) · [40 Network/Wireless/Drone-Link](lab-40-network-wireless-drone-security.md)
 
 ### Space / aerospace / aviation
-- 04 Sensor Logger · 16 Telemetry Beacon · 17 PID Robot · 35 RTOS Autopilot · 37 PX4 Drone Stack · 40 Drone-Link Security · 41 Orbital Mechanics
+- [04 Sensor Logger](lab-04-stm32-sensor-logger.md) · [16 Telemetry Beacon](lab-16-smart-telemetry-beacon.md) · [17 PID Robot](lab-17-pid-self-balancer.md) · [35 RTOS Autopilot](lab-35-rtos-mini-autopilot.md) · [37 PX4 Drone Stack](lab-37-px4-mavlink-drone-stack.md) · [40 Drone-Link Security](lab-40-network-wireless-drone-security.md) · [41 Orbital Mechanics](lab-41-mostly-harmless-orbital-mechanics.md)
 
 ### Meta / capstone
-- 28 Game Jam · 34 AI Capstone · 42 Life, The Universe, And Everything
+- [28 Game Jam](lab-28-game-jam.md) · [34 AI Capstone](lab-34-ai-capstone.md) · [42 Life, The Universe, And Everything](lab-42-life-the-universe-and-everything.md)
 
 ---
 
 ## By difficulty (Basic → Standard → Advanced)
 
-These are *starting* difficulties. Every lab has Extension Challenges that take it from a 2-week sprint to a 3–5-week portfolio piece (Lab 42 stretches to a summer).
+These are *starting* difficulties. Every lab has Extension Challenges that take it from a 2-week sprint to a 3–5-week portfolio piece ([Lab 42](lab-42-life-the-universe-and-everything.md) stretches to a summer).
 
 ### Basic — gentle on-ramps
-- 01 Messenger · 09 Paddle · 10 Maze · 11 File Explorer · 12 Task Tracker · 20 Portfolio · 24 Extension · 28 Game Jam
+- [01 Messenger](lab-01-messenger.md) · [09 Paddle](lab-09-console-paddle-game.md) · [10 Maze](lab-10-maze-generator-solver.md) · [11 File Explorer](lab-11-mini-file-explorer.md) · [12 Task Tracker](lab-12-task-tracker.md) · [20 Portfolio](lab-20-personal-portfolio.md) · [24 Extension](lab-24-browser-extension.md) · [28 Game Jam](lab-28-game-jam.md)
 
 ### Standard — meaty mid-program
-- 05 Image Processor · 06 Tree Viz · 07 Graph Route · 08 Fractals · 14 CA · 15 Search Engine · 16 Telemetry · 18 Plant Monitor · 19 Controller · 21 REST API · 22 SPA · 25 Platformer · 26 Roguelike · 29 Android · 30 Cross-Platform · 31 LLM RAG · 33 Object Detection · 39 OWASP
+- [05 Image Processor](lab-05-image-processor.md) · [06 Tree Viz](lab-06-digital-tree-visualizer.md) · [07 Graph Route](lab-07-graph-route-finder.md) · [08 Fractals](lab-08-fractal-generator.md) · [14 CA](lab-14-cellular-automata.md) · [15 Search Engine](lab-15-mini-search-engine.md) · [16 Telemetry](lab-16-smart-telemetry-beacon.md) · [18 Plant Monitor](lab-18-smart-plant-monitor.md) · [19 Controller](lab-19-custom-game-controller.md) · [21 REST API](lab-21-rest-api-auth.md) · [22 SPA](lab-22-spa-frontend.md) · [25 Platformer](lab-25-platformer-game.md) · [26 Roguelike](lab-26-procedural-roguelike.md) · [29 Android](lab-29-android-native-app.md) · [30 Cross-Platform](lab-30-cross-platform-app.md) · [31 LLM RAG](lab-31-llm-rag-app.md) · [33 Object Detection](lab-33-object-detection-tracking.md) · [39 OWASP](lab-39-web-security-owasp.md)
 
 ### Advanced — big stretches
-- 02 Ray Casting · 03 Ray Tracer · 04 Sensor Logger · 13 Physics · 17 PID Robot · 23 Realtime · 27 Multiplayer Game · 32 NN From Scratch · 34 AI Capstone · 35 RTOS Autopilot · 36 Embedded Linux · 37 PX4 Stack · 38 Binary Exploit · 40 Drone-Link · 41 Orbital Mechanics
+- [02 Ray Casting](lab-02-ray-casting-engine.md) · [03 Ray Tracer](lab-03-ray-tracer.md) · [04 Sensor Logger](lab-04-stm32-sensor-logger.md) · [13 Physics](lab-13-physics-sandbox.md) · [17 PID Robot](lab-17-pid-self-balancer.md) · [23 Realtime](lab-23-realtime-multiplayer.md) · [27 Multiplayer Game](lab-27-multiplayer-browser-game.md) · [32 NN From Scratch](lab-32-neural-net-from-scratch.md) · [34 AI Capstone](lab-34-ai-capstone.md) · [35 RTOS Autopilot](lab-35-rtos-mini-autopilot.md) · [36 Embedded Linux](lab-36-embedded-linux-from-inside.md) · [37 PX4 Stack](lab-37-px4-mavlink-drone-stack.md) · [38 Binary Exploit](lab-38-binary-exploitation.md) · [40 Drone-Link](lab-40-network-wireless-drone-security.md) · [41 Orbital Mechanics](lab-41-mostly-harmless-orbital-mechanics.md)
 
 ### The boss
-- 42 Life, The Universe, And Everything
+- [42 Life, The Universe, And Everything](lab-42-life-the-universe-and-everything.md)
 
 ---
 
 ## Suggested tracks
 
-A *track* is 4–6 labs that hang together. Use them as one-semester syllabuses, intensive summer paths, or self-study itineraries. Lab 42 is the recommended closer for any track — you can synthesize 2–3 of the prior labs into your final answer.
+A *track* is 4–6 labs that hang together. Use them as one-semester syllabuses, intensive summer paths, or self-study itineraries. [Lab 42](lab-42-life-the-universe-and-everything.md) is the recommended closer for any track — you can synthesize 2–3 of the prior labs into your final answer.
 
 ### Track A — *Defense / Aerospace / Drones (Ukrainian-context flagship)*
-**04 Sensor Logger → 17 PID Robot → 35 RTOS Autopilot → 37 PX4 Stack → 40 Drone-Link Security → 42**
-Ukrainian defense-tech employability path. Real Yuzhmash / Firefly / Promin / Skyrora alignment. Add 41 Orbital Mechanics for satellite-flavor extension.
+**[04](lab-04-stm32-sensor-logger.md) → [17](lab-17-pid-self-balancer.md) → [35](lab-35-rtos-mini-autopilot.md) → [37](lab-37-px4-mavlink-drone-stack.md) → [40](lab-40-network-wireless-drone-security.md) → [42](lab-42-life-the-universe-and-everything.md)**
+Ukrainian defense-tech employability path. Real Yuzhmash / Firefly / Promin / Skyrora alignment. Add [41 Orbital Mechanics](lab-41-mostly-harmless-orbital-mechanics.md) for satellite-flavor extension.
 
 ### Track B — *AI / ML*
-**31 LLM RAG → 32 NN From Scratch → 33 Object Detection → 34 AI Capstone → 42**
-End-to-end modern AI: from-scratch math, vision, language, shipped product. Add 22 SPA for the deployable UI layer.
+**[31](lab-31-llm-rag-app.md) → [32](lab-32-neural-net-from-scratch.md) → [33](lab-33-object-detection-tracking.md) → [34](lab-34-ai-capstone.md) → [42](lab-42-life-the-universe-and-everything.md)**
+End-to-end modern AI: from-scratch math, vision, language, shipped product. Add [22 SPA](lab-22-spa-frontend.md) for the deployable UI layer.
 
 ### Track C — *Full-Stack Engineer*
-**12 Task Tracker → 20 Portfolio → 21 REST API → 22 SPA → 23 Realtime → 42**
-The classic web-engineer pipeline. Lab 42 typically becomes a small SaaS / civic-tech / community-tool project.
+**[12](lab-12-task-tracker.md) → [20](lab-20-personal-portfolio.md) → [21](lab-21-rest-api-auth.md) → [22](lab-22-spa-frontend.md) → [23](lab-23-realtime-multiplayer.md) → [42](lab-42-life-the-universe-and-everything.md)**
+The classic web-engineer pipeline. [Lab 42](lab-42-life-the-universe-and-everything.md) typically becomes a small SaaS / civic-tech / community-tool project.
 
 ### Track D — *Game Developer*
-**09 Paddle → 10 Maze → 25 Platformer → 26 Roguelike → 27 Multiplayer Game → 28 Jam → 42**
-Six labs with a built-in jam. Lab 42 is usually the polished final game.
+**[09](lab-09-console-paddle-game.md) → [10](lab-10-maze-generator-solver.md) → [25](lab-25-platformer-game.md) → [26](lab-26-procedural-roguelike.md) → [27](lab-27-multiplayer-browser-game.md) → [28](lab-28-game-jam.md) → [42](lab-42-life-the-universe-and-everything.md)**
+Six labs with a built-in jam. [Lab 42](lab-42-life-the-universe-and-everything.md) is usually the polished final game.
 
 ### Track E — *Embedded / Systems Programmer*
-**04 Sensor Logger → 16 Telemetry → 19 Game Controller → 35 RTOS Autopilot → 36 Embedded Linux → 42**
-The "I want to write firmware" path. Combines beautifully with a Lab 38 (binary exploitation) extension.
+**[04](lab-04-stm32-sensor-logger.md) → [16](lab-16-smart-telemetry-beacon.md) → [19](lab-19-custom-game-controller.md) → [35](lab-35-rtos-mini-autopilot.md) → [36](lab-36-embedded-linux-from-inside.md) → [42](lab-42-life-the-universe-and-everything.md)**
+The "I want to write firmware" path. Combines beautifully with a [Lab 38](lab-38-binary-exploitation.md) (binary exploitation) extension.
 
 ### Track F — *Security Engineer*
-**21 REST API → 38 Binary Exploit → 39 OWASP → 40 Drone-Link → 42**
-Build first (Lab 21) so you have something of your own to break. Then attacker-then-defender across three layers.
+**[21](lab-21-rest-api-auth.md) → [38](lab-38-binary-exploitation.md) → [39](lab-39-web-security-owasp.md) → [40](lab-40-network-wireless-drone-security.md) → [42](lab-42-life-the-universe-and-everything.md)**
+Build first ([Lab 21](lab-21-rest-api-auth.md)) so you have something of your own to break. Then attacker-then-defender across three layers.
 
 ### Track G — *Mobile Developer*
-**20 Portfolio → 22 SPA → 29 Android → 30 Cross-Platform → 42**
-A mobile-shipping pipeline; Lab 42 typically ships to a real app store or as a sideloadable APK.
+**[20](lab-20-personal-portfolio.md) → [22](lab-22-spa-frontend.md) → [29](lab-29-android-native-app.md) → [30](lab-30-cross-platform-app.md) → [42](lab-42-life-the-universe-and-everything.md)**
+A mobile-shipping pipeline; [Lab 42](lab-42-life-the-universe-and-everything.md) typically ships to a real app store or as a sideloadable APK.
 
 ### Track H — *Math / Graphics / Simulation*
-**02 Ray Casting → 03 Ray Tracer → 08 Fractals → 13 Physics → 14 CA → 41 Orbital Mechanics → 42**
+**[02](lab-02-ray-casting-engine.md) → [03](lab-03-ray-tracer.md) → [08](lab-08-fractal-generator.md) → [13](lab-13-physics-sandbox.md) → [14](lab-14-cellular-automata.md) → [41](lab-41-mostly-harmless-orbital-mechanics.md) → [42](lab-42-life-the-universe-and-everything.md)**
 The "I want to feel math as a superpower" path. Visually iconic portfolio.
 
 ### Track Z — *The Hitchhiker's Path* (built-in homage)
-**01 Messenger → 03 Ray Tracer → 13 Physics Sandbox → 31 LLM RAG → 41 Orbital Mechanics → 42**
+**[01](lab-01-messenger.md) → [03](lab-03-ray-tracer.md) → [13](lab-13-physics-sandbox.md) → [31](lab-31-llm-rag-app.md) → [41](lab-41-mostly-harmless-orbital-mechanics.md) → [42](lab-42-life-the-universe-and-everything.md)**
 A guided tour from "first shipped thing" to "Mostly Harmless" to "Life, the Universe, and Everything." Recommended if a student has no domain preference and just wants the program's *spirit*. Don't Panic.
 
 ---
@@ -179,23 +179,23 @@ A guided tour from "first shipped thing" to "Mostly Harmless" to "Life, the Univ
 
 These pairs / triples are explicitly endorsed by the labs themselves; their *Extension Challenges* sections cite them directly. Pick a pair when you want a 4–5-week project instead of a 2-week one.
 
-- **21 + 22** → full-stack web product
-- **21 + 22 + 23** → real-time full-stack
-- **21 + 38 + 39** → service + attacker-then-defender
-- **22 + 24** → SPA + browser-extension companion
-- **25 + 27** → single-player engine grown into multiplayer
-- **26 + 14** → roguelike with cellular-automata caves
-- **31 + 32** → use your from-scratch NN inside your RAG app
-- **32 + 33** → train your own detector from your own NN
-- **31 + 33 + 34** → multimodal AI capstone
-- **35 + 37** → write your autopilot, fly it in PX4 SITL
-- **35 + 36** → RTOS firmware *plus* Linux companion
-- **36 + 38** → exploit your own kernel module
-- **37 + 40** → drone stack *with* secured MAVLink link
-- **41 + 32** → RL controller for low-thrust trajectories
-- **41 + 37** → orbital guidance running on PX4
-- **40 + 16** → secure your own IoT telemetry
-- **39 + 21** → pen-test your own service end-to-end
+- **[21](lab-21-rest-api-auth.md) + [22](lab-22-spa-frontend.md)** → full-stack web product
+- **[21](lab-21-rest-api-auth.md) + [22](lab-22-spa-frontend.md) + [23](lab-23-realtime-multiplayer.md)** → real-time full-stack
+- **[21](lab-21-rest-api-auth.md) + [38](lab-38-binary-exploitation.md) + [39](lab-39-web-security-owasp.md)** → service + attacker-then-defender
+- **[22](lab-22-spa-frontend.md) + [24](lab-24-browser-extension.md)** → SPA + browser-extension companion
+- **[25](lab-25-platformer-game.md) + [27](lab-27-multiplayer-browser-game.md)** → single-player engine grown into multiplayer
+- **[26](lab-26-procedural-roguelike.md) + [14](lab-14-cellular-automata.md)** → roguelike with cellular-automata caves
+- **[31](lab-31-llm-rag-app.md) + [32](lab-32-neural-net-from-scratch.md)** → use your from-scratch NN inside your RAG app
+- **[32](lab-32-neural-net-from-scratch.md) + [33](lab-33-object-detection-tracking.md)** → train your own detector from your own NN
+- **[31](lab-31-llm-rag-app.md) + [33](lab-33-object-detection-tracking.md) + [34](lab-34-ai-capstone.md)** → multimodal AI capstone
+- **[35](lab-35-rtos-mini-autopilot.md) + [37](lab-37-px4-mavlink-drone-stack.md)** → write your autopilot, fly it in PX4 SITL
+- **[35](lab-35-rtos-mini-autopilot.md) + [36](lab-36-embedded-linux-from-inside.md)** → RTOS firmware *plus* Linux companion
+- **[36](lab-36-embedded-linux-from-inside.md) + [38](lab-38-binary-exploitation.md)** → exploit your own kernel module
+- **[37](lab-37-px4-mavlink-drone-stack.md) + [40](lab-40-network-wireless-drone-security.md)** → drone stack *with* secured MAVLink link
+- **[41](lab-41-mostly-harmless-orbital-mechanics.md) + [32](lab-32-neural-net-from-scratch.md)** → RL controller for low-thrust trajectories
+- **[41](lab-41-mostly-harmless-orbital-mechanics.md) + [37](lab-37-px4-mavlink-drone-stack.md)** → orbital guidance running on PX4
+- **[40](lab-40-network-wireless-drone-security.md) + [16](lab-16-smart-telemetry-beacon.md)** → secure your own IoT telemetry
+- **[39](lab-39-web-security-owasp.md) + [21](lab-21-rest-api-auth.md)** → pen-test your own service end-to-end
 
 ---
 
@@ -223,23 +223,23 @@ Every lab uses the same template (with two structural variants for product-flavo
 18. **Going further** — books, talks, communities.
 19. **A final word** — the closing emotional beat.
 
-Lab 42 is the deliberate exception: it has no instructor-set acceptance criteria, only the **shipped / not shipped** binary and the requirement of a `MANIFESTO.md`.
+[Lab 42](lab-42-life-the-universe-and-everything.md) is the deliberate exception: it has no instructor-set acceptance criteria, only the **shipped / not shipped** binary and the requirement of a `MANIFESTO.md`.
 
 ---
 
 ## Ethical labs (read first)
 
-The three security labs (38, 39, 40) open with a **`⚠ Read this first — Ethics, Legality, Sandbox`** block whose rules are non-negotiable. Every project derived from those labs must include an `ETHICS.md`. Anyone teaching from this folder should read those three blocks before assigning.
+The three security labs ([38](lab-38-binary-exploitation.md), [39](lab-39-web-security-owasp.md), [40](lab-40-network-wireless-drone-security.md)) open with a **`⚠ Read this first — Ethics, Legality, Sandbox`** block whose rules are non-negotiable. Every project derived from those labs must include an `ETHICS.md`. Anyone teaching from this folder should read those three blocks before assigning.
 
-The drone-stack lab (37) and the drone-link security lab (40) **never use real aircraft**. All experiments live inside PX4 SITL or a Wi-Fi access point the student owns.
+The drone-stack lab ([37](lab-37-px4-mavlink-drone-stack.md)) and the drone-link security lab ([40](lab-40-network-wireless-drone-security.md)) **never use real aircraft**. All experiments live inside PX4 SITL or a Wi-Fi access point the student owns.
 
 ---
 
 ## Where to start (quick recipe)
 
-1. Read `lab-01-messenger.md` end to end — it's the canonical example of the template.
-2. Read `lab-42-life-the-universe-and-everything.md` end to end — it's the philosophical anchor of the program.
-3. Pick a track from the list above (or run the `TRACK_PICKER`).
+1. Read [`lab-01-messenger.md`](lab-01-messenger.md) end to end — it's the canonical example of the template.
+2. Read [`lab-42-life-the-universe-and-everything.md`](lab-42-life-the-universe-and-everything.md) end to end — it's the philosophical anchor of the program.
+3. Pick a track from the list above (or run the [`TRACK_PICKER`](../TRACK_PICKER.md)).
 4. Open the first lab in your chosen track. Open an empty repo. Begin.
 
 Don't Panic.

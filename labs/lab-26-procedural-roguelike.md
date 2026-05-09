@@ -25,7 +25,7 @@ If you want a perfect appetizer, watch [**The Coding Train's *Procedural Generat
 - **Infinite content from finite code** is one of the most magical sensations in programming. You will press a button and watch your computer build a world.
 - The skills (**seeded RNG, deterministic generation, BSP / cellular automata / random walks, pathfinding for NPCs**) are heavily used in **AAA games, simulation, ML data generation, and graphics**.
 - A procedural project is **portfolio gold**: each run produces a different screenshot, so your README never looks repetitive — it looks like a living thing.
-- Connects beautifully to other labs: the graph algorithms from **Lab 07/10**, the platformer from **Lab 25**, the multiplayer from **Lab 27**, the AI from **Lab 32–34**. A roguelike is a melting pot.
+- Connects beautifully to other labs: the graph algorithms from **[Lab 7](lab-07-graph-route-finder.md)/10**, the platformer from **[Lab 25](lab-25-platformer-game.md)**, the multiplayer from **[Lab 27](lab-27-multiplayer-browser-game.md)**, the AI from **[Lab 32](lab-32-neural-net-from-scratch.md)–34**. A roguelike is a melting pot.
 
 ---
 
@@ -40,7 +40,7 @@ A 2D top-down dungeon. **Each new run produces a different layout** (rooms, corr
 Everything from Basic, plus: **enemies** in rooms (at least 2 types) that move toward the player, **simple combat** (bump-to-attack, like classic Rogue), **HP** for player and enemies, **items** to pick up (potions, weapons), a **win condition** (reach floor 10, or kill the final boss). **Seeded** generation — given the same seed, the same dungeon. Played and beaten by at least one human besides yourself.
 
 **Advanced — "It Has Depth"**
-You've added something distinctive: a richer combat system (multiple weapon types, magic, dodging), **field of view / fog of war** (you only see what your character can see), enemies with **A\*** pathfinding (connects to Lab 07!), procedural item generation (random stat combinations, like Diablo), a richer generation algorithm (Wave Function Collapse, BSP trees, drunkard's walk), a final boss with phases, sound effects + music, a "share your seed" feature so two players can play the same dungeon.
+You've added something distinctive: a richer combat system (multiple weapon types, magic, dodging), **field of view / fog of war** (you only see what your character can see), enemies with **A\*** pathfinding (connects to [Lab 7](lab-07-graph-route-finder.md)!), procedural item generation (random stat combinations, like Diablo), a richer generation algorithm (Wave Function Collapse, BSP trees, drunkard's walk), a final boss with phases, sound effects + music, a "share your seed" feature so two players can play the same dungeon.
 
 ---
 
@@ -117,12 +117,12 @@ A roguelike is a **finite-state machine** running on top of a **procedural gener
 ### Advanced — "Side Quests" (each ~3–10h)
 
 - **Field of View / Fog of War.** You only see what your character can see. Use shadowcasting or recursive shadowcasting. *Beautifully atmospheric.*
-- **A\* Pathfinding for Enemies.** Enemies don't just walk randomly; they path-find to the player. Connects to Lab 07.
+- **A\* Pathfinding for Enemies.** Enemies don't just walk randomly; they path-find to the player. Connects to [Lab 7](lab-07-graph-route-finder.md).
 - **Wave Function Collapse.** Use WFC to generate dungeons by combining hand-designed tile patterns. (Watch [Martin Donald's WFC video](https://www.youtube.com/watch?v=2SuvO4Gi7uY) — the best intro on YouTube.)
 - **Procedural Items.** Items with randomly combined stats ("Sword of Burning Vengeance: +5 Damage, +1 Fire").
 - **Boss Fight.** Final boss on floor 10 with multiple attack patterns.
 - **Permadeath + Score.** Death is permanent. Each run is scored. A scoreboard.
-- **Daily Challenge.** Same seed for everyone, every day. (Like Spelunky's daily.) Connects to Lab 21 for a leaderboard backend.
+- **Daily Challenge.** Same seed for everyone, every day. (Like Spelunky's daily.) Connects to [Lab 21](lab-21-rest-api-auth.md) for a leaderboard backend.
 - **Save / Resume.** Save state to localStorage, resume next visit.
 - **Original Sprites.** Yours or a friend's.
 - **Music + SFX.** Footsteps, attack, hit, level transition, victory.
@@ -132,8 +132,8 @@ A roguelike is a **finite-state machine** running on top of a **procedural gener
 ## Extension challenges (3–5 weeks)
 
 - **A Real Tiny Game.** 5+ enemy types, item rarities, status effects, a classes/character system, multiple biomes (cave, dungeon, forest, ice). Spend the third week tuning balance.
-- **Combine With Lab 07 (Pathfinding).** Use proper A\* for enemies, prove that the algorithm gives different (and better) AI than random walks. Document the difference in your README with GIFs.
-- **Combine With Lab 27 (Multiplayer).** Two players in the same procedurally generated dungeon. Cooperative. *This is a huge ambition; only attempt if you have a strong team.*
+- **Combine With [Lab 7](lab-07-graph-route-finder.md) (Pathfinding).** Use proper A\* for enemies, prove that the algorithm gives different (and better) AI than random walks. Document the difference in your README with GIFs.
+- **Combine With [Lab 27](lab-27-multiplayer-browser-game.md) (Multiplayer).** Two players in the same procedurally generated dungeon. Cooperative. *This is a huge ambition; only attempt if you have a strong team.*
 
 ---
 

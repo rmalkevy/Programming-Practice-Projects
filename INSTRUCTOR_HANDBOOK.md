@@ -6,7 +6,7 @@
 > "I refuse to grade by exam," says the instructor, "for exams deny shipping, and without shipping the program is nothing."
 > — every effective programming-school instructor, paraphrased
 
-This handbook is for instructors, mentors, and TAs running the 42-lab program. It assumes you've read at least two labs end-to-end (recommended: `labs/lab-01-messenger.md` and `labs/lab-42-life-the-universe-and-everything.md`).
+This handbook is for instructors, mentors, and TAs running the 42-lab program. It assumes you've read at least two labs end-to-end (recommended: [`labs/lab-01-messenger.md`](labs/lab-01-messenger.md) and [`labs/lab-42-life-the-universe-and-everything.md`](labs/lab-42-life-the-universe-and-everything.md)).
 
 The program was designed for **first-year aviation-institute students in Ukraine, ~2026**, but adapts cleanly to any first- or second-year CS/SE/aerospace cohort.
 
@@ -14,7 +14,7 @@ The program was designed for **first-year aviation-institute students in Ukraine
 
 ## 1. Philosophy in one paragraph
 
-The program rejects the textbook "exercise → quiz → exam" loop. It replaces it with a **shipping loop**: every two to three weeks, the student turns an empty repo into a runnable, documentable, defensible artifact. Across one academic year, this produces ~15–18 portfolio-grade projects per student. By Lab 42, the student has a public GitHub that any junior recruiter would happily open. Grades are secondary to artifacts.
+The program rejects the textbook "exercise → quiz → exam" loop. It replaces it with a **shipping loop**: every two to three weeks, the student turns an empty repo into a runnable, documentable, defensible artifact. Across one academic year, this produces ~15–18 portfolio-grade projects per student. By [Lab 42](labs/lab-42-life-the-universe-and-everything.md), the student has a public GitHub that any junior recruiter would happily open. Grades are secondary to artifacts.
 
 If you remember nothing else: **shipping > grading.**
 
@@ -39,27 +39,27 @@ If a student finishes the program with all six of those traits, the program succ
 
 ### 3.1 The classic year (recommended)
 **~16 labs across 32 weeks (one per fortnight).**
-- Fall semester: 8 labs from a coherent track (e.g., Track A or C).
-- Spring semester: 6 labs broadening domain coverage + 2 weeks for Lab 42.
-- Lab 42 is always the closer.
+- Fall semester: 8 labs from a coherent track (e.g., Track A or C — see [`TRACK_PICKER.md`](TRACK_PICKER.md)).
+- Spring semester: 6 labs broadening domain coverage + 2 weeks for [Lab 42](labs/lab-42-life-the-universe-and-everything.md).
+- [Lab 42](labs/lab-42-life-the-universe-and-everything.md) is always the closer.
 
 ### 3.2 The intensive summer (École 42 spirit)
 **~6 labs across 10 weeks** during a summer intensive.
 - Pick one track, work in pairs / trios, daily standups, weekly demos.
-- Closing week is Lab 42, defended at a public showcase.
+- Closing week is [Lab 42](labs/lab-42-life-the-universe-and-everything.md), defended at a public showcase.
 - Incredibly productive, exhausting, transformative; not for everyone.
 
 ### 3.3 The four-lab semester (light-touch elective)
 **4 labs across 14 weeks.**
 - Use this as a one-semester elective.
 - Pick from the *Make it yours* sections aggressively; let students self-direct.
-- Skip Lab 42 unless you can give them at least 3 weeks at the end.
+- Skip [Lab 42](labs/lab-42-life-the-universe-and-everything.md) unless you can give them at least 3 weeks at the end.
 
 ### 3.4 The self-paced track
 **Solo, no instructor.**
-- Refer student to `TRACK_PICKER.md`.
+- Refer student to [`TRACK_PICKER.md`](TRACK_PICKER.md).
 - Suggest one mentor (any senior they know) for the defense step.
-- Make `MANIFESTO.md` (Lab 42) the exit ticket.
+- Make `MANIFESTO.md` ([Lab 42](labs/lab-42-life-the-universe-and-everything.md)) the exit ticket.
 
 ---
 
@@ -69,10 +69,10 @@ Every lab is **2 weeks** by default (3 for the more ambitious labs in the 16–4
 
 | Default | Extension dial |
 |---|---|
-| Lab 01–15 | 2 weeks → up to 4 weeks with extensions |
-| Lab 16–34 | 2–3 weeks → up to 5 weeks |
-| Lab 35–41 | 3 weeks → up to 5 weeks |
-| Lab 42 | 3 weeks → up to a summer |
+| [Lab 01](labs/lab-01-messenger.md)–[15](labs/lab-15-mini-search-engine.md) | 2 weeks → up to 4 weeks with extensions |
+| [Lab 16](labs/lab-16-smart-telemetry-beacon.md)–[34](labs/lab-34-ai-capstone.md) | 2–3 weeks → up to 5 weeks |
+| [Lab 35](labs/lab-35-rtos-mini-autopilot.md)–[41](labs/lab-41-mostly-harmless-orbital-mechanics.md) | 3 weeks → up to 5 weeks |
+| [Lab 42](labs/lab-42-life-the-universe-and-everything.md) | 3 weeks → up to a summer |
 
 Practical rule: if a student is ahead, **don't add more labs — extend the current one.** Depth beats breadth in this program.
 
@@ -89,7 +89,7 @@ Practical rule: if a student is ahead, **don't add more labs — extend the curr
 - Teams of 4+ are not permitted in this program. They produce silent-passenger problems.
 - Solo students can pair-review each other's labs voluntarily; *encourage this loudly.*
 
-For Lab 42 specifically: teams *may* exist, but the *Manifesto* must be defended by each member individually for their portion.
+For [Lab 42](labs/lab-42-life-the-universe-and-everything.md) specifically: teams *may* exist, but the *Manifesto* must be defended by each member individually for their portion.
 
 ---
 
@@ -113,7 +113,7 @@ Map to whatever institutional system you're forced to use:
 
 Reject "incomplete" submissions; require students to ship the Basic tier or ask for a one-week extension. **Lateness with a working artifact > on-time without one.**
 
-For Lab 42, grading is binary: **shipped** (passing) / **not shipped** (not passing) — but the showcase peer-vote selects winners in three categories (clearest Question, most beautiful Answer, most ambitious shipped artifact).
+For [Lab 42](labs/lab-42-life-the-universe-and-everything.md), grading is binary: **shipped** (passing) / **not shipped** (not passing) — but the showcase peer-vote selects winners in three categories (clearest Question, most beautiful Answer, most ambitious shipped artifact).
 
 ---
 
@@ -161,19 +161,19 @@ The program is mostly software; hardware is optional in *every* lab. But these o
 
 | Item | Approx. UAH (2026) | Use |
 |---|---|---|
-| 5× Raspberry Pi Pico (RP2040) | ~1500 UAH | Labs 04, 19 |
-| 5× ESP32 dev boards | ~2000 UAH | Labs 04, 16, 18 |
-| 3× IMU breakouts (MPU-6050) | ~500 UAH | Lab 17 |
-| 3× DHT22 sensors | ~600 UAH | Lab 04, 18 |
-| 2× USB-to-serial adapters | ~600 UAH | Labs 04, 36 |
-| 2× SD-card readers | ~500 UAH | Lab 36 |
-| 1× Alfa AWUS036NHA Wi-Fi adapter | ~1500 UAH | Lab 40 |
-| 1× RTL-SDR dongle | ~1000 UAH | Lab 40 (optional) |
-| 1× cheap travel router (TP-Link) | ~700 UAH | Lab 40 |
+| 5× Raspberry Pi Pico (RP2040) | ~1500 UAH | Labs [04](labs/lab-04-stm32-sensor-logger.md), [19](labs/lab-19-custom-game-controller.md) |
+| 5× ESP32 dev boards | ~2000 UAH | Labs [04](labs/lab-04-stm32-sensor-logger.md), [16](labs/lab-16-smart-telemetry-beacon.md), [18](labs/lab-18-smart-plant-monitor.md) |
+| 3× IMU breakouts (MPU-6050) | ~500 UAH | [Lab 17](labs/lab-17-pid-self-balancer.md) |
+| 3× DHT22 sensors | ~600 UAH | Labs [04](labs/lab-04-stm32-sensor-logger.md), [18](labs/lab-18-smart-plant-monitor.md) |
+| 2× USB-to-serial adapters | ~600 UAH | Labs [04](labs/lab-04-stm32-sensor-logger.md), [36](labs/lab-36-embedded-linux-from-inside.md) |
+| 2× SD-card readers | ~500 UAH | [Lab 36](labs/lab-36-embedded-linux-from-inside.md) |
+| 1× Alfa AWUS036NHA Wi-Fi adapter | ~1500 UAH | [Lab 40](labs/lab-40-network-wireless-drone-security.md) |
+| 1× RTL-SDR dongle | ~1000 UAH | [Lab 40](labs/lab-40-network-wireless-drone-security.md) (optional) |
+| 1× cheap travel router (TP-Link) | ~700 UAH | [Lab 40](labs/lab-40-network-wireless-drone-security.md) |
 
 Total: ~9,000 UAH (~$220) per cohort if shared. Many institutes can absorb this. If not, every lab supports a "simulator-only" path explicitly.
 
-For aviation-institute deployments specifically: the existing PCB / hand-tools / soldering benches usually cover Labs 04, 16–19, 35.
+For aviation-institute deployments specifically: the existing PCB / hand-tools / soldering benches usually cover Labs [04](labs/lab-04-stm32-sensor-logger.md), [16](labs/lab-16-smart-telemetry-beacon.md)–[19](labs/lab-19-custom-game-controller.md), [35](labs/lab-35-rtos-mini-autopilot.md).
 
 ---
 
@@ -201,7 +201,7 @@ Solution: enforce vertical-slice-by-Day-X (per the lab's own day plan). Better a
 Solution: required *Make it yours* defense — student must walk through the personal twist for 60 seconds. Tutorial-copying becomes obvious immediately.
 
 ### *"I let my teammate carry me."*
-Solution: required who-did-what + individual defense. Silent passengers don't survive Lab 42.
+Solution: required who-did-what + individual defense. Silent passengers don't survive [Lab 42](labs/lab-42-life-the-universe-and-everything.md).
 
 ### *"AI wrote my code."*
 Solution: this is fine. *Defending it is what matters.* If the student can't walk through their own code line-by-line in defense, the lab fails — regardless of who or what wrote the code. Keep this position consistent and gentle; LLMs are tools, demonstrated understanding is the bar.
@@ -213,7 +213,7 @@ Solution: revisit *Make it yours.* If a student is bored, it's almost always bec
 
 ## 12. Required "ethics labs"
 
-Labs **38, 39, 40** are security labs and require a stricter posture:
+Labs **[38](labs/lab-38-binary-exploitation.md), [39](labs/lab-39-web-security-owasp.md), [40](labs/lab-40-network-wireless-drone-security.md)** are security labs and require a stricter posture:
 
 1. Read the **`⚠ Read this first`** block in each before assigning.
 2. Confirm the institution has a **sandbox VM policy** that allows the work.
@@ -223,7 +223,7 @@ Labs **38, 39, 40** are security labs and require a stricter posture:
 6. **Forbid** any RF transmission without an amateur-radio license.
 7. **Forbid** any operation against real aircraft / drones outside PX4 SITL.
 
-If your institution can't provide a sandbox VM policy, *swap these three labs for an alternative track.* (Track B or H both work as substitutes.)
+If your institution can't provide a sandbox VM policy, *swap these three labs for an alternative track.* (Track B or H both work as substitutes — see [`TRACK_PICKER.md`](TRACK_PICKER.md).)
 
 ---
 
@@ -267,7 +267,7 @@ For substantive changes (adding labs, removing labs, restructuring tracks), main
 - Be **publicly proud** of student work. Tweet, post, share — with permission.
 - Be **harsh on dishonesty, gentle on slowness.** They're different; they need different responses.
 - Take **one student each cohort under deeper mentorship.** Pick the one whose curiosity you most want to amplify; offer them an extension lab pairing or co-author a small paper. This is how alumni networks begin.
-- Read **`labs/lab-42-life-the-universe-and-everything.md`** at the start of every cohort. It is the program's emotional anchor — it will tell you what to remind yourself when the term gets hard.
+- Read [**`labs/lab-42-life-the-universe-and-everything.md`**](labs/lab-42-life-the-universe-and-everything.md) at the start of every cohort. It is the program's emotional anchor — it will tell you what to remind yourself when the term gets hard.
 - And: **buy good coffee for the showcase.** Always.
 
 42.

@@ -123,8 +123,8 @@ The 2-week scope above ships a real, defendable simulator. If physics or game-fe
 
 - **Ship to the web.** Port to TypeScript + canvas (or compile your C++/C# version to WASM). Deploy to GitHub Pages — anyone with the URL plays.
 - **Build a real "pinball table"** with bumpers, flippers (driven by left/right keys), tilt, and a high-score system. Now your sandbox is a tiny game.
-- **Combine with Lab 17 (PID).** Add a self-balancing ball-on-a-plate simulator — change "the user controls gravity" to "a PID controller does." A real control-theory toy.
-- **Combine with Lab 25 / 28 (Game / Jam).** Use the physics engine as the core of a 48-hour jam game.
+- **Combine with [Lab 17](lab-17-pid-self-balancer.md) (PID).** Add a self-balancing ball-on-a-plate simulator — change "the user controls gravity" to "a PID controller does." A real control-theory toy.
+- **Combine with [Lab 25](lab-25-platformer-game.md) / 28 (Game / Jam).** Use the physics engine as the core of a 48-hour jam game.
 - **A 2D rigid-body engine.** Move beyond circles to polygons, with proper SAT (Separating Axis Theorem) collision detection and rotational physics. Substantial; legendary as a portfolio project.
 
 ---

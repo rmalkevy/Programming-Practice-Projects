@@ -128,9 +128,9 @@ The whole "3D" effect is just: *closer wall → taller slice; farther wall → s
 The 2-week scope above ships a real, defendable engine. If retro graphics or game programming pulls you in, here's how to grow it into a portfolio standout:
 
 - **Ship to the web.** Port to TypeScript + canvas (or compile your C/C++ to WASM with Emscripten). Anyone with the URL plays your engine.
-- **Make it a real tiny game** with goals, enemies, a HUD, sound. Combine with Lab 25 (platformer) and Lab 28 (jam) as a 3-week game-dev capstone.
-- **Combine with Lab 19 (USB-HID controller).** Play your own raycaster with your own custom-built controller. Two labs, one demo.
-- **Combine with Lab 27 (multiplayer).** A two-player networked raycaster. Brutal but legendary.
+- **Make it a real tiny game** with goals, enemies, a HUD, sound. Combine with [Lab 25](lab-25-platformer-game.md) (platformer) and [Lab 28](lab-28-game-jam.md) (jam) as a 3-week game-dev capstone.
+- **Combine with [Lab 19](lab-19-custom-game-controller.md) (USB-HID controller).** Play your own raycaster with your own custom-built controller. Two labs, one demo.
+- **Combine with [Lab 27](lab-27-multiplayer-browser-game.md) (multiplayer).** A two-player networked raycaster. Brutal but legendary.
 - **Read the Wolfenstein 3D source code** ([open-source on GitHub](https://github.com/id-Software/wolf3d)) and write a deep blog post comparing your engine to id Software's 1992 implementation. *Surprisingly* impressive technical-writing piece.
 
 ---
@@ -272,7 +272,7 @@ Be ready to:
 4. **Show what fish-eye correction does** by toggling it off and on (if you can — otherwise explain).
 5. **What breaks** if FOV is set to 180°? To 5°? If the player starts inside a wall? If the map is 1×1?
 6. **What was the hardest bug** and how did you find it?
-7. **What's the difference** between this lab's "ray casting" and Lab 03's "ray tracing"? (They share half a name. They're cousins, not the same thing.)
+7. **What's the difference** between this lab's "ray casting" and [Lab 3](lab-03-ray-tracer.md)'s "ray tracing"? (They share half a name. They're cousins, not the same thing.)
 
 ---
 

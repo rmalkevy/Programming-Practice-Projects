@@ -14,7 +14,7 @@ In 1996 a small online game called **QuakeWorld** invented one of the most impor
 
 In this lab, you'll build a **multiplayer browser game**. Real people. Different computers. Same world. Two friends sit on opposite sides of campus, open the same URL, and see each other's characters move in real time. They can shoot, race, chase, draw, or just bump into each other — *but they share a world.*
 
-This is the lab that combines almost everything: networking (Lab 23), real-time UI, game loops (Lab 09 / 25), state management, debugging the hardest class of bug there is (race conditions across machines), and *the social magic*. The games you'll be most proud of in your career will probably be multiplayer.
+This is the lab that combines almost everything: networking ([Lab 23](lab-23-realtime-multiplayer.md)), real-time UI, game loops ([Lab 9](lab-09-console-paddle-game.md) / 25), state management, debugging the hardest class of bug there is (race conditions across machines), and *the social magic*. The games you'll be most proud of in your career will probably be multiplayer.
 
 If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multiplayer*** series](https://www.gabrielgambetta.com/client-server-game-architecture.html) — five short articles, the canonical reference, free. Pair it with [**Glenn Fiedler's *Networking for Game Programmers***](https://gafferongames.com/) — and watch [**The Cherno's *Multiplayer Game Programming***](https://www.youtube.com/watch?v=Q5DVqjVSf-0) introduction.
 
@@ -25,7 +25,7 @@ If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multipla
 - **The network is the hardest part of any game.** Multiplayer is the thing AAA studios staff entire teams for. A working multiplayer browser game in your portfolio is *rare* and *visible*.
 - **Demo-friendly.** Two laptops, one URL, instant magic. Recruiters won't forget the moment they see their character move.
 - The skills (**authoritative server, lockstep vs. snapshot interpolation, lag compensation, anti-cheat basics**) are real and asked-about.
-- This lab is a **direct extension of Lab 23.** You can absolutely re-use that codebase and grow it into a game.
+- This lab is a **direct extension of [Lab 23](lab-23-realtime-multiplayer.md).** You can absolutely re-use that codebase and grow it into a game.
 
 ---
 
@@ -40,7 +40,7 @@ Two browser tabs (on the same machine or different machines) connect to your gam
 A game with a goal — race, capture-the-flag, last-player-standing, an `.io`-style food-eating game (think Agar.io / Slither.io), a co-op survival, a chase. Up to 4–8 players in one room. Player names + colors. Shareable lobby URL. Per-frame state synchronization. Win condition. Lobby → game → results loop. Played by at least 5 humans simultaneously.
 
 **Advanced — "It Handles Real Networks"**
-You've added: **client-side prediction** (your character moves immediately, server confirms later), **interpolation** (other players move smoothly, not in jitters), **lag compensation** (a 100ms ping doesn't ruin the game), an **anti-cheat sanity check** (server rejects "I teleported" or "I shot 1000x faster than possible"), **persistent stats** (kills/deaths/wins backed by Lab 21's API), **reconnection** (drop your Wi-Fi, come back to the same game), or **spectator mode**.
+You've added: **client-side prediction** (your character moves immediately, server confirms later), **interpolation** (other players move smoothly, not in jitters), **lag compensation** (a 100ms ping doesn't ruin the game), an **anti-cheat sanity check** (server rejects "I teleported" or "I shot 1000x faster than possible"), **persistent stats** (kills/deaths/wins backed by [Lab 21](lab-21-rest-api-auth.md)'s API), **reconnection** (drop your Wi-Fi, come back to the same game), or **spectator mode**.
 
 ---
 
@@ -74,7 +74,7 @@ The mantra: **server-authoritative, client-predictive, interpolated for others.*
 
 **Week 1 — Make the world shared**
 
-- **Day 1 — Pick the game and the stack.** *One game, one mechanic.* See ideas below. Stack: TypeScript + Socket.IO + canvas (recommended) or Phaser. *If you did Lab 23, build directly on that.*
+- **Day 1 — Pick the game and the stack.** *One game, one mechanic.* See ideas below. Stack: TypeScript + Socket.IO + canvas (recommended) or Phaser. *If you did [Lab 23](lab-23-realtime-multiplayer.md), build directly on that.*
 - **Day 2 — Hello world.** Server and client connect via WebSockets; "hello" message round-trip works. Deploy a hello-world version *immediately* (Render / Fly.io). *Milestone: deployed real-time scaffold.*
 - **Day 3 — A character on screen.** Server tracks a single player's `(x, y)`. Client receives, renders. Move with WASD: client sends inputs; server moves the player; broadcasts position; client renders.
 - **Day 4 — Multiplayer.** Server tracks *all* connected players. On each connection, broadcasts the new player to everyone. Each client renders all players. Open two tabs, both characters move. *Milestone: the magic.* Take a video.
@@ -120,7 +120,7 @@ The mantra: **server-authoritative, client-predictive, interpolated for others.*
 - **Client-Side Prediction.** Local player moves immediately. Server reconciles. Massively reduces perceived lag.
 - **Lag Compensation.** Server "rewinds" by ping when validating shots. Famous Counter-Strike trick.
 - **Anti-Cheat.** Server rejects impossible inputs (teleport, fire-rate violations, walls).
-- **Persistent Stats.** K/D, wins, MVP — saved per user via Lab 21's auth + DB.
+- **Persistent Stats.** K/D, wins, MVP — saved per user via [Lab 21](lab-21-rest-api-auth.md)'s auth + DB.
 - **Spectator Mode.** Players who join late watch the rest of the game.
 - **Reconnection.** Drop Wi-Fi; come back; same game.
 - **Mobile Touch Controls.** Joystick + buttons for phones.
@@ -133,7 +133,7 @@ The mantra: **server-authoritative, client-predictive, interpolated for others.*
 ## Extension challenges (3–5 weeks)
 
 - **Build A Real `.io` Game.** Polish to *agar.io / slither.io* level. Onboard players in 5 seconds. Make it embarrassingly addictive.
-- **Combine Lab 23 + Lab 27.** Use the same WebSocket spine for both projects. Two products, one architecture. Document extensively.
+- **Combine [Lab 23](lab-23-realtime-multiplayer.md) + Lab 27.** Use the same WebSocket spine for both projects. Two products, one architecture. Document extensively.
 - **Take It To A Game Jam.** GMTK Jam, Ludum Dare, etc. — but multiplayer. Cult-favorite type of submission.
 
 ---
@@ -148,7 +148,7 @@ The mechanics are universal; the *game* is what makes it memorable.
 - **Tag.** One player is "it." Touch someone → they're it. The new "it" is slow for 3 seconds.
 - **Capture the Flag.** Two teams. Bring the flag home.
 - **Co-op survival.** Waves of zombies. Players cooperate.
-- **Drawing party game.** One player draws, others guess. (Skribbl-style — overlaps with Lab 23.)
+- **Drawing party game.** One player draws, others guess. (Skribbl-style — overlaps with [Lab 23](lab-23-realtime-multiplayer.md).)
 - **Aviation flavor.** Top-down dogfight: each player a small plane, simple physics, aim and shoot.
 - **Asymmetric.** One player is the "big bad" (a giant monster); the rest are villagers trying to escape. (Dead by Daylight, Among Us flavor.)
 
@@ -163,7 +163,7 @@ Solo: extremely ambitious; tight scope is critical.
 Team:
 - *By layer:* one person owns the server (game state, validation, broadcasting); the other owns the client (rendering, input, UX).
 - *By feature:* one person owns Basic; the other owns Standard. Then both attack Advanced.
-- *Across labs:* if your team also builds Lab 23, share the WebSocket spine.
+- *Across labs:* if your team also builds [Lab 23](lab-23-realtime-multiplayer.md), share the WebSocket spine.
 
 Two team rules: **git from day one** and **list who did what.** Every team member must be able to demo, deploy, and explain the prediction/interpolation step.
 

@@ -25,7 +25,7 @@ If you want a perfect appetizer, read [the Stripe API documentation](https://str
 
 - **Junior backend interviews are 80% about this exact lab.** "Walk me through how you'd design an API for X" is the most common screening question in the world. After this lab, you have a real, deployed answer.
 - This is also the lab where you finally understand **passwords, tokens, sessions, JWTs, salts, hashing**, and the difference between "authentication" and "authorization." Not from theory; from making them work.
-- Combined with **Lab 22** (the SPA frontend) and **Lab 30** (the mobile app), this becomes a full-stack project — the strongest single artifact a junior can have.
+- Combined with **[Lab 22](lab-22-spa-frontend.md)** (the SPA frontend) and **[Lab 30](lab-30-cross-platform-app.md)** (the mobile app), this becomes a full-stack project — the strongest single artifact a junior can have.
 - Ukrainian backend hiring is *strong* — Reface, Grammarly, MacPaw, Petcube, ETERNA, Restream, Ajax Systems, Genesis ecosystem — they all hire on this exact skill set.
 
 ---
@@ -129,9 +129,9 @@ A request walks through a pipeline, gets validated, executes business logic, tal
 
 ## Extension challenges (3–5 weeks)
 
-- **Connect to Lab 22 (Frontend Dashboard).** Pair this API with a real React/Svelte SPA. Now you have a deployed full-stack app. *This is the highest-ROI extension on the entire course.*
-- **Connect to Lab 30 (Mobile App).** Same API, now consumed by a React Native app. Full-stack with mobile. Senior-level portfolio piece.
-- **Add the Lab 33 RAG Layer.** Wire your API to an LLM-powered chat that answers questions about the data ("how many recipes used eggs this month?"). Combine backend + AI in one project.
+- **Connect to [Lab 22](lab-22-spa-frontend.md) (Frontend Dashboard).** Pair this API with a real React/Svelte SPA. Now you have a deployed full-stack app. *This is the highest-ROI extension on the entire course.*
+- **Connect to [Lab 30](lab-30-cross-platform-app.md) (Mobile App).** Same API, now consumed by a React Native app. Full-stack with mobile. Senior-level portfolio piece.
+- **Add the [Lab 33](lab-33-object-detection-tracking.md) RAG Layer.** Wire your API to an LLM-powered chat that answers questions about the data ("how many recipes used eggs this month?"). Combine backend + AI in one project.
 - **Real Production Practices.** Add structured logging (Pino, Serilog, structlog), metrics (Prometheus), tracing (OpenTelemetry), Sentry for error tracking, GitHub Actions for tests + deploys. Document each in the README. *This list, completed, is what mid-level engineers do at real jobs.*
 
 ---
@@ -142,7 +142,7 @@ The mechanics are universal. **What your API does for whom** is what makes this 
 
 Pick **one**:
 
-- **A specific domain.** A flight logbook (aviation flavor — register flights, hours, aircraft type, instructor name; closes nicely against Lab 12 task tracker). A workout tracker. A study-flashcard system. A book library. A "places I've been" travel log. A daily journaling API. Pick something *you* would use.
+- **A specific domain.** A flight logbook (aviation flavor — register flights, hours, aircraft type, instructor name; closes nicely against [Lab 12](lab-12-task-tracker.md) task tracker). A workout tracker. A study-flashcard system. A book library. A "places I've been" travel log. A daily journaling API. Pick something *you* would use.
 - **A community-specific tool.** An API for your university's club. An API for a small business (a tutor scheduling lessons, a restaurant tracking ingredients). Real domain, real users.
 - **Aviation simulator integration.** An API that ingests data from Microsoft Flight Simulator (via SimConnect) and stores flight history. Beautiful direct tie-in to the institute.
 
@@ -196,7 +196,7 @@ Two team rules: **git from day one** and **list who did what.** Each member must
 - **Never log passwords or full JWTs.** Even on dev. Even in error messages.
 - **Never use `MD5` or `SHA-1` for passwords.** Always bcrypt or argon2 with a per-user salt (the libraries do this automatically — just use them properly).
 - **Always use parameterized queries.** Never `"SELECT * FROM users WHERE name='" + userInput + "'"`. SQL injection is still the #1 web vulnerability.
-- **Always include a `Content-Type` and CORS headers.** Frontend in Lab 22 will need them.
+- **Always include a `Content-Type` and CORS headers.** Frontend in [Lab 22](lab-22-spa-frontend.md) will need them.
 
 ---
 

@@ -26,7 +26,7 @@ If you want a perfect appetizer, watch [**Philipp Lackner's *Compose in 30 minut
 - An installable APK on your README is a *visceral* demo: a recruiter can install your software on their actual phone in 30 seconds.
 - The **declarative UI** model (Compose, SwiftUI, React, Flutter) is the future of UI work. Once you understand it on Android, you understand it everywhere.
 - The skills (**Kotlin coroutines, lifecycle awareness, offline-first storage, dependency injection**) are some of the most transferable in software.
-- Connects directly to **Lab 30 (Cross-Platform App)** — building an Android-native version first sharpens your sense of *what's lost* when you choose React Native or Flutter.
+- Connects directly to **[Lab 30](lab-30-cross-platform-app.md) (Cross-Platform App)** — building an Android-native version first sharpens your sense of *what's lost* when you choose React Native or Flutter.
 
 ---
 
@@ -41,7 +41,7 @@ A real Android app that runs on **either an emulator OR a real device**. At leas
 Everything from Basic, plus: **persistent local storage** (Room or DataStore — your data survives app close and phone restart), proper **state management** (ViewModel + StateFlow), **dark mode + light mode** that follow the system theme, **Material 3** components, smooth animations between screens, real error handling (offline state, empty states, loading states), **accessible** (TalkBack reads your screens), installed and used by at least 3 humans (friends, classmates).
 
 **Advanced — "It's Production-Looking"**
-You've added: **a real backend** (talks to Lab 21's API), **authentication** (login/signup), **push notifications** (Firebase Cloud Messaging), **camera or photo picker** integration, **location services**, **a Wear OS / tablet variant**, **CI** (GitHub Actions builds APKs), or *publishing to the Play Store* (optional — see softening note).
+You've added: **a real backend** (talks to [Lab 21](lab-21-rest-api-auth.md)'s API), **authentication** (login/signup), **push notifications** (Firebase Cloud Messaging), **camera or photo picker** integration, **location services**, **a Wear OS / tablet variant**, **CI** (GitHub Actions builds APKs), or *publishing to the Play Store* (optional — see softening note).
 
 ---
 
@@ -113,7 +113,7 @@ The mantra: **declarative UI, unidirectional data flow, single source of truth.*
 
 ### Advanced — "Side Quests" (each ~3–10h)
 
-- **Backend Integration.** Connect to Lab 21's API. Authentication, sync.
+- **Backend Integration.** Connect to [Lab 21](lab-21-rest-api-auth.md)'s API. Authentication, sync.
 - **Camera / Photo Picker.** Pick or capture an image, display it, save it.
 - **Location.** Permission flow, current location, map (Google Maps / OSM).
 - **Push Notifications.** Firebase Cloud Messaging. Server triggers a notification.
@@ -130,8 +130,8 @@ The mantra: **declarative UI, unidirectional data flow, single source of truth.*
 ## Extension challenges (3–5 weeks)
 
 - **A Polished, Daily-Driver App.** Take it to the level where you actually use it daily for a month, iterate based on real friction. Distribute to 10+ users.
-- **Combine With Lab 21 + Lab 22.** A web admin panel + REST API + native Android client, all yours. Massive portfolio leverage.
-- **Combine With Lab 16 / 18 (Embedded).** A companion app for your IoT device — view data, control the hardware. Embedded + mobile is a *rare* and powerful combo.
+- **Combine With [Lab 21](lab-21-rest-api-auth.md) + [Lab 22](lab-22-spa-frontend.md).** A web admin panel + REST API + native Android client, all yours. Massive portfolio leverage.
+- **Combine With [Lab 16](lab-16-smart-telemetry-beacon.md) / 18 (Embedded).** A companion app for your IoT device — view data, control the hardware. Embedded + mobile is a *rare* and powerful combo.
 
 ---
 
@@ -145,7 +145,7 @@ The architecture is universal; the *idea* makes the app. A few directions:
 - **Pomodoro Timer.** With statistics, dark mode, persistent history.
 - **Personal Recipe Book.** Add a recipe, add ingredients, mark favorites, search.
 - **Workout Tracker.** Sets, reps, weights, history, charts.
-- **Companion App For Your IoT (Lab 16/18) Project.**
+- **Companion App For Your IoT ([Lab 16](lab-16-smart-telemetry-beacon.md)/18) Project.**
 - **Daily Journal.** Markdown editor, daily entries, search, mood tags.
 - **Public Transit Schedule.** Local schedules, your favorite stops.
 - **Plant Watering Schedule.** Add plant, set frequency, get a notification.

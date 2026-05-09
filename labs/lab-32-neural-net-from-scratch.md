@@ -26,7 +26,7 @@ If you want a perfect appetizer, watch the **first 30 minutes** of [**Karpathy's
 - **Most ML practitioners haven't done this.** They use PyTorch as a black box. Doing it from scratch is the cleanest possible understanding of *what's actually happening* when a model trains.
 - The skills (**autograd, computation graphs, gradient descent, backpropagation, the math of cross-entropy loss**) are the *foundation* of every other modern AI skill — fine-tuning, prompt engineering, debugging weird model behavior — all flow from these.
 - A repo named `from-scratch-neural-net` with **Karpathy-quality writeups** is one of the most distinctive ML portfolio items possible.
-- Connects directly to **Lab 31 (RAG)**, **Lab 33 (Computer Vision)**, **Lab 34 (Capstone)**, and **Lab 16/18 (Embedded ML)**. This lab is the *base* of the AI track.
+- Connects directly to **[Lab 31](lab-31-llm-rag-app.md) (RAG)**, **[Lab 33](lab-33-object-detection-tracking.md) (Computer Vision)**, **[Lab 34](lab-34-ai-capstone.md) (Capstone)**, and **[Lab 16](lab-16-smart-telemetry-beacon.md)/18 (Embedded ML)**. This lab is the *base* of the AI track.
 
 ---
 
@@ -138,8 +138,8 @@ This lab follows Karpathy's curriculum closely. Watch as you go.
 - **Deploy.** **Hugging Face Spaces** with a Gradio interface. Strangers can poke your model.
 - **Compare to PyTorch.** Verify your from-scratch gradients match PyTorch's on the same inputs. *Proof of correctness.*
 - **Visualize Internals.** Plot weights, activations, attention heads.
-- **Embedded ML.** Run a tiny model on Lab 16/18's microcontroller (TensorFlow Lite Micro). Wildly impressive.
-- **Connects to Lab 31.** Use *your* fine-tuned model in your RAG app instead of OpenAI.
+- **Embedded ML.** Run a tiny model on [Lab 16](lab-16-smart-telemetry-beacon.md)/18's microcontroller (TensorFlow Lite Micro). Wildly impressive.
+- **Connects to [Lab 31](lab-31-llm-rag-app.md).** Use *your* fine-tuned model in your RAG app instead of OpenAI.
 
 ---
 

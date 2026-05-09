@@ -119,7 +119,7 @@ The 2-week scope above ships a real, defendable generator. If fractals or graphi
 - **GPU port.** Move Mandelbrot iteration to a WebGL fragment shader. 100×–1000× speedup. Real-time deep zoom suddenly works.
 - **Deep-zoom video.** Render a 1-minute zoom into the Mandelbrot, ending at a famous coordinate. Stitch frames with `ffmpeg`. Post to YouTube.
 - **A poster-quality print.** Render at 16K resolution, print at A1 size, hang it in your room. *Yes, this counts.*
-- **Combine with Lab 32 (neural net).** Train a tiny network to *imitate* the Mandelbrot — given a coordinate, predict the iteration count. A delightful ML toy.
+- **Combine with [Lab 32](lab-32-neural-net-from-scratch.md) (neural net).** Train a tiny network to *imitate* the Mandelbrot — given a coordinate, predict the iteration count. A delightful ML toy.
 
 ---
 

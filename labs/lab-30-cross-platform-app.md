@@ -24,9 +24,9 @@ If you want a perfect appetizer, watch [**William Candillon's *Can it be done in
 
 - **One codebase, two platforms.** A working app on both stores from one repo is a uniquely strong portfolio item.
 - **React Native skills are some of the most asked-about** in the modern job market — most senior engineers can't comfortably do a mobile app, and recruiters know it.
-- The skills (**TypeScript, React, hooks, async I/O, gesture/animation, native modules**) transfer directly to web (Lab 22), backend (Lab 21), and even desktop (Tauri/Electron).
+- The skills (**TypeScript, React, hooks, async I/O, gesture/animation, native modules**) transfer directly to web ([Lab 22](lab-22-spa-frontend.md)), backend ([Lab 21](lab-21-rest-api-auth.md)), and even desktop (Tauri/Electron).
 - **Expo** is one of the best developer experiences in software. You'll be productive in hours, not weeks.
-- **Connects to Lab 21 + Lab 22 + Lab 29.** Fullstack + mobile native + mobile cross-platform = a complete picture of a product engineer.
+- **Connects to [Lab 21](lab-21-rest-api-auth.md) + [Lab 22](lab-22-spa-frontend.md) + [Lab 29](lab-29-android-native-app.md).** Fullstack + mobile native + mobile cross-platform = a complete picture of a product engineer.
 
 ---
 
@@ -41,7 +41,7 @@ A React Native + Expo app that runs on **iOS via Expo Go** (your iPhone or a fri
 Everything from Basic, plus: **persistent storage** (AsyncStorage / MMKV / SQLite), **dark mode** following the system theme, **smooth animations** (Reanimated 3), responsive layouts (handling keyboards, notches, safe-area insets), real error handling (offline state, empty states, loading), **a sideloadable APK for Android**, *and* either a TestFlight build for iOS *or* Expo Go preview for iOS testing. Used by 3+ humans.
 
 **Advanced — "It's Production-Looking"**
-You've added: **a real backend** (Lab 21's API or your own), **authentication**, **push notifications** (Expo Notifications), **camera or photo picker**, **location**, **OTA updates** (Expo's killer feature — push JS-only updates without resubmitting), **CI/CD** with **EAS Build**, *or* publishing to one of the stores (Play Store $25 or App Store $99 — see softening note).
+You've added: **a real backend** ([Lab 21](lab-21-rest-api-auth.md)'s API or your own), **authentication**, **push notifications** (Expo Notifications), **camera or photo picker**, **location**, **OTA updates** (Expo's killer feature — push JS-only updates without resubmitting), **CI/CD** with **EAS Build**, *or* publishing to one of the stores (Play Store $25 or App Store $99 — see softening note).
 
 ---
 
@@ -117,7 +117,7 @@ The mantra: **one JavaScript, two real native UI trees.** Same code, two operati
 
 ### Advanced — "Side Quests" (each ~3–10h)
 
-- **Backend Integration.** Connect to Lab 21's API.
+- **Backend Integration.** Connect to [Lab 21](lab-21-rest-api-auth.md)'s API.
 - **Authentication.** Login + signup + logout, persistent session.
 - **Push Notifications.** Expo Notifications. Server triggers a notification.
 - **Camera / Photo Picker.** Capture or pick an image, display it.
@@ -134,9 +134,9 @@ The mantra: **one JavaScript, two real native UI trees.** Same code, two operati
 ## Extension challenges (3–5 weeks)
 
 - **A Polished, Daily-Driver App.** Use it daily for a month. Iterate on real friction. Distribute to 10+ users via TestFlight + APK.
-- **Combine With Lab 21 + Lab 22.** Your own backend + web admin + cross-platform mobile client. The whole product, all yours.
-- **Combine With Lab 29.** Build the same app twice — once native (Lab 29), once cross-platform (Lab 30). Then write a comparison: where Compose wins, where React Native wins, where they tie. *Massively* impressive technical writing.
-- **Combine With Lab 16/18 (IoT).** Companion app for an embedded device — sensor data on your phone, control the hardware remotely.
+- **Combine With [Lab 21](lab-21-rest-api-auth.md) + [Lab 22](lab-22-spa-frontend.md).** Your own backend + web admin + cross-platform mobile client. The whole product, all yours.
+- **Combine With [Lab 29](lab-29-android-native-app.md).** Build the same app twice — once native ([Lab 29](lab-29-android-native-app.md)), once cross-platform (Lab 30). Then write a comparison: where Compose wins, where React Native wins, where they tie. *Massively* impressive technical writing.
+- **Combine With [Lab 16](lab-16-smart-telemetry-beacon.md)/18 (IoT).** Companion app for an embedded device — sensor data on your phone, control the hardware remotely.
 
 ---
 
@@ -153,8 +153,8 @@ The architecture is universal; the *idea* is the personality.
 - **Weather App** (with beautiful animations — a *good* weather app is a real signal).
 - **Workout Tracker.**
 - **Local Transit Schedule.**
-- **Companion App For Your Lab 16/18 (IoT)** — sensor monitoring on your phone.
-- **Companion App For Your Lab 21 Backend** — turn the API into something usable on a phone.
+- **Companion App For Your [Lab 16](lab-16-smart-telemetry-beacon.md)/18 (IoT)** — sensor monitoring on your phone.
+- **Companion App For Your [Lab 21](lab-21-rest-api-auth.md) Backend** — turn the API into something usable on a phone.
 
 You'll defend why you chose it and why cross-platform was the right choice for this app (vs. native-only).
 
@@ -167,8 +167,8 @@ Solo: very feasible. Expo's DX makes this one of the most approachable mobile la
 Team:
 - *By layer:* one person owns UI + navigation + animations; the other owns data + state + storage + networking.
 - *By feature:* split your screens 2 + 1.
-- *Across labs:* if your team also does Lab 21, the API is shared between you. Real product engineering.
-- *Across labs (ambitious):* Lab 29 + Lab 30 by the same team — two implementations of the same app, with a written comparison.
+- *Across labs:* if your team also does [Lab 21](lab-21-rest-api-auth.md), the API is shared between you. Real product engineering.
+- *Across labs (ambitious):* [Lab 29](lab-29-android-native-app.md) + Lab 30 by the same team — two implementations of the same app, with a written comparison.
 
 Two team rules: **git from day one** and **list who did what.** Each team member must demo on a real phone.
 

@@ -6,7 +6,7 @@
 **Time budget:** ~2 weeks for the core lab, with extension challenges that grow it to 3–5 weeks.
 **Preferred language:** C/C++ on the device; Python or C# for the simulator path.
 **Working style:** solo, or in a team of up to 3 people.
-**Hardware:** **strongly recommended** but **not required**. A real two-wheel self-balancer (~$30–40), a simple ball-on-tube (~$15), or a fan-balanced lever all work. **A pure software simulator is fully acceptable** — the algorithm and the lessons are identical. (Same approach as Lab 04.)
+**Hardware:** **strongly recommended** but **not required**. A real two-wheel self-balancer (~$30–40), a simple ball-on-tube (~$15), or a fan-balanced lever all work. **A pure software simulator is fully acceptable** — the algorithm and the lessons are identical. (Same approach as [Lab 4](lab-04-stm32-sensor-logger.md).)
 
 ---
 
@@ -135,7 +135,7 @@ In one sentence each:
 
 - **Build a Real Quadcopter Stabilizer Board.** STM32 / ESP32 + IMU + four ESCs + four motors on a small frame. Tune four PID loops simultaneously. This is a 4–5 week project that ends with a thing that flies. Take photos.
 - **Inverted Pendulum on a Cart.** A cart that drives left/right to balance a pendulum standing on top of it. The classic control-theory problem, beautiful when it works.
-- **Connect to Lab 16's Telemetry Dashboard.** Stream PID errors, IMU readings, and motor commands live to your dashboard from Lab 16. Tune by watching graphs in your browser. *This is exactly how professional drone telemetry tuning works.*
+- **Connect to [Lab 16](lab-16-smart-telemetry-beacon.md)'s Telemetry Dashboard.** Stream PID errors, IMU readings, and motor commands live to your dashboard from [Lab 16](lab-16-smart-telemetry-beacon.md). Tune by watching graphs in your browser. *This is exactly how professional drone telemetry tuning works.*
 
 ---
 
@@ -146,7 +146,7 @@ Pick **one** personal twist:
 - **Theme the robot.** Give it a name, a face (LCD with eyes), or a 3D-printed personality. A tiny self-balancing penguin is more memorable than a generic robot.
 - **A specific use case.** A "follow me" robot that uses an ultrasonic sensor to track a person walking. A "library trolley" that balances books while moving. A "service tray" that holds a glass of water without spilling.
 - **A specific demo.** Make it dance to music (synchronize movements to BPM). Make it record its own falls and play them back as videos.
-- **Aviation flavor (recommended).** Build a quadrotor attitude simulator with realistic dynamics, control it with a USB joystick (Lab 19 connection!), display the cockpit on screen.
+- **Aviation flavor (recommended).** Build a quadrotor attitude simulator with realistic dynamics, control it with a USB joystick ([Lab 19](lab-19-custom-game-controller.md) connection!), display the cockpit on screen.
 
 ---
 

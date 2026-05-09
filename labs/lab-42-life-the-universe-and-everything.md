@@ -57,17 +57,17 @@ You pick one. Both are valid; pick whichever lets you ship the *most ambitious t
 
 Pick **2 to 4** of your previous 41 labs. **Fuse them** into a single coherent product whose value comes from the combination, not the parts. Examples that have worked at this level:
 
-- *Lab 31 (LLM-RAG) + Lab 22 (SPA) + Lab 21 (auth):* "Marvin" — an emotionally honest AI study companion. Faithful to canon: it's *also* mildly depressing.
-- *Lab 33 (object detection) + Lab 37 (PX4 drone) + Lab 40 (link security):* a secure, vision-guided autonomous drone running entirely in simulation, with a published threat-model.
-- *Lab 32 (NN from scratch) + Lab 34 (AI capstone) + Lab 41 (orbital mechanics):* a learned controller for low-thrust interplanetary trajectories that beats a textbook baseline.
-- *Lab 38 (binary exploit) + Lab 36 (embedded Linux) + Lab 35 (RTOS):* a research-grade hardened firmware reference platform with a public threat-model.
-- *Lab 23 (multiplayer) + Lab 25/26/27 (game) + Lab 41 (orbits):* a multiplayer "*Heart of Gold*" trajectory-planning game where two crews race to plan the most efficient transfer.
-- *Lab 16 (telemetry beacon) + Lab 22 (SPA) + Lab 31 (LLM):* a "smart-monitoring" station that explains its own readings in natural language.
-- *Lab 24 (browser extension) + Lab 31 (LLM):* an extension that turns *any* website into a structured study deck.
-- *Lab 11 (file explorer) + Lab 36 (embedded Linux) + Lab 38 (exploitation):* a forensic file-explorer that reverses unknown filesystems.
-- *Lab 26 (procedural roguelike) + Lab 25 (platformer) + Lab 14 (cellular automata):* a roguelike whose dungeons evolve over real time according to CA rules.
-- *Lab 30 (cross-platform mobile) + anything in 16-19 (embedded):* a *real*-feeling consumer hardware product with companion app.
-- *Lab 39 (web security) + Lab 21 (REST API):* a verified-secure SaaS micro-product, with a public pen-test report.
+- *[Lab 31](lab-31-llm-rag-app.md) (LLM-RAG) + [Lab 22](lab-22-spa-frontend.md) (SPA) + [Lab 21](lab-21-rest-api-auth.md) (auth):* "Marvin" — an emotionally honest AI study companion. Faithful to canon: it's *also* mildly depressing.
+- *[Lab 33](lab-33-object-detection-tracking.md) (object detection) + [Lab 37](lab-37-px4-mavlink-drone-stack.md) (PX4 drone) + [Lab 40](lab-40-network-wireless-drone-security.md) (link security):* a secure, vision-guided autonomous drone running entirely in simulation, with a published threat-model.
+- *[Lab 32](lab-32-neural-net-from-scratch.md) (NN from scratch) + [Lab 34](lab-34-ai-capstone.md) (AI capstone) + [Lab 41](lab-41-mostly-harmless-orbital-mechanics.md) (orbital mechanics):* a learned controller for low-thrust interplanetary trajectories that beats a textbook baseline.
+- *[Lab 38](lab-38-binary-exploitation.md) (binary exploit) + [Lab 36](lab-36-embedded-linux-from-inside.md) (embedded Linux) + [Lab 35](lab-35-rtos-mini-autopilot.md) (RTOS):* a research-grade hardened firmware reference platform with a public threat-model.
+- *[Lab 23](lab-23-realtime-multiplayer.md) (multiplayer) + [Lab 25](lab-25-platformer-game.md)/26/27 (game) + [Lab 41](lab-41-mostly-harmless-orbital-mechanics.md) (orbits):* a multiplayer "*Heart of Gold*" trajectory-planning game where two crews race to plan the most efficient transfer.
+- *[Lab 16](lab-16-smart-telemetry-beacon.md) (telemetry beacon) + [Lab 22](lab-22-spa-frontend.md) (SPA) + [Lab 31](lab-31-llm-rag-app.md) (LLM):* a "smart-monitoring" station that explains its own readings in natural language.
+- *[Lab 24](lab-24-browser-extension.md) (browser extension) + [Lab 31](lab-31-llm-rag-app.md) (LLM):* an extension that turns *any* website into a structured study deck.
+- *[Lab 11](lab-11-mini-file-explorer.md) (file explorer) + [Lab 36](lab-36-embedded-linux-from-inside.md) (embedded Linux) + [Lab 38](lab-38-binary-exploitation.md) (exploitation):* a forensic file-explorer that reverses unknown filesystems.
+- *[Lab 26](lab-26-procedural-roguelike.md) (procedural roguelike) + [Lab 25](lab-25-platformer-game.md) (platformer) + [Lab 14](lab-14-cellular-automata.md) (cellular automata):* a roguelike whose dungeons evolve over real time according to CA rules.
+- *[Lab 30](lab-30-cross-platform-app.md) (cross-platform mobile) + anything in 16-19 (embedded):* a *real*-feeling consumer hardware product with companion app.
+- *[Lab 39](lab-39-web-security-owasp.md) (web security) + [Lab 21](lab-21-rest-api-auth.md) (REST API):* a verified-secure SaaS micro-product, with a public pen-test report.
 
 The *combination* must do something neither part can do alone. That is the hardest constraint of Path A — and the most rewarding to defend.
 
@@ -276,7 +276,7 @@ The *most important* file is `MANIFESTO.md`. It is the file that turns *Lab 42* 
 - **They look at the GitHub graph.** Did you ship steadily, or did you cram in week 3? Both are fine; the latter just means you're human.
 - **They look at the retro.** A junior who can write *"here's what I'd do differently"* is hireable. A junior who can't is not.
 - **They look at "real users."** Even one is a credibility multiplier.
-- **They look at the cross-lab citations.** "Built on top of my Lab 33 + Lab 37" tells a coherent story. "Random new project unrelated to anything else I learned" tells the opposite story.
+- **They look at the cross-lab citations.** "Built on top of my [Lab 33](lab-33-object-detection-tracking.md) + [Lab 37](lab-37-px4-mavlink-drone-stack.md)" tells a coherent story. "Random new project unrelated to anything else I learned" tells the opposite story.
 - **For Ukrainian recruiters specifically:** if your Question has a Ukrainian context (defense, civic-tech, accessibility, education, agriculture, energy), say so. The local-relevance signal is high.
 
 ---

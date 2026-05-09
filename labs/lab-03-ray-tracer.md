@@ -144,7 +144,7 @@ The 2-week scope above ships a real, defendable ray tracer. If graphics pulls yo
 - **Path tracing.** Move from direct lighting to true Monte Carlo path tracing — soft shadows, caustics, color bleeding. Read Peter Shirley's [*Ray Tracing: The Next Week*](https://raytracing.github.io/) (free, sequel to the appetizer).
 - **GPU port.** Rewrite the inner loop in WebGL / WGSL / CUDA. 100×–1000× speedup. Document the journey.
 - **Animated short.** Render a 5-second 30-FPS animation (150 frames). Edit it together with `ffmpeg`. Post it to YouTube.
-- **Combine with Lab 22.** A web playground where users edit a scene JSON in-browser and watch the render appear (compile your tracer to WASM). *Genuinely impressive* portfolio piece.
+- **Combine with [Lab 22](lab-22-spa-frontend.md).** A web playground where users edit a scene JSON in-browser and watch the render appear (compile your tracer to WASM). *Genuinely impressive* portfolio piece.
 - **Read PBRT.** *Physically Based Rendering* by Matt Pharr et al. is the canonical graphics textbook (and won an Academy Award for its impact on cinema). Pick one chapter and implement what's in it.
 
 ---

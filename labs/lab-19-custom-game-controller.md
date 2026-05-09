@@ -27,7 +27,7 @@ If you want a perfect appetizer, watch the YouTube channel [**Adafruit's HID-via
 - **A working USB-HID device on your portfolio is rare and impressive.** Most students never touch the device side of USB. You will, in two weeks.
 - The skills (USB descriptors, polling rates, debouncing, ergonomics) are **directly relevant** to robotics, drone-firmware, and avionics roles — these systems all speak USB or USB-HID-compatible protocols.
 - It's a **memorable demo.** Plug, play, win. Three seconds. No setup.
-- This lab pairs gloriously with **Lab 25 (2D platformer)** and **Lab 28 (3D first-person)** — students who do all three can demo their controller playing their own game.
+- This lab pairs gloriously with **[Lab 25](lab-25-platformer-game.md) (2D platformer)** and **[Lab 28](lab-28-game-jam.md) (3D first-person)** — students who do all three can demo their controller playing their own game.
 
 ---
 

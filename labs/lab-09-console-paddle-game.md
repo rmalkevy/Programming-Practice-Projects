@@ -133,10 +133,10 @@ This entire game lives inside a `while` loop that runs 60 times per second. That
 The 2-week scope above ships a real, defendable game. If you fall in love with game-dev, here's how to grow it into a portfolio piece:
 
 - **Ship to itch.io.** Build a web version (TypeScript + canvas, or Godot's HTML5 export) and put it up. Anyone with the URL can play.
-- **Combine with Lab 19.** Use *your* USB-HID controller (from Lab 19) to play *your* Pong. Two labs, one demo.
-- **Combine with Lab 27.** A real two-player online Pong over WebSockets. Exactly the kind of "small but technically deep" portfolio piece recruiters love.
+- **Combine with [Lab 19](lab-19-custom-game-controller.md).** Use *your* USB-HID controller (from [Lab 19](lab-19-custom-game-controller.md)) to play *your* Pong. Two labs, one demo.
+- **Combine with [Lab 27](lab-27-multiplayer-browser-game.md).** A real two-player online Pong over WebSockets. Exactly the kind of "small but technically deep" portfolio piece recruiters love.
 - **A polished, slightly-bigger game.** Use the Pong skeleton to make Breakout, Arkanoid, or Air Hockey. Same loop, different game.
-- **Take it to a game jam.** Lab 28 — the jam lab — pairs perfectly. Pong as a starting template for a 48-hour creative jam.
+- **Take it to a game jam.** [Lab 28](lab-28-game-jam.md) — the jam lab — pairs perfectly. Pong as a starting template for a 48-hour creative jam.
 
 ---
 

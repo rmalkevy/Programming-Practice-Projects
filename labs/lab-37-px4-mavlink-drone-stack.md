@@ -25,7 +25,7 @@ If you want a perfect appetizer, watch [**PX4's *PX4 in 5 minutes*** intro](http
 - **Ukraine's drone industry is hiring.** Skills with PX4, MAVLink, and ROS 2 are *immediately* placeable in defense, dual-use, and consumer-drone companies in your country and abroad.
 - **PX4 is one of the largest open-source aerospace projects in history.** Reading and writing code that flies real drones is genuinely rare for a 1st-year.
 - The skills (**MAVLink protocol, SITL simulation, mission planning, ROS 2 nodes, computer-vision integration**) are the *exact* skills the autonomous-systems hiring market is asking for.
-- **Combines beautifully with everything you've done.** Lab 17's PID intuition makes attitude control click. Lab 33's vision pipeline becomes a real "follow the target" system. Lab 35's RTOS knowledge becomes "I understand what's *inside* the autopilot." Lab 36's Linux distro becomes the companion computer. **This is the capstone of the embedded/aviation track.**
+- **Combines beautifully with everything you've done.** [Lab 17](lab-17-pid-self-balancer.md)'s PID intuition makes attitude control click. [Lab 33](lab-33-object-detection-tracking.md)'s vision pipeline becomes a real "follow the target" system. [Lab 35](lab-35-rtos-mini-autopilot.md)'s RTOS knowledge becomes "I understand what's *inside* the autopilot." [Lab 36](lab-36-embedded-linux-from-inside.md)'s Linux distro becomes the companion computer. **This is the capstone of the embedded/aviation track.**
 
 ---
 
@@ -46,7 +46,7 @@ Everything from Basic, plus:
 - works in **QGroundControl** too (you can fly the same mission from the GUI as a sanity check).
 
 **Advanced — "It's An Autonomous System"**
-You've added: **vision-based behaviors** (Lab 33's object detection feeds into mission decisions — "follow the red ball," "land on the marker," "avoid the obstacle"), **a ROS 2 node** that publishes/subscribes to PX4 topics via the **uXRCE-DDS** bridge (the modern PX4 ↔ ROS 2 connection), **swarm coordination** (multiple SITL instances flying in formation), **a custom MAVLink dialect** for a special payload, **integration with a real Pixhawk** (over USB/serial — your code that flew SITL now flies real hardware), or **a tiny ML-driven decision** (Lab 32's network picks a landing zone from camera input).
+You've added: **vision-based behaviors** ([Lab 33](lab-33-object-detection-tracking.md)'s object detection feeds into mission decisions — "follow the red ball," "land on the marker," "avoid the obstacle"), **a ROS 2 node** that publishes/subscribes to PX4 topics via the **uXRCE-DDS** bridge (the modern PX4 ↔ ROS 2 connection), **swarm coordination** (multiple SITL instances flying in formation), **a custom MAVLink dialect** for a special payload, **integration with a real Pixhawk** (over USB/serial — your code that flew SITL now flies real hardware), or **a tiny ML-driven decision** ([Lab 32](lab-32-neural-net-from-scratch.md)'s network picks a landing zone from camera input).
 
 ---
 
@@ -137,13 +137,13 @@ flowchart LR
 
 ### Advanced — "Side Quests" (each ~3–10h)
 
-- **Vision Following.** Connect Lab 33's object detector. Drone follows a red ball / a person / a colored marker as it moves. *World-class portfolio piece.*
+- **Vision Following.** Connect [Lab 33](lab-33-object-detection-tracking.md)'s object detector. Drone follows a red ball / a person / a colored marker as it moves. *World-class portfolio piece.*
 - **Precision Landing.** Detect an ArUco / AprilTag marker; land precisely on it.
 - **ROS 2 Node.** Rewrite the mission script as a ROS 2 node using PX4-ROS 2 bridge. Use `rclpy` or `rclcpp`. Recruiter-impressive.
 - **Swarm.** Two or three SITL instances on different ports, all running the same logic with different roles (leader/follower).
 - **Real Pixhawk.** Get a Pixhawk dev board ($100–200, but lab-shareable). Run the same code over USB/serial. *Real flight.*
 - **Custom MAVLink Dialect.** Define your own message type for a custom payload (e.g., "spray fertilizer," "release parachute"). Generate code with the official MAVLink generator.
-- **Companion-Computer Stack.** Run ROS 2 + your mission code on the Pi from Lab 36. The Pi is the autonomy brain; PX4 SITL is the flight controller.
+- **Companion-Computer Stack.** Run ROS 2 + your mission code on the Pi from [Lab 36](lab-36-embedded-linux-from-inside.md). The Pi is the autonomy brain; PX4 SITL is the flight controller.
 - **Mission Replay.** Save a `.tlog`; replay it later. Compare two missions side-by-side.
 - **Geofencing.** Define a polygon; drone refuses to fly outside it. Real safety feature.
 - **Wind / Failure Stress Test.** Crank up Gazebo's wind. Document how mission behavior degrades. Tune control gains.
@@ -154,10 +154,10 @@ flowchart LR
 ## Extension challenges (3–5 weeks)
 
 - **A real autonomous demo on hardware.** Pair with a school's drone (or a small <250g toy quadcopter with PX4 firmware). Fly your mission outdoors. *Genuinely* career-defining.
-- **Combine Lab 33 + Lab 37.** Vision-based autonomous tracking — drone follows a moving target via a camera. Record video. Post to LinkedIn / GitHub.
-- **Combine Lab 35 + Lab 37.** Your own RTOS code (Lab 35) acts as a *sensor companion* speaking MAVLink to PX4 SITL. The kid version of running custom firmware alongside a real autopilot.
-- **Combine Lab 36 + Lab 37.** Your custom Linux distro runs a ROS 2 node that commands PX4 SITL. Three labs in one stack — the *real* drone-companion-computer architecture.
-- **Combine Lab 32 + Lab 37.** Train a tiny model that picks safe landing spots from camera input. Drone autonomously selects and lands. Demo blockbuster.
+- **Combine [Lab 33](lab-33-object-detection-tracking.md) + Lab 37.** Vision-based autonomous tracking — drone follows a moving target via a camera. Record video. Post to LinkedIn / GitHub.
+- **Combine [Lab 35](lab-35-rtos-mini-autopilot.md) + Lab 37.** Your own RTOS code ([Lab 35](lab-35-rtos-mini-autopilot.md)) acts as a *sensor companion* speaking MAVLink to PX4 SITL. The kid version of running custom firmware alongside a real autopilot.
+- **Combine [Lab 36](lab-36-embedded-linux-from-inside.md) + Lab 37.** Your custom Linux distro runs a ROS 2 node that commands PX4 SITL. Three labs in one stack — the *real* drone-companion-computer architecture.
+- **Combine [Lab 32](lab-32-neural-net-from-scratch.md) + Lab 37.** Train a tiny model that picks safe landing spots from camera input. Drone autonomously selects and lands. Demo blockbuster.
 - **Open source everything.** A clean repo with mission scripts, ROS 2 nodes, README, video demos. Get one external pull request.
 - **Write a deep blog post.** "How I built an autonomous drone-following system using only free software." This kind of content gets shared in defense-tech and drone communities.
 
@@ -188,7 +188,7 @@ Solo: feasible. The MAVLink ecosystem is well-documented; PX4 SITL is friendly.
 Team:
 - *By layer:* one person owns mission logic + script; the other owns telemetry + visualization; if 3 — third person owns ROS 2 + computer-vision integration.
 - *By feature:* one person hits Basic + Standard solid; the other targets Advanced (ROS 2, vision, real hardware).
-- *Across labs:* if Lab 33 (vision) and Lab 37 are done by the same team, **you have the makings of a portfolio-defining demo** — autonomous vision-based drone behavior.
+- *Across labs:* if [Lab 33](lab-33-object-detection-tracking.md) (vision) and Lab 37 are done by the same team, **you have the makings of a portfolio-defining demo** — autonomous vision-based drone behavior.
 
 Two team rules: **git from day one** (this lab has many configs and scripts; keep them organized) and **list who did what.** Each member must explain MAVLink end-to-end (your script's intent → wire bytes → PX4 action).
 
@@ -303,7 +303,7 @@ If stuck for 30+ minutes: **open QGC, fly the mission manually first.** If QGC c
 - **They look at the mission visualizer.** Planned-vs-actual paths, telemetry plots, failure-mode handling = "this person thinks like an autonomy engineer."
 - **They look at coordinate-frame awareness.** Documenting NED vs. ENU in the README is a tiny detail that signals deep care.
 - **They look at the failure-mode demo.** Autonomous systems are *defined* by how they handle failure. A clean RTL recovery is gold.
-- **They look at the cross-lab combinations.** Vision + drone (Lab 33 + 37), or RTOS + drone (Lab 35 + 37), or full stack (Labs 33, 35, 36, 37) is a portfolio you can build a career on.
+- **They look at the cross-lab combinations.** Vision + drone ([Lab 33](lab-33-object-detection-tracking.md) + 37), or RTOS + drone ([Lab 35](lab-35-rtos-mini-autopilot.md) + 37), or full stack (Labs [33](lab-33-object-detection-tracking.md), [35](lab-35-rtos-mini-autopilot.md), [36](lab-36-embedded-linux-from-inside.md), 37) is a portfolio you can build a career on.
 - **For Ukrainian recruiters specifically:** mention your interest in defense-tech / dual-use applications openly in the README — the local industry is hungry for engineers who explicitly want to work on this.
 
 ---
@@ -344,7 +344,7 @@ Be ready to:
 
 ## Showcase
 
-End-of-semester gallery — anonymous voting for **most impressive autonomous mission**, **best failure recovery**, **best vision integration** (if you combined with Lab 33), and **most production-ready code**. Bring laptops; the panel will *invite* you to inject failures live.
+End-of-semester gallery — anonymous voting for **most impressive autonomous mission**, **best failure recovery**, **best vision integration** (if you combined with [Lab 33](lab-33-object-detection-tracking.md)), and **most production-ready code**. Bring laptops; the panel will *invite* you to inject failures live.
 
 ---
 

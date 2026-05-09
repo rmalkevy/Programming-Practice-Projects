@@ -53,7 +53,7 @@ Everything from Basic, plus:
 - a **clean state machine** for the autopilot's modes (`STANDBY → ARMED → ACTIVE → FAULT`).
 
 **Advanced — "It's A Real Avionics Stack"**
-You've added something serious: **NuttX** (the actual RTOS Pixhawk runs — much steeper learning curve, but you'll be reading the same kernel code that runs in real drones), **MAVLink-style structured telemetry** (CRC-protected binary messages — see Lab 37), **a real PID control loop** as a high-priority task (connect to Lab 17), **fault injection testing** (deliberately break tasks; verify the watchdog catches it), **dual-core scheduling** (ESP32 has two cores; assign tasks across them and document the tradeoffs), or **MISRA-C / strict static analysis** to catch the bugs that aerospace certification cares about.
+You've added something serious: **NuttX** (the actual RTOS Pixhawk runs — much steeper learning curve, but you'll be reading the same kernel code that runs in real drones), **MAVLink-style structured telemetry** (CRC-protected binary messages — see [Lab 37](lab-37-px4-mavlink-drone-stack.md)), **a real PID control loop** as a high-priority task (connect to [Lab 17](lab-17-pid-self-balancer.md)), **fault injection testing** (deliberately break tasks; verify the watchdog catches it), **dual-core scheduling** (ESP32 has two cores; assign tasks across them and document the tradeoffs), or **MISRA-C / strict static analysis** to catch the bugs that aerospace certification cares about.
 
 ---
 
@@ -137,14 +137,14 @@ In a `loop()`, a slow `printf` blocks everything for 80 ms. In an RTOS, a high-p
 ### Advanced — "Side Quests" (each ~3–10h)
 
 - **Move to NuttX.** The RTOS that runs Pixhawk. Same lab, harder toolchain, *much* stronger aviation signal.
-- **Real PID Control Loop.** Connect to Lab 17 — your control task becomes a real PID. Drives a motor or simulates a balancer.
+- **Real PID Control Loop.** Connect to [Lab 17](lab-17-pid-self-balancer.md) — your control task becomes a real PID. Drives a motor or simulates a balancer.
 - **Fault Injection.** Deliberate stalls, infinite loops, deadline overruns. Show your watchdog catches each.
 - **Dual-Core (ESP32).** Use `xTaskCreatePinnedToCore` to split tasks across cores. Document the timing improvement.
 - **Static Analysis.** Run `cppcheck`, `clang-tidy`, or a MISRA-C subset. Document and fix the warnings.
 - **Trace Visualization.** Use **Tracealyzer** (free for students) or **SystemView** (Segger) to record a full trace. Beautiful, professional, recruiter-impressive.
-- **Hard-real-time Linux comparison.** Run the same logic on a Raspberry Pi with **PREEMPT_RT** kernel. Compare jitter to your microcontroller. Connects to Lab 36.
+- **Hard-real-time Linux comparison.** Run the same logic on a Raspberry Pi with **PREEMPT_RT** kernel. Compare jitter to your microcontroller. Connects to [Lab 36](lab-36-embedded-linux-from-inside.md).
 - **CAN bus.** Implement a tiny CAN protocol between two microcontrollers. CAN is what cars and a lot of avionics talk on.
-- **MAVLink Telemetry.** Send your telemetry as MAVLink messages over UART. Connects directly to Lab 37.
+- **MAVLink Telemetry.** Send your telemetry as MAVLink messages over UART. Connects directly to [Lab 37](lab-37-px4-mavlink-drone-stack.md).
 - **Power Profiling.** Measure current draw with each task active vs. idle. Critical for battery-powered drones.
 
 ---
@@ -152,8 +152,8 @@ In a `loop()`, a slow `printf` blocks everything for 80 ms. In an RTOS, a high-p
 ## Extension challenges (3–5 weeks)
 
 - **A Real Mini Autopilot.** Mount on a 2-DOF gimbal or a small wheeled robot. Run actual control loops at 250 Hz against an IMU. Demonstrate stability live.
-- **Combine with Lab 17 + Lab 33.** PID balancer + a webcam + a vision pipeline (Lab 33's CV) → the robot keeps a colored ball balanced under camera observation. Three labs, one demo.
-- **Combine with Lab 37.** Use your MAVLink-speaking microcontroller as a *companion sensor* to a PX4 SITL drone. The drone simulates flight; your microcontroller injects real telemetry from a real sensor (e.g., a pitot tube on a fan) into the simulation.
+- **Combine with [Lab 17](lab-17-pid-self-balancer.md) + [Lab 33](lab-33-object-detection-tracking.md).** PID balancer + a webcam + a vision pipeline ([Lab 33](lab-33-object-detection-tracking.md)'s CV) → the robot keeps a colored ball balanced under camera observation. Three labs, one demo.
+- **Combine with [Lab 37](lab-37-px4-mavlink-drone-stack.md).** Use your MAVLink-speaking microcontroller as a *companion sensor* to a PX4 SITL drone. The drone simulates flight; your microcontroller injects real telemetry from a real sensor (e.g., a pitot tube on a fan) into the simulation.
 - **Open-source firmware.** Add a license, GitHub Actions building it from scratch in a Docker container, contributing guide. Get one external pull request.
 - **Write a blog post or paper.** "What I learned re-implementing a Pixhawk-style scheduler on a $5 ESP32." Aerospace engineers will read it.
 
@@ -181,7 +181,7 @@ Solo: very feasible. RTOS is a deeply *individual* mental shift; nothing replace
 Team:
 - *By task layer:* one person owns sensor + queue plumbing; the other owns control + telemetry + state machine; if 3 — third person owns watchdog + measurement + the timing report.
 - *By tier:* one person hits Standard solid; the other hunts Advanced (NuttX port, dual-core, MAVLink).
-- *Across labs:* one team member could pair this with Lab 17 (their PID becomes your control task) or Lab 37 (their MAVLink GCS talks to your firmware).
+- *Across labs:* one team member could pair this with [Lab 17](lab-17-pid-self-balancer.md) (their PID becomes your control task) or [Lab 37](lab-37-px4-mavlink-drone-stack.md) (their MAVLink GCS talks to your firmware).
 
 Two team rules: **git from day one** (with a clean `.gitignore` for your toolchain) and **list who did what.** Each member must explain *priority inversion* and the watchdog's role.
 

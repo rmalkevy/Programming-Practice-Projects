@@ -11,11 +11,11 @@
 
 ## The hook
 
-The API you built in Lab 21 is invisible. It returns JSON. It's correct, it's secure, it's deployed — and a non-technical human can never tell. **This lab is the painted shell that turns "an API" into "an app".** Login screens. Forms. Tables. Charts. Error states. Loading spinners. Dark mode. The thousand small decisions that turn correct data into a thing people *use*.
+The API you built in [Lab 21](lab-21-rest-api-auth.md) is invisible. It returns JSON. It's correct, it's secure, it's deployed — and a non-technical human can never tell. **This lab is the painted shell that turns "an API" into "an app".** Login screens. Forms. Tables. Charts. Error states. Loading spinners. Dark mode. The thousand small decisions that turn correct data into a thing people *use*.
 
 Modern frontend is the most-hired junior skill in Ukraine. It's also the most overproduced — too many "I built a TODO app with React" portfolios that all look the same. **The way to stand out is not to use 17 frameworks; it's to actually finish *one* small frontend that genuinely works against a real backend, looks honestly designed, handles real-world failure cases (the network died mid-form, the token expired, the input is invalid), and is deployed to a public URL someone can use.** That's a 1-in-30 portfolio. This is your shot at building it.
 
-Pair it with Lab 21 and you have a deployed full-stack app. Pair *that* with Lab 30 (mobile) and you have a portfolio piece that genuinely impresses senior engineers. This is the lab where the "full stack" becomes more than a buzzword on your CV.
+Pair it with [Lab 21](lab-21-rest-api-auth.md) and you have a deployed full-stack app. Pair *that* with [Lab 30](lab-30-cross-platform-app.md) (mobile) and you have a portfolio piece that genuinely impresses senior engineers. This is the lab where the "full stack" becomes more than a buzzword on your CV.
 
 If you want a perfect appetizer, browse [**Linear's website and product**](https://linear.app/) — it's the textbook example of what excellent modern frontend feels like. Pair with [**Josh Comeau's blog**](https://www.joshwcomeau.com/) — the best writer on modern CSS and React on the internet, and his free [*CSS for JS Developers*](https://css-for-js.dev/) intro is gold. For tactical reference: Adam Wathan & Steve Schoger's [**Refactoring UI**](https://www.refactoringui.com/), which is referenced in nearly every senior frontend portfolio you'll ever see.
 
@@ -25,7 +25,7 @@ If you want a perfect appetizer, browse [**Linear's website and product**](https
 
 - **Frontend is the largest junior hiring pool in Ukrainian tech.** This lab is your interview practice.
 - It is the lab where you finally understand **components, state, effects, async data, forms, and routing** — five concepts most students bounce off four or five times before they stick.
-- Combined with **Lab 21**, this is the most-likely-to-be-cloned-by-recruiters portfolio piece in this whole course. They will literally pull up the URL during the call.
+- Combined with **[Lab 21](lab-21-rest-api-auth.md)**, this is the most-likely-to-be-cloned-by-recruiters portfolio piece in this whole course. They will literally pull up the URL during the call.
 - **Real-world frontend is 80% handling failure.** Network drops, validation errors, expired sessions, race conditions. After this lab, you'll have *seen* all five.
 
 ---
@@ -35,7 +35,7 @@ If you want a perfect appetizer, browse [**Linear's website and product**](https
 > **Instructor TODO:** add reference screenshots to `docs/` once available.
 
 **Basic — "It Talks to the API"**
-A single-page app at a public URL that consumes Lab 21's API. Users can register, log in, log out. Logged-in users see a list of their data, can create new items, edit, and delete. Forms validate before submission. Loading states are visible. Errors are shown clearly (not just `alert()` boxes). The app doesn't crash when the API is unreachable — it shows an honest "couldn't load — try again" message.
+A single-page app at a public URL that consumes [Lab 21](lab-21-rest-api-auth.md)'s API. Users can register, log in, log out. Logged-in users see a list of their data, can create new items, edit, and delete. Forms validate before submission. Loading states are visible. Errors are shown clearly (not just `alert()` boxes). The app doesn't crash when the API is unreachable — it shows an honest "couldn't load — try again" message.
 
 **Standard — "It's Polished"**
 The app feels good. Typography is consistent. There's a real color palette. Mobile-responsive (it should look fine on a phone). Forms have proper field-level validation, good labels, and helpful error messages. Tables are sortable; long lists are paginated. There's a settings page. Dark/light theme. Loading skeletons (not spinners) on data fetches. Optimistic updates on common actions (delete an item; the UI updates instantly, then rolls back if the API fails). Lighthouse score 90+ on mobile.
@@ -74,9 +74,9 @@ A frontend is a state machine that mirrors API state and handles failure. The ha
 
 **Week 1 — Login → list → create**
 
-- **Day 1 — Pick stack & deploy "hello."** React + Vite + TypeScript is the recommended baseline. Or SvelteKit, or Vue 3. Deploy a "hello world" to Vercel/Netlify *immediately.* Same pattern as Lab 21: deploy first, develop against deployed version. *Milestone: live URL works.*
+- **Day 1 — Pick stack & deploy "hello."** React + Vite + TypeScript is the recommended baseline. Or SvelteKit, or Vue 3. Deploy a "hello world" to Vercel/Netlify *immediately.* Same pattern as [Lab 21](lab-21-rest-api-auth.md): deploy first, develop against deployed version. *Milestone: live URL works.*
 - **Day 2 — Routing.** Set up basic routing — `/login`, `/register`, `/dashboard`, `/settings`. React Router, SvelteKit's file-based routing, or Vue Router. A protected-route wrapper that redirects to `/login` if no token.
-- **Day 3 — Login form.** A real form with proper labels, validation (use `zod` + `react-hook-form`, or your framework's equivalent). On submit, call `POST /auth/login` against your Lab 21 API. Store the JWT in memory + (carefully) localStorage. *Milestone: you can log in to your own backend from your own frontend, both deployed.*
+- **Day 3 — Login form.** A real form with proper labels, validation (use `zod` + `react-hook-form`, or your framework's equivalent). On submit, call `POST /auth/login` against your [Lab 21](lab-21-rest-api-auth.md) API. Store the JWT in memory + (carefully) localStorage. *Milestone: you can log in to your own backend from your own frontend, both deployed.*
 - **Day 4 — Register form.** Same pattern. Handle the "user already exists" error case gracefully.
 - **Day 5 — Authenticated fetch wrapper.** A `fetch()` helper that automatically adds the `Authorization: Bearer <token>` header and handles 401 by redirecting to `/login`.
 - **Day 6 — Dashboard with list.** Fetch the user's data on mount. Show loading state, then the list. Show "no items yet" empty state.
@@ -100,7 +100,7 @@ A frontend is a state machine that mirrors API state and handles failure. The ha
 
 ### Basic — "It Talks to the API" (~12–18 hours)
 - live URL, deployed
-- consumes a real public API (your Lab 21 deployment)
+- consumes a real public API (your [Lab 21](lab-21-rest-api-auth.md) deployment)
 - register / login / logout flow
 - a list view of the user's data
 - create / edit / delete actions
@@ -136,9 +136,9 @@ A frontend is a state machine that mirrors API state and handles failure. The ha
 
 ## Extension challenges (3–5 weeks)
 
-- **Couple it tightly with Lab 21.** Treat them as a single full-stack project. Single repo (monorepo), shared types via OpenAPI codegen or a shared package, single CI/CD pipeline, single README. *This is what production-grade junior portfolios look like.*
-- **Real-Time Multiplayer Layer.** Add WebSockets (extends to Lab 23 territory) — multiple users see each other's actions live. The data refreshes when someone else changes it.
-- **Mobile Companion.** Build Lab 30 (React Native) that consumes the same API. Now you have full-stack with mobile. The strongest junior portfolio piece achievable in a single semester.
+- **Couple it tightly with [Lab 21](lab-21-rest-api-auth.md).** Treat them as a single full-stack project. Single repo (monorepo), shared types via OpenAPI codegen or a shared package, single CI/CD pipeline, single README. *This is what production-grade junior portfolios look like.*
+- **Real-Time Multiplayer Layer.** Add WebSockets (extends to [Lab 23](lab-23-realtime-multiplayer.md) territory) — multiple users see each other's actions live. The data refreshes when someone else changes it.
+- **Mobile Companion.** Build [Lab 30](lab-30-cross-platform-app.md) (React Native) that consumes the same API. Now you have full-stack with mobile. The strongest junior portfolio piece achievable in a single semester.
 - **Real Production Practices.** End-to-end tests (Playwright or Cypress), CI on every PR, error tracking with Sentry, analytics with Plausible (privacy-friendly). Document each in the README.
 
 ---
@@ -236,7 +236,7 @@ frontend-spa/
 
 ## When you get stuck
 
-- **CORS errors when calling the API.** Configure your backend (Lab 21) to allow the frontend's origin. For development, set `Access-Control-Allow-Origin: *` is acceptable.
+- **CORS errors when calling the API.** Configure your backend ([Lab 21](lab-21-rest-api-auth.md)) to allow the frontend's origin. For development, set `Access-Control-Allow-Origin: *` is acceptable.
 - **JWT works on first login, then 401 forever.** You're not sending the `Authorization` header on subsequent requests. Add it in your fetch wrapper.
 - **Forms submit empty data.** You're using uncontrolled inputs without proper `name` attributes, or you're not preventing the form's default submission.
 - **Dark mode flashes on page load.** Set the initial theme from `localStorage` *synchronously* in a `<script>` in `<head>`, before React renders.
@@ -256,7 +256,7 @@ If stuck for 30+ minutes: open the network tab. The bug is almost always in a re
 - [ ] No `alert()` calls anywhere.
 - [ ] API base URL is configured via environment variable.
 - [ ] `.env` is in `.gitignore`.
-- [ ] CORS is properly configured between frontend (this lab) and backend (Lab 21).
+- [ ] CORS is properly configured between frontend (this lab) and backend ([Lab 21](lab-21-rest-api-auth.md)).
 - [ ] 404 page exists.
 - [ ] Favicon set (not the framework default).
 - [ ] OpenGraph meta tags work — paste link in Telegram, see preview.
@@ -322,4 +322,4 @@ End-of-semester gallery — anonymous voting for **most polished UI**, **best UX
 
 ## A final word
 
-The backend you built in Lab 21 is correct. This lab makes it *exist* in the world. After this, you'll have something a recruiter clicks on, registers for, uses for 30 seconds, and thinks "this person ships." That impression — built in 30 seconds, kept for the entire interview — is the hidden value of the frontend.
+The backend you built in [Lab 21](lab-21-rest-api-auth.md) is correct. This lab makes it *exist* in the world. After this, you'll have something a recruiter clicks on, registers for, uses for 30 seconds, and thinks "this person ships." That impression — built in 30 seconds, kept for the entire interview — is the hidden value of the frontend.

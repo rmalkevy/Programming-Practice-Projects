@@ -26,7 +26,7 @@ If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multipla
 - **Real-time UX is the modern web's most distinguishing feature.** Every "feels like magic" product (Linear, Figma, Notion, Discord) has it. Most junior portfolios don't.
 - The skills (**WebSockets, broadcasting, room/channel management, optimistic updates, reconnection logic**) are some of the most asked-about in senior backend interviews and rare in junior portfolios.
 - A multiplayer web app **demos itself.** Two browser tabs, one URL — the recruiter sees the magic in 5 seconds. *Most* portfolio projects need a 2-minute explanation; this one needs none.
-- This lab synergizes powerfully with **Lab 27 (multiplayer browser game)** — same WebSocket spine, two products built on it. Combined, they're the most distinctive single multiplayer skill set in any junior portfolio.
+- This lab synergizes powerfully with **[Lab 27](lab-27-multiplayer-browser-game.md) (multiplayer browser game)** — same WebSocket spine, two products built on it. Combined, they're the most distinctive single multiplayer skill set in any junior portfolio.
 
 ---
 
@@ -41,7 +41,7 @@ Two browser tabs see each other. The chosen project — a drawing board, a TODO 
 Multiple independent "rooms" (or "games", or "boards") run simultaneously. Each user creates or joins a room with a shareable URL (`/r/abc123`). Up to 10 users per room. The user can see other connected users (avatars, names, "user X is typing"). The app handles the messy real-world cases — users joining mid-action, rooms being abandoned, the network glitching for 5 seconds, two users editing the same thing at the same time.
 
 **Advanced — "It Handles Real-World Mess"**
-You've added something serious: **persistence** (the room's state survives a server restart), **authentication-aware rooms** (private rooms only logged-in users can enter — connects to Lab 21's auth), **conflict resolution** beyond last-writer-wins (a real CRDT or operational transform — used by Figma and Google Docs), **lag compensation** so the UI feels instant even on slow networks, **a spectator mode** (read-only viewers don't count toward the user limit), or **end-to-end encryption** of room contents (server can broker but not read).
+You've added something serious: **persistence** (the room's state survives a server restart), **authentication-aware rooms** (private rooms only logged-in users can enter — connects to [Lab 21](lab-21-rest-api-auth.md)'s auth), **conflict resolution** beyond last-writer-wins (a real CRDT or operational transform — used by Figma and Google Docs), **lag compensation** so the UI feels instant even on slow networks, **a spectator mode** (read-only viewers don't count toward the user limit), or **end-to-end encryption** of room contents (server can broker but not read).
 
 ---
 
@@ -112,7 +112,7 @@ The server is the **single source of truth**. Every action goes through it. Ever
 ### Advanced — "Side Quests" (each ~3–10h)
 
 - **Persistence.** Room state stored in Redis or a database. Survives server restart.
-- **Auth-Gated Rooms.** Connects to Lab 21's auth: private rooms only logged-in users can enter.
+- **Auth-Gated Rooms.** Connects to [Lab 21](lab-21-rest-api-auth.md)'s auth: private rooms only logged-in users can enter.
 - **Real CRDT.** Use Yjs or Automerge for conflict-free concurrent editing. Used by Linear, Figma, Notion. Game-changer for collaborative editing.
 - **Live Cursors.** Show every connected user's mouse position in the room — Figma-style. Visceral "this is multiplayer" effect.
 - **Optimistic UI.** Local action updates UI instantly; server confirmation arrives later. Roll back if rejected.
@@ -125,7 +125,7 @@ The server is the **single source of truth**. Every action goes through it. Ever
 
 ## Extension challenges (3–5 weeks)
 
-- **Combine With Lab 27 (Multiplayer Browser Game).** Same WebSocket backbone, two different products on top. Massive portfolio leverage.
+- **Combine With [Lab 27](lab-27-multiplayer-browser-game.md) (Multiplayer Browser Game).** Same WebSocket backbone, two different products on top. Massive portfolio leverage.
 - **Build a Tiny Figma.** A real collaborative drawing app with shapes, text, layers, undo, multiplayer cursors. Use Yjs or Automerge for conflict-free state. Document the architecture extensively. *This is a senior-level project at junior scale.*
 - **End-to-End Encryption.** Encrypt room contents on the client; the server broadcasts ciphertext only. Use the Web Crypto API. The architecture conversation in interviews this unlocks is gold.
 
@@ -156,7 +156,7 @@ Solo: connection management, state sync, reconnection, UI — you'll touch every
 Team:
 - *By layer:* one person owns the server (room manager, broadcasting, persistence); the other owns the client (UI, optimistic updates, reconnection).
 - *By feature:* one person drives Basic (single room sync); the other drives Standard (multi-room + users + reconnection).
-- *By stack split:* if you do both Lab 22 and 23 as a team, one person can own auth + REST, the other owns real-time. Both surfaces feed into the same product.
+- *By stack split:* if you do both [Lab 22](lab-22-spa-frontend.md) and 23 as a team, one person can own auth + REST, the other owns real-time. Both surfaces feed into the same product.
 
 Two team rules: **git from day one** and **list who did what.** Each member must be able to explain how a single user action travels from one tab to another tab.
 
@@ -178,7 +178,7 @@ Two team rules: **git from day one** and **list who did what.** Each member must
 - For the brave: `ws` library on Node, or browser's native `WebSocket`. No reconnection logic, no rooms, no fallbacks — you build them yourself. Educational; not productive.
 
 **Frontend**
-- React + TanStack Query + Socket.IO client. Or Svelte + Socket.IO. Pick what you used in Lab 22.
+- React + TanStack Query + Socket.IO client. Or Svelte + Socket.IO. Pick what you used in [Lab 22](lab-22-spa-frontend.md).
 - Tailwind for styling.
 
 **Hosting**

@@ -24,7 +24,7 @@ If you want a perfect appetizer, read [*Getting Real*](https://basecamp.com/gett
 ## Why this is worth your time
 
 - Some flavor of "list with statuses" is the most common shape of every job-listing for a junior engineer. **Building a clean one is the closest 1st-year project to "first day of work."**
-- Persistence, validation, and CRUD — the same trio as Lab 01 — are the boring-looking work that takes up 70% of any real product. This lab gets you fluent.
+- Persistence, validation, and CRUD — the same trio as [Lab 1](lab-01-messenger.md) — are the boring-looking work that takes up 70% of any real product. This lab gets you fluent.
 - A well-designed task tracker is a **portfolio piece you can show to a non-technical person**. They'll understand what it is in 5 seconds and remember the demo. Most of your other projects need explanation.
 - It is the rare lab where, if you genuinely care about your own productivity, **you'll keep using the result for the rest of the semester** — and that's the highest compliment a piece of software can get.
 
@@ -125,7 +125,7 @@ A task tracker is the simplest non-trivial CRUD app. There's almost nothing here
 - **Markdown Notes.** Each task has a body where the user can write notes in Markdown.
 - **CSV / Markdown Export.** "Export this week's done tasks" → a clean text artifact you could paste into a status report.
 - **CLI Power Tool.** A real CLI: `tt add "fix bug" -p high -d today -t work`. Globally installable. Fast as hell. The kind of thing you'd actually keep using.
-- **Multi-user.** Sign-in (even just username, no password — same caveats as Lab 01). Each user has their own task list.
+- **Multi-user.** Sign-in (even just username, no password — same caveats as [Lab 1](lab-01-messenger.md)). Each user has their own task list.
 - **Calendar View.** Show this week / next week as a 7-column grid with tasks placed on their deadlines.
 - **Pomodoro Integration.** Click "start" on a task, a 25-minute timer counts down, completion logs the session. Build a "I worked for 4 hours today" stats page.
 
@@ -136,9 +136,9 @@ A task tracker is the simplest non-trivial CRUD app. There's almost nothing here
 The 2-week scope above ships a real, defendable tool. If you fall in love with it, here's how to grow it into a portfolio centerpiece:
 
 - **A daily-driver release.** Use it yourself for 30 days, journal the friction, fix the top three pain points each week. *That feedback loop* is the rarest signal in any junior portfolio.
-- **Combine with Lab 21.** Move storage to your own deployed REST API with auth — your tasks now follow you across machines. Suddenly you have a real multi-device product.
-- **Combine with Lab 22.** A polished SPA frontend on top of the API. Real product shape.
-- **Combine with Lab 30.** A cross-platform mobile companion (React Native + Expo). Tasks sync between web and phone.
+- **Combine with [Lab 21](lab-21-rest-api-auth.md).** Move storage to your own deployed REST API with auth — your tasks now follow you across machines. Suddenly you have a real multi-device product.
+- **Combine with [Lab 22](lab-22-spa-frontend.md).** A polished SPA frontend on top of the API. Real product shape.
+- **Combine with [Lab 30](lab-30-cross-platform-app.md).** A cross-platform mobile companion (React Native + Expo). Tasks sync between web and phone.
 - **Open source it.** Add a license, a contributing guide, GitHub Actions CI, issue templates. Get one external pull request.
 - **Ship a CLI version to npm or NuGet.** A globally installable `tt` command other people can install. Shocking how impressive this is on a CV.
 

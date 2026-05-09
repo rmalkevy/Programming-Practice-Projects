@@ -27,7 +27,7 @@ If you want the perfect appetizer, browse [**Random Nerd Tutorials**](https://ra
 - **The IoT-product shape is everywhere.** Smart locks, weather stations, drone health monitors, agricultural sensors, defense-tech ground sensors. They're all *this lab*, scaled up.
 - It's the kind of project a non-technical person — a parent, a recruiter, a friend's friend — *understands instantly.* That makes it shockingly effective at the start of any portfolio conversation.
 - Real Ukrainian opportunities: smart agriculture (Climate Field View, Smart Farming Ukraine), defense-tech ground sensors, energy monitoring startups. They hire on demonstrated IoT skills, and this lab is one demonstration.
-- The skills compound: builds on Lab 04 (sensors), connects to Lab 16 (telemetry), prepares Lab 21 (backend) and Lab 33 (AI integration via thresholds → smart alerts).
+- The skills compound: builds on [Lab 4](lab-04-stm32-sensor-logger.md) (sensors), connects to [Lab 16](lab-16-smart-telemetry-beacon.md) (telemetry), prepares [Lab 21](lab-21-rest-api-auth.md) (backend) and [Lab 33](lab-33-object-detection-tracking.md) (AI integration via thresholds → smart alerts).
 
 ---
 
@@ -118,7 +118,7 @@ A simple state machine on top of a simple sensor read. The product-engineering w
 - **Temperature & Humidity.** Add a DHT22 (~$3). Now it's a complete environmental monitor.
 - **Light Sensor.** A photoresistor (~$0.50) detects how much light the plant gets. Combined with moisture: a real growth assistant.
 - **Telegram Two-Way.** You can send commands back: `/status`, `/water now`, `/snooze 6h`.
-- **Connect to Lab 16 Backend.** Push readings to your telemetry dashboard from Lab 16. The full IoT stack: many devices, one backend, one beautiful UI.
+- **Connect to [Lab 16](lab-16-smart-telemetry-beacon.md) Backend.** Push readings to your telemetry dashboard from [Lab 16](lab-16-smart-telemetry-beacon.md). The full IoT stack: many devices, one backend, one beautiful UI.
 - **Public Garden Page.** Deploy the dashboard publicly. Share a URL with friends so they can check on your plants. Surprisingly fun.
 - **Long-Term Logging.** Save daily averages to flash. Build a "30 days of moisture" chart.
 
@@ -126,7 +126,7 @@ A simple state machine on top of a simple sensor read. The product-engineering w
 
 ## Extension challenges (3–5 weeks)
 
-- **A Real Mini Greenhouse.** Multiple plants. Pump-per-plant. A grow light that turns on with a relay when ambient light is low. A dashboard that shows the whole "garden" at a glance. Connects to Lab 16's telemetry backend. Document with a 5-minute video tour.
+- **A Real Mini Greenhouse.** Multiple plants. Pump-per-plant. A grow light that turns on with a relay when ambient light is low. A dashboard that shows the whole "garden" at a glance. Connects to [Lab 16](lab-16-smart-telemetry-beacon.md)'s telemetry backend. Document with a 5-minute video tour.
 - **AI-Driven Watering Schedule.** Log watering frequency, moisture decay rates, ambient temperature. Use the data (offline analysis in Python with pandas) to *predict* when each plant will need water. The device watering schedule becomes adaptive. Excellent bridge to the AI/ML labs.
 - **Defense-Tech Inspired Ground Sensor.** Same hardware, different framing: a ruggedized, battery-powered ground sensor that detects soil disturbance / vibration / sound, transmits over LoRa to a base station. The skill graph from "smart plant" to "ground reconnaissance" is short.
 
@@ -139,7 +139,7 @@ Pick **one** personal twist:
 - **The plant gets a personality.** Name it. Give it a voice (a "this-plant-uses-it/she/they" pronoun in the alert message). Have the alerts read in increasing urgency: "Hey, getting a bit dry." → "Could really use a sip." → "DYING, HUMAN." Surprisingly memorable and will be the thing the recruiter laughs about.
 - **A specific use case.** A monitor for a tomato seedling tray. A monitor for an orchid (notoriously fussy). A monitor for cannabis (you'll need to handle the legal angle in your README).
 - **Theme the dashboard.** Pixel-art plant grows when watered, wilts when dry. Or 1920s-engineering-blueprint aesthetic. Or hand-drawn.
-- **Aviation flavor.** Repurpose the device — same hardware, same software — as a "model rocket pad humidity & temperature monitor", a "drone storage hangar climate sensor", or a "STM32 development bench environmental logger" (bonus: connects to Lab 16's dashboard).
+- **Aviation flavor.** Repurpose the device — same hardware, same software — as a "model rocket pad humidity & temperature monitor", a "drone storage hangar climate sensor", or a "STM32 development bench environmental logger" (bonus: connects to [Lab 16](lab-16-smart-telemetry-beacon.md)'s dashboard).
 
 You'll defend why you chose your twist.
 

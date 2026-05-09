@@ -131,9 +131,9 @@ Two phases: **build the index once**, **answer many queries fast**. Every modern
 The 2-week scope above is already a real, defendable project. If you fall in love with information retrieval, here's how to grow it into a portfolio standout:
 
 - **Index a Wikipedia subset** — a few thousand articles. Measure indexing time and query latency. Document the numbers.
-- **Combine with Lab 22.** A polished SPA frontend on top of your engine. Search-as-you-type, live snippets, deployed.
-- **Combine with Lab 21.** Wrap the engine in a deployed REST API. Anyone with the URL can hit `/search?q=...` and get JSON.
-- **Combine with Lab 31 (RAG).** Use your inverted index as the retrieval layer for an LLM RAG app — *not* a vector database. Document the tradeoffs (lexical vs. semantic retrieval). This is rare, real, and recruiter-impressive.
+- **Combine with [Lab 22](lab-22-spa-frontend.md).** A polished SPA frontend on top of your engine. Search-as-you-type, live snippets, deployed.
+- **Combine with [Lab 21](lab-21-rest-api-auth.md).** Wrap the engine in a deployed REST API. Anyone with the URL can hit `/search?q=...` and get JSON.
+- **Combine with [Lab 31](lab-31-llm-rag-app.md) (RAG).** Use your inverted index as the retrieval layer for an LLM RAG app — *not* a vector database. Document the tradeoffs (lexical vs. semantic retrieval). This is rare, real, and recruiter-impressive.
 - **Benchmark vs. ripgrep / `grep -r`.** Same dataset, same queries, different tools. Plot times. Write the comparison up.
 - **Open source it.** A nice CLI, a license, GitHub Actions, contributing guide.
 

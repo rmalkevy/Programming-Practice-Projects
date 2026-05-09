@@ -77,7 +77,7 @@ Two flavors of filter are everything you need. **Per-pixel** filters (grayscale,
 
 **Week 2 — Neighborhood filters and a real toolbox**
 
-- **Day 8 — Box blur.** For each pixel, set its color to the *average* of itself and its 8 neighbors (a 3×3 region). Run on a photo. *Milestone: the image is visibly softer.* Notice that you must read from the *original* image and write to a *new* image — not in-place. (This is the same trap as Lab 14's cellular automata!)
+- **Day 8 — Box blur.** For each pixel, set its color to the *average* of itself and its 8 neighbors (a 3×3 region). Run on a photo. *Milestone: the image is visibly softer.* Notice that you must read from the *original* image and write to a *new* image — not in-place. (This is the same trap as [Lab 14](lab-14-cellular-automata.md)'s cellular automata!)
 - **Day 9 — Convolution engine.** Generalize the blur into `convolve(image, kernel)` where `kernel` is a 3×3 array of numbers. Test it: a kernel of all `1/9`s should be your blur from Day 8. Now you can implement many filters with the same engine.
 - **Day 10 — More filters.** Sharpen kernel: `[[ 0,-1, 0],[-1, 5,-1],[ 0,-1, 0]]`. Edge detection kernel (simple): `[[-1,-1,-1],[-1, 8,-1],[-1,-1,-1]]`. Try them. Save. *Milestone: edges of objects pop out from the noise.*
 - **Day 11 — Filter pipeline.** Allow chained filters from the CLI: `--pipeline grayscale,blur,edge`. Internally that just applies them in order.
@@ -125,8 +125,8 @@ Two flavors of filter are everything you need. **Per-pixel** filters (grayscale,
 The 2-week scope above ships a real, defendable image processor. If image processing pulls you in, here's how to grow it into a portfolio standout:
 
 - **Ship a web playground.** A TypeScript port deployed to GitHub Pages — drag-drop a photo, pick a filter, download the result. Image tools shine on the web.
-- **Combine with Lab 33 (computer vision).** Use your filters as the *preprocessing* stage of an object detector. Real CV pipelines are *exactly* "preprocess → infer → postprocess."
-- **Combine with Lab 32 (neural net).** Train a tiny CNN to *learn* a filter (e.g., "make this look like a Sobel output") from data. Compare hand-coded vs. learned filters.
+- **Combine with [Lab 33](lab-33-object-detection-tracking.md) (computer vision).** Use your filters as the *preprocessing* stage of an object detector. Real CV pipelines are *exactly* "preprocess → infer → postprocess."
+- **Combine with [Lab 32](lab-32-neural-net-from-scratch.md) (neural net).** Train a tiny CNN to *learn* a filter (e.g., "make this look like a Sobel output") from data. Compare hand-coded vs. learned filters.
 - **A real photo-editing app.** Add layers, undo/redo, exports at multiple sizes. Use it on your own photos.
 - **GPU port.** Move the convolution loop to WebGL / a compute shader. Document the speedup. 100×+ is realistic.
 
@@ -184,7 +184,7 @@ Two rules for teams:
 - Deploy to GitHub Pages — friends use your image processor without installing anything.
 
 **Anyone**
-- **Always allocate an output buffer.** Don't write filtered pixels back to the same buffer you're reading from — for neighborhood filters this corrupts the result (same bug as Lab 14).
+- **Always allocate an output buffer.** Don't write filtered pixels back to the same buffer you're reading from — for neighborhood filters this corrupts the result (same bug as [Lab 14](lab-14-cellular-automata.md)).
 - **Clamp every channel to 0–255 after every operation.** Forgetting to clamp is the #1 first-week bug.
 - **Test on a tiny image first** — a 4×4 hand-crafted PPM is the best debugger.
 

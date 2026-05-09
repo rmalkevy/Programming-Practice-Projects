@@ -30,14 +30,14 @@ If you want a perfect appetizer, read [*Introduction to A\**](https://www.redblo
 
 ---
 
-## Note: how this lab differs from Lab 10 (maze solver)
+## Note: how this lab differs from [Lab 10](lab-10-maze-generator-solver.md) (maze solver)
 
 Both labs use BFS / DFS on grids and graphs. The difference is the *shape*:
 
-- **Lab 10** uses a **rigid grid** — every cell has up to 4 neighbors at fixed positions. The graph is implicit; you don't store edges.
+- **[Lab 10](lab-10-maze-generator-solver.md)** uses a **rigid grid** — every cell has up to 4 neighbors at fixed positions. The graph is implicit; you don't store edges.
 - **Lab 07** uses a **general graph** — nodes can be anywhere, edges can connect any pair, and you store them explicitly. This is the form GPS, social networks, and the web actually use.
 
-If you've already done Lab 10, this lab is the natural sequel: same algorithms, more flexible structure, more interesting examples.
+If you've already done [Lab 10](lab-10-maze-generator-solver.md), this lab is the natural sequel: same algorithms, more flexible structure, more interesting examples.
 
 ---
 
@@ -152,8 +152,8 @@ The 2-week scope above ships a real, defendable route finder. If algorithms or v
 - **Ship to the web.** A TypeScript + SVG version deployed to GitHub Pages — shareable URL, instant demo, mesmerizing animations.
 - **Build a "race" interactive.** Side-by-side BFS / Dijkstra / A\* on the same map, animated. Distill.pub / Bret Victor energy.
 - **A real OSM-based route finder** for your home city. Load OpenStreetMap, find car / cycling / walking routes. Compare to Google Maps. Document the differences.
-- **Combine with Lab 26 (procedural roguelike).** Use A\* for enemy pathfinding in your roguelike. Document the AI quality difference vs. random walks.
-- **Combine with Lab 06 (tree visualizer).** A unified algorithm-visualization library/site.
+- **Combine with [Lab 26](lab-26-procedural-roguelike.md) (procedural roguelike).** Use A\* for enemy pathfinding in your roguelike. Document the AI quality difference vs. random walks.
+- **Combine with [Lab 6](lab-06-digital-tree-visualizer.md) (tree visualizer).** A unified algorithm-visualization library/site.
 - **Open source as an npm package** other students can drop into their own projects. *Wildly* impressive.
 
 ---
@@ -252,7 +252,7 @@ graph-route-finder/
 - **My BFS visits the same node multiple times.** Mark a node visited when you *enqueue* it, not when you dequeue it. Otherwise it can be enqueued many times before being processed.
 - **My Dijkstra finds a wrong path.** Three classic mistakes: (a) not using a priority queue (so you process nodes out of order), (b) processing a node more than once (always `continue` if the popped distance is worse than the recorded one), (c) negative weights — Dijkstra doesn't handle them.
 - **My path reconstruction returns nothing or loops.** You're walking from `start` instead of `target`, or your `cameFrom[start]` isn't `null`/sentinel and your loop never ends. Always: walk *backward* from target, stop at start.
-- **My graph layout is a tangled mess.** For small graphs, place nodes manually. For larger ones, use a circular layout or a force-directed layout (a small physics simulation where edges pull and nodes push apart — basically Lab 13's physics engine reapplied).
+- **My graph layout is a tangled mess.** For small graphs, place nodes manually. For larger ones, use a circular layout or a force-directed layout (a small physics simulation where edges pull and nodes push apart — basically [Lab 13](lab-13-physics-sandbox.md)'s physics engine reapplied).
 - **Edges are drawn through nodes.** Render edges *first*, then nodes on top.
 
 If you're stuck for 30+ minutes: print the visited set after every step on a 5-node graph, verify by hand, then re-attach the visualization.

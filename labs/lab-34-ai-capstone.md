@@ -12,7 +12,7 @@
 
 There's a curious gap right now in the world of software: **the giants ship general-purpose AI products** (ChatGPT, Claude, Gemini), and **a million tiny niches are still completely underserved.** A polished AI product for **Ukrainian aviation regulations** doesn't exist. An AI tutor that knows *only* your professor's lecture notes doesn't exist. A flight-instructor companion that watches a student-pilot's actions in a simulator and grades them in real time doesn't exist. A model that turns a hand-drawn aircraft sketch into a 3D printable file doesn't exist. A garden-watering robot that uses a camera to detect when a plant is wilting doesn't exist (well — *yet*).
 
-For the last three labs, you've learned **to talk to LLMs (Lab 31), to build neural networks (Lab 32), and to make computers see (Lab 33).** This capstone is the lab where you take **at least two of those AI skills**, combine them with **at least one skill from the rest of the course** (web, mobile, embedded, game), and ship **a single coherent product** to real humans.
+For the last three labs, you've learned **to talk to LLMs ([Lab 31](lab-31-llm-rag-app.md)), to build neural networks ([Lab 32](lab-32-neural-net-from-scratch.md)), and to make computers see ([Lab 33](lab-33-object-detection-tracking.md)).** This capstone is the lab where you take **at least two of those AI skills**, combine them with **at least one skill from the rest of the course** (web, mobile, embedded, game), and ship **a single coherent product** to real humans.
 
 This is the lab where your portfolio stops looking like a list of academic exercises and starts looking like a *founder*'s. *That* is the lab a recruiter remembers.
 
@@ -197,17 +197,17 @@ Pick a real problem you care about. Some directions:
 - **Recipe Helper.** "Here's what's in my fridge"; LLM suggests recipes; image classifier verifies what's there.
 - **AI Personal Trainer.** Webcam-based form check on push-ups (vision) + LLM-generated workout plans.
 - **AI Therapist Journal** — *only with extreme care, strong disclaimers, and no medical claims.*
-- **Plant Doctor.** Photo of a plant + symptoms; AI diagnoses; recommends action. (Combines Lab 18 + Lab 33 + Lab 31.)
+- **Plant Doctor.** Photo of a plant + symptoms; AI diagnoses; recommends action. (Combines [Lab 18](lab-18-smart-plant-monitor.md) + [Lab 33](lab-33-object-detection-tracking.md) + [Lab 31](lab-31-llm-rag-app.md).)
 
 **Creative flavor:**
 - **AI Music Tagger.** Upload a song; an LLM writes a description; an embedding classifier suggests "songs like this."
-- **AI-Generated Game NPC.** A Lab 25/27 game where NPC dialogue is generated live.
+- **AI-Generated Game NPC.** A [Lab 25](lab-25-platformer-game.md)/27 game where NPC dialogue is generated live.
 - **AI Drawing Critic.** Upload a sketch; vision describes it; LLM gives encouraging feedback.
 
 **Embedded flavor:**
-- **Smart Plant Monitor with AI Diagnosis** — Lab 18's hardware + Lab 33's vision.
-- **AI-Driven Self-Balancer** — Lab 17 + a vision input that follows a colored target.
-- **Voice-Controlled IoT** — Lab 16's beacon + on-device wake-word detection.
+- **Smart Plant Monitor with AI Diagnosis** — [Lab 18](lab-18-smart-plant-monitor.md)'s hardware + [Lab 33](lab-33-object-detection-tracking.md)'s vision.
+- **AI-Driven Self-Balancer** — [Lab 17](lab-17-pid-self-balancer.md) + a vision input that follows a colored target.
+- **Voice-Controlled IoT** — [Lab 16](lab-16-smart-telemetry-beacon.md)'s beacon + on-device wake-word detection.
 
 You'll defend why you chose your problem and why you're well-positioned to solve it.
 
@@ -231,7 +231,7 @@ Two team rules: **git from day one**, **list who did what**, and *one* thing ext
 **Whatever fits the product.** Some common stacks:
 - **Web + AI:** Next.js + Vercel AI SDK + OpenAI/Claude + Postgres on Vercel.
 - **Mobile + AI:** Expo + React Native + a backend that does the AI heavy lifting.
-- **Embedded + AI:** Lab 16/17/18's hardware + a Raspberry Pi/Jetson running vision + a web dashboard.
+- **Embedded + AI:** [Lab 16](lab-16-smart-telemetry-beacon.md)/17/18's hardware + a Raspberry Pi/Jetson running vision + a web dashboard.
 - **Game + AI:** Godot/Unity + an LLM API for narrative or AI for procedural content.
 
 **Anyone**

@@ -3,7 +3,7 @@
 > "A game jam is the fastest way to learn what 'finished' means."
 
 **Time budget:** ~2 weeks total — but the jam itself is *48–72 hours of intense work*, with the surrounding time spent preparing, recovering, and polishing.
-**Preferred engines:** Godot, Unity, Phaser, LÖVE — anything you can ship a game in. Use what you already learned in Lab 25 or 26.
+**Preferred engines:** Godot, Unity, Phaser, LÖVE — anything you can ship a game in. Use what you already learned in [Lab 25](lab-25-platformer-game.md) or 26.
 **Working style:** solo, or in a team of up to 3 people.
 
 ---
@@ -71,7 +71,7 @@ This lab's "plan" is unusual because the actual work is compressed into a weeken
 **Week 1 — Prepare**
 
 - **Day 1 — Pick the jam.** *Strongly preferred: a real public jam.* See the list below. Match the dates to your calendar.
-- **Day 2 — Pick your engine.** Use what you already know from Lab 25 or 26. *The jam is no time to learn a new engine.*
+- **Day 2 — Pick your engine.** Use what you already know from [Lab 25](lab-25-platformer-game.md) or 26. *The jam is no time to learn a new engine.*
 - **Day 3 — Make a "jam template."** Boilerplate for your engine: title screen, level transition, audio toggle, sane export setup. *This single hour will save you 5 during the jam.*
 - **Day 4 — Practice.** Build a 1-day mini-game ("an enemy chases me, I dodge, I score") in your engine to make sure your toolchain works end-to-end.
 - **Day 5 — Asset library.** Bookmark Kenney.nl, OpenGameArt, Freesound, Pixabay, Bensound, Incompetech. Save 10 favorite sprites and 5 pieces of music. *During the jam you don't have time to browse.*
@@ -120,10 +120,10 @@ The schedule:
 - **Multiple Endings / Branching.** Storytelling depth.
 - **Accessibility.** Color-blind mode, key remapping, on-screen text alternatives for audio cues.
 - **Mobile / Touch.** Game playable on phones.
-- **Speedrun Mode.** Built-in timer with leaderboard backed by Lab 21.
+- **Speedrun Mode.** Built-in timer with leaderboard backed by [Lab 21](lab-21-rest-api-auth.md).
 - **Streaming / Sharing.** A "share my best run" button that saves a GIF.
 - **Original Art / Music.** You made the assets, or a friend did.
-- **Localization.** At least one other language. Connects to Lab 22's i18n.
+- **Localization.** At least one other language. Connects to [Lab 22](lab-22-spa-frontend.md)'s i18n.
 - **Try Two Jams.** Submit to a second smaller jam in week 2 with a different game.
 
 ---
@@ -175,8 +175,8 @@ Two team rules: **git from day one** (every team should have a shared repo *befo
 ## Tooling and engine tips
 
 **Use what you already know.**
-- If you did Lab 25, your Godot or Unity setup is your jam setup.
-- If you did Lab 26, your TypeScript + canvas setup is your jam setup.
+- If you did [Lab 25](lab-25-platformer-game.md), your Godot or Unity setup is your jam setup.
+- If you did [Lab 26](lab-26-procedural-roguelike.md), your TypeScript + canvas setup is your jam setup.
 - *The jam is a terrible time to learn a new engine.*
 
 **Anyone**

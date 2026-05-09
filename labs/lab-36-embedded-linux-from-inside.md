@@ -28,7 +28,7 @@ If you want a perfect appetizer, watch [**Bootlin's *Embedded Linux 101*** (free
 - **Embedded Linux is one of the highest-leverage CS skills you can have at your stage.** Aerospace, automotive, satellite, drone, and robotics companies pay enormous premiums for engineers who can build and tune Linux for embedded targets.
 - **Almost no 1st-year students touch this.** A working custom Buildroot image + a kernel module on a portfolio is a *career-defining* line item.
 - The skills (**cross-compilation, kernel configuration, init systems, kernel modules, kbuild, sysfs, devtmpfs, journald**) are the *foundational* skills of operating systems work — once you have them, every Linux server, every IoT device, every drone companion computer suddenly makes sense.
-- **Connects directly to drone software stacks.** Real drones use Linux companion computers (Raspberry Pi, Jetson) running Lab 33-style vision pipelines, Lab 31-style LLM inference, MAVLink bridges, and mission planners. Building Linux for that target *is* this lab.
+- **Connects directly to drone software stacks.** Real drones use Linux companion computers (Raspberry Pi, Jetson) running [Lab 33](lab-33-object-detection-tracking.md)-style vision pipelines, [Lab 31](lab-31-llm-rag-app.md)-style LLM inference, MAVLink bridges, and mission planners. Building Linux for that target *is* this lab.
 
 ---
 
@@ -49,7 +49,7 @@ Everything from Basic, plus:
 - **networking** (Wi-Fi via wpa_supplicant or Ethernet via DHCP) configured at boot.
 
 **Advanced — "It's A Real Embedded Linux Product"**
-You've added: **Yocto-built image** (the industrial-grade alternative to Buildroot — what Mercedes-Benz, BMW, GE, every serious embedded company uses), **OTA update mechanism** (the Pi can update itself from a remote server), **PREEMPT_RT real-time kernel** (turn vanilla Linux into a hard-real-time system — connects to Lab 35), **device tree modifications** (the *real* low-level configuration of how the kernel sees hardware), **a custom bootloader** (U-Boot configuration), or a **production observability stack** (Prometheus node exporter + a remote dashboard).
+You've added: **Yocto-built image** (the industrial-grade alternative to Buildroot — what Mercedes-Benz, BMW, GE, every serious embedded company uses), **OTA update mechanism** (the Pi can update itself from a remote server), **PREEMPT_RT real-time kernel** (turn vanilla Linux into a hard-real-time system — connects to [Lab 35](lab-35-rtos-mini-autopilot.md)), **device tree modifications** (the *real* low-level configuration of how the kernel sees hardware), **a custom bootloader** (U-Boot configuration), or a **production observability stack** (Prometheus node exporter + a remote dashboard).
 
 ---
 
@@ -134,7 +134,7 @@ You configure *what* you want; Buildroot fetches, compiles, and packages it. The
 
 - **Yocto Build.** Same image, but built with the Yocto Project. Industrial-grade. Recruiter-impressive.
 - **OTA Updates.** Implement a Mender / RAUC / SWUpdate flow. Push a new image to the Pi from a server. Roll back on failure.
-- **PREEMPT_RT Kernel.** Build a real-time-patched kernel. Measure latency. Connects to Lab 35.
+- **PREEMPT_RT Kernel.** Build a real-time-patched kernel. Measure latency. Connects to [Lab 35](lab-35-rtos-mini-autopilot.md).
 - **Device Tree.** Customize the device tree to match a custom hardware configuration (e.g., add a fake sensor at I2C address 0x40).
 - **U-Boot Configuration.** Replace the Pi's default firmware with a U-Boot configuration. Document the boot flow.
 - **Secure Boot.** Sign your kernel + initramfs. Pi only boots images you signed.
@@ -147,9 +147,9 @@ You configure *what* you want; Buildroot fetches, compiles, and packages it. The
 
 ## Extension challenges (3–5 weeks)
 
-- **Build the OS for a drone companion computer.** A real Pi running your custom Linux + a YOLOv8 object-detection pipeline (Lab 33) + a MAVLink bridge to a PX4 SITL drone (Lab 37). Three labs, one stack.
-- **Combine with Lab 35.** Write the same control logic twice — once on a microcontroller with FreeRTOS (Lab 35), once on a Pi with PREEMPT_RT Linux (this lab). Compare jitter, power, complexity. *World-class* technical-writing piece.
-- **Combine with Lab 33 + Lab 31.** A Pi running your custom Linux that does on-device computer vision *and* a small local LLM. Edge AI in your custom OS.
+- **Build the OS for a drone companion computer.** A real Pi running your custom Linux + a YOLOv8 object-detection pipeline ([Lab 33](lab-33-object-detection-tracking.md)) + a MAVLink bridge to a PX4 SITL drone ([Lab 37](lab-37-px4-mavlink-drone-stack.md)). Three labs, one stack.
+- **Combine with [Lab 35](lab-35-rtos-mini-autopilot.md).** Write the same control logic twice — once on a microcontroller with FreeRTOS ([Lab 35](lab-35-rtos-mini-autopilot.md)), once on a Pi with PREEMPT_RT Linux (this lab). Compare jitter, power, complexity. *World-class* technical-writing piece.
+- **Combine with [Lab 33](lab-33-object-detection-tracking.md) + [Lab 31](lab-31-llm-rag-app.md).** A Pi running your custom Linux that does on-device computer vision *and* a small local LLM. Edge AI in your custom OS.
 - **Open source the build.** A clean repo, GitHub Actions building the image in a Docker container nightly, contributing guide. Get one external pull request.
 - **Write a deep blog post.** "How I built a 6-second-boot Linux distro for a Raspberry Pi from scratch." This kind of writeup gets shared widely on Hacker News and Reddit.
 
@@ -162,7 +162,7 @@ The build pipeline is universal. The *device* is yours.
 - **Drone Companion Computer.** A Pi that boots into a MAVLink bridge + an object-detection pipeline. Vision-based following, autonomous landing detection. Aviation-flavored. Connects to Labs 33 and 37.
 - **Cubesat Onboard Computer.** Pi that runs a "mission scheduler" — log telemetry, take an image with the camera, downlink at simulated radio passes. Cubesat-flavored.
 - **Industrial Sensor Gateway.** Pi that boots, reads sensors over I2C/SPI/CAN, and forwards data to a server. Industrial-IoT.
-- **Aviation Logbook Server.** Pi that hosts a small web UI (Lab 22) for a pilot's flight logbook. Boots fast, runs forever, headless.
+- **Aviation Logbook Server.** Pi that hosts a small web UI ([Lab 22](lab-22-spa-frontend.md)) for a pilot's flight logbook. Boots fast, runs forever, headless.
 - **Smart Home Hub.** Pi that boots into Home Assistant or Tasmota equivalents. Practical.
 - **Personal Cloud / NAS.** Pi that boots into Nextcloud / SFTP / Samba — your own personal cloud. Surprisingly relevant skills.
 - **Retro Console.** Pi that boots straight into RetroPie / EmulationStation. Custom OS for one purpose.
@@ -179,7 +179,7 @@ Solo: this lab is famously hard solo. Pair-programming on the kernel-module day 
 Team:
 - *By layer:* one person owns the Buildroot/Yocto config + boot pipeline; the other owns the kernel module + driver work; if 3 — third person owns the application, networking, observability.
 - *By feature:* one person hits Basic + Standard solid; the other targets Advanced (Yocto port, OTA, PREEMPT_RT).
-- *Across labs:* one team member could pair this with Lab 33 or 37 for a combined drone-companion-computer demo.
+- *Across labs:* one team member could pair this with [Lab 33](lab-33-object-detection-tracking.md) or 37 for a combined drone-companion-computer demo.
 
 Two team rules: **git from day one** (with a *clean* `.gitignore` — Buildroot output is huge, don't commit it) and **list who did what.** Each member must explain the boot flow end-to-end.
 

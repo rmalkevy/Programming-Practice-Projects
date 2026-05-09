@@ -38,7 +38,7 @@ You've built and *installed* (in developer mode) an extension that does **one us
 The extension is **published to the Chrome Web Store** (or a publicly downloadable signed `.crx` if the $5 developer fee is a barrier — see softening below). It has a real name, real icon, screenshots, a description, an options page (settings stored via `chrome.storage`), and at least one real user (a friend, a teammate). It handles edge cases — pages where the script can't run, tabs that don't exist anymore, etc.
 
 **Advanced — "It's a Real Tool"**
-You've added: cross-browser support (Firefox in addition to Chrome), syncing of settings across the user's devices via `chrome.storage.sync`, integration with an external API (calls to your own backend from Lab 21? a third-party service?), keyboard shortcuts, a context-menu integration, an onboarding flow on first install, telemetry of *anonymous* usage (so you know how many people use what features), or a settings UI built with proper React + state management.
+You've added: cross-browser support (Firefox in addition to Chrome), syncing of settings across the user's devices via `chrome.storage.sync`, integration with an external API (calls to your own backend from [Lab 21](lab-21-rest-api-auth.md)? a third-party service?), keyboard shortcuts, a context-menu integration, an onboarding flow on first install, telemetry of *anonymous* usage (so you know how many people use what features), or a settings UI built with proper React + state management.
 
 ---
 
@@ -117,8 +117,8 @@ The three contexts — **content script** (lives in the page), **background work
 - **Keyboard Shortcuts.** Custom keyboard shortcuts via the `commands` API.
 - **Context Menu.** Right-click integration that runs your action on a selected text/image/link.
 - **Onboarding Flow.** First-install opens a welcome page that teaches the user what your extension does.
-- **External API.** Talks to a backend (Lab 21's, OpenAI's, an open API). Adds real intelligence.
-- **AI-Powered.** Integrates with an LLM API (OpenAI / Claude / Gemini) for summarization, translation, etc. Connects directly to Lab 31.
+- **External API.** Talks to a backend ([Lab 21](lab-21-rest-api-auth.md)'s, OpenAI's, an open API). Adds real intelligence.
+- **AI-Powered.** Integrates with an LLM API (OpenAI / Claude / Gemini) for summarization, translation, etc. Connects directly to [Lab 31](lab-31-llm-rag-app.md).
 - **Anonymous Telemetry.** Tracks how many people use what feature. (Be transparent — explain it in your privacy notice.)
 - **Theming / Dark Mode.** Settings auto-adapt to system theme.
 - **Settings Sync.** `chrome.storage.sync` so the user's settings follow them across devices.
@@ -129,7 +129,7 @@ The three contexts — **content script** (lives in the page), **background work
 ## Extension challenges (3–5 weeks)
 
 - **Build a Real Productivity Tool.** A genuine, full-featured extension that you (or a small group) actually use daily for a month. Iterate based on real feedback. Submit a polished version to the Chrome Web Store.
-- **Companion to Another Lab.** Lab 21's API + a browser extension client. Or Lab 31's LLM playground + an extension that summarizes any page in your browser using your own API. Cross-lab projects are extremely strong portfolio pieces.
+- **Companion to Another Lab.** [Lab 21](lab-21-rest-api-auth.md)'s API + a browser extension client. Or [Lab 31](lab-31-llm-rag-app.md)'s LLM playground + an extension that summarizes any page in your browser using your own API. Cross-lab projects are extremely strong portfolio pieces.
 - **Open Source.** Publish on GitHub with a license, contribute guide, issue templates, and CI. Get one external pull request.
 
 ---
@@ -147,7 +147,7 @@ The technical skeleton is the same. The *idea* is what makes it memorable. Some 
 - **Dark Mode for Any Site.** A real, live dark-mode injector. Surprisingly hard; surprisingly impressive.
 - **Aviation flavor.** A METAR fetcher — the user sees an airport ICAO code (e.g., "KJFK") on a page, and your extension shows live weather conditions. Pilots, simmers, and aviation students will use it.
 - **Coding-flavored.** A LeetCode-on-any-site extension that overlays "this is an O(n²) loop" hints when you select code. Very ambitious but very memorable.
-- **AI-flavored (links to Lab 31).** Right-click → "summarize this article with AI." Calls an LLM API; shows the summary in a side panel.
+- **AI-flavored (links to [Lab 31](lab-31-llm-rag-app.md)).** Right-click → "summarize this article with AI." Calls an LLM API; shows the summary in a side panel.
 
 You'll defend why you chose yours.
 

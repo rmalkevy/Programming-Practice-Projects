@@ -130,11 +130,11 @@ The app is a tiny loop with three pieces of state behind it: **users**, **conver
 
 The 2-week scope above ships a real, defendable messenger. If you fall in love with it, here's how to grow it into a portfolio centerpiece:
 
-- **Combine with Lab 21.** Move storage to a deployed REST API with proper auth. Now your messenger can run from any device. Two labs, one product.
-- **Combine with Lab 23.** Replace polling with real WebSockets. Live message delivery, typing indicators, presence — the same architecture as Discord and Slack.
-- **Combine with Lab 22.** A polished SPA chat frontend. Looks like a real product.
-- **Combine with Lab 30.** A cross-platform mobile companion. Same backend, three clients (CLI / web / mobile).
-- **Combine with Lab 31.** Add an AI assistant user that joins any chat — RAG over your team's chat history.
+- **Combine with [Lab 21](lab-21-rest-api-auth.md).** Move storage to a deployed REST API with proper auth. Now your messenger can run from any device. Two labs, one product.
+- **Combine with [Lab 23](lab-23-realtime-multiplayer.md).** Replace polling with real WebSockets. Live message delivery, typing indicators, presence — the same architecture as Discord and Slack.
+- **Combine with [Lab 22](lab-22-spa-frontend.md).** A polished SPA chat frontend. Looks like a real product.
+- **Combine with [Lab 30](lab-30-cross-platform-app.md).** A cross-platform mobile companion. Same backend, three clients (CLI / web / mobile).
+- **Combine with [Lab 31](lab-31-llm-rag-app.md).** Add an AI assistant user that joins any chat — RAG over your team's chat history.
 - **Open source it.** Add CI, docs, a contributing guide. Get one external pull request.
 
 ---

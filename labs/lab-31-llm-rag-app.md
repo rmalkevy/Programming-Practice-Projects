@@ -26,7 +26,7 @@ If you want a perfect appetizer, watch [**Andrej Karpathy's *State of GPT*** (Mi
 - The skills (**prompt engineering, embeddings, vector search, streaming responses, eval, cost-awareness**) are the *current* most-asked-about skills on the job market.
 - Your project is **uniquely demonstrable.** Recruiters chat with it for 30 seconds and *immediately* understand what you built.
 - AI is the rare technology where a thoughtful student project can be *better* than most paid SaaS products. Niche RAG apps are still wildly underserved.
-- **Connects to Lab 21, 22, 24, 33, 34.** Real product engineering with AI inside.
+- **Connects to [Lab 21](lab-21-rest-api-auth.md), 22, 24, 33, 34.** Real product engineering with AI inside.
 
 ---
 
@@ -81,7 +81,7 @@ The mantra of RAG: **retrieve first, generate second.** A plain LLM is a librari
 
 **Week 2 — Make it real**
 
-- **Day 8 — Session history.** Persist chat sessions. (LocalStorage is fine for now; PostgreSQL if you're combining with Lab 21.)
+- **Day 8 — Session history.** Persist chat sessions. (LocalStorage is fine for now; PostgreSQL if you're combining with [Lab 21](lab-21-rest-api-auth.md).)
 - **Day 9 — Hallucination guards.** Detect when retrieval failed (low similarity scores), force the model to say "I don't know" instead of inventing.
 - **Day 10 — Eval set.** Create a `eval.json` with 10 question-expected-answer pairs. Write a small script that runs your RAG app over them and prints results. Score manually (or with another LLM).
 - **Day 11 — Rate limit + cost guard.** Per-IP rate limit. API key auth (so it's not free for the world). Log every call to Postgres or a file.
@@ -127,8 +127,8 @@ The mantra of RAG: **retrieve first, generate second.** A plain LLM is a librari
 ## Extension challenges (3–5 weeks)
 
 - **A Polished, Niche AI Product.** Take a domain underserved by existing AI tools (Ukrainian aviation regulations, your university's curriculum, a specific textbook) and build the AI product *you wish existed.* Distribute to 20+ real users.
-- **Combine With Lab 24 (Browser Extension).** A right-click "Ask AI about this page" extension that uses your RAG backend.
-- **Combine With Lab 32 (Build A Neural Net).** Use a *local model* you fine-tuned in Lab 32 instead of OpenAI. Total ownership of the AI stack.
+- **Combine With [Lab 24](lab-24-browser-extension.md) (Browser Extension).** A right-click "Ask AI about this page" extension that uses your RAG backend.
+- **Combine With [Lab 32](lab-32-neural-net-from-scratch.md) (Build A Neural Net).** Use a *local model* you fine-tuned in [Lab 32](lab-32-neural-net-from-scratch.md) instead of OpenAI. Total ownership of the AI stack.
 - **Open-Source The Project.** Add docs, a contribute guide, GitHub Actions, MIT license. Get one external pull request.
 
 ---
@@ -157,7 +157,7 @@ Solo: feasible. The scope is contained.
 Team:
 - *By layer:* one person owns the data pipeline (chunking, embedding, vector DB); the other owns the app (UI, streaming, sessions).
 - *By feature:* one person owns Basic + the eval set; the other owns Advanced (tool use, structured output, benchmarking).
-- *Across labs:* if your team also does Lab 22, the chat UI + the auth come from there. Build the AI on top.
+- *Across labs:* if your team also does [Lab 22](lab-22-spa-frontend.md), the chat UI + the auth come from there. Build the AI on top.
 
 Two team rules: **git from day one** and **list who did what.** Each team member must explain the full pipeline end-to-end.
 
