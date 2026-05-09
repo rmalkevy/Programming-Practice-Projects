@@ -32,7 +32,7 @@ If you want a perfect appetizer, read [*Getting Real*](https://basecamp.com/gett
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference build:** [How To Build Your First TypeScript Project — TODO List Application — Web Dev Simplified](https://www.youtube.com/watch?v=jBmrduvKl5w) — clean baseline for the Standard target. For the full-stack flavor, pair with any classic [Theo / WebDevSimplified] follow-up tutorials.
 
 **Basic — "It Tracks Tasks"**
 A console (or simple GUI) application. The user can create tasks (title + status), list them, change a task's status (`todo → in-progress → done`), and delete tasks. Tasks are saved to disk; closing and reopening the app shows them again. Empty titles are rejected. Each task has a creation timestamp.

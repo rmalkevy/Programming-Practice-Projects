@@ -32,7 +32,7 @@ If you want a perfect appetizer, watch [**Philipp Lackner's *Compose in 30 minut
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots / GIF of a polished Android app to `docs/`.
+> **Reference build:** [The Jetpack Compose Beginner Crash Course — Philipp Lackner](https://www.youtube.com/watch?v=6_wK_Ud8--0) — the canonical 2026 Android-native starting point. Pair with [Material 3 Apps with Jetpack Compose](https://www.youtube.com/watch?v=h7K4n9C2jkI) once your app needs polish.
 
 **Basic — "It Runs"**
 A real Android app that runs on **either an emulator OR a real device**. At least 3 distinct screens. Navigation between screens. A real feature (a list, a form, a counter, a timer — *any* genuine interaction). Built and signed into a **sideloadable APK** that you can send a friend.

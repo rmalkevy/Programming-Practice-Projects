@@ -33,7 +33,7 @@ If you want a perfect appetizer, watch [**Mark Brown's *Game Maker's Toolkit* �
 
 ## The target
 
-> **Instructor TODO:** record a polished reference build (or include a GIF from a known short itch.io platformer) and place in `docs/`.
+> **Reference build:** [Pygame Platformer Tutorial — Full Course — DaFluffyPotato](https://www.youtube.com/watch?v=2gABYM5M0ww) — 6-hour platformer build covering tiles, physics, particles, parallax, AI, level editing, and packaging. The Advanced bar for this lab.
 
 **Basic — "It Plays"**
 A single level. A character that runs, jumps, and dies. At least one type of enemy or hazard. A goal. A working game loop: title → play → win/lose → restart. Built and exported to a **playable web build on itch.io** that anyone with a URL can play.

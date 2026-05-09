@@ -32,7 +32,7 @@ If you want a perfect appetizer, watch [**Andrej Karpathy's *State of GPT*** (Mi
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots of polished RAG apps (e.g., Perplexity, Notion AI, Cursor docs) to `docs/`.
+> **Reference build:** [Chatbots with RAG: LangChain Full Walkthrough — James Briggs](https://www.youtube.com/watch?v=LhnCsygAvzY) — embeddings + Pinecone + LangChain end-to-end; matches the Standard target. Pair with [LangChain Multi-Query Retriever for RAG](https://www.youtube.com/watch?v=VFf8XJUIHnU) for the Advanced retrieval techniques.
 
 **Basic — "It Talks to Your Docs"**
 A web chat UI that takes a user message, calls an LLM, and returns a streamed answer. **The LLM has access to your domain documents** via RAG — relevant chunks retrieved, passed in the prompt. Five+ seed questions visibly produce useful, accurate answers. Source citations shown next to answers ("answered from page 12 of *X*"). Deployed.

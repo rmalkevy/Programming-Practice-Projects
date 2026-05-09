@@ -30,7 +30,7 @@ If you want a perfect appetizer, read [*Introduction to A\**](https://www.redblo
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference video:** [The Coding Train — Maze Generator series (Coding Challenge #10)](https://www.youtube.com/playlist?list=PL3Esa3e6Kj9qcBFxrsP5DK8E_1dO5t_m1) — Daniel Shiffman builds a recursive-backtracker maze generator step by step; matches this lab's Basic and Standard milestones.
 
 **Basic — "It Solves"**
 A 21×21 grid of black walls and white corridors, with a green `S` (start) and a red `F` (finish). The maze is hand-coded or generated. You press a key; the program runs BFS or DFS; cells visited during the search turn light blue; the final path from start to finish turns yellow. You can run it again with `R`.

@@ -32,7 +32,7 @@ If you want a perfect appetizer, watch [**Joseph Redmon's *YOLO: You Only Look O
 
 ## The target
 
-> **Instructor TODO:** add reference videos (e.g., a YOLO traffic-counting demo) to `docs/`.
+> **Reference build:** [Track & Count Objects using YOLOv8, ByteTrack & Supervision — Roboflow](https://www.youtube.com/watch?v=OS5qI9YBkfk) — full detection-plus-tracking-plus-counting pipeline matching this lab's Standard and Advanced targets.
 
 **Basic — "It Detects"**
 A Python program that **reads a video** (a file or a live webcam feed), **runs YOLOv8** on each frame, and **draws bounding boxes** with class labels around detected objects. At least 60% of the source frames have correct detections (subjective; visible). At least 5 distinct object classes detected over the run. Saved output video.

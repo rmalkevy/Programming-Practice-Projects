@@ -32,7 +32,7 @@ If you want a perfect appetizer, read the original [Brin & Page 1998 paper](http
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots / terminal recordings to `docs/` once available.
+> **Reference build:** [Search Engine in Rust (Ep.01) — Tsoding Daily](https://www.youtube.com/watch?v=hm5xOJiVEeg) — live-coded TF-IDF inverted-index search engine built from scratch; the spirit of the Advanced target.
 
 **Basic — "It Searches"**
 A program that loads a folder of text files (≥ 10 files), builds an inverted index, and lets the user search for a single word from the command line or a console prompt. The output is a list of files where the word appears, sorted by how many times it appears. Search is instant — even on 100 files, the index makes the lookup essentially free.

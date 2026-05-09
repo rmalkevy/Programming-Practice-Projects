@@ -33,7 +33,7 @@ If you want a perfect appetizer, watch [**Brian Douglas's "Understanding PID Con
 
 ## The target
 
-> **Instructor TODO:** add reference video / GIF / screenshots to `docs/` once available.
+> **Reference build:** [Joop Brokking — *Your Arduino Balancing Robot* (YABR)](http://www.brokking.net/yabr_main.html) — the legendary self-balancing-robot build with code, schematics, and a multi-part [video walkthrough on YouTube](https://www.youtube.com/playlist?list=PL0K4VDicBzshc4hIwPZ1B-faaaY9DPbLf) (start with Part 1 — *PID controller explained*).
 
 **Basic — "It Doesn't Fall (Much)"**
 A self-balancing robot (or simulator pendulum, or fan-lever) reads its tilt from an IMU 100+ times per second, computes a motor command using a PID controller, and applies it. The setpoint is "vertical." When you nudge the robot, it leans, then corrects, then settles. It might wobble. It might overshoot. But left alone, it stays upright for at least 10–30 seconds.

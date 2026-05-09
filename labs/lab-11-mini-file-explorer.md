@@ -32,7 +32,7 @@ If you want a perfect appetizer, browse the [Total Commander](https://www.ghisle
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference build:** [Developing a Terminal App in Go with Bubble Tea — package main](https://www.youtube.com/watch?v=_gzypL-Qv-g) — fundamentals of building polished TUI apps in Go (the techniques transfer cleanly to a file explorer).
 
 **Basic — "It Walks the Tree"**
 A console app. The user starts in some directory; the app shows the contents — files in plain text, folders highlighted (or marked with `/`). Up/Down keys (or `j`/`k`) move the selection. Enter opens a folder. `Backspace` (or `..`) goes up. The current path is shown at the top. Invalid paths (e.g., a permission error) are caught cleanly without crashing.

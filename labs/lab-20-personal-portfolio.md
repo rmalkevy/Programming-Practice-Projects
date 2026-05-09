@@ -32,7 +32,7 @@ If you want a perfect appetizer, browse [**Brittany Chiang's portfolio**](https:
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available. (Compare against [brittanychiang.com](https://brittanychiang.com/) and [paco.me](https://paco.me/) for the look-and-feel target.)
+> **Reference videos:** browse [Lee Robinson's YouTube channel](https://www.youtube.com/c/LeeRobinsonDev) for modern Next.js / personal-site deep-dives. (Compare against [brittanychiang.com](https://brittanychiang.com/) and [paco.me](https://paco.me/) for the look-and-feel target.)
 
 **Basic — "It Exists"**
 A static site at a real public URL — `yourname.github.io`, `yourname.vercel.app`, or a custom domain (~$10/year). Sections: a brief introduction (3–5 sentences in your own voice), 3+ project cards each with a thumbnail and link, a short About page, an honest CV/resume download, contact methods. Mobile-friendly. Loads in under 2 seconds. Works in incognito mode. No "Lorem Ipsum", no broken links, no 2017 placeholder photos.

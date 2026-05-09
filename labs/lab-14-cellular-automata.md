@@ -30,7 +30,7 @@ If you want a 5-minute appetizer before starting, watch Numberphile's [*Inventin
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference video:** [7.3: The Game of Life — The Coding Train (Nature of Code)](https://www.youtube.com/watch?v=tENSCEO-LEc) — Conway in 16 minutes, with code. Pair with [Coding Challenge #179: Elementary Cellular Automata](https://www.youtube.com/watch?v=Ggxt06qSAe4) for the 1D companion.
 
 **Basic — "It Generates"**
 A grid (say 50×50) of squares — black for dead, white for alive. You start with a hardcoded pattern. Press a key; the grid advances one generation. Press it again; it advances another. The classic shapes work — a "blinker" oscillates, a "block" stays still, a "glider" moves diagonally across the screen.

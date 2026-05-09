@@ -33,7 +33,7 @@ If you want a perfect appetizer, browse [**Random Nerd Tutorials**](https://rand
 
 ## The target
 
-> **Instructor TODO:** add reference photos / dashboard screenshots to `docs/` once available.
+> **Reference build:** [ESP32 Based IoT Weather Station — Complete Guide](https://www.youtube.com/watch?v=GE5an3kYOKQ) — multi-sensor → cloud-dashboard pipeline, end-to-end. Pair with [Andreas Spiess channel](https://www.youtube.com/c/AndreasSpiess) for the full Swiss-accent ESP32 / LoRa / IoT canon.
 
 **Basic — "It Streams"**
 The ESP32 connects to Wi-Fi, reads a sensor every second (the onboard temperature is fine, or any external sensor like an LM35 / DHT11 / soil moisture probe), wraps the reading in a JSON message, and POSTs it to a small backend running on your laptop. The backend logs it. You can see the values arrive in the terminal. Closing and reopening anything still works — Wi-Fi reconnects, backend handles disconnects.

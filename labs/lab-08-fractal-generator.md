@@ -30,7 +30,7 @@ If you want a 16-minute appetizer before starting, watch Numberphile's [*The Man
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference video:** [The Mandelbrot Set — Numberphile (with Dr. Holly Krieger)](https://www.youtube.com/watch?v=NGMRB4O922I) — the gentlest, most cited intro to *what* you're rendering. Pair with [The Coding Train — Coding Challenge #21: Mandelbrot Set with p5.js](https://www.youtube.com/watch?v=6z7GQewK-Ks) for a build-along.
 
 **Basic — "It Branches"**
 A black image with a recursive tree drawn in green: a trunk, two branches, four sub-branches, eight, sixteen. Or: a Sierpinski triangle — a big triangle made of three triangles made of three triangles, down to depth 7. It's static, the parameters are hardcoded, but it's *unmistakably* a fractal.

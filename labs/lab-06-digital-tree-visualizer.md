@@ -30,7 +30,7 @@ If you want a 30-second appetizer, open [VisuAlgo's BST page](https://visualgo.n
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available. (Compare against [VisuAlgo](https://visualgo.net/en/bst) for the look-and-feel target.)
+> **Reference video:** [Data Structures Easy to Advanced Course — William Fiset / freeCodeCamp](https://www.youtube.com/watch?v=RBSGKlAvoiM) — animated BST walkthroughs that match this lab's visualization spirit. (Compare against [VisuAlgo](https://visualgo.net/en/bst) for the look-and-feel target.)
 
 **Basic — "It Grows"**
 A text input and an "Insert" button. Each value typed appears as a circle node connected to its parent by a line. The tree visibly grows as you insert. A search box highlights the path the search algorithm takes (for example, by coloring visited nodes yellow). Tree positions are computed automatically — the user doesn't place nodes by hand.

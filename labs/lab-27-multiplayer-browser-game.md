@@ -31,7 +31,7 @@ If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multipla
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots / GIF of a polished multiplayer build to `docs/`.
+> **Reference build:** [Coding Challenge #32.1: Agar.io — Part 1 (Basic Game Mechanics) — The Coding Train](https://www.youtube.com/watch?v=JXuxYMGe4KI) — multi-part .io-game build with WebSockets and a real multiplayer server. The Standard target lives here.
 
 **Basic — "Two People Move Together"**
 Two browser tabs (on the same machine or different machines) connect to your game's URL. Each shows a character at a position. **Moving in one tab visibly moves the character in the other tab within a second.** A simple "world" — top-down or side-view. No combat necessary. Players see each other.

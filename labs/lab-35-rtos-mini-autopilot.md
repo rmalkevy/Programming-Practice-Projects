@@ -34,7 +34,7 @@ If you want a perfect appetizer, watch [**Phil's Lab — *Real-Time Operating Sy
 
 ## The target
 
-> **Instructor TODO:** add reference logic-analyzer screenshots and a video of a working mini-autopilot to `docs/`.
+> **Reference build:** [Carbon Aeronautics — Quadcopter Drone series](https://github.com/CarbonAeronautics) — multi-part YouTube series (search the channel) covering quadcopter dynamics, PID, Kalman filtering, and rate-mode flight. Pair with [Andreas Spiess — How to work with FreeRTOS on ESP32](https://www.youtube.com/watch?v=684KSAvYbw4) for the RTOS task-and-queue culture.
 
 **Basic — "Multiple Tasks Cooperate"**
 A microcontroller running a real RTOS with **at least 3 tasks**:

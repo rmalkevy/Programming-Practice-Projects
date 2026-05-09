@@ -33,7 +33,7 @@ If you want a perfect appetizer, watch the YouTube channel [**Adafruit's HID-via
 
 ## The target
 
-> **Instructor TODO:** add reference photos to `docs/` once available.
+> **Reference build:** [Adafruit Arcade Fightstick guide](https://learn.adafruit.com/arcade-fightstick) — a full custom-controller build (RP2040 + arcade buttons + USB-HID firmware), with [demo video](https://www.youtube.com/watch?v=eA55A6IIOZw). The same pattern scales to any custom HID device this lab might become.
 
 **Basic — "It's a Controller"**
 A Pi Pico (or STM32) wired to at least 4 buttons and 1 analog joystick (a cheap PSP-style thumbstick, ~$2). When plugged in via USB, the OS recognizes it as a generic gamepad. Test in a game settings menu (or use [gamepad-tester.com](https://gamepad-tester.com/) in a browser) — buttons light up, stick deflects. Plays a real game (any browser game with controller support, e.g., the Chrome dinosaur game has community mods, or use a Steam game like *Stardew Valley*).

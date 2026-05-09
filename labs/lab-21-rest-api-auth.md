@@ -32,7 +32,7 @@ If you want a perfect appetizer, read [the Stripe API documentation](https://str
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots / curl recordings to `docs/` once available.
+> **Reference build:** [JWT Authentication Tutorial — Node.js — Web Dev Simplified](https://www.youtube.com/watch?v=mbsmsi7l3r4) for the auth spine, then [JWT Authentication with Access Tokens & Refresh Tokens](https://www.youtube.com/watch?v=XYjOteYbCMo) for the production-grade refresh-token pattern.
 
 **Basic — "It Has Endpoints"**
 A REST API with at least 5 endpoints (list / get-one / create / update / delete on one main resource of your choosing). Persistent storage in SQLite (or a file). Input validated server-side. Sensible HTTP status codes (200, 201, 400, 404, 422). Error responses are structured JSON. The API is reachable via `curl` from your laptop. Domain is your choice: a recipe API, a flashcard API, a workout-tracker API, a flight-log API (aviation-flavored).

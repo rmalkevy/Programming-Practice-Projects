@@ -32,7 +32,7 @@ If you want a perfect appetizer, read the first few sections of [Lode's Computer
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference build:** [Coding Challenge #146 — Rendering Raycasting — The Coding Train](https://www.youtube.com/watch?v=vYgIKn7iDH8) — Daniel Shiffman walks through exactly the 2D-rays-to-3D-walls journey this lab asks of you. Pair with [Coding Challenge #145: 2D Raycasting](https://www.youtube.com/watch?v=TOEi6T2mtHo) as a primer.
 
 **Basic — "I'm Inside the Map"**
 A window split in two: on the right, a top-down 2D minimap of a hand-coded maze with the player as a dot and a line showing where they're looking. On the left, a column-by-column pseudo-3D rendering of what the player sees — walls grow taller as the player walks closer. `W A S D` move and rotate. Walls block the player. It works.

@@ -30,7 +30,7 @@ If you want a 12-minute appetizer before starting, watch Sebastian Lague's [*Cod
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference build:** [Writing a Physics Engine from scratch — collision detection optimization — Pezzza's Work](https://www.youtube.com/watch?v=9IULfQH7E90) — Verlet-physics in C++, with the legendary spatial-grid optimization. The visual bar to aim for at the Advanced level.
 
 **Basic — "It Falls"**
 A single ball falls under gravity in a window. It hits the floor, bounces with reduced energy, bounces again a little lower, and eventually settles. The ball stays inside the window — left wall, right wall, floor, ceiling all push it back. Run the program and you can stare at it like a screensaver.

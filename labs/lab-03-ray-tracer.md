@@ -36,7 +36,7 @@ If you want a 9-minute appetizer before starting, search YouTube for *"How Ray T
 
 Here is what "done" looks like at each level. Every level is a complete, defendable project — you decide where you stop.
 
-> **Instructor TODO:** drop a small `docs/target-basic.png`, `docs/target-standard.png`, and `docs/target-advanced.png` here once you render reference images. Until then, the descriptions below carry the lab.
+> **Reference build:** [Coding Adventure: Ray Tracing — Sebastian Lague](https://www.youtube.com/watch?v=Qz0KTGYJtUk) — gold-standard look-and-feel target for the Standard / Advanced acceptance criteria of this lab.
 
 **Basic — "First Light"**
 A single matte-colored sphere, lit from one direction, on a solid colored background. The lit side of the sphere is brighter; the back side fades into shadow. You save it as a PNG or PPM file. It's small — maybe 400×300 pixels — and it took your computer a couple of seconds to render. You made that. From nothing. From math.

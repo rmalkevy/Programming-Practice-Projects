@@ -31,7 +31,7 @@ If you want a perfect appetizer, watch [**The Coding Train's *Procedural Generat
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots / GIF of a polished early build to `docs/`.
+> **Reference video:** [I Tried to make a Roguelike in One Month — Devlog](https://www.youtube.com/watch?v=tl21e4y0iyQ) — solo procgen-roguelike devlog covering scope, polish, and the Steam-release path.
 
 **Basic — "It Generates"**
 A 2D top-down dungeon. **Each new run produces a different layout** (rooms, corridors, walls). The player walks around with arrow keys / WASD. There's a `>` staircase that takes you to a new generated floor. At least 5 floors are reachable. Rendering can be ASCII or simple sprites.

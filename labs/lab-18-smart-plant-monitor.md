@@ -33,7 +33,7 @@ If you want the perfect appetizer, browse [**Random Nerd Tutorials**](https://ra
 
 ## The target
 
-> **Instructor TODO:** add reference photos to `docs/` once available.
+> **Reference build:** [ESP32 Project 35 — Plant Monitor: soil, temperature & light — SunFounder](https://www.youtube.com/watch?v=SdgvQlIllPA) — clean ESP32 plant-monitor build matching the Basic level. Pair with [Why most Arduino soil-moisture sensors suck — Andreas Spiess](https://www.youtube.com/watch?v=m0mcCtcViTY) before you buy hardware.
 
 **Basic — "It Watches"**
 A probe sits in soil (or a dummy variable in simulator mode). Every 30–60 seconds, the device reads moisture. An LED is green if soil is wet enough, red if dry. A buzzer beeps once a minute when the soil is critically dry. The device runs forever, on a USB cable or a small battery. You install it in a real plant pot.

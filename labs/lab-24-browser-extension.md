@@ -29,7 +29,7 @@ If you want a perfect appetizer, watch [**Wes Bos's *Building a Chrome Extension
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots / GIF of a polished extension to `docs/`.
+> **Reference build:** [Build a Chrome Extension — Course for Beginners — freeCodeCamp](https://www.youtube.com/watch?v=0n809nd4Zu4) — Manifest V3 from scratch with a real published-extension target.
 
 **Basic — "It Works"**
 You've built and *installed* (in developer mode) an extension that does **one useful thing on every page** — adds a button to the toolbar that triggers an action, changes pages in some way (e.g., dark mode all sites), or shows useful info about the page. The popup looks polished. The icon looks deliberate.

@@ -32,7 +32,7 @@ If you want a perfect appetizer, browse [**Linear's website and product**](https
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference videos:** [Fireship — Frontend Frameworks playlist](https://www.youtube.com/playlist?list=PLXU6UYQih-Bp1b8lUwZn36LLMwTs7tZB2) for the 100-second tour of every modern SPA framework — pick yours, then build.
 
 **Basic — "It Talks to the API"**
 A single-page app at a public URL that consumes [Lab 21](lab-21-rest-api-auth.md)'s API. Users can register, log in, log out. Logged-in users see a list of their data, can create new items, edit, and delete. Forms validate before submission. Loading states are visible. Errors are shown clearly (not just `alert()` boxes). The app doesn't crash when the API is unreachable — it shows an honest "couldn't load — try again" message.

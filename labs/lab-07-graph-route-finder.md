@@ -43,7 +43,7 @@ If you've already done [Lab 10](lab-10-maze-generator-solver.md), this lab is th
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference video:** [A* Pathfinding (E01: algorithm explanation) — Sebastian Lague](https://www.youtube.com/watch?v=-L-WgKMFuhE) — the cleanest A* explanation on YouTube. Pair with Computerphile's [A* (A Star) Search Algorithm](https://www.youtube.com/watch?v=ySN5Wnu88nE) for a tighter intuition primer.
 
 **Basic — "It Finds a Path"**
 A graph displayed on screen — circles for nodes, lines for edges, labels for names. The user picks a start and a target (by clicking, by keyboard, or by typing the names). The program runs BFS and shows the resulting path highlighted in yellow. Visited nodes are colored light blue. If no path exists, you get a clean "no path" message.

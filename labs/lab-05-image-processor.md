@@ -30,7 +30,7 @@ If you want a perfect appetizer, watch 3Blue1Brown's [*But what is a convolution
 
 ## The target
 
-> **Instructor TODO:** add reference before/after image pairs to `docs/` once available.
+> **Reference video:** [But what is a convolution? — 3Blue1Brown](https://www.youtube.com/watch?v=KuXjwB4LzSA) — the cleanest visual explanation of the core operation behind every kernel filter in this lab.
 
 **Basic — "It Filters"**
 A program (CLI or simple GUI) that loads a `.png` file, applies a chosen filter (grayscale, invert, brightness adjust), and saves the result as a new file. The output looks correct: grayscale is grayscale, inversion looks like an old film negative, brightness +50 makes the image lighter. The CLI rejects bad input cleanly: missing files, unsupported formats, invalid arguments.

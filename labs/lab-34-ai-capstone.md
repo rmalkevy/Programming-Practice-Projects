@@ -32,7 +32,7 @@ If you want a perfect appetizer, watch [**Andrej Karpathy's *Software 3.0*** (Se
 
 ## The target
 
-> **Instructor TODO:** add reference examples of polished, narrow AI products (Cursor, Tldraw, Suno, Krea, Granola) to `docs/`.
+> **Reference video:** [Cursor Team — Future of Programming with AI — Lex Fridman Podcast #447](https://www.youtube.com/watch?v=oFfVt3S51T4) — a 2.5-hour conversation with the founders of one of the most polished AI products in existence. The bar for what "narrow, polished, AI-native" means in 2026.
 
 **Basic — "It's a Product, Not a Demo"**
 You've built **one cohesive product** that combines:

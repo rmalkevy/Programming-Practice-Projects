@@ -32,7 +32,7 @@ If you want a 60-second appetizer, watch [original 1972 Atari Pong gameplay foot
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots to `docs/` once available.
+> **Reference video:** [Pong with Python & Pygame — Tech With Tim / freeCodeCamp](https://www.youtube.com/watch?v=tS8F7_X2qB0) — comprehensive 1-hour build of the canonical paddle game; matches this lab's Standard target.
 
 **Basic — "It's Playable"**
 Two paddles (one on each side), one ball, a center line. Player 1 controls the left paddle with `W`/`S`. Player 2 controls the right paddle with `↑`/`↓` (or just an AI that lazily tracks the ball). The ball bounces off paddles and walls. Score is shown at the top. When a player misses, the ball resets and the other player gets a point. *It feels like Pong because it is Pong.*

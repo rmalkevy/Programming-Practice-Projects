@@ -32,7 +32,7 @@ If you want a perfect appetizer, watch the **first 30 minutes** of [**Karpathy's
 
 ## The target
 
-> **Instructor TODO:** add reference plots / sample outputs (loss curves, generated names, MNIST predictions) to `docs/`.
+> **Reference video:** [The spelled-out intro to neural networks and backpropagation: building micrograd — Andrej Karpathy](https://www.youtube.com/watch?v=VMj-3S1tku0) — *the* video. The Standard target of this lab is essentially "finish this video." The full [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) playlist is the Advanced map.
 
 **Basic — "I Built An Autograd Engine"**
 You've built a **scalar autograd engine** (Karpathy's *micrograd*) — Value class with `+`, `*`, `tanh`, `**`, with a `backward()` method that does reverse-mode automatic differentiation. You've used it to train a tiny multi-layer perceptron (MLP) on a small toy dataset (e.g., classifying points in 2D, or learning a simple function). **The training loss visibly goes down.** A loss curve plot is in your README.

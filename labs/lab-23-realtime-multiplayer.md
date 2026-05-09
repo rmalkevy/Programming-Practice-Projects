@@ -32,7 +32,7 @@ If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multipla
 
 ## The target
 
-> **Instructor TODO:** add reference screenshots / GIF to `docs/` once available.
+> **Reference build:** [How to Create the Simplest .io Game in 30 Minutes — JavaScript + Node.js + Socket.IO](https://www.youtube.com/watch?v=hj4ZF1FlkDE) — full real-time multiplayer baseline in 30 minutes; matches the Basic target end-to-end.
 
 **Basic — "It Syncs"**
 Two browser tabs see each other. The chosen project — a drawing board, a TODO list, a poll, a typing race — has the property that an action in one tab visibly updates the other within a second. Both tabs handle disconnects: when the network drops, the tab shows "reconnecting…", and when it recovers, state catches up.
