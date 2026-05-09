@@ -1,115 +1,171 @@
-# Lab 08: Fractal Generator
+# Lab 08 — Infinity in a Loop: Build a Fractal Generator
 
-## Goal
+> "Clouds are not spheres, mountains are not cones, coastlines are not circles."
+> — Benoît Mandelbrot, 1982
 
-Create an application that generates fractal images.
-
-The goal is to understand recursion, repeated transformations, and visual algorithms.
-
-You will practice:
-
-- recursion;
-- loops;
-- geometry;
-- drawing on screen or image;
-- parameterized algorithms;
-- visual debugging.
+**Time budget:** ~2 weeks, working at your own pace.
+**Preferred language:** C++ or C# (any language is allowed, but graphics output is fastest in these).
+**Working style:** solo, or in a team of up to 3 people. Both are equally welcome.
 
 ---
 
-## Idea
+## The hook
 
-A fractal is a pattern that repeats itself at different scales.
+Imagine a function so simple you can write it on a napkin: `z = z² + c`. That's it. Two multiplications and one addition, looped a few times for each pixel of an image. From that single line — a single line — comes the most famous shape in mathematics: the Mandelbrot set. Zoom into any edge of it and you find oceans of detail that no human has ever seen before, because nobody has zoomed there before. The set is infinite. Your screen is finite. You decide where to look.
 
-Possible fractals:
+In this lab you'll write the program that draws fractals. Recursion will stop being a textbook concept and become a thing that paints pictures. The first time you generate a tree that branches into smaller trees, or a triangle made of triangles made of triangles, you'll feel the tiny shock that everyone feels: *the computer just used itself to draw itself.*
 
-- Sierpinski triangle;
-- fractal tree;
-- Mandelbrot set;
-- Julia set.
-
-Recommended starting point: **Sierpinski triangle** or **fractal tree**.
+If you want a 16-minute appetizer before starting, watch Numberphile's [*The Mandelbrot Set*](https://www.youtube.com/watch?v=NGMRB4O922I) with mathematician Holly Krieger — it's a beautiful introduction to what these objects actually *are*. For the practical side, Daniel Shiffman's [*Coding Train*](https://thecodingtrain.com/) channel has a famous Mandelbrot challenge and a fractal tree challenge — both perfect companions to this lab.
 
 ---
 
-## Fractal Generation Workflow
+## Why this is worth your time
+
+- Recursion is one of the hardest concepts in 1st-year programming. Drawing a fractal is the **fastest known cure** — once you see the picture appear, the concept locks into place forever.
+- Fractals are real: **coastlines, lungs, lightning, broccoli, river deltas, blood vessels** all follow fractal patterns. You're not playing with toys; you're playing with the geometry of nature.
+- Benoît Mandelbrot's 1980 paper is one of the most cited mathematics papers ever. You'll be implementing the algorithm from that paper.
+- A high-resolution fractal poster is one of the cheapest, coolest pieces of decoration you'll ever produce.
+
+---
+
+## The target
+
+> **Instructor TODO:** add reference screenshots to `docs/` once available.
+
+**Basic — "It Branches"**
+A black image with a recursive tree drawn in green: a trunk, two branches, four sub-branches, eight, sixteen. Or: a Sierpinski triangle — a big triangle made of three triangles made of three triangles, down to depth 7. It's static, the parameters are hardcoded, but it's *unmistakably* a fractal.
+
+**Standard — "It Lives in a Window"**
+The same fractal, but now the user can change parameters from the keyboard or a small UI: depth, branching angle, branch length ratio, base color. Every change re-renders almost instantly. The image saves to a PNG file with one button.
+
+**Advanced — "Forty Years of Mathematics in Five Seconds"**
+You've added the Mandelbrot set. Smooth color gradient. The user can click-and-drag to zoom into a region; each zoom takes a couple of seconds and reveals more detail than the previous frame. You can render at 4K and print it.
+
+---
+
+## The big idea, in one diagram
 
 ```mermaid
 flowchart TD
-    A[Start application] --> B[Select fractal type]
-    B --> C[Set parameters]
-    C --> D[Start drawing function]
-    D --> E{Base case reached?}
-    E -- Yes --> F[Stop recursion]
-    E -- No --> G[Draw current shape]
-    G --> H[Call drawing function for smaller parts]
-    H --> E
+    A[Drawing function called with parameters] --> B{Base case reached?}
+    B -- Yes --> C[Stop]
+    B -- No --> D[Draw something at this scale]
+    D --> E[Call the drawing function again, smaller]
+    E --> F[Call the drawing function again, smaller, in another direction]
+    F --> B
 ```
 
----
+Three lines: *do the work, recurse smaller, recurse smaller again.* Add a base case so you don't loop forever. That's a recursive fractal in a nutshell.
 
-## Task
-
-Implement a fractal generator that displays or saves at least one fractal.
-
-Your application should allow changing basic parameters, such as:
-
-- depth;
-- size;
-- angle;
-- color;
-- image resolution.
+For the Mandelbrot family the loop is different — you iterate `z = z² + c` per pixel — but the spirit is the same: a tiny rule, applied many times, producing structure.
 
 ---
 
-## Functional Requirements
+## Two-week plan with milestones
 
-### 1. Fractal Type
+**Week 1 — Make it branch**
 
-Implement at least one fractal.
+- **Day 1–2 — Setup & first pixel.** Open a window or create an empty image. Draw a single line from `(100, 400)` to `(100, 100)`. *Milestone: a line on a screen.*
+- **Day 3 — Recursion warm-up.** Write a `drawTree(x, y, length, angle, depth)` function. For now it just draws one line. Call it once. Same line, but now under your control.
+- **Day 4 — The branching.** At the end of each line, recursively call `drawTree` twice — once rotated `+30°` and once rotated `-30°`, with `length * 0.7` and `depth - 1`. Run it. *Milestone: a tree appears. Take a screenshot.*
+- **Day 5 — Knobs.** Pull `angle`, `length ratio`, `depth`, and `color` out into variables you can change. Try `angle = 45°`, then `15°`. Try `ratio = 0.5`. Try `depth = 12`. Each change makes a different tree.
+- **Day 6 — Save it.** Output the result as a PNG (or PPM if you want zero dependencies — see the ray-tracer lab).
+- **Day 7 — Pick a buddy fractal.** Implement *one of*: Sierpinski triangle, Koch snowflake, dragon curve. Same recursion idea, different shape. *Milestone: two different fractals from the same project.*
 
-Recommended:
+**At this point you've completed the Basic level. You can stop here and submit a real, defendable project.**
 
-- Sierpinski triangle;
-- fractal tree;
-- Mandelbrot set;
-- Julia set.
+**Week 2 — Make it interactive (or go to Mandelbrot)**
 
-### 2. Parameters
-
-The user should be able to configure at least two parameters.
-
-Examples:
-
-- recursion depth;
-- starting size;
-- angle;
-- color;
-- zoom;
-- number of iterations.
-
-### 3. Rendering
-
-The fractal must be rendered to:
-
-- screen;
-- canvas;
-- image file;
-- terminal output for very simple versions.
-
-### 4. Stability
-
-The program must not crash for reasonable input values.
-
-Requirements:
-
-- validate depth or iteration count;
-- avoid infinite recursion;
-- handle invalid parameters.
+- **Day 8–9 — Real-time controls.** Wire up sliders or keyboard keys to change parameters live. The tree should respond as you adjust the angle.
+- **Day 10–11 — The big one (optional but strongly recommended).** Implement the Mandelbrot set. For each pixel `(x, y)`, map it to a complex number `c`, iterate `z = z² + c` up to ~100 times, and color the pixel based on how fast it escaped. *Milestone: you see the most famous shape in mathematics, generated by your own code.*
+- **Day 12 — Color.** Replace the binary "in/out" coloring with a smooth gradient based on iteration count. The image goes from "decent" to "wallpaper-quality" with maybe 20 lines of code.
+- **Day 13 — Polish, README, demo prep.**
+- **Day 14 — Buffer day.**
 
 ---
 
-## Suggested Project Structure
+## Levels
+
+### Basic — "It Branches" (~6–10 hours)
+- one fractal (recursive tree or Sierpinski triangle recommended)
+- hardcoded parameters
+- output to screen or PNG
+- a working base case so the recursion terminates
+
+### Standard — "It Lives in a Window" (~12–18 hours)
+- everything from Basic
+- at least two configurable parameters
+- two different fractal types in the same project
+- save the result to a PNG (not just on-screen)
+- input validation (no infinite recursion, no crash on `depth = -1`)
+
+### Advanced — "Side Quests" (each ~3–10h, pick what excites you)
+
+- **The Classic.** Implement the Mandelbrot set with smooth color gradients. Required if you want to call yourself a graphics person.
+- **Deep Zoom.** Click-and-drag a rectangle to zoom into the Mandelbrot. Add 2× / 0.5× zoom keys. Render an animation that zooms 1000× over 60 frames.
+- **Julia Set.** Same iteration as Mandelbrot but with a different parameter. Looks like Mandelbrot's twin.
+- **L-Systems.** Implement Lindenmayer systems — formal grammars that generate fractal shapes. With a 4-line grammar you can produce trees, ferns, and fractal curves.
+- **Color Symphony.** Map iteration count to a smooth gradient (HSL, palettes from Adobe Color, or "fire", "ocean", "neon" presets).
+- **Print Mode.** Render at 4K, 8K, even 16K resolution. Use it as your laptop wallpaper. Save it as a PDF and print it.
+- **Live Edit.** A slider for every parameter, instant re-render. Make sure rendering is fast enough that dragging feels smooth.
+
+---
+
+## Make it yours (required)
+
+Pick **one** personal twist:
+
+- A fractal tree themed as something specific: an underwater coral, a windswept beach pine, a snowflake from your home town's winter.
+- Your initials grown as a fractal — recursive `H`, recursive `M`, etc.
+- A Mandelbrot zoom that lands on a specific famous spot (search for "Mandelbrot zoom coordinates" — there are dozens of well-known beautiful regions).
+- A custom color palette that means something to you (your university colors, a favorite painting, a sunset photo you took).
+- Anything that, when you show it, you smile.
+
+You'll defend why you chose it — not just what it is.
+
+---
+
+## Working solo or in a team
+
+You can do this lab alone or in a team of **up to 3 people**. Pick whichever sounds more fun — neither path is rewarded differently.
+
+If you go solo: you'll touch every part of the code, which is the fastest way to actually internalize recursion and rendering. Lonelier when you get stuck, but everything is unambiguously yours.
+
+If you go as a team: you'll learn how to split a small graphics system. Sensible splits:
+
+- *By fractal:* one person owns the recursive-tree family, another owns the Mandelbrot family.
+- *By layer:* one person owns the math/algorithms, the other owns rendering, UI, and image export.
+- *By milestone:* one person drives Basic, the other drives the Standard + side quests; pair-program the hard bits.
+
+For a 3-person team: add one person who owns the personal twist, the README, and the deep-zoom animation.
+
+Two rules for teams:
+
+1. **Use git from day one** with a real branching workflow (one branch per feature, merge via PR/MR). No zip files emailed at midnight.
+2. **In your README, list who did what.** Each member must be able to defend the *whole* project, not just their slice.
+
+---
+
+## Tooling and language tips
+
+**C++**
+- Drawing options: SDL2 (battle-tested, simple), SFML (cleaner API), or raylib (the easiest of the three for graphics newcomers — strongly recommended).
+- For PNG output without a window: `stb_image_write.h` (single header file).
+- Always compile with `-O2` or `-O3` — Mandelbrot at depth 1000 is painful in `-O0`.
+
+**C#**
+- Easiest path: a Windows Forms or WPF app with a `Bitmap` and `SetPixel`. Slow but simple.
+- Faster path: lock the bitmap, write directly to the byte array.
+- Cross-platform: [Avalonia](https://avaloniaui.net/) or `SkiaSharp` for serious rendering.
+- Build in `Release` — Mandelbrot in `Debug` will make you cry.
+
+**Anyone**
+- Start small (200×200). Never debug a fractal at 1920×1080.
+- For the Mandelbrot, cap iterations at 100 for early development. Increase later.
+
+---
+
+## Suggested project structure
 
 ```txt
 fractal-generator/
@@ -118,138 +174,78 @@ fractal-generator/
     main.*
     fractals/
       FractalTree.*
-      SierpinskiTriangle.*
+      Sierpinski.*
       Mandelbrot.*
+      Julia.*               # if you do the side quest
     rendering/
-      Renderer.*
+      Canvas.*               # owns the pixel buffer
+      ImageWriter.*          # PNG / PPM export
+      Palette.*              # color gradients
     ui/
-      Controls.*
+      Controls.*             # sliders / keyboard
+  output/
+    tree.png
+    mandelbrot.png
+  docs/
+    milestone-screenshots/
 ```
 
 ---
 
-## Difficulty Levels
+## When you get stuck
 
-### Basic
+- **Stack overflow on deep recursion.** Either lower your depth, or convert to an iterative version using a stack/queue. Most languages have a fixed recursion-depth limit (~1000).
+- **My tree only has one branch.** You probably forgot to call the recursive function *twice* (once for left, once for right). Or both calls share the same `depth` variable but you didn't decrement it.
+- **My Mandelbrot is one solid color.** Most likely your `c = (mappedX, mappedY)` mapping is wrong — print a few values and confirm `c` is in the range roughly `[-2.5, 1] × [-1, 1]`.
+- **It renders, but very slowly.** Are you in Debug mode? Are you calling `setPixel` per pixel via a slow API? In C# specifically, `Bitmap.SetPixel` is ~100× slower than locking the bitmap.
+- **The image is all black.** Pixel coordinates probably go off-screen. Add bounds checks.
 
-Implement:
-
-- one fractal;
-- fixed parameters;
-- screen or file output;
-- simple README.
-
-### Standard
-
-Implement everything from Basic plus:
-
-- configurable depth or iterations;
-- at least two parameters;
-- clean rendering module;
-- input validation;
-- save generated image.
-
-### Advanced
-
-Implement some of the following:
-
-- multiple fractal types;
-- zoom and pan;
-- color gradients;
-- animation;
-- interactive UI;
-- high-resolution export.
+If you're stuck for 30+ minutes: print debug, shrink the problem (one branch, depth 2), then ask a friend to look at your screen.
 
 ---
 
-## Implementation Plan
+## What to put in your README
 
-1. Choose fractal type.
-2. Implement drawing primitives.
-3. Implement recursive or iterative generation.
-4. Add base case.
-5. Render result.
-6. Add parameters.
-7. Add validation.
-8. Add export or screenshot.
-9. Refactor into modules.
-10. Write README and prepare demo.
+1. Project name + one-sentence description.
+2. **Final image right at the top.** This README is going to look amazing.
+3. Which fractals you implemented + which side quests.
+4. Your personal twist and why.
+5. How to run it.
+6. A short paragraph in your own words explaining how recursion produces the picture.
+7. (Optional but loved) A milestone gallery — depth 1, depth 3, depth 6, depth 10.
+8. If you worked in a team — who did what, one line per person.
 
 ---
 
-## Testing
+## Reflection
 
-Test at least the following:
+Be ready to:
 
-- fractal is generated
-- base case works
-- parameters change result
-- invalid values are handled
-- program does not crash on reasonable depth
-
-Automated tests are recommended but not strictly required. If you do not write automated tests, describe manual test cases in `README.md`.
-
----
-
-## Demo
-
-During the demo, show:
-
-- generate fractal
-- change parameters
-- show output image/screen
-- explain recursion or iterations
-- show project structure
+1. **Live-edit the depth** to 1, 3, 6, 10. Explain what changed and why.
+2. **Explain your base case** and what would happen if you removed it.
+3. **Explain how a Mandelbrot pixel becomes a color.** From `(x, y)` on the screen to a final RGB triple — the whole pipeline.
+4. **Where does your code break** if depth = 50? If depth = -1? If branching angle = 360°?
+5. **What's the difference** between your fractal's recursion and, say, a recursive `factorial(n)` function?
+6. **What was the hardest bug** you hit, and how did you find it?
+7. **What was the moment** when this lab clicked for you?
 
 ---
 
-## README Requirements
+## Showcase
 
-Your repository must include `README.md` with:
-
-1. Project name.
-2. Short description.
-3. Selected difficulty level.
-4. Technologies used.
-5. How to run the project.
-6. Main features.
-7. Short explanation of the main algorithm or architecture.
-8. Screenshots or demo link, if possible.
-9. Known problems or limitations.
+At the end of the semester there will be a small gallery of everyone's final renders — anonymous voting for **most beautiful fractal**, **deepest zoom**, and **most creative personal twist**. No pressure, no points. Make something you'd want to see on the wall.
 
 ---
 
-## Defense Questions
+## Going further
 
-Be ready to answer:
-
-1. What fractal did you implement?
-2. Where is recursion used?
-3. What is the base case?
-4. How does depth affect result?
-5. How do you prevent infinite recursion?
-6. How would you add another fractal?
-7. What parameters can the user change?
+- *The Coding Train* — Daniel Shiffman has free, friendly fractal-tree, L-system, and Mandelbrot videos.
+- *The Beauty of Fractals* by Peitgen & Richter — the 1986 book that brought fractals to the mainstream. Heavy but stunning.
+- *The Fractal Geometry of Nature* by Mandelbrot — the original 1982 book.
+- *Coding Adventure: Mandelbrot Set* by Sebastian Lague on YouTube — an excellent watch even after the lab.
 
 ---
 
-## Evaluation Criteria
+## A final word
 
-| Criterion | Points |
-|---|---:|
-| Fractal algorithm | 25 |
-| Rendering | 20 |
-| Parameters | 15 |
-| Validation | 10 |
-| Code structure | 10 |
-| README | 10 |
-| Demo and defense | 10 |
-| **Total** | **100** |
-
----
-
-## Expected Result
-
-At the end of this lab, you should have a working project called **Fractal Generator**.
-
-The project should demonstrate both programming skills and the ability to structure, explain, and present a small but non-trivial software system.
+Recursion will, for some of you, click for the first time during this lab. When it does, you'll suddenly understand a dozen other things in computer science you didn't realize you didn't understand. Take a screenshot of the moment your tree first branches correctly. Future-you will appreciate it.
