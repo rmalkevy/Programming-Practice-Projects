@@ -1,266 +1,273 @@
-# Lab 05: Image Processor
+# Lab 05 — Pixels Are Just Numbers: Build an Image Processor
 
-## Goal
+> "An image is just a 2D array. A filter is just a 2D array operation. Once you see this, half of computer vision is over."
+> — every graphics professor on day one
 
-Create a simple image processing application.
-
-The goal is to understand how images can be represented as pixels and how algorithms can transform those pixels.
-
-You will practice:
-
-- file input/output;
-- working with matrices;
-- pixel-level operations;
-- filters;
-- modular application design;
-- testing visual results.
+**Time budget:** ~2 weeks, working at your own pace.
+**Preferred language:** C++ or C# (any language is allowed; if you want a browser-based version, TypeScript with HTML canvas is also excellent).
+**Working style:** solo, or in a team of up to 3 people. Both are equally welcome.
 
 ---
 
-## Idea
+## The hook
 
-An image can be treated as a 2D matrix of pixels. Each pixel has color components such as red, green, and blue.
+Pick up your phone and look at a photo. There's no magic in it. There's no scene. It's a grid of numbers — a 2D array of small integers, three numbers per pixel for red, green, blue. That's the whole thing. Every filter you've ever swiped across an Instagram photo, every Snapchat lens, every "remove background" button, every Photoshop trick — all of them are short loops over those numbers.
 
-Image processing means applying an operation to each pixel or to a group of neighboring pixels.
+In this lab you'll write those loops yourself. By the end of two weeks you'll be able to load an image, run it through your own filters — grayscale, invert, blur, sharpen, edge detect — and save the result. The first time you point your edge-detection filter at a photo of a friend and see their outline emerge from a sea of noise, you'll feel the same thing every computer-vision researcher felt the first time it worked for them: *that's all there is to it?* Yes. That's all.
 
-Examples:
-
-- convert image to grayscale;
-- invert colors;
-- blur image;
-- detect edges;
-- resize image.
+If you want a perfect appetizer, watch 3Blue1Brown's [*But what is a convolution?*](https://www.youtube.com/watch?v=KuXjwB4LzSA) — 25 minutes, beautifully animated, and when you're done you'll *understand* the operation that does 80% of the work in this lab. Pair it with Computerphile's series on image processing (search "Computerphile Sobel" or "Computerphile blur" on YouTube — both are short and excellent).
 
 ---
 
-## Image Processing Workflow
+## Why this is worth your time
+
+- **An image is a 2D array.** Most working programmers never internalize this; the ones that do can answer half of computer-vision interview questions on instinct.
+- The **convolution kernel** — a 3×3 grid of numbers slid over an image — is the engine behind classical image processing *and* the building block of every modern Convolutional Neural Network. After this lab, "CNN" stops being a buzzword.
+- This is the rare lab where you can **see your code working** at every step. Bug in your filter? The output looks weird. Fix it? The output looks right. The feedback loop is instant.
+- A small CLI you wrote that turns photos into edge maps is **the most fun command-line tool** you'll write all semester.
+
+---
+
+## The target
+
+> **Instructor TODO:** add reference before/after image pairs to `docs/` once available.
+
+**Basic — "It Filters"**
+A program (CLI or simple GUI) that loads a `.png` file, applies a chosen filter (grayscale, invert, brightness adjust), and saves the result as a new file. The output looks correct: grayscale is grayscale, inversion looks like an old film negative, brightness +50 makes the image lighter. The CLI rejects bad input cleanly: missing files, unsupported formats, invalid arguments.
+
+**Standard — "It Has a Toolbox"**
+The program supports at least five filters, including at least one *neighborhood* filter (blur or sharpen) — meaning a filter that looks at a pixel's neighbors, not just the pixel itself. The CLI can chain filters: `grayscale → blur → edge-detect` in a single command. Brightness and contrast are adjustable as numeric parameters. Big images (≥ 4 megapixels) process in under a few seconds.
+
+**Advanced — "It Surprises You"**
+You've added something memorable: a **convolution engine** that can run any 3×3 kernel the user types in, **edge detection** with Sobel or Canny, **histogram equalization** that auto-improves contrast, **median filter** for noise reduction, **k-means color quantization** that reduces an image to N colors, **batch mode** that processes a folder, or a **live preview** GUI where you drag a slider and watch the output change.
+
+---
+
+## The big idea, in one diagram
 
 ```mermaid
 flowchart TD
-    A[Start application] --> B[Load image]
-    B --> C[Decode pixels]
-    C --> D[Select operation]
-    D --> E[Apply filter or transformation]
-    E --> F[Create new image]
-    F --> G[Save output file]
-    G --> H[Show result or path]
+    A[Load image: PNG/JPG/BMP/PPM] --> B[Decode to a 2D pixel array]
+    B --> C[Pick a filter]
+    C --> D{Filter type?}
+    D -- Per-pixel --> E[For each pixel: compute new color from old color]
+    D -- Neighborhood --> F[For each pixel: compute new color from a 3x3 or 5x5 region]
+    E --> G[Allocate a new image with the result]
+    F --> G
+    G --> H[Save: encode and write to disk]
 ```
 
----
-
-## Task
-
-Implement an image processor that loads an image, applies one or more transformations, and saves the result.
-
-The application may be:
-
-- console-based;
-- desktop application;
-- web application;
-- simple script with command-line arguments.
+Two flavors of filter are everything you need. **Per-pixel** filters (grayscale, invert, brightness) are a single `for` loop. **Neighborhood** filters (blur, sharpen, edge detection) are the same `for` loop, with another tiny `for` loop inside it that walks a small region — that's *convolution*, the trick the 3Blue1Brown video is about.
 
 ---
 
-## Functional Requirements
+## Two-week plan with milestones
 
-### 1. Image Loading
+**Week 1 — Make per-pixel filters work**
 
-The application must load an image from a file.
+- **Day 1 — Load and save.** Pick an image format and a library. Write a tiny program that *loads* `input.png` and *immediately saves* it to `output.png` without changing anything. *Milestone: round-trip works.* This sounds trivial; it's not, and it surfaces every encoding bug before you write a single filter.
+- **Day 2 — Pixel access.** Print the RGB values of pixel (0, 0). Print pixel (100, 50). Loop over all pixels and count how many are "very dark" (sum of R+G+B < 100).
+- **Day 3 — Grayscale.** For each pixel, compute `gray = 0.299*R + 0.587*G + 0.114*B` (the standard luminance formula — search "ITU-R BT.601" if curious). Set R, G, B all to `gray`. Save and admire. *Milestone: your first real filter.*
+- **Day 4 — Invert.** For each pixel, set `R = 255 - R`, same for G and B. Save. The result looks like a film negative.
+- **Day 5 — Brightness.** Add a number `b` (e.g., +30) to each channel, then **clamp** to 0–255. (Forgetting to clamp is the #1 first-week bug — overflow makes pixels wrap around and the image looks like a glitched JPEG.)
+- **Day 6 — A clean CLI.** `imgproc input.png --filter grayscale --output out.png`. Use whatever argument-parsing library is idiomatic for your language. Validate inputs. Print a friendly help message.
+- **Day 7 — Polish + a small README.** Take before/after screenshots. *Milestone: you have a working image processor.*
 
-Supported formats may include:
+**At this point you've completed the Basic level. You can stop here and submit a real, defendable project.**
 
-- PNG;
-- JPG;
-- BMP;
-- PPM.
+**Week 2 — Neighborhood filters and a real toolbox**
 
-### 2. Image Operations
-
-Implement at least three operations.
-
-Required recommended operations:
-
-- grayscale;
-- color inversion;
-- brightness change.
-
-Additional operations:
-
-- blur;
-- sharpen;
-- edge detection;
-- resize;
-- rotate;
-- crop.
-
-### 3. Output
-
-The processed image must be saved as a new file.
-
-Requirements:
-
-- do not overwrite original image by default;
-- output filename should be clear;
-- invalid input file should be handled.
-
-### 4. User Interface
-
-The user should be able to choose operation.
-
-Possible interfaces:
-
-- command-line arguments;
-- console menu;
-- buttons in UI;
-- API endpoint.
+- **Day 8 — Box blur.** For each pixel, set its color to the *average* of itself and its 8 neighbors (a 3×3 region). Run on a photo. *Milestone: the image is visibly softer.* Notice that you must read from the *original* image and write to a *new* image — not in-place. (This is the same trap as Lab 14's cellular automata!)
+- **Day 9 — Convolution engine.** Generalize the blur into `convolve(image, kernel)` where `kernel` is a 3×3 array of numbers. Test it: a kernel of all `1/9`s should be your blur from Day 8. Now you can implement many filters with the same engine.
+- **Day 10 — More filters.** Sharpen kernel: `[[ 0,-1, 0],[-1, 5,-1],[ 0,-1, 0]]`. Edge detection kernel (simple): `[[-1,-1,-1],[-1, 8,-1],[-1,-1,-1]]`. Try them. Save. *Milestone: edges of objects pop out from the noise.*
+- **Day 11 — Filter pipeline.** Allow chained filters from the CLI: `--pipeline grayscale,blur,edge`. Internally that just applies them in order.
+- **Day 12 — Pick a side quest.**
+- **Day 13 — README, before/after gallery, demo prep.**
+- **Day 14 — Buffer day.**
 
 ---
 
-## Suggested Project Structure
+## Levels
+
+### Basic — "It Filters" (~8–12 hours)
+- load and save at least one image format
+- at least three filters: grayscale, invert, brightness
+- a CLI or simple GUI to choose the filter
+- input/output filenames as parameters
+- the original image is never overwritten by accident
+- error handling: missing file, unsupported format, invalid parameter
+
+### Standard — "It Has a Toolbox" (~14–20 hours)
+- everything from Basic
+- at least 5 filters including ≥1 neighborhood filter (blur or sharpen)
+- a generic convolution function that can run any 3×3 kernel
+- adjustable parameters where it makes sense (brightness `+30`, blur radius `5`)
+- a filter pipeline: chain multiple filters in one command
+- handles large images (≥ 4 megapixels) in seconds, not minutes
+
+### Advanced — "Side Quests" (each ~3–10h, pick what excites you)
+
+- **Edge Detection Properly.** Sobel operator (two convolutions, then magnitude). The output looks like a pencil sketch of the input — magical.
+- **Canny Edge Detector.** The full classic algorithm: blur → Sobel → non-maximum suppression → thresholding. Several days of work. Produces dramatically cleaner edges.
+- **Custom Kernels.** Let the user paste a 3×3 kernel from the CLI: `--kernel "0 -1 0 -1 5 -1 0 -1 0"`. Suddenly your engine becomes a filter design playground.
+- **Histogram + Equalization.** Compute and display the RGB histogram. Implement histogram equalization — a 30-line algorithm that auto-stretches contrast on dull photos. The result is often striking.
+- **Median Filter.** Replace each pixel with the median of its 3×3 neighborhood. Removes salt-and-pepper noise without softening edges. Try it on a noisy photo.
+- **K-Means Color Quantization.** Reduce a photo to N colors via k-means clustering (N = 8 or 16). The result looks like a vintage poster.
+- **ASCII Art Mode.** Render the image as text characters mapped by brightness — `' .,:;ox%#@'`. Save it as a `.txt` file. Print it.
+- **Live Preview GUI.** A simple window with the image and sliders for brightness/contrast/blur. As you drag, the image updates. The most addictive feature you can add.
+- **Batch Mode.** Process a whole folder. `imgproc input/ --filter grayscale --output gray/`. With a progress bar.
+- **GIF Maker.** Apply a filter with progressively stronger parameters across N frames; export as a GIF. Watching a photo slowly blur, frame by frame, is mesmerizing.
+
+---
+
+## Make it yours (required)
+
+Pick **one** personal twist:
+
+- **Process something that means something.** A folder of your own photos. A photo of you and your grandparent (try edge detection — it's surprisingly emotional). A meme you want to deface. The covers of your favorite albums.
+- **A signature filter.** Design *your own* filter or filter chain that produces a recognizable look — a "your-name-here Instagram filter". Document the kernel choices and parameters. Apply it to 5 different photos and put them in the README.
+- **A specific use case.** Build a tiny "scan-to-pencil-sketch" tool: load a photo of a sketch you drew, threshold it, clean it up, export as a clean black-on-white PNG. Or a "passport photo" tool that crops and adjusts a portrait photo for an ID. Or a "low-bandwidth" tool that quantizes images for 1990s-era display.
+- **Theme the CLI/UI.** Make the CLI feel like a 1980s graphics terminal, with green-on-black output and ASCII banners. Or make a glossy modern GUI with a single big "process" button.
+
+You'll defend why you chose your twist.
+
+---
+
+## Working solo or in a team
+
+You can do this lab alone or in a team of **up to 3 people**.
+
+If you go solo: you'll touch I/O, math, and CLI design — three different muscles, all useful, all yours.
+
+If you go as a team, sensible splits:
+
+- *By layer:* one person owns the I/O (loading, saving, format conversion), the other owns filters (per-pixel + convolution + side quests).
+- *By feature:* one person drives Basic (per-pixel filters + CLI), the other drives Standard (convolution engine + neighborhood filters + pipeline).
+- *By output:* one person owns the engine, the other owns the front-end (CLI ergonomics, GUI if you do one, demo gallery).
+
+For a 3-person team: add a "side quest + UX" owner — Sobel, equalization, live preview, the personal twist.
+
+Two rules for teams:
+
+1. **Use git from day one** with a branching workflow.
+2. **In your README, list who did what.** Each member must be able to explain a convolution and walk through one neighborhood filter.
+
+---
+
+## Tooling and language tips
+
+**C++**
+- For PNG / JPG / BMP loading: [`stb_image.h`](https://github.com/nothings/stb) and `stb_image_write.h` — single-header, MIT, drop-in.
+- For PPM output: literally just write text. Three lines of header, then RGB triples. No library needed.
+- Build with `-O2`. A 4-megapixel convolution in `-O0` is *minutes*; in `-O2` it's a second.
+
+**C#**
+- `System.Drawing.Common` works on Windows; on cross-platform, [SixLabors.ImageSharp](https://github.com/SixLabors/ImageSharp) is the modern standard.
+- For pixel access speed, lock the bitmap and walk the byte array — `GetPixel`/`SetPixel` are 100× too slow for this lab.
+- Always run in `Release`.
+
+**TypeScript (browser)**
+- HTML `<canvas>` + `getImageData()` and `putImageData()`. The pixel array is a flat `Uint8ClampedArray` of `[R, G, B, A, R, G, B, A, ...]`.
+- Drag-and-drop file input + a "process" button is a wonderful UX.
+- Deploy to GitHub Pages — friends use your image processor without installing anything.
+
+**Anyone**
+- **Always allocate an output buffer.** Don't write filtered pixels back to the same buffer you're reading from — for neighborhood filters this corrupts the result (same bug as Lab 14).
+- **Clamp every channel to 0–255 after every operation.** Forgetting to clamp is the #1 first-week bug.
+- **Test on a tiny image first** — a 4×4 hand-crafted PPM is the best debugger.
+
+---
+
+## Suggested project structure
 
 ```txt
 image-processor/
   README.md
   src/
     main.*
-    ImageLoader.*
-    ImageProcessor.*
+    io/
+      ImageLoader.*
+      ImageWriter.*
     filters/
-      GrayscaleFilter.*
-      InvertFilter.*
-      BlurFilter.*
-    ImageWriter.*
+      PerPixel/
+        Grayscale.*
+        Invert.*
+        Brightness.*
+      Neighborhood/
+        Convolution.*       # the generic engine
+        Blur.*              # 1/9 kernel
+        Sharpen.*
+        EdgeDetect.*
+        Sobel.*             # if you do the side quest
+      Pipeline.*            # chain filters
+    cli/
+      Args.*
   input/
+    sample.png
   output/
+    sample-grayscale.png
+    sample-blur.png
+  docs/
+    before-after-gallery/
 ```
 
 ---
 
-## Difficulty Levels
+## When you get stuck
 
-### Basic
+- **My output is all black or all white.** You forgot to clamp values to 0–255 *and* you're using an unsigned 8-bit type, so values overflow to wraparound. Always clamp after arithmetic.
+- **The blur looks half-blurred / weird stripes appear.** You're reading and writing to the *same* image. For neighborhood filters, you must always read from a copy / source buffer and write to a fresh destination buffer.
+- **The image looks slightly too dark or too green.** You probably skipped the proper grayscale luminance weights (`0.299, 0.587, 0.114`) and used a flat `(R+G+B)/3`. Both work, but luminance looks "right" to humans. Document which you used in your README.
+- **The edges of the image are weird after a convolution.** You're trying to read pixel `(-1, -1)` which doesn't exist. Choose an edge policy: clamp coordinates to the edge, mirror them, or skip a 1-pixel border. Document your choice.
+- **The whole thing is painfully slow.** Are you in Debug mode? Are you using `GetPixel` / `SetPixel` instead of locked bitmap access? Are you allocating a new array per pixel? All three are 100× perf hits.
 
-Implement:
-
-- load one image;
-- grayscale filter;
-- invert colors;
-- save output image;
-- simple README.
-
-### Standard
-
-Implement everything from Basic plus:
-
-- at least three filters;
-- command-line or menu selection;
-- brightness/contrast adjustment;
-- error handling;
-- clean filter structure.
-
-### Advanced
-
-Implement some of the following:
-
-- blur or convolution filters;
-- edge detection;
-- batch processing;
-- preview UI;
-- filter pipeline;
-- custom kernel input;
-- performance optimization.
+If you're stuck for 30+ minutes: build a 4×4 hand-crafted image, run your filter, print the input and output side by side, and verify by hand.
 
 ---
 
-## Implementation Plan
+## What to put in your README
 
-1. Load image file.
-2. Read pixel data.
-3. Implement grayscale.
-4. Implement invert.
-5. Implement brightness change.
-6. Save image.
-7. Add operation selection.
-8. Add error handling.
-9. Refactor filters into modules.
-10. Write README and prepare demo.
+1. Project name + one-sentence description.
+2. **A before/after image pair at the top.** A photo and its edge-detected version is the most striking option.
+3. Which level + side quests.
+4. Your personal twist and why.
+5. How to run it + at least 3 example commands.
+6. A short paragraph in your own words explaining what a convolution is.
+7. (Optional but loved) A small gallery: same input, 4–6 different filters.
+8. If you worked in a team — who did what.
 
 ---
 
-## Testing
+## Reflection
 
-Test at least the following:
+Be ready to:
 
-- valid image is loaded
-- output image is saved
-- filters produce visible changes
-- invalid file is handled
-- original image is not overwritten accidentally
-
-Automated tests are recommended but not strictly required. If you do not write automated tests, describe manual test cases in `README.md`.
-
----
-
-## Demo
-
-During the demo, show:
-
-- original image
-- processed output
-- different filters
-- project structure
-- how one filter works
+1. **Run a filter on a photo I provide**, live. Save and open the result.
+2. **Walk through your `convolve` function** in plain English.
+3. **Explain why you can't apply blur in-place.** Demonstrate what goes wrong if you try.
+4. **What would you change** in your sharpen kernel to make it stronger?
+5. **Why does grayscale weight green more heavily** than red and blue? (Hint: human eyes.)
+6. **Where does your code break** on a 1×1 image? On a fully transparent PNG? On a non-square image?
+7. **What was the hardest bug** and how did you find it?
 
 ---
 
-## README Requirements
+## Showcase
 
-Your repository must include `README.md` with:
-
-1. Project name.
-2. Short description.
-3. Selected difficulty level.
-4. Technologies used.
-5. How to run the project.
-6. Main features.
-7. Short explanation of the main algorithm or architecture.
-8. Screenshots or demo link, if possible.
-9. Known problems or limitations.
+At the end of the semester there will be a small gallery — anonymous voting for **most striking before/after**, **most useful real tool**, and **most creative custom filter**. Bring 3 input/output pairs and the filter that produced them.
 
 ---
 
-## Defense Questions
+## Going further
 
-Be ready to answer:
-
-1. How is an image represented in memory?
-2. How does grayscale work?
-3. How do you modify pixel colors?
-4. What happens with invalid files?
-5. How would you implement blur?
-6. Why is filter structure useful?
-7. How would you process many images?
+- *But what is a convolution?* by 3Blue1Brown (the appetizer above).
+- *Digital Image Processing* by Gonzalez & Woods — the textbook. Heavy. Comprehensive. Beautiful diagrams.
+- The Computerphile YouTube channel — short, friendly videos on Sobel, Gaussian blur, JPEG compression, and more.
+- The OpenCV documentation — once you've written your own convolution, OpenCV's `cv2.filter2D` will feel like a precision tool, not a black box.
+- The original [Canny edge detection paper](https://www.cse.unr.edu/~bebis/CS474/Handouts/Canny.pdf) (1986) — readable and elegant.
 
 ---
 
-## Evaluation Criteria
+## A final word
 
-| Criterion | Points |
-|---|---:|
-| Image loading | 15 |
-| Implemented filters | 25 |
-| Output saving | 15 |
-| User interface | 10 |
-| Error handling | 10 |
-| Code structure | 10 |
-| README | 10 |
-| Demo and defense | 5 |
-| **Total** | **100** |
-
----
-
-## Expected Result
-
-At the end of this lab, you should have a working project called **Image Processor**.
-
-The project should demonstrate both programming skills and the ability to structure, explain, and present a small but non-trivial software system.
+Most students go through their entire CS degree without realizing that an image is *just* a 2D array of numbers. After this lab, you'll never forget. That single shift makes the entire field of computer vision suddenly approachable. The convolution you'll build in Day 9 is the same operation a deep neural network does — millions of times — to recognize a cat. You're starting at the beginning of a very long, very interesting road.
