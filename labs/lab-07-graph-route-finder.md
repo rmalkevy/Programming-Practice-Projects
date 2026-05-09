@@ -145,6 +145,19 @@ That table is half of an algorithms textbook in four lines.
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable route finder. If algorithms or visualization pulls you in, here's how to grow it into a portfolio standout:
+
+- **Ship to the web.** A TypeScript + SVG version deployed to GitHub Pages — shareable URL, instant demo, mesmerizing animations.
+- **Build a "race" interactive.** Side-by-side BFS / Dijkstra / A\* on the same map, animated. Distill.pub / Bret Victor energy.
+- **A real OSM-based route finder** for your home city. Load OpenStreetMap, find car / cycling / walking routes. Compare to Google Maps. Document the differences.
+- **Combine with Lab 26 (procedural roguelike).** Use A\* for enemy pathfinding in your roguelike. Document the AI quality difference vs. random walks.
+- **Combine with Lab 06 (tree visualizer).** A unified algorithm-visualization library/site.
+- **Open source as an npm package** other students can drop into their own projects. *Wildly* impressive.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -243,6 +256,31 @@ graph-route-finder/
 - **Edges are drawn through nodes.** Render edges *first*, then nodes on top.
 
 If you're stuck for 30+ minutes: print the visited set after every step on a 5-node graph, verify by hand, then re-attach the visualization.
+
+---
+
+## Submission checklist
+
+- [ ] Tool runs end-to-end on a clean machine.
+- [ ] Both BFS and at least one of {DFS, Dijkstra} work without crashing on edge cases (start=target, no path, self-loops, disconnected components).
+- [ ] Algorithm switching at runtime works.
+- [ ] Graphs load from at least 2 different JSON files.
+- [ ] Path reconstruction is correct (not reversed, no loops).
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel — both free).
+- [ ] **A 15-second GIF** of the search animating in the README. Pathfinding is GIF-friendly; use this.
+- [ ] No private paths in source.
+- [ ] README explains BFS vs. Dijkstra in your own words.
+
+---
+
+## What evaluators look at
+
+- **They watch the GIF.** A radiating BFS or a focused A\* sells the project in 5 seconds.
+- **They check Dijkstra correctness.** A graph where BFS and Dijkstra return *different* paths is the demonstration that you actually understand weighted shortest paths. Recruiters look for this specifically.
+- **They check the priority queue.** A linear scan over an array is a junior shortcut; a real binary heap reads as algorithmic care.
+- **They look at the algorithm/render separation.** Pure algorithm code that returns a result, separate visualization that animates it = strong engineering signal.
+- **They look at edge cases.** Self-loops, disconnected nodes, no-path cases — gracefully handled = "this person tested."
+- **They look at the personal twist.** A real dataset (your city's metro, an actor graph, course prerequisites) lifts this from "I implemented BFS" to "I built something useful."
 
 ---
 

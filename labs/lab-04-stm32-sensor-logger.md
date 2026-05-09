@@ -142,6 +142,18 @@ Three pieces — **read, format, write** — wrapped in a clock and a state mach
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable logger. If embedded systems pull you in (and at an aviation institute, they should), here's how to grow it into a portfolio centerpiece:
+
+- **Combine with Lab 16 (smart telemetry beacon).** Add Wi-Fi telemetry to a hosted dashboard. Two embedded labs, one product.
+- **Combine with Lab 22 (SPA frontend).** Build a polished web dashboard that visualizes your logger's data live. Charts, history, alerts.
+- **Combine with Lab 33 (computer vision).** Add a small camera (ESP32-CAM); your "logger" now logs *images* alongside numbers — a ground-truthed dataset of plant growth, weather, traffic.
+- **A real flight-data recorder.** Add an IMU + GPS + barometer + SD card. Mount on a model rocket or drone. Recover the flight data after a real flight. *Wildly* impressive demo.
+- **Open source the firmware** — license, contributing guide, GitHub Actions building the firmware. Get one external pull request.
+
+---
+
 ## Make it yours (required)
 
 The mechanics are universal. The *story* — what your device measures, why, and for whom — is what makes the project memorable.
@@ -250,6 +262,33 @@ sensor-logger/
 - **Commands aren't being recognized.** You're probably reading bytes one at a time and not buffering them into lines. Read until `\n`, then parse.
 
 If you're stuck for 30+ minutes: print every byte you receive (in hex). The bug is almost always there.
+
+---
+
+## Deployment checklist
+
+- [ ] Firmware builds end-to-end on a clean machine (toolchain documented in README).
+- [ ] Device boots reliably from cold start.
+- [ ] Sensor reads work without false zeros for at least 1 hour of continuous operation.
+- [ ] Out-of-range / sensor-error values are flagged, not crashed on.
+- [ ] Commands recognized: `START`, `STOP`, `STATUS` (or your equivalent) — documented in README.
+- [ ] Message format is documented (every field, type, unit) in `docs/message-format.md`.
+- [ ] If real hardware: a wiring diagram + a photo of the device in the README.
+- [ ] If simulator: a screen recording of streaming output.
+- [ ] **A 15-second video** of the device running (plus a CSV of real captured data, if applicable).
+- [ ] No private API keys / Wi-Fi passwords in source — use a `secrets.h` or `.env` excluded from git.
+- [ ] If you did Wi-Fi side quests: a deployed dashboard URL.
+
+---
+
+## What recruiters look at
+
+- **Embedded recruiters look at code style.** A clean main loop with a state machine, non-blocking timers, and structured-message output reads as professional. A tangled `loop()` with hardcoded `delay(1000)` reads as student.
+- **They look at message format.** A documented JSON or CSV protocol with units, types, and CRC = signal of someone who has seen real avionics buses.
+- **They look at the wiring photo.** Clean wiring + a labeled diagram is taken as care; a bird's-nest of jumper wires reads as "first time."
+- **They look at error handling.** What happens when the sensor returns garbage? The radio drops? Power flickers? Visible answers in the firmware = "this person knows real hardware lies."
+- **They look at the personal twist.** A weather station that's been on your balcony for a week, or a flight-data recorder you flew in a real model rocket, is *vastly* stronger than "I read a temperature sensor for 10 minutes."
+- **They look for the aviation crossover** at an aviation institute: an aviation-context twist (engine-monitor sim, model-rocket recorder, ATC-ish telemetry) is the natural conversation-opener.
 
 ---
 

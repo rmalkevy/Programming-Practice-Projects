@@ -111,6 +111,18 @@ For the Mandelbrot family the loop is different — you iterate `z = z² + c` pe
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable generator. If fractals or graphics pull you in, here's how to grow it into a portfolio standout:
+
+- **Ship to the web.** A TypeScript + canvas (or WebGL) port deployed to GitHub Pages. Zoom-and-explore in any browser.
+- **GPU port.** Move Mandelbrot iteration to a WebGL fragment shader. 100×–1000× speedup. Real-time deep zoom suddenly works.
+- **Deep-zoom video.** Render a 1-minute zoom into the Mandelbrot, ending at a famous coordinate. Stitch frames with `ffmpeg`. Post to YouTube.
+- **A poster-quality print.** Render at 16K resolution, print at A1 size, hang it in your room. *Yes, this counts.*
+- **Combine with Lab 32 (neural net).** Train a tiny network to *imitate* the Mandelbrot — given a coordinate, predict the iteration count. A delightful ML toy.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -201,6 +213,31 @@ fractal-generator/
 - **The image is all black.** Pixel coordinates probably go off-screen. Add bounds checks.
 
 If you're stuck for 30+ minutes: print debug, shrink the problem (one branch, depth 2), then ask a friend to look at your screen.
+
+---
+
+## Submission checklist
+
+- [ ] Generator runs end-to-end on a clean machine.
+- [ ] No crash on edge cases: depth = 0, depth = 1, very high depth (`1000` for Mandelbrot iterations).
+- [ ] Release-mode build benchmarked: 1080×1080 Mandelbrot at depth 200 renders in seconds, not minutes.
+- [ ] Saves output as PNG (or PPM) — files open in standard image viewers.
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel) — zoom-and-explore works in-browser.
+- [ ] **Final image at the top of the README.** This is the project; show it loud.
+- [ ] (If extension) A deep-zoom video or animation in the README.
+- [ ] No private paths in source.
+- [ ] README explains how to reproduce the final image.
+
+---
+
+## What evaluators look at
+
+- **They look at the image.** Fractals are unique: the final image *is* the project. A polished Mandelbrot zoom or a hand-tuned recursive tree carries the README.
+- **They check the recursion code.** A clean base case, clean recursive call, no global state = strong signal. Tangled recursion or hidden state = "barely got it working."
+- **They check Mandelbrot math.** The escape-time iteration is well-known; getting the coordinate mapping right (the `(-2.5, 1) × (-1, 1)` rectangle) is the lab's signature decision.
+- **They check performance.** Compiled in release mode? Pixel-buffer access (not `SetPixel`-per-pixel)? Reasonable iteration cap? Real numbers in the README ("at depth 200, 1080×1080 renders in 1.8 seconds on my laptop") read as engineered.
+- **They check the personal twist.** Your initials, your university colors, a coral-themed tree — these read as "I made something." A vanilla Mandelbrot reads as "I followed a tutorial."
+- **They look at the math writeup.** A clear in-your-own-words paragraph on *why* recursion produces the picture is uniquely impressive technical writing for a 1st-year student.
 
 ---
 

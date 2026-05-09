@@ -128,6 +128,18 @@ The whole tool lives inside that loop. The tricky bits are: **never crash on an 
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable tool. If filesystem hacking pulls you in, here's how to grow it into something portfolio-worthy:
+
+- **Ship a real CLI.** Globally installable via `npm i -g` or `dotnet tool install`. Other people install your file explorer and use it. *Surprisingly* impressive on a CV.
+- **Build a TUI in the spirit of Total Commander / Far Manager.** Two panes, keyboard-only, fast as hell. Use it yourself for a month.
+- **Combine with Lab 15 (search).** Add full-text search (your inverted index from Lab 15) over the contents of all text files in a directory tree. A *grep that's faster than ripgrep* on warm cache. Real engineering.
+- **Build a desktop GUI** with Avalonia or Tauri. Drag-and-drop, modern UI, packaged installer. Looks like a real product.
+- **Open source it.** A license, GitHub Actions CI, contributing guide. Get one external pull request.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist. Generic file explorers are a dime a dozen — your version should fit a *purpose*.
@@ -218,6 +230,31 @@ mini-file-explorer/
 - **My search is case-sensitive but I want it case-insensitive.** Lowercase both sides before comparing. (Be careful with non-ASCII alphabets — `ß` vs `SS` is famously tricky in German. For 1st-year scope, ASCII-lowercase is fine.)
 
 If you're stuck for 30+ minutes: print the path and the exact OS error to a log file. The bug is almost always in path construction or error handling.
+
+---
+
+## Submission checklist
+
+- [ ] Tool runs end-to-end on a clean machine.
+- [ ] Doesn't crash on permission errors, missing folders, broken symlinks, gigantic directories.
+- [ ] Handles non-ASCII filenames (try a folder named `тест` and a file `файл.txt`).
+- [ ] Path construction uses the language's path utilities — works on Windows *and* Unix.
+- [ ] If you built a CLI: a one-line install command in the README (`npm i -g …` or download link).
+- [ ] If you built a desktop GUI: a downloadable installer or signed binary in GitHub Releases.
+- [ ] **A 15-second screen recording or GIF** in the README — real navigation, real folders.
+- [ ] No private paths or absolute paths in source.
+- [ ] Keyboard shortcuts listed in the README.
+
+---
+
+## What evaluators look at
+
+- **They navigate.** A reviewer types in your hands' workflow — go up, go down, search, sort. Speed and responsiveness sell the project in 10 seconds.
+- **They abuse it.** They'll point it at `/`, at `C:\`, at a folder full of 10000 files, at a permission-denied folder, at a deep symlink loop. *Plan for these.* Graceful degradation reads as senior-level care.
+- **They look at your error handling.** A `try/catch` at every filesystem call + a status-bar error message = strong signal. Crashes on permission errors = "didn't think about real users."
+- **They look at path-handling code.** String concatenation = junior. `Path.Combine` / `path.join` = professional.
+- **They look at non-ASCII support.** Most student projects break here; getting it right marks you as someone who tests with real-world data.
+- **They look at the personal twist.** A photo organizer / code-project navigator / aviation logbook reader is *much* stronger signal than "yet another file explorer."
 
 ---
 

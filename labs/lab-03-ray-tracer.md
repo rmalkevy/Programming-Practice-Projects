@@ -137,6 +137,18 @@ These are optional bonus quests. Each one teaches a different concept. Pick one 
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable ray tracer. If graphics pulls you in, here's how to grow it into a portfolio standout:
+
+- **Path tracing.** Move from direct lighting to true Monte Carlo path tracing — soft shadows, caustics, color bleeding. Read Peter Shirley's [*Ray Tracing: The Next Week*](https://raytracing.github.io/) (free, sequel to the appetizer).
+- **GPU port.** Rewrite the inner loop in WebGL / WGSL / CUDA. 100×–1000× speedup. Document the journey.
+- **Animated short.** Render a 5-second 30-FPS animation (150 frames). Edit it together with `ffmpeg`. Post it to YouTube.
+- **Combine with Lab 22.** A web playground where users edit a scene JSON in-browser and watch the render appear (compile your tracer to WASM). *Genuinely impressive* portfolio piece.
+- **Read PBRT.** *Physically Based Rendering* by Matt Pharr et al. is the canonical graphics textbook (and won an Academy Award for its impact on cinema). Pick one chapter and implement what's in it.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist. This is required — it's what stops every submission from looking the same and forces you to actually *think* about the scene.
@@ -237,6 +249,31 @@ Almost everyone hits these. They're not bugs in your understanding — they're r
 - **My program is so slow.** Are you in Debug mode? Is your image 4K? Are you using `Console.WriteLine` inside the pixel loop? Any of these will cost you 10–100×.
 
 If you're stuck for more than ~30 minutes, the unblock order is: (1) print debug, (2) reduce to a tiny case (1×1 image, one sphere), (3) ask a friend to look at your screen. Don't sit silently for hours — that's not a learning experience, that's suffering.
+
+---
+
+## Submission checklist
+
+- [ ] Renderer runs end-to-end on a clean machine: clone → build → `./trace > out.ppm` (or PNG) → image opens.
+- [ ] No crash on edge cases: camera inside a sphere, sphere with radius 0, scene with no lights, ray direction degenerate.
+- [ ] Released-mode build produces images in seconds, not minutes (debug-mode comparison documented).
+- [ ] PPM/PNG output is valid (opens in IrfanView / GIMP / VS Code).
+- [ ] **A final render at the top of the README** — the better the image, the stronger the project.
+- [ ] (If extension) An animation: a small GIF/MP4 in the README.
+- [ ] (If extension) A live web demo URL.
+- [ ] No private paths in source.
+- [ ] README explains how to reproduce the final render.
+
+---
+
+## What evaluators look at
+
+- **They look at the image.** Graphics is unique: the final render *is* the project. A polished 800×800 image with shadows, reflections, and a thoughtful composition reads instantly.
+- **They look at correctness.** Self-shadow acne, fisheye, missing normals — these are the classic ray-tracer bugs; absent = care.
+- **They look at math separation.** Pure `Vec3` and `Ray` modules with tested operations = engineering signal. Math intermixed with rendering = "barely got it working."
+- **They look at performance.** Compiled in release mode? Inner loop allocation-free? Simple speedup numbers in the README ("1080×1080 with 1 light + 5 spheres + reflections renders in 4.2 seconds on my laptop") are gold.
+- **They look at the personal twist.** A self-portrait scene, an album cover, your university logo — these read as "I made this," not "I followed a tutorial."
+- **They look at the math writeup.** A clear, in-your-own-words paragraph explaining ray-sphere intersection (with the discriminant) is *uniquely* impressive technical writing for a 1st-year student.
 
 ---
 

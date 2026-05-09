@@ -128,6 +128,18 @@ This entire game lives inside a `while` loop that runs 60 times per second. That
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable game. If you fall in love with game-dev, here's how to grow it into a portfolio piece:
+
+- **Ship to itch.io.** Build a web version (TypeScript + canvas, or Godot's HTML5 export) and put it up. Anyone with the URL can play.
+- **Combine with Lab 19.** Use *your* USB-HID controller (from Lab 19) to play *your* Pong. Two labs, one demo.
+- **Combine with Lab 27.** A real two-player online Pong over WebSockets. Exactly the kind of "small but technically deep" portfolio piece recruiters love.
+- **A polished, slightly-bigger game.** Use the Pong skeleton to make Breakout, Arkanoid, or Air Hockey. Same loop, different game.
+- **Take it to a game jam.** Lab 28 — the jam lab — pairs perfectly. Pong as a starting template for a 48-hour creative jam.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -217,6 +229,32 @@ pong/
 - **The game stutters.** Are you allocating in the loop? Calling `Console.WriteLine` per frame? Is the framework's vsync off?
 
 If you're stuck for 30+ minutes: print the ball's position and velocity each frame, drop the speed to 50px/s, and watch it tick.
+
+---
+
+## Deployment checklist
+
+- [ ] Game runs end-to-end on a clean machine: clone → build → play.
+- [ ] Stable 60 FPS on a normal laptop.
+- [ ] No crash on edge cases: very fast ball, paddle pressed against wall, both paddles missing simultaneously.
+- [ ] Title → game → game over → restart loop is unbroken.
+- [ ] Pause/restart works.
+- [ ] Mute works (or no sound at all — never blast unmuteable audio).
+- [ ] If you built a web version: **a live URL on itch.io** (free; the standard for indie games).
+- [ ] If you built a desktop binary: a downloadable build in your GitHub Releases.
+- [ ] **A 15-second GIF of a rally** in the README.
+- [ ] Controls listed clearly.
+
+---
+
+## What recruiters look at
+
+- **They play it.** A recruiter will play 30 seconds of Pong. The first 5 seconds matter most — does it *feel* good?
+- **They look at game feel.** Bounce angle, screen shake, ball speedup, particles — the things that take a "tech demo" to a "real game."
+- **They look at the game loop.** A clean separation between *update* (game logic) and *render* (drawing) is a major engineering signal — same shape as every commercial engine.
+- **They look at delta-time handling.** A game that runs at the same speed on a fast and slow machine is a strong signal of platform awareness.
+- **They look at the GIF.** This is one of the most GIF-friendly labs on the list. A satisfying 15-second rally is worth 1000 words.
+- **They look at how you handle the unbeatable-AI problem.** A balanced AI (with a max speed, with a small intentional miss rate) reads as design instinct.
 
 ---
 

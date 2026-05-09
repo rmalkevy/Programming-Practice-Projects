@@ -131,6 +131,19 @@ A task tracker is the simplest non-trivial CRUD app. There's almost nothing here
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable tool. If you fall in love with it, here's how to grow it into a portfolio centerpiece:
+
+- **A daily-driver release.** Use it yourself for 30 days, journal the friction, fix the top three pain points each week. *That feedback loop* is the rarest signal in any junior portfolio.
+- **Combine with Lab 21.** Move storage to your own deployed REST API with auth — your tasks now follow you across machines. Suddenly you have a real multi-device product.
+- **Combine with Lab 22.** A polished SPA frontend on top of the API. Real product shape.
+- **Combine with Lab 30.** A cross-platform mobile companion (React Native + Expo). Tasks sync between web and phone.
+- **Open source it.** Add a license, a contributing guide, GitHub Actions CI, issue templates. Get one external pull request.
+- **Ship a CLI version to npm or NuGet.** A globally installable `tt` command other people can install. Shocking how impressive this is on a CV.
+
+---
+
 ## Make it yours (required)
 
 The technical bar isn't higher because of this — but a personal angle is what turns this from "yet another to-do app" into something memorable.
@@ -223,6 +236,31 @@ task-tracker/
 - **The CLI feels slow.** Are you re-reading the file on every command? Read once at startup, save on every change.
 
 If you're stuck for 30+ minutes: print the in-memory list and the on-disk file side by side. The bug is almost always a mismatch.
+
+---
+
+## Deployment checklist
+
+- [ ] App runs end-to-end on a clean machine: clone → install deps → run → first task created.
+- [ ] No crash on startup with an empty / missing data file (it's created cleanly).
+- [ ] No data loss after a forced kill mid-write (atomic writes work).
+- [ ] No private paths or absolute paths in source.
+- [ ] If you built the kanban web UI side quest: **a live URL** (Vercel, Render, Fly.io, GitHub Pages for static, or wherever fits) — recruiters can click and use it.
+- [ ] If you shipped a CLI: a one-line install command in the README (`npm i -g`, `dotnet tool install`, or a download link).
+- [ ] At least one screenshot taken with *real* tasks (your own, not "task 1 / task 2 / task 3").
+- [ ] A 15-second demo GIF in the README.
+- [ ] You've used the tool yourself for at least one full day.
+
+---
+
+## What recruiters look at
+
+- **They open it.** First 10 seconds: does it look like something you'd use? Or does it look like a class assignment?
+- **They look at your real tasks** in the screenshot. "Buy milk / lab 4 by Friday / call mom" reads as a real product. "Test 1 / Test 2 / Test 3" reads as someone who built but didn't *use*.
+- **They look at the data model.** Clean separation between `Task`, `TaskService`, and `Repository` is a major engineering signal — it's the same shape as enterprise codebases.
+- **They look at your storage strategy.** Atomic writes + safe error handling = "this person has thought about real users."
+- **They check if you actually used it.** A "before/after one week of use" section in the README is one of the strongest signals junior portfolios can carry.
+- **They look at code clarity over cleverness.** Boring, readable CRUD beats a clever generic abstraction every time.
 
 ---
 

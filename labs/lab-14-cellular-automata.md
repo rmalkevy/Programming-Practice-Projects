@@ -121,6 +121,18 @@ The single most important detail in this whole lab: **never modify the grid you'
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable simulator. If you fall in love with emergent systems, here's how to grow it into a portfolio standout:
+
+- **Ship to the web.** A TypeScript + canvas port deployed to GitHub Pages — anyone with the URL plays. Cellular automata are uniquely web-friendly because the simulation *is* the demo.
+- **Build an interactive explainable.** A web page in the style of [Bret Victor](http://worrydream.com/) or [Distill.pub](https://distill.pub/) — interactive sliders, narrative text, the user discovers Conway's rules by manipulating cells. *Genuinely rare* portfolio piece.
+- **Hashlife.** Implement Bill Gosper's legendary algorithm — simulates *billions* of generations in seconds via memoization. One of the most elegant algorithms in CS.
+- **3D Cellular Automata.** Lift the rules to three dimensions. Visualize with WebGL / Three.js. Looks alien.
+- **Combine with Lab 32 (neural net).** Train a tiny network to *learn* Conway's rules from data — does it converge to the right rule? A nice toy ML experiment.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -207,6 +219,31 @@ cellular-automata/
 - **My RLE loader produces a glitchy result.** RLE is finicky; print what you parsed before you set cells. Test on the smallest pattern first (a glider).
 
 If you're stuck 30+ minutes: print a 5×5 grid before and after one step, by hand verify the rules cell-by-cell, then ask a friend.
+
+---
+
+## Submission checklist
+
+- [ ] Simulator runs end-to-end on a clean machine.
+- [ ] Stable 60 FPS on a 100×100 grid (or document FPS at your chosen size).
+- [ ] No crash on edge cases: empty grid, fully alive grid, single cell, edge-adjacent patterns.
+- [ ] Start / pause / step / reset / speed controls all work.
+- [ ] At least 3 famous patterns preloaded and selectable.
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel — both free).
+- [ ] **A 15-second GIF** in the README — preferably Gosper's Gun firing or a glider crossing the screen.
+- [ ] No private paths in source.
+- [ ] Controls listed in the README.
+
+---
+
+## What evaluators look at
+
+- **They watch the GIF.** A glider walking across, or Gosper's Gun firing, sells the project in 5 seconds.
+- **They look for the separate-next-gen-grid pattern.** This is *the* signature bug in this lab; getting it right reads as care.
+- **They read the rules paragraph in your README.** Conway's four rules in your own words + a sentence on *why* the swap-grid trick matters = strong technical writing signal.
+- **They look at the rule/grid/render separation.** Clean modules read as engineering instinct; tangled code reads as "barely got it working."
+- **They look at performance.** Is the simulator fluid at 100×100? 500×500? Is rendering done with `putImageData` / pixel buffers, or naive `fillRect` per cell?
+- **They poke pattern loading.** Glider, blinker, Gosper Gun pre-loaded = polish; user has to hand-edit cells = student project.
 
 ---
 

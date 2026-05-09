@@ -117,6 +117,18 @@ Five lines of physics, plus rendering. That's the whole sandbox. The game loop t
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable simulator. If physics or game-feel pulls you in, here's how to grow it into something portfolio-worthy:
+
+- **Ship to the web.** Port to TypeScript + canvas (or compile your C++/C# version to WASM). Deploy to GitHub Pages — anyone with the URL plays.
+- **Build a real "pinball table"** with bumpers, flippers (driven by left/right keys), tilt, and a high-score system. Now your sandbox is a tiny game.
+- **Combine with Lab 17 (PID).** Add a self-balancing ball-on-a-plate simulator — change "the user controls gravity" to "a PID controller does." A real control-theory toy.
+- **Combine with Lab 25 / 28 (Game / Jam).** Use the physics engine as the core of a 48-hour jam game.
+- **A 2D rigid-body engine.** Move beyond circles to polygons, with proper SAT (Separating Axis Theorem) collision detection and rotational physics. Substantial; legendary as a portfolio project.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -199,6 +211,30 @@ physics-sandbox/
 - **My 1000-ball test is slow.** Naive ball-ball collision is O(n²). For thousands of balls, look up "spatial hashing" or "uniform grid" — but only after you've finished the basics.
 
 If you're stuck for 30+ minutes: print the ball's position and velocity each frame, drop the simulation to 1 ball, then ask a friend to look at your screen.
+
+---
+
+## Submission checklist
+
+- [ ] Sandbox runs end-to-end on a clean machine.
+- [ ] Stable 60 FPS with 100+ balls on a normal laptop.
+- [ ] No crash on edge cases: zero gravity, negative mass, very high speeds, balls spawned at the same position.
+- [ ] Pause / reset / spawn controls all work.
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel, or itch.io for a polished version).
+- [ ] **A 15-second GIF or video** in the README — physics sims are GIF-friendly; use this.
+- [ ] No private paths in source.
+- [ ] Controls listed in the README.
+
+---
+
+## What evaluators look at
+
+- **They watch the GIF.** First 5 seconds: does it look smooth, alive, fun? Or stuttery and broken?
+- **They open the simulation.** They will crank gravity to zero, hold spawn, and see what happens. *Plan for these abuse cases.*
+- **They look at the physics/rendering separation.** A clean `World.step(dt)` divorced from drawing is a major signal — it's the same shape as Box2D, Bullet, every commercial engine.
+- **They look at delta-time handling.** Stable behavior across frame rates is a strong signal of platform awareness.
+- **They look at collision quality.** Balls sticking together, tunneling through walls, gaining energy — these are the bugs that distinguish a "works on my machine" project from one engineered with care.
+- **They look at performance.** Code reviewers love seeing "naive O(n²) collisions are fine for ≤200 balls; spatial hashing kicks in at 1000+" — even if you didn't implement the spatial hash, *acknowledging* the tradeoff is signal.
 
 ---
 

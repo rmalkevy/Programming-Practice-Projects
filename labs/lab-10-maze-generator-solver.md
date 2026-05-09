@@ -122,6 +122,19 @@ Two ideas in one project: *carve a maze*, then *find a path through it*. The "fr
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable maze tool. If algorithms or visualization pull you in, here's how to grow it into a portfolio standout:
+
+- **Ship to the web.** A TypeScript + canvas port deployed to GitHub Pages. Algorithm visualizers shine on the web.
+- **Build a teaching site.** Multiple generators (Recursive Backtracker, Prim, Wilson, Kruskal) and multiple solvers (BFS, DFS, A\*), each with a narrative explaining why they work and what their visual signature means. Distill.pub / Bret Victor energy.
+- **Combine with Lab 26 (procedural roguelike).** Use your generator algorithms for dungeon levels in your roguelike. Plug-and-play.
+- **Combine with Lab 07 (graph algorithms).** A unified algorithm-visualization library — same engine, mazes and arbitrary graphs.
+- **A real-world maze.** Take a hand-drawn paper maze, scan it, threshold it, run your solver. *Surprisingly* impressive demo.
+- **Open source as an npm package** other students drop into their projects.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -217,6 +230,32 @@ maze-generator-solver/
 - **My animation is choppy.** Don't sleep inside the algorithm — that blocks rendering. Instead, run *one step* of the algorithm per frame, then let the renderer draw.
 
 If you're stuck for 30+ minutes: shrink to a 5×5 hardcoded maze, print the visited grid after every step in the console, and watch the algorithm progress by hand.
+
+---
+
+## Submission checklist
+
+- [ ] Tool runs end-to-end on a clean machine.
+- [ ] Generated mazes are *perfect* — no loops, exactly one path between any two cells (test with a 5×5 by hand).
+- [ ] No crash on edge cases: 1×1 maze, very large maze (200×200), no-path maze, start = finish.
+- [ ] BFS finds the shortest path (verify on a small hand-drawn case).
+- [ ] DFS does not (and that's fine — but the README acknowledges the difference).
+- [ ] Animation is smooth (one step per frame, not blocked by `sleep`).
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel — both free).
+- [ ] **A 15-second GIF** in the README — preferably BFS spreading like a flood.
+- [ ] No private paths in source.
+- [ ] README explains BFS vs. DFS in your own words, with your own example.
+
+---
+
+## What evaluators look at
+
+- **They watch the GIF.** A flood-filling BFS or a focused A\* sells the project in 5 seconds.
+- **They check generation quality.** A perfect maze (no loops, fully connected) is the signature decision; getting it right reads as algorithmic care.
+- **They check BFS correctness.** Does BFS find the *shortest* path? On a maze with multiple corridors, this is observable.
+- **They check the visited-when-enqueued pattern.** This is the BFS-trap bug; getting it right is signal.
+- **They look at the generation/solver/render separation.** Three independent modules talking through a shared `Maze` type = strong engineering signal.
+- **They look at the personal twist.** A maze that *means* something (your university hallway, your hometown street grid) lifts this from "I implemented Recursive Backtracker" to "I made something."
 
 ---
 

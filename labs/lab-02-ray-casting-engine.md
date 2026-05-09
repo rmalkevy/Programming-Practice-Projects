@@ -123,6 +123,18 @@ The whole "3D" effect is just: *closer wall → taller slice; farther wall → s
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable engine. If retro graphics or game programming pulls you in, here's how to grow it into a portfolio standout:
+
+- **Ship to the web.** Port to TypeScript + canvas (or compile your C/C++ to WASM with Emscripten). Anyone with the URL plays your engine.
+- **Make it a real tiny game** with goals, enemies, a HUD, sound. Combine with Lab 25 (platformer) and Lab 28 (jam) as a 3-week game-dev capstone.
+- **Combine with Lab 19 (USB-HID controller).** Play your own raycaster with your own custom-built controller. Two labs, one demo.
+- **Combine with Lab 27 (multiplayer).** A two-player networked raycaster. Brutal but legendary.
+- **Read the Wolfenstein 3D source code** ([open-source on GitHub](https://github.com/id-Software/wolf3d)) and write a deep blog post comparing your engine to id Software's 1992 implementation. *Surprisingly* impressive technical-writing piece.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -209,6 +221,31 @@ ray-casting-engine/
 - **Frame rate drops at 320 rays.** Are you debugging in Debug mode? Are you allocating inside the ray loop? Is your inner step too small (try larger steps + DDA later)?
 
 If you're stuck for 30+ minutes: drop to 1 ray and `print` its position step-by-step until you find where the math goes wrong. Then turn the rays back on.
+
+---
+
+## Submission checklist
+
+- [ ] Engine runs end-to-end on a clean machine.
+- [ ] Stable 60 FPS at 320 columns on a normal laptop (or document FPS at your chosen resolution).
+- [ ] No crash on edge cases: player against a wall, ray cast straight up/down, very long open hallways.
+- [ ] Player cannot walk through walls.
+- [ ] Map loads from a text file; switching maps works.
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel, itch.io for a polished version).
+- [ ] **A 15-second GIF** of walking through the map in the README — raycasters are uniquely GIF-friendly.
+- [ ] No private paths in source.
+- [ ] Controls listed in the README.
+
+---
+
+## What evaluators look at
+
+- **They watch the GIF.** A first-person walk through your map sells the project in 5 seconds.
+- **They check the math.** Fish-eye correction (`cos(rayAngle - playerAngle)`) is the signature decision in this lab; getting it right reads as care.
+- **They look at the engine/render separation.** A pure `Raycaster` (math + hit testing) decoupled from `Renderer` (drawing) is the same architecture every commercial engine uses.
+- **They look at delta-time handling.** Same speed across machines = "this person knows games."
+- **They look at performance.** Allocation inside the per-ray loop is a classic bug; clean tight loops with pre-allocated buffers read as engineered.
+- **They look at the personal twist.** A themed map (your university, a haunted house, an alien ship) lifts this from "I followed Lode's tutorial" to "I made something."
 
 ---
 

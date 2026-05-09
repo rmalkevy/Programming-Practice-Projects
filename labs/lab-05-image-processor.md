@@ -120,6 +120,18 @@ Two flavors of filter are everything you need. **Per-pixel** filters (grayscale,
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable image processor. If image processing pulls you in, here's how to grow it into a portfolio standout:
+
+- **Ship a web playground.** A TypeScript port deployed to GitHub Pages — drag-drop a photo, pick a filter, download the result. Image tools shine on the web.
+- **Combine with Lab 33 (computer vision).** Use your filters as the *preprocessing* stage of an object detector. Real CV pipelines are *exactly* "preprocess → infer → postprocess."
+- **Combine with Lab 32 (neural net).** Train a tiny CNN to *learn* a filter (e.g., "make this look like a Sobel output") from data. Compare hand-coded vs. learned filters.
+- **A real photo-editing app.** Add layers, undo/redo, exports at multiple sizes. Use it on your own photos.
+- **GPU port.** Move the convolution loop to WebGL / a compute shader. Document the speedup. 100×+ is realistic.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -222,6 +234,31 @@ image-processor/
 - **The whole thing is painfully slow.** Are you in Debug mode? Are you using `GetPixel` / `SetPixel` instead of locked bitmap access? Are you allocating a new array per pixel? All three are 100× perf hits.
 
 If you're stuck for 30+ minutes: build a 4×4 hand-crafted image, run your filter, print the input and output side by side, and verify by hand.
+
+---
+
+## Submission checklist
+
+- [ ] Tool runs end-to-end on a clean machine: clone → build → process a sample image → output saved.
+- [ ] At least 5 filters work, including ≥ 1 neighborhood filter.
+- [ ] No crash on edge cases: 1×1 image, fully black image, fully white, very large image, non-square image, images with alpha channels.
+- [ ] Edge-policy for convolutions documented (clamp / mirror / skip).
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel) — drag-drop a photo, get a result.
+- [ ] **A before/after gallery** in the README — at least 5 input/output pairs.
+- [ ] Pipeline chaining works: e.g., `--filter grayscale --filter blur=3 --filter sharpen`.
+- [ ] Release-mode build benchmarked: 4MP image processed in seconds, not minutes.
+- [ ] No private paths in source.
+
+---
+
+## What evaluators look at
+
+- **They look at the gallery.** A side-by-side before/after for 5 different photos sells the project. *Use real, varied photos*; not just one stock image.
+- **They check the convolution engine.** A clean, generic `applyKernel(image, 3x3 kernel)` function is the heart of this lab; reading it is the fastest way to judge engineering care.
+- **They check the destination-buffer pattern.** Reading and writing to the same buffer is the signature bug; getting it right is signal.
+- **They check clamping.** Wraparound bugs (where a bright pixel becomes black after a +30 brightness shift) reveal someone who didn't test enough.
+- **They check performance.** A 4MP image processed in seconds = engineered. In minutes = "didn't think about real users."
+- **They look at the personal twist.** A signature filter, a passport-photo tool, a pencil-sketch maker — these read as "I made something." Generic gray-scale-on-cat-photo reads as "I followed a tutorial."
 
 ---
 

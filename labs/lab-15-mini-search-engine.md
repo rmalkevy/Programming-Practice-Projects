@@ -126,6 +126,19 @@ Two phases: **build the index once**, **answer many queries fast**. Every modern
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above is already a real, defendable project. If you fall in love with information retrieval, here's how to grow it into a portfolio standout:
+
+- **Index a Wikipedia subset** — a few thousand articles. Measure indexing time and query latency. Document the numbers.
+- **Combine with Lab 22.** A polished SPA frontend on top of your engine. Search-as-you-type, live snippets, deployed.
+- **Combine with Lab 21.** Wrap the engine in a deployed REST API. Anyone with the URL can hit `/search?q=...` and get JSON.
+- **Combine with Lab 31 (RAG).** Use your inverted index as the retrieval layer for an LLM RAG app — *not* a vector database. Document the tradeoffs (lexical vs. semantic retrieval). This is rare, real, and recruiter-impressive.
+- **Benchmark vs. ripgrep / `grep -r`.** Same dataset, same queries, different tools. Plot times. Write the comparison up.
+- **Open source it.** A nice CLI, a license, GitHub Actions, contributing guide.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -226,6 +239,33 @@ mini-search-engine/
 - **Snippets cut words in half.** Snap the start to the previous space and the end to the next space.
 
 If you're stuck for 30+ minutes: pretty-print your index for one document, hand-verify against the source text, then bring back the search.
+
+---
+
+## Submission checklist
+
+- [ ] Engine runs end-to-end on a clean machine: clone → install deps → index → query → results.
+- [ ] At least 10 documents in the repo (or a script that downloads them legally — Project Gutenberg is public domain).
+- [ ] Indexing completes without crashes on weird inputs (empty file, non-UTF-8, very large file).
+- [ ] Queries return in <100ms on the demo dataset (measure and document it).
+- [ ] Index is persisted; second startup loads it instead of re-indexing.
+- [ ] **A 30-second terminal recording or GIF** in the README showing real queries and snippets.
+- [ ] If you built the web UI side quest: **a live URL** (Vercel, Render, GitHub Pages for static).
+- [ ] No private paths in source.
+- [ ] README documents indexing time + query latency + dataset size.
+
+---
+
+## What evaluators look at
+
+A hiring engineer or professor reviewing this project will look at:
+
+- **Live timing.** They will type a query and watch the latency. <50ms on the demo dataset reads as "engineered"; 5 seconds reads as "not really indexed."
+- **The inverted index code.** A clean `Map<string, List<{docId, count, position}>>` (or your equivalent) is the heart of the project — they'll read it carefully.
+- **TF-IDF understanding.** They'll ask you to explain *why* a specific result ranked above another. If you can point to the math live, that's a strong signal.
+- **Stop-words + tokenizer.** They look for the small, real-world details (lowercasing, punctuation, encoding handling) that distinguish a working tool from a toy.
+- **Snippet quality.** Snippets that highlight *the right* word, snap to word boundaries, and don't duplicate context = polish.
+- **Honest limits.** A README that says "indexing 100k documents takes 4 minutes; queries are still <50ms" is *vastly* stronger than vague claims.
 
 ---
 

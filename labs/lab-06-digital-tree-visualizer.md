@@ -117,6 +117,18 @@ Insert, search, and delete all share the same skeleton: a recursive walk that co
 
 ---
 
+## Extension challenges (3–5 weeks)
+
+The 2-week scope above ships a real, defendable visualizer. If algorithm visualization pulls you in, here's how to grow it into a portfolio standout:
+
+- **Ship to the web.** A TypeScript + SVG version deployed to GitHub Pages — shareable URL, instant demo. Algorithm visualizers are uniquely strong portfolio pieces *only* when they're playable in-browser.
+- **Build a teaching website.** Multiple data structures (BST, AVL, red-black, trie, heap) with narrative explanations and step-by-step walks. Distill.pub / Bret Victor energy.
+- **Combine with Lab 22.** A SPA that's *the visualizer* — polished UI, routing between data structures, save/load tree configurations.
+- **Combine with Lab 07 (graph algorithms).** Same engine, but now visualize graph traversals — BFS, DFS, Dijkstra, A\*. Two labs, one beautiful product.
+- **Open source it.** Ship as an npm package other students can drop into their own pages. *Wildly* impressive.
+
+---
+
 ## Make it yours (required)
 
 Pick **one** personal twist:
@@ -204,6 +216,30 @@ tree-visualizer/
 - **The whole canvas flickers.** You're probably re-creating DOM nodes / shapes every frame instead of updating their attributes. Or you're not using double-buffering in a desktop UI.
 
 If you're stuck for 30+ minutes: drop the UI, work on a 5-node tree in the console with `printInOrder`, fix the algorithm, then re-attach the UI.
+
+---
+
+## Submission checklist
+
+- [ ] Visualizer runs end-to-end on a clean machine.
+- [ ] Insert / search / delete all work without crashing on edge cases (empty tree, single node, sequential inserts producing a "linked list").
+- [ ] Layout updates cleanly after every operation; no overlaps.
+- [ ] Search highlight clears between operations.
+- [ ] If you ported to web: **a live URL** (GitHub Pages, Vercel, Netlify — all free).
+- [ ] **A 15-second GIF** in the README — preferably a search animating its way to a node.
+- [ ] No private paths in source.
+- [ ] README explains your duplicate-handling policy.
+
+---
+
+## What evaluators look at
+
+- **They watch the GIF.** A search highlighting its way down the tree, or an AVL rotation, sells the project in 5 seconds.
+- **They look at BST/layout/render separation.** Pure tree logic, separate from layout, separate from rendering = strong engineering signal. Tangled code reads as "barely got it working."
+- **They test the delete-with-two-children case.** This is the hardest case in any BST; getting it right (in-order successor swap) reads as algorithmic care.
+- **They look at the "trace" panel** if you built it. Plain-English narration of comparisons makes the project unique among algorithm-visualizer portfolios.
+- **They look at code clarity.** A 30-line `insert` is fine; a clever recursive one-liner that's unreadable is worse than no clever solution.
+- **They poke pathological inputs.** Sequential `1, 2, 3, 4, 5` produces a linked list — does your visualizer handle it gracefully? Does the README acknowledge it?
 
 ---
 
