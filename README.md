@@ -98,6 +98,17 @@ Eight curated paths through the program; pick one with the help of [`TRACK_PICKE
 
 ---
 
+## Semester language courses
+
+Two 16-week courses for 3rd–4th-year students who already program, built on the same philosophy: **one project across eight two-week labs, each lab = one language feature explored properly + one increment of the project.** No syntax drills. By the end you have a deployed portfolio project and can explain the language's internals at a whiteboard.
+
+| Course | Project | Labs |
+|---|---|---|
+| [**Python**](./courses/python/README.md) | A full-text search engine over a corpus you choose — iterators → inverted index → BM25 ranking → typed/tested/packaged CLI → parallel indexing (the GIL) → async crawler → FastAPI service → NumPy + embeddings. Counts as [Lab 15](./labs/lab-15-mini-search-engine.md). | [8 labs](./courses/python/README.md#the-eight-labs) |
+| **JavaScript** *(coming)* | A multiplayer browser game — the event loop → prototypes and classes → async → Node streams and WebSockets → real-time sync → TypeScript → tooling and performance → shipped. Counts as [Lab 27](./labs/lab-27-multiplayer-browser-game.md). | 8 labs |
+
+---
+
 ## Repository layout
 
 ```txt
@@ -107,6 +118,11 @@ Eight curated paths through the program; pick one with the help of [`TRACK_PICKE
 ├── TRACK_PICKER.md                 # decision tree for picking 4–6 labs
 ├── templates/
 │   └── MANIFESTO_TEMPLATE.md       # the Lab 42 ceremonial document
+├── courses/
+│   ├── python/                     # 16-week Python course: 8 labs building a search engine
+│   │   ├── README.md
+│   │   └── lab-01 … lab-08
+│   └── javascript/                 # 16-week JS course (coming): 8 labs building a multiplayer game
 └── labs/
     ├── README.md                   # comprehensive lab index
     ├── lab-01-messenger.md
