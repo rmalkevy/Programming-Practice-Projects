@@ -105,7 +105,7 @@ Two 16-week courses for 3rd–4th-year students who already program, built on th
 | Course | Project | Labs |
 |---|---|---|
 | [**Python**](./courses/python/README.md) | A full-text search engine over a corpus you choose — iterators → inverted index → BM25 ranking → typed/tested/packaged CLI → parallel indexing (the GIL) → async crawler → FastAPI service → NumPy + embeddings. Counts as [Lab 15](./labs/lab-15-mini-search-engine.md). | [8 labs](./courses/python/README.md#the-eight-labs) |
-| **JavaScript** *(coming)* | A multiplayer browser game — the event loop → prototypes and classes → async → Node streams and WebSockets → real-time sync → TypeScript → tooling and performance → shipped. Counts as [Lab 27](./labs/lab-27-multiplayer-browser-game.md). | 8 labs |
+| [**JavaScript**](./courses/javascript/README.md) | A real-time multiplayer browser game with an authoritative Node server — the event loop → prototypes and `this` → promises and async → Node streams and WebSockets → prediction, reconciliation, and a binary protocol → TypeScript → V8 internals, profiling, and tests → Docker, CI/CD, and a public URL. Counts as [Lab 27](./labs/lab-27-multiplayer-browser-game.md). | [8 labs](./courses/javascript/README.md#the-eight-labs) |
 
 ---
 
@@ -122,7 +122,9 @@ Two 16-week courses for 3rd–4th-year students who already program, built on th
 │   ├── python/                     # 16-week Python course: 8 labs building a search engine
 │   │   ├── README.md
 │   │   └── lab-01 … lab-08
-│   └── javascript/                 # 16-week JS course (coming): 8 labs building a multiplayer game
+│   └── javascript/                 # 16-week JS course: 8 labs building a multiplayer game
+│       ├── README.md
+│       └── lab-01 … lab-08
 └── labs/
     ├── README.md                   # comprehensive lab index
     ├── lab-01-messenger.md
