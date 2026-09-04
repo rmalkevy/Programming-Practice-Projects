@@ -4,7 +4,7 @@
 > — anyone who has worked on avionics for a single afternoon
 
 **Time budget:** ~2 weeks, working at your own pace.
-**Preferred language:** C / C++ (for real hardware), or C# / Python (for simulator and dashboard layers).
+**Preferred language:** C / C++ (for real hardware); C#, Python, or TypeScript/JavaScript for the simulator and dashboard layers (a web dashboard in JS/TS is a great fit). Any language is allowed.
 **Working style:** solo, or in a team of up to 3 people. Both are equally welcome.
 **Hardware:** *optional*. A real microcontroller (STM32, Arduino, ESP32, Raspberry Pi Pico) is recommended; a pure software simulator is fully acceptable if you can't get hardware.
 

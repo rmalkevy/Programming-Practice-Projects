@@ -117,6 +117,19 @@ Eight curated paths through the program; pick one with the help of [`TRACK_PICKE
 
 ---
 
+## The spirit of the program
+
+Two influences shaped these labs, and it's worth naming both up front.
+
+**École 42.** The Parisian school with no teachers, no lectures, and no fixed syllabus — only peer review, a brutal onboarding month called *La Piscine* ("the pool"), and one conviction: you learn to build by building hard, open-ended things and shipping them, not by grinding tidy textbook exercises. This program borrows that posture deliberately. Every lab hands you an ambitious target and a lot of rope, then trusts you to swim — solo or in a small crew, defended in front of peers. [**Lab 42**](labs/lab-42-life-the-universe-and-everything.md) is the explicit homage: the student's own *Piscine*-spirited capstone, where you finally set your own question.
+
+**Douglas Adams.** Forty-two labs is not a coincidence. In *The Hitchhiker's Guide to the Galaxy*, the supercomputer Deep Thought spends seven and a half million years computing the Answer to Life, the Universe, and Everything — and returns **42**, an answer that turns out to be useless because no one ever worked out the actual question. That is the whole arc of this program: forty-one labs teach you to build, and the forty-second asks you to find the question worth answering.
+
+> "I checked it very thoroughly," said the computer, "and that quite definitely is the answer. I think the problem, to be quite honest with you, is that you've never actually known what the question is."
+> — Deep Thought, *The Hitchhiker's Guide to the Galaxy*
+
+---
+
 ## Design principles
 
 The program is opinionated. The five most important opinions:
