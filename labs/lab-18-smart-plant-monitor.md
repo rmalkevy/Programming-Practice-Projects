@@ -27,13 +27,15 @@ If you want the perfect appetizer, browse [**Random Nerd Tutorials**](https://ra
 - **The IoT-product shape is everywhere.** Smart locks, weather stations, drone health monitors, agricultural sensors, defense-tech ground sensors. They're all *this lab*, scaled up.
 - It's the kind of project a non-technical person — a parent, a recruiter, a friend's friend — *understands instantly.* That makes it shockingly effective at the start of any portfolio conversation.
 - Real Ukrainian opportunities: smart agriculture (Climate Field View, Smart Farming Ukraine), defense-tech ground sensors, energy monitoring startups. They hire on demonstrated IoT skills, and this lab is one demonstration.
-- The skills compound: builds on [Lab 4](lab-04-stm32-sensor-logger.md) (sensors), connects to [Lab 16](lab-16-smart-telemetry-beacon.md) (telemetry), prepares [Lab 21](lab-21-rest-api-auth.md) (backend) and [Lab 33](lab-33-object-detection-tracking.md) (AI integration via thresholds → smart alerts).
+- The skills compound: builds on [Lab 04](lab-04-stm32-sensor-logger.md) (sensors), connects to [Lab 16](lab-16-smart-telemetry-beacon.md) (telemetry), prepares [Lab 21](lab-21-rest-api-auth.md) (backend) and [Lab 33](lab-33-object-detection-tracking.md) (AI integration via thresholds → smart alerts).
 
 ---
 
 ## The target
 
 > **Reference build:** [ESP32 Project 35 — Plant Monitor: soil, temperature & light — SunFounder](https://www.youtube.com/watch?v=SdgvQlIllPA) — clean ESP32 plant-monitor build matching the Basic level. Pair with [Why most Arduino soil-moisture sensors suck — Andreas Spiess](https://www.youtube.com/watch?v=m0mcCtcViTY) before you buy hardware.
+
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *watch, live*. Aim for a public dashboard URL showing your plant's real readings over time, plus a 60-second video and a wiring photo. A live graph of real soil-moisture data (and an alert firing when it's dry) reads as a real product.
 
 **Basic — "It Watches"**
 A probe sits in soil (or a dummy variable in simulator mode). Every 30–60 seconds, the device reads moisture. An LED is green if soil is wet enough, red if dry. A buzzer beeps once a minute when the soil is critically dry. The device runs forever, on a USB cable or a small battery. You install it in a real plant pot.

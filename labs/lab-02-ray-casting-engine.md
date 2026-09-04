@@ -34,6 +34,8 @@ If you want a perfect appetizer, read the first few sections of [Lode's Computer
 
 > **Reference build:** [Coding Challenge #146 — Rendering Raycasting — The Coding Train](https://www.youtube.com/watch?v=vYgIKn7iDH8) — Daniel Shiffman walks through exactly the 2D-rays-to-3D-walls journey this lab asks of you. Pair with [Coding Challenge #145: 2D Raycasting](https://www.youtube.com/watch?v=TOEi6T2mtHo) as a primer.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *play in the browser*. Aim to finish with the TypeScript + canvas build (or compile your C/C++ to WASM with Emscripten) and **deploy it** to GitHub Pages / Vercel / itch.io, so your README links to a live, playable URL — not just a GIF. A raycaster someone can walk through in one click is a memorable interview opener.
+
 **Basic — "I'm Inside the Map"**
 A window split in two: on the right, a top-down 2D minimap of a hand-coded maze with the player as a dot and a line showing where they're looking. On the left, a column-by-column pseudo-3D rendering of what the player sees — walls grow taller as the player walks closer. `W A S D` move and rotate. Walls block the player. It works.
 
@@ -272,7 +274,7 @@ Be ready to:
 4. **Show what fish-eye correction does** by toggling it off and on (if you can — otherwise explain).
 5. **What breaks** if FOV is set to 180°? To 5°? If the player starts inside a wall? If the map is 1×1?
 6. **What was the hardest bug** and how did you find it?
-7. **What's the difference** between this lab's "ray casting" and [Lab 3](lab-03-ray-tracer.md)'s "ray tracing"? (They share half a name. They're cousins, not the same thing.)
+7. **What's the difference** between this lab's "ray casting" and [Lab 03](lab-03-ray-tracer.md)'s "ray tracing"? (They share half a name. They're cousins, not the same thing.)
 
 ---
 

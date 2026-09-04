@@ -33,6 +33,8 @@ If you want a perfect appetizer, watch [**PX4's *PX4 in 5 minutes*** intro](http
 
 > **Reference videos:** [Ardupilot & PX4 SITL — From 0 to 100 in One Hour](https://www.youtube.com/watch?v=mKt4ZTaE2bk) for the toolchain-and-first-mission spine, and [Swarm of 16 PX4 Drones Creates 3D Heart Shape — MAVSDK Drone Show SITL Demo](https://www.youtube.com/watch?v=7j3QzX3dlfk) for the visual bar of what's possible at the Advanced level.
 
+> **Portfolio tip:** this project is sold by seeing the drone *fly your code*. Put a **screen recording** at the top of the README of your mission running in the PX4 simulator (QGroundControl plus your ROS 2 / MAVLink node commanding it), plus an architecture diagram. A drone executing your autonomous mission in sim is a standout aerospace portfolio piece.
+
 **Basic — "It Flies On Command"**
 PX4 SITL runs on your machine (in Docker or natively). A 3D simulator (**Gazebo**, **jMAVSim**, or **Gazebo Garden**) shows the drone visually. You wrote a script (Python with `pymavlink` or MAVSDK) that **arms the drone, takes off to 5 m, hovers for 10 s, and lands** — autonomously, end-to-end. Recorded as a video.
 

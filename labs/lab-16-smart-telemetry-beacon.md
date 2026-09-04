@@ -12,7 +12,7 @@
 
 ## The hook
 
-In [Lab 4](lab-04-stm32-sensor-logger.md) you built a sensor logger that talked to itself — print to console, write to a file, done. Real avionics doesn't work that way. Every drone, satellite, weather balloon, and aircraft sends its sensor data **somewhere else** — a ground station, a cloud server, a cockpit display, an air-traffic controller's screen. That stream of values, going from a small device into a system that watches and reacts, is called *telemetry*. It's one of the most important and least-taught topics at the 1st-year level.
+In [Lab 04](lab-04-stm32-sensor-logger.md) you built a sensor logger that talked to itself — print to console, write to a file, done. Real avionics doesn't work that way. Every drone, satellite, weather balloon, and aircraft sends its sensor data **somewhere else** — a ground station, a cloud server, a cockpit display, an air-traffic controller's screen. That stream of values, going from a small device into a system that watches and reacts, is called *telemetry*. It's one of the most important and least-taught topics at the 1st-year level.
 
 In this lab you'll close the loop. A small device — an ESP32 the size of a coin — sits anywhere with Wi-Fi. It reads sensor data, packages it into JSON, and pushes it to a tiny backend you wrote, which displays it on a web page that you can open from your phone. Your friend opens the page in another country and sees your sensor moving in real time. That's the entire IoT industry, in 200 lines of code.
 
@@ -34,6 +34,8 @@ If you want a perfect appetizer, browse [**Random Nerd Tutorials**](https://rand
 ## The target
 
 > **Reference build:** [ESP32 Based IoT Weather Station — Complete Guide](https://www.youtube.com/watch?v=GE5an3kYOKQ) — multi-sensor → cloud-dashboard pipeline, end-to-end. Pair with [Andreas Spiess channel](https://www.youtube.com/c/AndreasSpiess) for the full Swiss-accent ESP32 / LoRa / IoT canon.
+
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *watch update, live*. Aim for a **public telemetry dashboard URL** that updates as your device sends data, plus a 60-second video of readings changing in real time and a wiring photo. Live telemetry going from a physical device to a web page is a strong, memorable demo.
 
 **Basic — "It Streams"**
 The ESP32 connects to Wi-Fi, reads a sensor every second (the onboard temperature is fine, or any external sensor like an LM35 / DHT11 / soil moisture probe), wraps the reading in a JSON message, and POSTs it to a small backend running on your laptop. The backend logs it. You can see the values arrive in the terminal. Closing and reopening anything still works — Wi-Fi reconnects, backend handles disconnects.

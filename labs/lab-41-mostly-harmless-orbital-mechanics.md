@@ -33,13 +33,15 @@ If you want a perfect appetizer:
 
 - **Aerospace and space-tech are *real* hiring sectors right now.** Globally: SpaceX, RocketLab, Maxar, Skyroot, ISRO, ESA, JAXA, Astranis, Astroscale, Vast, Varda, Anduril Space, hundreds more. **In Ukraine specifically:** Firefly Aerospace (Ukrainian-founded, employs Ukrainians directly), **Promin Aerospace**, **Skyrora** (Scotland, Ukrainian engineering team), **EOS Data Analytics**, **Kurs Orbital**, plus the deep heritage of **Yuzhmash** and **Yuzhnoye Design Bureau**. The skill of "I can model an orbit and write a propagator" is *immediately* useful in every one of those companies.
 - **The math is universal across domains.** A six-degree-of-freedom rigid-body propagator is — algebraically — the same animal as a robot-arm dynamics simulator, an aircraft autopilot model, a ship navigation system, a missile-defense simulator, and a video-game physics engine. The intuition you build here transfers everywhere.
-- **It plays beautifully with the rest of your portfolio.** [Lab 13](lab-13-physics-sandbox.md) (physics sandbox) — same integrators. [Lab 3](lab-03-ray-tracer.md) (ray tracer) — same rendering pipeline. [Lab 32](lab-32-neural-net-from-scratch.md) (neural net) — RL controllers for low-thrust trajectories. [Lab 35](lab-35-rtos-mini-autopilot.md) / 37 (RTOS / drone autopilot) — *literally the same control loop*, scaled up. [Lab 2](lab-02-ray-casting-engine.md) / 25 (rendering / games) — your viz can be a small game.
+- **It plays beautifully with the rest of your portfolio.** [Lab 13](lab-13-physics-sandbox.md) (physics sandbox) — same integrators. [Lab 03](lab-03-ray-tracer.md) (ray tracer) — same rendering pipeline. [Lab 32](lab-32-neural-net-from-scratch.md) (neural net) — RL controllers for low-thrust trajectories. [Lab 35](lab-35-rtos-mini-autopilot.md) / [37](lab-37-px4-mavlink-drone-stack.md) (RTOS / drone autopilot) — *literally the same control loop*, scaled up. [Lab 02](lab-02-ray-casting-engine.md) / [25](lab-25-platformer-game.md) (rendering / games) — your viz can be a small game.
 - **It's a "famous" lab.** Hohmann transfer plots and gravity-assist diagrams are visually iconic. Recruiters who've never opened a tax form will linger on a beautiful trajectory plot.
 - **It's *fun* in a way few labs are.** It's hard to explain until you've spent an evening pointing a probe at Mars and watching it arrive — and then it's hard to forget.
 
 ---
 
 ## The target
+
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *watch orbit, live*. Aim to ship a browser visualization (Three.js / canvas) of your trajectories and transfers, deployed to GitHub Pages / Vercel, with a GIF of a Hohmann transfer or gravity assist at the top of the README. A mission you can watch play out beats a plot of numbers.
 
 **Basic — "Earth Orbit"**
 You've shipped:
@@ -142,7 +144,7 @@ If you do all three, you've built the core of a real flight-dynamics workstation
 - **GPU it.** Reimplement the integrator in Rust / C++ / CUDA / WGSL. Benchmark.
 - **CelesTrak constellation.** Track all of Starlink (~6,000 sats) for an hour and render as a 3D animation. *Genuinely beautiful.*
 - **Kepler's equation.** Solve `M = E - e sin E` for `E` with Newton-Raphson. Compare convergence at high eccentricity.
-- **Real ground-station controller.** Take your pass predictor and (in simulation) drive a 2-axis tracker — compute az/el commands, plot the antenna's required motion. *[Lab 35](lab-35-rtos-mini-autopilot.md) / 37 link if you want it on real motors.*
+- **Real ground-station controller.** Take your pass predictor and (in simulation) drive a 2-axis tracker — compute az/el commands, plot the antenna's required motion. *[Lab 35](lab-35-rtos-mini-autopilot.md) / [37](lab-37-px4-mavlink-drone-stack.md) link if you want it on real motors.*
 - **Connect to PX4 SITL.** Pipe your trajectory into PX4 as setpoints; let the autopilot try to fly it. *Doesn't have to be physically realistic — it's the integration that's interesting.*
 - **Astronomical-scale visualizer ("Total Perspective Vortex").** A log-scale viewer from your apartment to the observable universe. Render planets, stars, galaxies, voids, with proper scale labels. *Shock value: high.*
 - **Aviation-style HUD.** Build a flight-data display for a probe in transit — CSS-styled like a 1970s NASA console.
@@ -153,10 +155,10 @@ If you do all three, you've built the core of a real flight-dynamics workstation
 ## Extension challenges (3–5 weeks, or longer)
 
 - **Combine with [Lab 13](lab-13-physics-sandbox.md).** Your physics sandbox gains an "orbital" mode. Watch students drag-and-launch projectiles into orbit.
-- **Combine with [Lab 3](lab-03-ray-tracer.md).** Render your trajectories with your own ray tracer — proper specular planets and lit space.
+- **Combine with [Lab 03](lab-03-ray-tracer.md).** Render your trajectories with your own ray tracer — proper specular planets and lit space.
 - **Combine with [Lab 32](lab-32-neural-net-from-scratch.md).** Train a small neural net or RL agent to fly low-thrust trajectories, beating an analytical baseline.
 - **Combine with [Lab 33](lab-33-object-detection-tracking.md).** Detect and track satellites in *amateur telescope footage* with your object-detection pipeline. *Genuinely novel.*
-- **Combine with [Lab 35](lab-35-rtos-mini-autopilot.md) / 37.** Run your guidance algorithm on PX4 SITL. The drone "thinks" it's a probe.
+- **Combine with [Lab 35](lab-35-rtos-mini-autopilot.md) / [37](lab-37-px4-mavlink-drone-stack.md).** Run your guidance algorithm on PX4 SITL. The drone "thinks" it's a probe.
 - **Combine with [Lab 22](lab-22-spa-frontend.md) / 23.** A multiplayer "trajectory game" — two teams compete to plot the most efficient transfer.
 - **The Voyager Grand Tour.** Recreate it. End-to-end. Multi-planet gravity-assist trajectory through Jupiter, Saturn, Uranus, Neptune. Compare your solution to historical data. *Career-grade portfolio piece.*
 - **A tiny CubeSat mission proposal.** Pick a real-ish CubeSat mission concept (Earth observation, in-orbit experiment, etc.). Write the orbit and lifetime study. Open up a possibility of a real connection to a Ukrainian space-tech employer.

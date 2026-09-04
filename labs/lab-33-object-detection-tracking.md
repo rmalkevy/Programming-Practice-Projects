@@ -34,6 +34,8 @@ If you want a perfect appetizer, watch [**Joseph Redmon's *YOLO: You Only Look O
 
 > **Reference build:** [Track & Count Objects using YOLOv8, ByteTrack & Supervision — Roboflow](https://www.youtube.com/watch?v=OS5qI9YBkfk) — full detection-plus-tracking-plus-counting pipeline matching this lab's Standard and Advanced targets.
 
+> **Portfolio tip:** this project is sold by seeing it *track things on real video*. Put a **short output clip** (boxes + IDs following objects) at the top of the README, and ship a Gradio / Streamlit demo on a Hugging Face Space where a recruiter can upload their own clip. Watching your tracker follow a moving object is the entire pitch.
+
 **Basic — "It Detects"**
 A Python program that **reads a video** (a file or a live webcam feed), **runs YOLOv8** on each frame, and **draws bounding boxes** with class labels around detected objects. At least 60% of the source frames have correct detections (subjective; visible). At least 5 distinct object classes detected over the run. Saved output video.
 

@@ -52,6 +52,8 @@ If you want a perfect appetizer, watch [**"How To Capture Packets" — David Bom
 
 ## The target
 
+> **Portfolio tip:** in security, the deliverable is the **write-up**. Publish a blog-style report with your capture screenshots, what a plaintext protocol leaked vs what TLS protected, and the defensive fix, plus a short demo video - all on your own lab network only. A clear, ethical report reads as far more employable than raw tooling output. Keep the ethics framing front and center.
+
 **Basic — "I See The Wire And The Air"**
 You've shipped:
 - a **wired-network** capture lab — running services in containers / VMs, capturing their traffic with Wireshark/tcpdump, demonstrating **what a plaintext protocol leaks** vs **what TLS protects** (e.g., HTTP vs HTTPS, FTP vs SFTP, telnet vs SSH),
@@ -150,7 +152,7 @@ This lab makes those three things *physical* instead of abstract.
 - **MAVLink2 signing in production-style.** Implement the full key-rotation mechanism. Document the user-experience trade-offs of secure operation.
 - **WireGuard everywhere.** Stand up a WireGuard mesh between virtual nodes. Use it as the carrier for MAVLink, video, and command links. Benchmark latency and throughput.
 - **Combine with [Lab 16](lab-16-smart-telemetry-beacon.md).** Your IoT telemetry beacon: capture + replay it; then secure it.
-- **Combine with [Lab 35](lab-35-rtos-mini-autopilot.md) / 37.** Your own RTOS firmware speaking secured MAVLink.
+- **Combine with [Lab 35](lab-35-rtos-mini-autopilot.md) / [37](lab-37-px4-mavlink-drone-stack.md).** Your own RTOS firmware speaking secured MAVLink.
 - **Combine with [Lab 39](lab-39-web-security-owasp.md).** Capture HTTP traffic of your own intentionally-vulnerable web app on the wire — show the same SQL injection request and JWT in plaintext.
 - **DEF CON CTF.** Compete in a public wireless / network CTF and document your solves.
 - **Post-quantum aware.** Replace one of your secured links with a hybrid key-exchange (e.g., ML-KEM via `liboqs`). Document compatibility and performance.

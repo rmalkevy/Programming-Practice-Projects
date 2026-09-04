@@ -36,6 +36,8 @@ If you want a perfect appetizer, watch [**Phil's Lab — *Real-Time Operating Sy
 
 > **Reference build:** [Carbon Aeronautics — Quadcopter Drone series](https://github.com/CarbonAeronautics) — multi-part YouTube series (search the channel) covering quadcopter dynamics, PID, Kalman filtering, and rate-mode flight. Pair with [Andreas Spiess — How to work with FreeRTOS on ESP32](https://www.youtube.com/watch?v=684KSAvYbw4) for the RTOS task-and-queue culture.
 
+> **Portfolio tip:** this project is sold by motion and traces. Put a **short video** at the top of the README - the craft holding attitude in the simulator (or on hardware) while you introduce a disturbance - plus a task-timing / scheduler trace. Seeing tasks meet their deadlines under load is what makes an RTOS project real.
+
 **Basic — "Multiple Tasks Cooperate"**
 A microcontroller running a real RTOS with **at least 3 tasks**:
 - a **sensor task** (reads a temperature / IMU / button at a fixed rate),

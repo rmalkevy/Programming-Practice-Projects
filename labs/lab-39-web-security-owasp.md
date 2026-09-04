@@ -48,6 +48,8 @@ If you want a perfect appetizer, spend an evening on the **[PortSwigger Web Secu
 
 ## The target
 
+> **Portfolio tip:** in security, the deliverable is the **write-up**, not a public deploy. Keep the vulnerable app **local, launchable with one Docker command**, and publish a blog-style report per OWASP category (the exploit, a screenshot / PoC, and the fix) with a short demo video. Never expose the intentionally-vulnerable app on the public internet - the ethics framing above is part of the grade.
+
 **Basic — "I Built And Broke A Vulnerable App"**
 You've shipped a small but realistic web app — a tiny social-network or note-sharing or lab-portal-style site — with **at least 8 of the 10 OWASP categories** deliberately introduced. For each, you've:
 - written an exploit (`curl` script or `Burp` request),

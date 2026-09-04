@@ -34,6 +34,8 @@ If you want a perfect appetizer, browse [**Brittany Chiang's portfolio**](https:
 
 > **Reference videos:** browse [Lee Robinson's YouTube channel](https://www.youtube.com/c/LeeRobinsonDev) for modern Next.js / personal-site deep-dives. (Compare against [brittanychiang.com](https://brittanychiang.com/) and [paco.me](https://paco.me/) for the look-and-feel target.)
 
+> **Portfolio tip:** this *is* the recruiter's entry point, so treat it as the hub for everything else. Deploy it to a **custom domain**, and embed or link every other finished lab (live demos, videos, repos) from it. The strongest version is a site where one click leads to a working thing you built.
+
 **Basic — "It Exists"**
 A static site at a real public URL — `yourname.github.io`, `yourname.vercel.app`, or a custom domain (~$10/year). Sections: a brief introduction (3–5 sentences in your own voice), 3+ project cards each with a thumbnail and link, a short About page, an honest CV/resume download, contact methods. Mobile-friendly. Loads in under 2 seconds. Works in incognito mode. No "Lorem Ipsum", no broken links, no 2017 placeholder photos.
 
@@ -41,7 +43,7 @@ A static site at a real public URL — `yourname.github.io`, `yourname.vercel.ap
 The site is genuinely well-designed: consistent typography (one body font, one heading font max), a clear color palette, generous whitespace, smooth scroll anchors, subtle animations on hover/scroll. Lighthouse score of 95+ on performance, accessibility, best practices. Dark/light theme toggle. Each project card opens a detailed case-study page (build vs. just a "view repo" link). Uses a real static-site framework (Astro, Next.js, SvelteKit). Custom domain.
 
 **Advanced — "It's Memorable"**
-Something specific makes this *yours, not a template*. A genuinely unique landing page (not just "Brittany's portfolio with my name swapped"). Animations that *fit the theme* (an aviation portfolio with subtle compass/instrument-cluster motifs; a game-dev portfolio with pixel-art touches; a low-tech "punk-zine" aesthetic). A blog with 1–3 real posts about projects you built. Live embedded demos (your [Lab 25](lab-25-platformer-game.md) platformer playable inline; your [Lab 22](lab-22-spa-frontend.md) dashboard live; your [Lab 9](lab-09-console-paddle-game.md) Pong embedded in the page).
+Something specific makes this *yours, not a template*. A genuinely unique landing page (not just "Brittany's portfolio with my name swapped"). Animations that *fit the theme* (an aviation portfolio with subtle compass/instrument-cluster motifs; a game-dev portfolio with pixel-art touches; a low-tech "punk-zine" aesthetic). A blog with 1–3 real posts about projects you built. Live embedded demos (your [Lab 25](lab-25-platformer-game.md) platformer playable inline; your [Lab 22](lab-22-spa-frontend.md) dashboard live; your [Lab 09](lab-09-console-paddle-game.md) Pong embedded in the page).
 
 ---
 
@@ -109,7 +111,7 @@ Most great developer portfolios follow this exact spine. **The "secret" is not n
 ### Advanced — "Side Quests" (each ~3–10h)
 
 - **A Real Blog.** 1–3 written posts about projects you built — *not* "10 things I learned about React this week" generic content. Real, specific, technical. *"How I balanced my robot in PID — three failed tunings before it worked."* Generates traffic. Demonstrates communication.
-- **Live Embedded Demos.** Embed [Lab 9](lab-09-console-paddle-game.md) Pong, [Lab 25](lab-25-platformer-game.md) platformer, [Lab 22](lab-22-spa-frontend.md) dashboard, etc., directly into the project pages as `<iframe>`s. Recruiter clicks, plays. Magic.
+- **Live Embedded Demos.** Embed [Lab 09](lab-09-console-paddle-game.md) Pong, [Lab 25](lab-25-platformer-game.md) platformer, [Lab 22](lab-22-spa-frontend.md) dashboard, etc., directly into the project pages as `<iframe>`s. Recruiter clicks, plays. Magic.
 - **Resume Builder.** A `/cv` page that's both viewable in-browser AND downloadable as PDF. Single source of truth.
 - **i18n.** A second language (Ukrainian + English is the obvious choice for the local job market; English-only is also fine).
 - **A `/uses` page.** A trend among senior devs — list your hardware, software, terminal setup. Honest, useful, often shared.

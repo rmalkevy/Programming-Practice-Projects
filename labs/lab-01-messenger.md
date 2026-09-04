@@ -34,6 +34,8 @@ If you want a perfect appetizer, read the first chapter of [*Designing Data-Inte
 
 > **Reference build:** [Build and Deploy a Full Stack Realtime Chat Messaging App — JavaScript Mastery](https://www.youtube.com/watch?v=MJzbJQLGehs) — shows the polish bar a personal-chat product can hit end-to-end.
 
+> **Portfolio tip:** the single strongest version of this project is one a recruiter can *click*. If you go past Basic, aim for the client-server or web-UI path and **deploy it** (Render / Fly.io / Railway for the server, Vercel for the UI) so your README links to a live URL, not just a screenshot. A working link people can open beats any static image.
+
 **Basic — "It Stores Messages"**
 A console (or simple GUI) application. The user picks an identity (e.g., "alice" or "bob"), opens an existing conversation or creates a new one, types a message, and presses Enter. The message gets a timestamp and is saved to disk. Close the app, reopen it — the message is still there. Two hardcoded users can talk to each other by switching identities.
 

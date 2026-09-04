@@ -34,6 +34,8 @@ If you want a perfect appetizer, watch [**Mark Brown's *GMTK Game Jam* highlight
 
 > **Reference video:** [I Spent a Week Making a Game about Vacuuming — Sebastian Lague](https://www.youtube.com/watch?v=PGk0rnyTa1U) — the spirit of a small-scope themed jam: tight loop, surprising polish, shipped. Pair with any [Game Maker's Toolkit Game Jam recap](https://www.youtube.com/c/MarkBrownGMT) for jam-culture inspiration.
 
+> **Portfolio tip:** the strongest version of a jam game is one a recruiter can *play in one click*. Publish it to **itch.io** (that's the culture) with an HTML5 build, a cover image, and a GIF, and link it at the top of the README. A finished, playable, themed game - shipped - says more than a big unfinished one.
+
 **Basic — "I Submitted Something"**
 You participated in either a real public jam (Ludum Dare, GMTK Jam, Global Game Jam, Brackeys Jam, js13kGames, your school's jam, or any jam listed on [itch.io](https://itch.io/jams)) **or** the in-class jam. **You submitted a complete, playable game by the deadline.** Game has a title, a goal, a working game loop. It's playable from beginning to end. It's hosted on **itch.io** with a public link. *No matter how rough.*
 

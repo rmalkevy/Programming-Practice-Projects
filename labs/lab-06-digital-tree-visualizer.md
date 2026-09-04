@@ -32,6 +32,8 @@ If you want a 30-second appetizer, open [VisuAlgo's BST page](https://visualgo.n
 
 > **Reference video:** [Data Structures Easy to Advanced Course — William Fiset / freeCodeCamp](https://www.youtube.com/watch?v=RBSGKlAvoiM) — animated BST walkthroughs that match this lab's visualization spirit. (Compare against [VisuAlgo](https://visualgo.net/en/bst) for the look-and-feel target.)
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *watch grow, live*. Aim to ship a browser build (adjust parameters with sliders, watch the tree redraw) to GitHub Pages / Vercel, and put a short GIF at the top of the README. An interactive visualization reads as far more alive than a static screenshot.
+
 **Basic — "It Grows"**
 A text input and an "Insert" button. Each value typed appears as a circle node connected to its parent by a line. The tree visibly grows as you insert. A search box highlights the path the search algorithm takes (for example, by coloring visited nodes yellow). Tree positions are computed automatically — the user doesn't place nodes by hand.
 
@@ -124,7 +126,7 @@ The 2-week scope above ships a real, defendable visualizer. If algorithm visuali
 - **Ship to the web.** A TypeScript + SVG version deployed to GitHub Pages — shareable URL, instant demo. Algorithm visualizers are uniquely strong portfolio pieces *only* when they're playable in-browser.
 - **Build a teaching website.** Multiple data structures (BST, AVL, red-black, trie, heap) with narrative explanations and step-by-step walks. Distill.pub / Bret Victor energy.
 - **Combine with [Lab 22](lab-22-spa-frontend.md).** A SPA that's *the visualizer* — polished UI, routing between data structures, save/load tree configurations.
-- **Combine with [Lab 7](lab-07-graph-route-finder.md) (graph algorithms).** Same engine, but now visualize graph traversals — BFS, DFS, Dijkstra, A\*. Two labs, one beautiful product.
+- **Combine with [Lab 07](lab-07-graph-route-finder.md) (graph algorithms).** Same engine, but now visualize graph traversals — BFS, DFS, Dijkstra, A\*. Two labs, one beautiful product.
 - **Open source it.** Ship as an npm package other students can drop into their own pages. *Wildly* impressive.
 
 ---

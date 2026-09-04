@@ -51,6 +51,8 @@ You can do this lab on any of the following. **All are valid; pick the one close
 
 > **Reference builds:** [Real-Time Data Logging with Arduino: Mastering millis() and SD Cards](https://www.youtube.com/watch?v=RAJH2B3PVXM) for the SD-card-logging spine, and [Andreas Spiess — How to work with FreeRTOS on ESP32](https://www.youtube.com/watch?v=684KSAvYbw4) for embedded multitasking culture.
 
+> **Portfolio tip:** hardware projects live or die on the demo. Put a **60-90 second video** at the top of your README showing real sensor values change as you breathe on the sensor, shine a light, or move the board, plus one clear wiring photo or diagram. A recruiter who can *see* it work in 90 seconds trusts it far more than a table of numbers.
+
 **Basic — "It Logs"**
 A program runs on your chosen platform (or as a simulator on your PC). Every second, it generates or reads one sensor reading (temperature, voltage, distance — whatever you can get) and prints a structured line to the console / serial port. The output looks clean and parseable. The program runs forever until you press `Ctrl+C` or send a `STOP` command.
 

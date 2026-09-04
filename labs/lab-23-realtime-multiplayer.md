@@ -34,6 +34,8 @@ If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multipla
 
 > **Reference build:** [How to Create the Simplest .io Game in 30 Minutes — JavaScript + Node.js + Socket.IO](https://www.youtube.com/watch?v=hj4ZF1FlkDE) — full real-time multiplayer baseline in 30 minutes; matches the Basic target end-to-end.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *see sync in real time*. Deploy it to a public URL and put a GIF at the top showing **two windows side by side**, an action in one instantly updating the other. Live sync across tabs is the entire wow - make it the first thing they see.
+
 **Basic — "It Syncs"**
 Two browser tabs see each other. The chosen project — a drawing board, a TODO list, a poll, a typing race — has the property that an action in one tab visibly updates the other within a second. Both tabs handle disconnects: when the network drops, the tab shows "reconnecting…", and when it recovers, state catches up.
 

@@ -31,6 +31,8 @@ If you want a perfect appetizer, watch [**Wes Bos's *Building a Chrome Extension
 
 > **Reference build:** [Build a Chrome Extension — Course for Beginners — freeCodeCamp](https://www.youtube.com/watch?v=0n809nd4Zu4) — Manifest V3 from scratch with a real published-extension target.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *install in one click*. Aim to publish it to the Chrome Web Store (or ship a one-download unpacked zip with clear load instructions), and put a short demo video at the top of the README. An extension they can actually add to their browser beats a code walkthrough.
+
 **Basic — "It Works"**
 You've built and *installed* (in developer mode) an extension that does **one useful thing on every page** — adds a button to the toolbar that triggers an action, changes pages in some way (e.g., dark mode all sites), or shows useful info about the page. The popup looks polished. The icon looks deliberate.
 

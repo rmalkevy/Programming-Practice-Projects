@@ -35,6 +35,8 @@ If you want a perfect appetizer, watch [**Mark Brown's *Game Maker's Toolkit* �
 
 > **Reference build:** [Pygame Platformer Tutorial — Full Course — DaFluffyPotato](https://www.youtube.com/watch?v=2gABYM5M0ww) — 6-hour platformer build covering tiles, physics, particles, parallax, AI, level editing, and packaging. The Advanced bar for this lab.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *play in one click*. Export an HTML5 build and host it on itch.io / GitHub Pages, link it at the top of the README, and add a GIF of the best moment. A playable level in the browser beats any amount of description.
+
 **Basic — "It Plays"**
 A single level. A character that runs, jumps, and dies. At least one type of enemy or hazard. A goal. A working game loop: title → play → win/lose → restart. Built and exported to a **playable web build on itch.io** that anyone with a URL can play.
 

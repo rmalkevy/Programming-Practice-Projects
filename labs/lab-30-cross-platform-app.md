@@ -34,6 +34,8 @@ If you want a perfect appetizer, watch [**William Candillon's *Can it be done in
 
 > **Reference videos:** [William Candillon — *Can it be done in React Native?* channel](https://www.youtube.com/@wcandillon) — recreations of polished native interactions (Spotify, Airbnb, YouTube, Duolingo) in React Native. The look-and-feel bar for this lab's Advanced target.
 
+> **Portfolio tip:** the strongest version of a mobile app is one a recruiter can *open on their own phone*. Publish an **Expo / EAS preview link** (and a signed APK on a GitHub Release), plus a 30-second screen recording showing it running on both platforms. One QR code they can scan beats a wall of screenshots.
+
 **Basic — "It Runs On Both"**
 A React Native + Expo app that runs on **iOS via Expo Go** (your iPhone or a friend's) and **Android via Expo Go or sideloadable APK** (your Android phone). 3+ screens. Real interaction (form, list, counter, timer). Navigation. The same code path produces the same UI on both platforms.
 

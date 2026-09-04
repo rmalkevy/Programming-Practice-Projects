@@ -34,6 +34,8 @@ If you want a perfect appetizer, watch [**Andrej Karpathy's *State of GPT*** (Mi
 
 > **Reference build:** [Chatbots with RAG: LangChain Full Walkthrough — James Briggs](https://www.youtube.com/watch?v=LhnCsygAvzY) — embeddings + Pinecone + LangChain end-to-end; matches the Standard target. Pair with [LangChain Multi-Query Retriever for RAG](https://www.youtube.com/watch?v=VFf8XJUIHnU) for the Advanced retrieval techniques.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *ask a question and get an answer*. Deploy a demo (Vercel / a Hugging Face Space) with a rate-limited key or your own funded budget, and link it at the top of the README with 2-3 example questions. A live RAG chatbot over real docs beats a screenshot of one.
+
 **Basic — "It Talks to Your Docs"**
 A web chat UI that takes a user message, calls an LLM, and returns a streamed answer. **The LLM has access to your domain documents** via RAG — relevant chunks retrieved, passed in the prompt. Five+ seed questions visibly produce useful, accurate answers. Source citations shown next to answers ("answered from page 12 of *X*"). Deployed.
 

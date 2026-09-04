@@ -32,6 +32,8 @@ If you want a 12-minute appetizer before starting, watch Sebastian Lague's [*Cod
 
 > **Reference build:** [Writing a Physics Engine from scratch — collision detection optimization — Pezzza's Work](https://www.youtube.com/watch?v=9IULfQH7E90) — Verlet-physics in C++, with the legendary spatial-grid optimization. The visual bar to aim for at the Advanced level.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *poke at, live*. Aim to ship a browser build where they spawn objects and watch them collide and settle, deployed to GitHub Pages / Vercel, with a GIF at the top of the README. Interactive physics is mesmerizing; a still frame isn't.
+
 **Basic — "It Falls"**
 A single ball falls under gravity in a window. It hits the floor, bounces with reduced energy, bounces again a little lower, and eventually settles. The ball stays inside the window — left wall, right wall, floor, ceiling all push it back. Run the program and you can stare at it like a screensaver.
 

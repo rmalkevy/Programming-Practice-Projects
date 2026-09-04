@@ -34,6 +34,8 @@ If you want a perfect appetizer, browse [**Linear's website and product**](https
 
 > **Reference videos:** [Fireship — Frontend Frameworks playlist](https://www.youtube.com/playlist?list=PLXU6UYQih-Bp1b8lUwZn36LLMwTs7tZB2) for the 100-second tour of every modern SPA framework — pick yours, then build.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *click and use*. Deploy it (Vercel / Netlify) with a seeded demo account, link the live URL at the top of the README, and make sure the failure cases (offline, expired token, invalid input) are visible in the demo. A polished frontend running against a real API is a 1-in-30 portfolio piece.
+
 **Basic — "It Talks to the API"**
 A single-page app at a public URL that consumes [Lab 21](lab-21-rest-api-auth.md)'s API. Users can register, log in, log out. Logged-in users see a list of their data, can create new items, edit, and delete. Forms validate before submission. Loading states are visible. Errors are shown clearly (not just `alert()` boxes). The app doesn't crash when the API is unreachable — it shows an honest "couldn't load — try again" message.
 

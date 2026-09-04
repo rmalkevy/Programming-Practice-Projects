@@ -32,6 +32,8 @@ If you want a perfect appetizer, watch 3Blue1Brown's [*But what is a convolution
 
 > **Reference video:** [But what is a convolution? — 3Blue1Brown](https://www.youtube.com/watch?v=KuXjwB4LzSA) — the cleanest visual explanation of the core operation behind every kernel filter in this lab.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *use in the browser*. Aim to ship a small web build (drag in an image, pick a filter, see the result instantly) deployed to GitHub Pages / Vercel, with before/after pairs in the README. A tool people can try in one click beats a folder of output PNGs.
+
 **Basic — "It Filters"**
 A program (CLI or simple GUI) that loads a `.png` file, applies a chosen filter (grayscale, invert, brightness adjust), and saves the result as a new file. The output looks correct: grayscale is grayscale, inversion looks like an old film negative, brightness +50 makes the image lighter. The CLI rejects bad input cleanly: missing files, unsupported formats, invalid arguments.
 

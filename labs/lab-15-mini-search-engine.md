@@ -34,6 +34,8 @@ If you want a perfect appetizer, read the original [Brin & Page 1998 paper](http
 
 > **Reference build:** [Search Engine in Rust (Ep.01) — Tsoding Daily](https://www.youtube.com/watch?v=hm5xOJiVEeg) — live-coded TF-IDF inverted-index search engine built from scratch; the spirit of the Advanced target.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *search, live*. Aim to ship a web front end over a real corpus (a Wikipedia dump, your course notes, a subreddit) deployed to a public URL, so they can type a query and see ranked results. A working search box over real data beats a description of TF-IDF.
+
 **Basic — "It Searches"**
 A program that loads a folder of text files (≥ 10 files), builds an inverted index, and lets the user search for a single word from the command line or a console prompt. The output is a list of files where the word appears, sorted by how many times it appears. Search is instant — even on 100 files, the index makes the lookup essentially free.
 

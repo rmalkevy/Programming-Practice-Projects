@@ -34,6 +34,8 @@ If you want a 60-second appetizer, watch [original 1972 Atari Pong gameplay foot
 
 > **Reference video:** [Pong with Python & Pygame — Tech With Tim / freeCodeCamp](https://www.youtube.com/watch?v=tS8F7_X2qB0) — comprehensive 1-hour build of the canonical paddle game; matches this lab's Standard target.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *play in one click*. If you port it to the browser (canvas or a WASM build), deploy it to GitHub Pages / itch.io and link it at the top of the README; otherwise put a short GIF of a real rally. A game someone can actually play beats a description of one.
+
 **Basic — "It's Playable"**
 Two paddles (one on each side), one ball, a center line. Player 1 controls the left paddle with `W`/`S`. Player 2 controls the right paddle with `↑`/`↓` (or just an AI that lazily tracks the ball). The ball bounces off paddles and walls. Score is shown at the top. When a player misses, the ball resets and the other player gets a point. *It feels like Pong because it is Pong.*
 

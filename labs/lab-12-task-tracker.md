@@ -24,7 +24,7 @@ If you want a perfect appetizer, read [*Getting Real*](https://basecamp.com/gett
 ## Why this is worth your time
 
 - Some flavor of "list with statuses" is the most common shape of every job-listing for a junior engineer. **Building a clean one is the closest 1st-year project to "first day of work."**
-- Persistence, validation, and CRUD — the same trio as [Lab 1](lab-01-messenger.md) — are the boring-looking work that takes up 70% of any real product. This lab gets you fluent.
+- Persistence, validation, and CRUD — the same trio as [Lab 01](lab-01-messenger.md) — are the boring-looking work that takes up 70% of any real product. This lab gets you fluent.
 - A well-designed task tracker is a **portfolio piece you can show to a non-technical person**. They'll understand what it is in 5 seconds and remember the demo. Most of your other projects need explanation.
 - It is the rare lab where, if you genuinely care about your own productivity, **you'll keep using the result for the rest of the semester** — and that's the highest compliment a piece of software can get.
 
@@ -32,7 +32,9 @@ If you want a perfect appetizer, read [*Getting Real*](https://basecamp.com/gett
 
 ## The target
 
-> **Reference build:** [How To Build Your First TypeScript Project — TODO List Application — Web Dev Simplified](https://www.youtube.com/watch?v=jBmrduvKl5w) — clean baseline for the Standard target. For the full-stack flavor, pair with any classic [Theo / WebDevSimplified] follow-up tutorials.
+> **Reference build:** [How To Build Your First TypeScript Project — TODO List Application — Web Dev Simplified](https://www.youtube.com/watch?v=jBmrduvKl5w) — clean baseline for the Standard target. For the full-stack flavor, pair with any classic Theo / Web Dev Simplified follow-up tutorials.
+
+> **Portfolio tip:** the single strongest version of this project is one a recruiter can *click and use*. If you go past Basic, deploy it (Vercel / Render / Fly.io) with a seeded demo account, and link the live URL at the top of the README. A working app they can add a task to beats any screenshot.
 
 **Basic — "It Tracks Tasks"**
 A console (or simple GUI) application. The user can create tasks (title + status), list them, change a task's status (`todo → in-progress → done`), and delete tasks. Tasks are saved to disk; closing and reopening the app shows them again. Empty titles are rejected. Each task has a creation timestamp.
@@ -125,7 +127,7 @@ A task tracker is the simplest non-trivial CRUD app. There's almost nothing here
 - **Markdown Notes.** Each task has a body where the user can write notes in Markdown.
 - **CSV / Markdown Export.** "Export this week's done tasks" → a clean text artifact you could paste into a status report.
 - **CLI Power Tool.** A real CLI: `tt add "fix bug" -p high -d today -t work`. Globally installable. Fast as hell. The kind of thing you'd actually keep using.
-- **Multi-user.** Sign-in (even just username, no password — same caveats as [Lab 1](lab-01-messenger.md)). Each user has their own task list.
+- **Multi-user.** Sign-in (even just username, no password — same caveats as [Lab 01](lab-01-messenger.md)). Each user has their own task list.
 - **Calendar View.** Show this week / next week as a 7-column grid with tasks placed on their deadlines.
 - **Pomodoro Integration.** Click "start" on a task, a 25-minute timer counts down, completion logs the session. Build a "I worked for 4 hours today" stats page.
 

@@ -6,7 +6,7 @@
 **Time budget:** ~2 weeks for the core lab, with extension challenges that grow it to 3–5 weeks.
 **Preferred language:** C/C++ on the device; Python or C# for the simulator path.
 **Working style:** solo, or in a team of up to 3 people.
-**Hardware:** **strongly recommended** but **not required**. A real two-wheel self-balancer (~$30–40), a simple ball-on-tube (~$15), or a fan-balanced lever all work. **A pure software simulator is fully acceptable** — the algorithm and the lessons are identical. (Same approach as [Lab 4](lab-04-stm32-sensor-logger.md).)
+**Hardware:** **strongly recommended** but **not required**. A real two-wheel self-balancer (~$30–40), a simple ball-on-tube (~$15), or a fan-balanced lever all work. **A pure software simulator is fully acceptable** — the algorithm and the lessons are identical. (Same approach as [Lab 04](lab-04-stm32-sensor-logger.md).)
 
 ---
 
@@ -34,6 +34,8 @@ If you want a perfect appetizer, watch [**Brian Douglas's "Understanding PID Con
 ## The target
 
 > **Reference build:** [Joop Brokking — *Your Arduino Balancing Robot* (YABR)](http://www.brokking.net/yabr_main.html) — the legendary self-balancing-robot build with code, schematics, and a multi-part [video walkthrough on YouTube](https://www.youtube.com/playlist?list=PL0K4VDicBzshc4hIwPZ1B-faaaY9DPbLf) (start with Part 1 — *PID controller explained*).
+
+> **Portfolio tip:** this project is sold entirely by motion. Put a **short video** at the top of the README - the thing balancing (or the simulator holding setpoint under a disturbance you introduce) - plus a plot of the response settling. Seeing it recover from a shove is worth a thousand words about control theory.
 
 **Basic — "It Doesn't Fall (Much)"**
 A self-balancing robot (or simulator pendulum, or fan-lever) reads its tilt from an IMU 100+ times per second, computes a motor command using a PID controller, and applies it. The setpoint is "vertical." When you nudge the robot, it leans, then corrects, then settles. It might wobble. It might overshoot. But left alone, it stays upright for at least 10–30 seconds.

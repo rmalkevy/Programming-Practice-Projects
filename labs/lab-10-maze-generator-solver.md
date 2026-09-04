@@ -32,6 +32,8 @@ If you want a perfect appetizer, read [*Introduction to A\**](https://www.redblo
 
 > **Reference video:** [The Coding Train — Maze Generator series (Coding Challenge #10)](https://www.youtube.com/playlist?list=PL3Esa3e6Kj9qcBFxrsP5DK8E_1dO5t_m1) — Daniel Shiffman builds a recursive-backtracker maze generator step by step; matches this lab's Basic and Standard milestones.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *run live*. Aim to ship a browser build that animates both generation and solving, deployed to GitHub Pages / Vercel, with a GIF at the top of the README. Watching the maze carve itself and then get solved is a 5-second sell.
+
 **Basic — "It Solves"**
 A 21×21 grid of black walls and white corridors, with a green `S` (start) and a red `F` (finish). The maze is hand-coded or generated. You press a key; the program runs BFS or DFS; cells visited during the search turn light blue; the final path from start to finish turns yellow. You can run it again with `R`.
 
@@ -129,7 +131,7 @@ The 2-week scope above ships a real, defendable maze tool. If algorithms or visu
 - **Ship to the web.** A TypeScript + canvas port deployed to GitHub Pages. Algorithm visualizers shine on the web.
 - **Build a teaching site.** Multiple generators (Recursive Backtracker, Prim, Wilson, Kruskal) and multiple solvers (BFS, DFS, A\*), each with a narrative explaining why they work and what their visual signature means. Distill.pub / Bret Victor energy.
 - **Combine with [Lab 26](lab-26-procedural-roguelike.md) (procedural roguelike).** Use your generator algorithms for dungeon levels in your roguelike. Plug-and-play.
-- **Combine with [Lab 7](lab-07-graph-route-finder.md) (graph algorithms).** A unified algorithm-visualization library — same engine, mazes and arbitrary graphs.
+- **Combine with [Lab 07](lab-07-graph-route-finder.md) (graph algorithms).** A unified algorithm-visualization library — same engine, mazes and arbitrary graphs.
 - **A real-world maze.** Take a hand-drawn paper maze, scan it, threshold it, run your solver. *Surprisingly* impressive demo.
 - **Open source as an npm package** other students drop into their projects.
 

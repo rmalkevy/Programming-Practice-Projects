@@ -14,7 +14,7 @@ In 1996 a small online game called **QuakeWorld** invented one of the most impor
 
 In this lab, you'll build a **multiplayer browser game**. Real people. Different computers. Same world. Two friends sit on opposite sides of campus, open the same URL, and see each other's characters move in real time. They can shoot, race, chase, draw, or just bump into each other — *but they share a world.*
 
-This is the lab that combines almost everything: networking ([Lab 23](lab-23-realtime-multiplayer.md)), real-time UI, game loops ([Lab 9](lab-09-console-paddle-game.md) / 25), state management, debugging the hardest class of bug there is (race conditions across machines), and *the social magic*. The games you'll be most proud of in your career will probably be multiplayer.
+This is the lab that combines almost everything: networking ([Lab 23](lab-23-realtime-multiplayer.md)), real-time UI, game loops ([Lab 09](lab-09-console-paddle-game.md) / [25](lab-25-platformer-game.md)), state management, debugging the hardest class of bug there is (race conditions across machines), and *the social magic*. The games you'll be most proud of in your career will probably be multiplayer.
 
 If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multiplayer*** series](https://www.gabrielgambetta.com/client-server-game-architecture.html) — five short articles, the canonical reference, free. Pair it with [**Glenn Fiedler's *Networking for Game Programmers***](https://gafferongames.com/) — and watch [**The Cherno's *Multiplayer Game Programming***](https://www.youtube.com/watch?v=Q5DVqjVSf-0) introduction.
 
@@ -32,6 +32,8 @@ If you want a perfect appetizer, read [**Gabriel Gambetta's *Fast-Paced Multipla
 ## The target
 
 > **Reference build:** [Coding Challenge #32.1: Agar.io — Part 1 (Basic Game Mechanics) — The Coding Train](https://www.youtube.com/watch?v=JXuxYMGe4KI) — multi-part .io-game build with WebSockets and a real multiplayer server. The Standard target lives here.
+
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *join and play, live*. Deploy the server and client to a public URL, and put a GIF at the top showing **two players in two windows** moving together. A multiplayer game a stranger can jump into is one of the strongest pieces you can show.
 
 **Basic — "Two People Move Together"**
 Two browser tabs (on the same machine or different machines) connect to your game's URL. Each shows a character at a position. **Moving in one tab visibly moves the character in the other tab within a second.** A simple "world" — top-down or side-view. No combat necessary. Players see each other.

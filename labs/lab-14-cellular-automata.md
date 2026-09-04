@@ -32,6 +32,8 @@ If you want a 5-minute appetizer before starting, watch Numberphile's [*Inventin
 
 > **Reference video:** [7.3: The Game of Life — The Coding Train (Nature of Code)](https://www.youtube.com/watch?v=tENSCEO-LEc) — Conway in 16 minutes, with code. Pair with [Coding Challenge #179: Elementary Cellular Automata](https://www.youtube.com/watch?v=Ggxt06qSAe4) for the 1D companion.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *run in the browser*. Aim to ship a web build (draw a pattern, hit play, watch it evolve) to GitHub Pages / Vercel, with a GIF of a glider gun or your own pattern at the top of the README. Watching life emerge from rules is the whole magic - show it moving.
+
 **Basic — "It Generates"**
 A grid (say 50×50) of squares — black for dead, white for alive. You start with a hardcoded pattern. Press a key; the grid advances one generation. Press it again; it advances another. The classic shapes work — a "blinker" oscillates, a "block" stays still, a "glider" moves diagonally across the screen.
 

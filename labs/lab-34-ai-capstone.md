@@ -34,6 +34,8 @@ If you want a perfect appetizer, watch [**Andrej Karpathy's *Software 3.0*** (Se
 
 > **Reference video:** [Cursor Team — Future of Programming with AI — Lex Fridman Podcast #447](https://www.youtube.com/watch?v=oFfVt3S51T4) — a 2.5-hour conversation with the founders of one of the most polished AI products in existence. The bar for what "narrow, polished, AI-native" means in 2026.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *use as a real product*. Deploy it to a public URL with a clear first-run experience (no setup, an example prepared), and link it at the top of the README with a 60-second demo video. "Narrow and polished and live" beats "broad and impressive in a screenshot."
+
 **Basic — "It's a Product, Not a Demo"**
 You've built **one cohesive product** that combines:
 - **at least one AI capability** (LLM call, fine-tuned model, vision pipeline — see "What counts as AI" below), AND

@@ -45,6 +45,8 @@ If you've already done [Lab 10](lab-10-maze-generator-solver.md), this lab is th
 
 > **Reference video:** [A* Pathfinding (E01: algorithm explanation) — Sebastian Lague](https://www.youtube.com/watch?v=-L-WgKMFuhE) — the cleanest A* explanation on YouTube. Pair with Computerphile's [A* (A Star) Search Algorithm](https://www.youtube.com/watch?v=ySN5Wnu88nE) for a tighter intuition primer.
 
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *play with in the browser*. Aim to ship a web build where they draw walls, drop start/end points, and watch the search explore, deployed to GitHub Pages / Vercel, with a GIF of the search animating in the README. Watching A* fan out and find the path sells the algorithm instantly.
+
 **Basic — "It Finds a Path"**
 A graph displayed on screen — circles for nodes, lines for edges, labels for names. The user picks a start and a target (by clicking, by keyboard, or by typing the names). The program runs BFS and shows the resulting path highlighted in yellow. Visited nodes are colored light blue. If no path exists, you get a clean "no path" message.
 
@@ -153,7 +155,7 @@ The 2-week scope above ships a real, defendable route finder. If algorithms or v
 - **Build a "race" interactive.** Side-by-side BFS / Dijkstra / A\* on the same map, animated. Distill.pub / Bret Victor energy.
 - **A real OSM-based route finder** for your home city. Load OpenStreetMap, find car / cycling / walking routes. Compare to Google Maps. Document the differences.
 - **Combine with [Lab 26](lab-26-procedural-roguelike.md) (procedural roguelike).** Use A\* for enemy pathfinding in your roguelike. Document the AI quality difference vs. random walks.
-- **Combine with [Lab 6](lab-06-digital-tree-visualizer.md) (tree visualizer).** A unified algorithm-visualization library/site.
+- **Combine with [Lab 06](lab-06-digital-tree-visualizer.md) (tree visualizer).** A unified algorithm-visualization library/site.
 - **Open source as an npm package** other students can drop into their own projects. *Wildly* impressive.
 
 ---

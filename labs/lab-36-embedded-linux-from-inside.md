@@ -36,6 +36,8 @@ If you want a perfect appetizer, watch [**Bootlin's *Embedded Linux 101*** (free
 
 > **Reference build:** [Buildroot Tutorial — Linux Kernel on QEMU Virtual board](https://www.youtube.com/watch?v=oy5PtFhVk5E) — boot a custom Linux from scratch, in a VM, with running user-space; the Basic target of this lab made concrete. For the deeper systems-engineering culture, browse [Bootlin's training pages](https://bootlin.com/training/).
 
+> **Portfolio tip:** this project is sold by the boot. Put an **asciinema recording (or video)** at the top of the README of your custom image booting from power-on into your own userspace, plus the size and config of what you built. A recruiter watching a Linux you assembled boot into a shell trusts you did the deep work.
+
 **Basic — "It Boots Into Your Code"**
 A **custom Linux image** built with Buildroot for a Raspberry Pi (3, 4, or 5). The Pi boots from your image to a login prompt in under 30 seconds. Your application — written in C / C++ / Python / Rust — auto-starts at boot via an init service. The image is reproducible: anyone can `git clone` your repo and `make` to get the same SD-card image.
 

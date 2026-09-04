@@ -129,6 +129,18 @@ The program is opinionated. The five most important opinions:
 
 ---
 
+## Using AI assistants
+
+AI coding assistants (Copilot, Cursor, ChatGPT, Claude, and friends) are **allowed** — this is how the industry actually works in 2026, and pretending otherwise would be dishonest. The bar is the same for every lab, whatever tools you used to get there:
+
+- **You must be able to explain and modify any line of your project, live, during the Reflection.** If you can't, it isn't yours yet — keep working until it is.
+- **Use AI to learn faster, not to skip the learning.** Ask it to explain a concept, review your code, or unstick a bug — don't accept a black box you can't defend.
+- **The interview test.** A recruiter *will* ask "why did you build it this way?" and "change this to do X." A portfolio piece is only worth something if you can answer both, on the spot, without the assistant.
+
+This is exactly what the **Reflection** section in every lab checks: it proves the work is yours, regardless of which tools helped you build it.
+
+---
+
 ## License & contribution
 
 The labs are licensed permissively (see `LICENSE` once added — recommendation: CC-BY-4.0 for the prose, MIT for any included code samples). Contributions from students who finish labs and notice outdated tooling, broken links, or unclear sentences are welcomed and credited — *that PR is part of your portfolio.*

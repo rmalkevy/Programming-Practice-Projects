@@ -28,7 +28,7 @@ The first time your sphere actually appears on a black background, you will paus
 - Out of all 1st-year topics, this is one of the few where **math becomes literally visible**. Vectors, dot products, normals — they stop being abstract the moment they paint a pixel.
 - A working ray tracer is a **permanent portfolio piece**. Far more memorable in an interview than a CRUD app. People love seeing pictures.
 
-If you want a 9-minute appetizer before starting, search YouTube for *"How Ray Tracing Works in 9 minutes"* or read the first chapter of [*Ray Tracing in One Weekend* by Peter Shirley](https://raytracing.github.io/) — it's free, world-famous, and a perfect companion to this lab.
+If you want an appetizer before starting, watch the *Reference build* video linked below (Sebastian Lague's [Coding Adventure: Ray Tracing](https://www.youtube.com/watch?v=Qz0KTGYJtUk)) or read the first chapter of [*Ray Tracing in One Weekend* by Peter Shirley](https://raytracing.github.io/) — it's free, world-famous, and a perfect companion to this lab.
 
 ---
 
@@ -37,6 +37,8 @@ If you want a 9-minute appetizer before starting, search YouTube for *"How Ray T
 Here is what "done" looks like at each level. Every level is a complete, defendable project — you decide where you stop.
 
 > **Reference build:** [Coding Adventure: Ray Tracing — Sebastian Lague](https://www.youtube.com/watch?v=Qz0KTGYJtUk) — gold-standard look-and-feel target for the Standard / Advanced acceptance criteria of this lab.
+
+> **Portfolio tip:** the strongest version of this project is one a recruiter can *see rendering, live*. Aim to finish with the web playground (edit a scene JSON in-browser, compile the tracer to WASM) **deployed** to GitHub Pages / Vercel, so your README links to a live URL instead of a single static image. If you stay native, at least put your best high-res render at the very top of the README — for graphics, the image *is* the pitch.
 
 **Basic — "First Light"**
 A single matte-colored sphere, lit from one direction, on a solid colored background. The lit side of the sphere is brighter; the back side fades into shadow. You save it as a PNG or PPM file. It's small — maybe 400×300 pixels — and it took your computer a couple of seconds to render. You made that. From nothing. From math.
