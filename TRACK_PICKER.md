@@ -74,6 +74,7 @@ Each track is a 4–6-lab path. They all end in [Lab 42](labs/lab-42-life-the-un
 
 *Add [41 Orbital Mechanics](labs/lab-41-mostly-harmless-orbital-mechanics.md) for satellite-flavored extension.*
 *Add [33 Object Detection](labs/lab-33-object-detection-tracking.md) for vision-guidance extension.*
+*Add [09 Signal Processing](labs/lab-09-signal-processing.md) for acoustic drone detection.*
 
 **Why this track in Ukraine:** Firefly Aerospace, Promin Aerospace, Skyrora, Yuzhmash heritage, dual-use defense industry — the most direct hire path that exists right now.
 
@@ -117,10 +118,10 @@ Each track is a 4–6-lab path. They all end in [Lab 42](labs/lab-42-life-the-un
 
 ### Track D — Game Developer
 
-[**09**](labs/lab-09-console-paddle-game.md) → [**10**](labs/lab-10-maze-generator-solver.md) → [**25**](labs/lab-25-platformer-game.md) → [**26**](labs/lab-26-procedural-roguelike.md) → [**27**](labs/lab-27-multiplayer-browser-game.md) → [**28**](labs/lab-28-game-jam.md) → [**42**](labs/lab-42-life-the-universe-and-everything.md)
+[**10**](labs/lab-10-maze-generator-solver.md) → [**13**](labs/lab-13-physics-sandbox.md) → [**25**](labs/lab-25-platformer-game.md) → [**26**](labs/lab-26-procedural-roguelike.md) → [**27**](labs/lab-27-multiplayer-browser-game.md) → [**28**](labs/lab-28-game-jam.md) → [**42**](labs/lab-42-life-the-universe-and-everything.md)
 
-- [09 Console Paddle Game](labs/lab-09-console-paddle-game.md) — *first game loop*.
 - [10 Maze Generator and Solver](labs/lab-10-maze-generator-solver.md) — *first procedural content*.
+- [13 Physics Sandbox](labs/lab-13-physics-sandbox.md) — *first game loop & simulation*.
 - [25 Platformer Game](labs/lab-25-platformer-game.md) — *first real engine work*.
 - [26 Procedural Roguelike](labs/lab-26-procedural-roguelike.md) — *first deep procgen*.
 - [27 Multiplayer Browser Game](labs/lab-27-multiplayer-browser-game.md) — *first multiplayer*.

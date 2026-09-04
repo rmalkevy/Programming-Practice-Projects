@@ -37,7 +37,7 @@ REPLACEMENTS = {
         "> **Reference video:** [The Mandelbrot Set — Numberphile (with Dr. Holly Krieger)](https://www.youtube.com/watch?v=NGMRB4O922I) — the gentlest, most cited intro to *what* you're rendering. Pair with [The Coding Train — Coding Challenge #21: Mandelbrot Set with p5.js](https://www.youtube.com/watch?v=6z7GQewK-Ks) for a build-along."
     ),
     9: (
-        "> **Reference video:** [Pong with Python & Pygame — Tech With Tim / freeCodeCamp](https://www.youtube.com/watch?v=tS8F7_X2qB0) — comprehensive 1-hour build of the canonical paddle game; matches this lab's Standard target."
+        "> **Reference video:** [But what is the Fourier Transform? A visual introduction — 3Blue1Brown](https://www.youtube.com/watch?v=spUNpyF58BY) — the clearest visual intro to the core operation behind this lab."
     ),
     10: (
         "> **Reference video:** [The Coding Train — Maze Generator series (Coding Challenge #10)](https://www.youtube.com/playlist?list=PL3Esa3e6Kj9qcBFxrsP5DK8E_1dO5t_m1) — Daniel Shiffman builds a recursive-backtracker maze generator step by step; matches this lab's Basic and Standard milestones."
@@ -145,7 +145,7 @@ def main() -> None:
         (6, 'lab-06-digital-tree-visualizer.md'),
         (7, 'lab-07-graph-route-finder.md'),
         (8, 'lab-08-fractal-generator.md'),
-        (9, 'lab-09-console-paddle-game.md'),
+        (9, 'lab-09-signal-processing.md'),
         (10, 'lab-10-maze-generator-solver.md'),
         (11, 'lab-11-mini-file-explorer.md'),
         (12, 'lab-12-task-tracker.md'),

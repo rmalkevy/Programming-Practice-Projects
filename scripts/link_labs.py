@@ -24,7 +24,7 @@ LAB_FILES = {
     6: "lab-06-digital-tree-visualizer.md",
     7: "lab-07-graph-route-finder.md",
     8: "lab-08-fractal-generator.md",
-    9: "lab-09-console-paddle-game.md",
+    9: "lab-09-signal-processing.md",
     10: "lab-10-maze-generator-solver.md",
     11: "lab-11-mini-file-explorer.md",
     12: "lab-12-task-tracker.md",

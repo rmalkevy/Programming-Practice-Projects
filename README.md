@@ -15,7 +15,7 @@ A self-contained, year-long programming program for first-year computer-science 
 - Every lab includes a **Reflection** for defense, a **showcase**-ready writeup, and a *Make-it-yours* personal-twist requirement.
 - The final lab — [**Lab 42 — Life, The Universe, And Everything**](labs/lab-42-life-the-universe-and-everything.md) — is the student's own École-42-spirited capstone.
 
-The program covers: software fundamentals · graphics & math · algorithms · embedded systems · web & full-stack · games · mobile · AI/ML · RTOS & Linux internals · drone autopilots · security (offensive + defensive) · orbital mechanics · and a meta-capstone.
+The program covers: software fundamentals · graphics & math · algorithms · signal processing / DSP · embedded systems · web & full-stack · games · mobile · AI/ML · RTOS & Linux internals · drone autopilots · security (offensive + defensive) · orbital mechanics · and a meta-capstone.
 
 ---
 
@@ -43,7 +43,7 @@ The program covers: software fundamentals · graphics & math · algorithms · em
 | [06](labs/lab-06-digital-tree-visualizer.md) | [Digital Tree Visualizer](labs/lab-06-digital-tree-visualizer.md) | algorithms |
 | [07](labs/lab-07-graph-route-finder.md) | [Graph Route Finder](labs/lab-07-graph-route-finder.md) | algorithms |
 | [08](labs/lab-08-fractal-generator.md) | [Fractal Generator](labs/lab-08-fractal-generator.md) | math / graphics |
-| [09](labs/lab-09-console-paddle-game.md) | [Console Paddle Game](labs/lab-09-console-paddle-game.md) | game |
+| [09](labs/lab-09-signal-processing.md) | [Hear the Drone: Signal Processing](labs/lab-09-signal-processing.md) | signals / DSP |
 | [10](labs/lab-10-maze-generator-solver.md) | [Maze Generator and Solver](labs/lab-10-maze-generator-solver.md) | algorithms / game |
 | [11](labs/lab-11-mini-file-explorer.md) | [Mini File Explorer](labs/lab-11-mini-file-explorer.md) | software |
 | [12](labs/lab-12-task-tracker.md) | [Task Tracker](labs/lab-12-task-tracker.md) | software / fullstack |
