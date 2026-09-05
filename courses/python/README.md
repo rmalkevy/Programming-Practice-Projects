@@ -66,10 +66,10 @@ Every lab file has the same shape, so you always know where you are:
 1. **This lab's feature** — what you'll master and why it matters beyond this project.
 2. **Theory** — a compact, self-contained explanation: the mental model, what's under the hood, the pitfalls, and a few *prove-it-to-yourself* experiments to run in the REPL. This is the reading; it replaces a lecture.
 3. **Project step** — what to add to `findex`, with milestones and a definition of done.
-4. **Resources** — hand-picked English talks, articles, and book chapters, each with one line on *why this one*.
-5. **Deliverable checklist** — what "done" means for this lab.
-6. **Reflection** — "explain it at the whiteboard" questions. These *are* the interview questions.
-7. **Stretch** — one optional deeper cut for when you're ahead.
+4. **Deliverable checklist** — what "done" means for this lab.
+5. **Reflection** — "explain it at the whiteboard" questions. These *are* the interview questions.
+6. **Stretch** — one optional deeper cut for when you're ahead.
+7. **Resources** — hand-picked English talks, articles, and book chapters, each with one line on *why this one*.
 
 ---
 

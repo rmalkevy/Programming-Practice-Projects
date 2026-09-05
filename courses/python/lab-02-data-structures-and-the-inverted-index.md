@@ -162,25 +162,6 @@ Plus one paragraph explaining *where the bytes went* in each row. This table is 
 
 ---
 
-## Resources
-
-**Watch**
-
-- Raymond Hettinger — [Modern Python Dictionaries: A Confluence of a Dozen Great Ideas (PyCon 2017, 45 min)](https://www.youtube.com/watch?v=npw4s1QTmPg). The definitive history and design of the compact ordered dict, told by the person who designed much of it. This is Section 1 in full.
-- Brandon Rhodes — [The Dictionary Even Mightier (PyCon 2017, 45 min)](https://www.youtube.com/watch?v=66P5FMkWoVU). Same subject, complementary angle: hash tables from first principles, collision resolution, and how each feature was motivated by a trade-off. Rhodes is one of the best explainers in the Python world.
-- Raymond Hettinger — [Dataclasses: The Code Generator to End All Code Generators (PyCon 2018, 50 min)](https://www.youtube.com/watch?v=T-TwcmT6Rcw). What dataclasses generate, why, and how they compare to namedtuples and attrs. Section 4.
-
-**Read**
-
-- Python docs — [Time Complexity of built-in operations](https://wiki.python.org/moin/TimeComplexity). One page; memorize the table.
-- Python docs — [`collections`](https://docs.python.org/3/library/collections.html), [`dataclasses`](https://docs.python.org/3/library/dataclasses.html), [`array`](https://docs.python.org/3/library/array.html), [`pickle`](https://docs.python.org/3/library/pickle.html) (read the security warning). The reference docs are excellent here.
-- Real Python — [Data Classes in Python](https://realpython.com/python-data-classes/). Thorough walkthrough of every option, including `slots` and `frozen` with memory measurements.
-- Python docs — [Sorting HOWTO](https://docs.python.org/3/howto/sorting.html). `key=`, stability, `operator.itemgetter`/`attrgetter` — you'll sort postings and results constantly.
-- Manning, Raghavan & Schütze — [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Chapter 1 ("Boolean retrieval") and Chapter 4 ("Index construction"). The free Stanford textbook this whole project is implicitly following. Chapter 1 is the inverted index and the merge algorithm; twenty pages.
-- *Fluent Python*, 2nd ed. — Chapter 3 ("Dictionaries and Sets") and Chapter 5 ("Data Class Builders").
-
----
-
 ## Deliverable checklist
 
 - [ ] `Posting` / `DocMeta` are `@dataclass(frozen=True, slots=True)`; you can put them in a set.
@@ -210,3 +191,22 @@ Plus one paragraph explaining *where the bytes went* in each row. This table is 
 ## Stretch
 
 Build the **binary, `mmap`-able index format**: one file with a JSON header (term → byte offset, count) and the postings as contiguous `array('I')` buffers. Load via `mmap` so that searching touches only the postings you need and *load time is constant regardless of index size*. Measure load time vs. pickle at 10×, 100× corpus size. Then implement **gap encoding** (store `doc_id` deltas instead of absolute ids) and note how much smaller the file gets — you've just reinvented the first step of real index compression.
+
+---
+
+## Resources
+
+**Watch**
+
+- Raymond Hettinger — [Modern Python Dictionaries: A Confluence of a Dozen Great Ideas (PyCon 2017, 45 min)](https://www.youtube.com/watch?v=npw4s1QTmPg). The definitive history and design of the compact ordered dict, told by the person who designed much of it. This is Section 1 in full.
+- Brandon Rhodes — [The Dictionary Even Mightier (PyCon 2017, 45 min)](https://www.youtube.com/watch?v=66P5FMkWoVU). Same subject, complementary angle: hash tables from first principles, collision resolution, and how each feature was motivated by a trade-off. Rhodes is one of the best explainers in the Python world.
+- Raymond Hettinger — [Dataclasses: The Code Generator to End All Code Generators (PyCon 2018, 50 min)](https://www.youtube.com/watch?v=T-TwcmT6Rcw). What dataclasses generate, why, and how they compare to namedtuples and attrs. Section 4.
+
+**Read**
+
+- Python docs — [Time Complexity of built-in operations](https://wiki.python.org/moin/TimeComplexity). One page; memorize the table.
+- Python docs — [`collections`](https://docs.python.org/3/library/collections.html), [`dataclasses`](https://docs.python.org/3/library/dataclasses.html), [`array`](https://docs.python.org/3/library/array.html), [`pickle`](https://docs.python.org/3/library/pickle.html) (read the security warning). The reference docs are excellent here.
+- Real Python — [Data Classes in Python](https://realpython.com/python-data-classes/). Thorough walkthrough of every option, including `slots` and `frozen` with memory measurements.
+- Python docs — [Sorting HOWTO](https://docs.python.org/3/howto/sorting.html). `key=`, stability, `operator.itemgetter`/`attrgetter` — you'll sort postings and results constantly.
+- Manning, Raghavan & Schütze — [*Introduction to Information Retrieval*](https://nlp.stanford.edu/IR-book/), Chapter 1 ("Boolean retrieval") and Chapter 4 ("Index construction"). The free Stanford textbook this whole project is implicitly following. Chapter 1 is the inverted index and the merge algorithm; twenty pages.
+- *Fluent Python*, 2nd ed. — Chapter 3 ("Dictionaries and Sets") and Chapter 5 ("Data Class Builders").

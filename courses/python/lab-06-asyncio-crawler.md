@@ -131,26 +131,6 @@ Then the README section: why concurrency 20 in one thread beat Lab 5's approach 
 
 ---
 
-## Resources
-
-**Watch**
-
-- Łukasz Langa — [*import asyncio: Learn Python's AsyncIO* (YouTube series, ~6 × 30–60 min)](https://www.youtube.com/playlist?list=PLhNSoGM2ik6SIkVGXWBwerucXjgP1rHmB). The CPython release manager teaching asyncio from the event loop up — including building a loop by hand. The most careful asyncio material anywhere. Episodes 1–4 are this lab.
-- David Beazley — [Python Concurrency From the Ground Up: LIVE! (PyCon 2015)](https://www.youtube.com/watch?v=MCs5OvhV9S4). You watched it in Lab 5; watch it again now that you've written `await`. The moment he swaps `yield` for the event loop is the moment asyncio stops being magic.
-- Miguel Grinberg — [Asynchronous Python for the Complete Beginner (PyCon 2017, 30 min)](https://www.youtube.com/watch?v=iG6fr81xHKA). The gentlest correct explanation of what async buys you and when it doesn't. Watch first if Section 1 felt abstract.
-- David Beazley — [Generators: The Final Frontier (PyCon 2014, 3h50)](https://www.youtube.com/watch?v=D1twn9kLmYg). The deep end: how coroutines were built out of generators, `yield from`, and the design space asyncio came from. Optional; for the curious.
-
-**Read**
-
-- Real Python — [Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/). Long, correct, with a chain-of-requests example close to a crawler. The single best written intro.
-- Python docs — [`asyncio` — Coroutines and Tasks](https://docs.python.org/3/library/asyncio-task.html) (read all of it: `TaskGroup`, timeouts, cancellation, `to_thread`) and [Synchronization Primitives](https://docs.python.org/3/library/asyncio-sync.html).
-- Nathaniel J. Smith — [Notes on structured concurrency, or: Go statement considered harmful](https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/). The essay that led to `TaskGroup`. Long, foundational, worth every minute.
-- [httpx — Async Support](https://www.python-httpx.org/async/). The client you'll use; read about connection pooling, timeouts, and `MockTransport` for tests.
-- Google Search Central — [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and Python's [`urllib.robotparser`](https://docs.python.org/3/library/urllib.robotparser.html).
-- *Fluent Python*, 2nd ed. — Chapter 21 ("Asynchronous Programming"). Includes an async crawler-flavored example.
-
----
-
 ## Deliverable checklist
 
 - [ ] `fetch` with `asyncio.timeout`, bounded retries with exponential backoff + jitter, `Retry-After`, status logging; `MockTransport` tests.
@@ -181,3 +161,23 @@ Then the README section: why concurrency 20 in one thread beat Lab 5's approach 
 ## Stretch
 
 Make the crawler **resumable**: persist the frontier and `seen` set to disk (SQLite via `aiosqlite`) so `Ctrl-C` and re-run continues where it stopped. Then add **incremental indexing**: pages already indexed are skipped unless their `ETag`/`Last-Modified` changed (conditional requests with `If-None-Match`). Finally, compare `asyncio` against `trio` (the library structured concurrency came from) or `anyio` by porting `crawl()` — notice what's the same, and what `trio` makes impossible to get wrong.
+
+---
+
+## Resources
+
+**Watch**
+
+- Łukasz Langa — [*import asyncio: Learn Python's AsyncIO* (YouTube series, ~6 × 30–60 min)](https://www.youtube.com/playlist?list=PLhNSoGM2ik6SIkVGXWBwerucXjgP1rHmB). The CPython release manager teaching asyncio from the event loop up — including building a loop by hand. The most careful asyncio material anywhere. Episodes 1–4 are this lab.
+- David Beazley — [Python Concurrency From the Ground Up: LIVE! (PyCon 2015)](https://www.youtube.com/watch?v=MCs5OvhV9S4). You watched it in Lab 5; watch it again now that you've written `await`. The moment he swaps `yield` for the event loop is the moment asyncio stops being magic.
+- Miguel Grinberg — [Asynchronous Python for the Complete Beginner (PyCon 2017, 30 min)](https://www.youtube.com/watch?v=iG6fr81xHKA). The gentlest correct explanation of what async buys you and when it doesn't. Watch first if Section 1 felt abstract.
+- David Beazley — [Generators: The Final Frontier (PyCon 2014, 3h50)](https://www.youtube.com/watch?v=D1twn9kLmYg). The deep end: how coroutines were built out of generators, `yield from`, and the design space asyncio came from. Optional; for the curious.
+
+**Read**
+
+- Real Python — [Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/). Long, correct, with a chain-of-requests example close to a crawler. The single best written intro.
+- Python docs — [`asyncio` — Coroutines and Tasks](https://docs.python.org/3/library/asyncio-task.html) (read all of it: `TaskGroup`, timeouts, cancellation, `to_thread`) and [Synchronization Primitives](https://docs.python.org/3/library/asyncio-sync.html).
+- Nathaniel J. Smith — [Notes on structured concurrency, or: Go statement considered harmful](https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/). The essay that led to `TaskGroup`. Long, foundational, worth every minute.
+- [httpx — Async Support](https://www.python-httpx.org/async/). The client you'll use; read about connection pooling, timeouts, and `MockTransport` for tests.
+- Google Search Central — [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and Python's [`urllib.robotparser`](https://docs.python.org/3/library/urllib.robotparser.html).
+- *Fluent Python*, 2nd ed. — Chapter 21 ("Asynchronous Programming"). Includes an async crawler-flavored example.

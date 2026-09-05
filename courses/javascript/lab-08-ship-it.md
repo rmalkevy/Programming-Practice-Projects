@@ -101,27 +101,6 @@ Get **two people you don't share a network with** to play a match at the same ti
 
 ---
 
-## Resources
-
-**Watch**
-
-- Fireship — [Learn Docker in 7 Easy Steps (12 min)](https://www.youtube.com/watch?v=gAkwW2tuIqE). Dockerfile, layers, multi-stage, compose — fast and accurate; enough to start M3.
-- Hussein Nasser — [WebSockets Crash Course](https://www.youtube.com/watch?v=2Nt-ZrNP22A) — rewatch the "scaling and proxies" portion now that it's your problem.
-
-**Read**
-
-- Node.js Docker team — [Docker and Node.js Best Practices](https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md) — signals, `CMD` exec form, non-root, memory, and the `node` vs `npm start` question. Short and authoritative.
-- Snyk — [10 best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/). Multi-stage builds, `.dockerignore`, deterministic installs, `dumb-init`, scanning. The checklist for M3.
-- Node.js API — [`process` signal events](https://nodejs.org/api/process.html#signal-events) for graceful shutdown; [`ws` README](https://github.com/websockets/ws) for `verifyClient`, `maxPayload`, and heartbeats.
-- OWASP — [HTML5 Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html) — the "Web Sockets" section: origin, TLS, input validation, rate limiting.
-- [The Twelve-Factor App](https://12factor.net/) — config, logs as streams, disposability (graceful shutdown). Read all twelve; they're short.
-- [pino](https://getpino.io) — structured logging; why it's fast. [`prom-client`](https://github.com/siimon/prom-client) for `/metrics`.
-- [Fly.io — JavaScript on Fly](https://fly.io/docs/js/) and [Render — Deploy a Node app](https://render.com/docs/deploy-node-express-app). Pick one; check the WebSocket notes.
-- MDN — [Progressive web apps](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) (manifest, installability). [itch.io — HTML5 games](https://itch.io/docs/creators/html5) for the optional games-audience release.
-- GitHub — [Building and testing Node.js](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs) — extend for the tag-triggered deploy job.
-
----
-
 ## Deliverable checklist
 
 - [ ] `SIGTERM` → `server.close()` → `shutdown` message + `1001` → flush → exit 0 in < 10 s; tested with `docker stop`.
@@ -156,3 +135,24 @@ Get **two people you don't share a network with** to play a match at the same ti
 ## Stretch
 
 Run **two server instances** behind a proxy with **sticky routing by room id** (Caddy or nginx `hash` upstream; or Fly's regions), and prove players in the same room land on the same instance while different rooms spread across both; then replace stickiness with **Redis pub/sub** relaying room events so a room can span instances, and measure the added latency. Add **Sentry** (or equivalent) error tracking and trigger a deliberate exception from a bot to see the full stack in the dashboard. Finally, produce a **one-page postmortem** of the worst production issue you hit during the lab — timeline, root cause, fix, prevention — in the format real engineering teams use; recruiters love this document more than any feature.
+
+---
+
+## Resources
+
+**Watch**
+
+- Fireship — [Learn Docker in 7 Easy Steps (12 min)](https://www.youtube.com/watch?v=gAkwW2tuIqE). Dockerfile, layers, multi-stage, compose — fast and accurate; enough to start M3.
+- Hussein Nasser — [WebSockets Crash Course](https://www.youtube.com/watch?v=2Nt-ZrNP22A) — rewatch the "scaling and proxies" portion now that it's your problem.
+
+**Read**
+
+- Node.js Docker team — [Docker and Node.js Best Practices](https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md) — signals, `CMD` exec form, non-root, memory, and the `node` vs `npm start` question. Short and authoritative.
+- Snyk — [10 best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/). Multi-stage builds, `.dockerignore`, deterministic installs, `dumb-init`, scanning. The checklist for M3.
+- Node.js API — [`process` signal events](https://nodejs.org/api/process.html#signal-events) for graceful shutdown; [`ws` README](https://github.com/websockets/ws) for `verifyClient`, `maxPayload`, and heartbeats.
+- OWASP — [HTML5 Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html) — the "Web Sockets" section: origin, TLS, input validation, rate limiting.
+- [The Twelve-Factor App](https://12factor.net/) — config, logs as streams, disposability (graceful shutdown). Read all twelve; they're short.
+- [pino](https://getpino.io) — structured logging; why it's fast. [`prom-client`](https://github.com/siimon/prom-client) for `/metrics`.
+- [Fly.io — JavaScript on Fly](https://fly.io/docs/js/) and [Render — Deploy a Node app](https://render.com/docs/deploy-node-express-app). Pick one; check the WebSocket notes.
+- MDN — [Progressive web apps](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) (manifest, installability). [itch.io — HTML5 games](https://itch.io/docs/creators/html5) for the optional games-audience release.
+- GitHub — [Building and testing Node.js](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs) — extend for the tag-triggered deploy job.

@@ -123,23 +123,6 @@ Plus a **netcode write-up** (one page): the three problems (latency, consistency
 
 ---
 
-## Resources
-
-**Watch**
-
-- Timothy Ford / Blizzard — [Overwatch Gameplay Architecture and Netcode (GDC 2017, 60 min)](https://www.youtube.com/watch?v=W3aieHjyNvw). ECS architecture in the first half; prediction, reconciliation, and how it feels to the player in the second. The best netcode talk on the internet; watch the networking half before M2 and the whole thing when you're done.
-
-**Read**
-
-- Gabriel Gambetta — [Fast-Paced Multiplayer](https://www.gabrielgambetta.com/client-server-game-architecture.html) — all four parts plus the **live demo** on the last page, which lets you toggle prediction, reconciliation, and interpolation with latency sliders. This is the lab's spine; read it twice.
-- Glenn Fiedler — [What Every Programmer Needs to Know About Game Networking](https://gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/) (history and the authoritative model) and [Snapshot Interpolation](https://gafferongames.com/post/snapshot_interpolation/) (the details of buffering and interpolating, with numbers).
-- Valve — [Source Multiplayer Networking](https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking). How Counter-Strike does it: tick rates, interpolation delay, lag compensation — a production system described plainly.
-- Paul Bettner & Mark Terrano — [1500 Archers on a 28.8: Network Programming in Age of Empires and Beyond](https://www.gamedeveloper.com/programming/1500-archers-on-a-28-8-network-programming-in-age-of-empires-and-beyond). The *other* architecture — deterministic lockstep — and why it wasn't chosen here. Know the alternative.
-- MDN — [JavaScript typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays) and [`DataView`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView).
-- npm — [Workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces) for the `shared/` package setup.
-
----
-
 ## Deliverable checklist
 
 - [ ] `shared/` workspace: sim, seeded PRNG, protocol, codec; imports cleanly in Node and browser; determinism test (same inputs → same hash on both).
@@ -171,3 +154,20 @@ Plus a **netcode write-up** (one page): the three problems (latency, consistency
 ## Stretch
 
 Implement **delta compression**: the server tracks the last snapshot each client acknowledged and sends only changed fields (a bitmask per entity), falling back to a full snapshot when the ack is too old — and measure the new bytes/s row. Then **lag compensation** for bullets: the server keeps a ring buffer of recent world states and evaluates each shot against the state the shooter *saw* (their reported interpolation time), per Valve's article. Finally, put the latency injector under **automated test**: a Node script spawning 4 headless clients that fly scripted paths for 60 s at 150 ms/5% drop and asserts the mean reconciliation correction stays under a threshold — your first netcode regression test, ready for Lab 7's CI.
+
+---
+
+## Resources
+
+**Watch**
+
+- Timothy Ford / Blizzard — [Overwatch Gameplay Architecture and Netcode (GDC 2017, 60 min)](https://www.youtube.com/watch?v=W3aieHjyNvw). ECS architecture in the first half; prediction, reconciliation, and how it feels to the player in the second. The best netcode talk on the internet; watch the networking half before M2 and the whole thing when you're done.
+
+**Read**
+
+- Gabriel Gambetta — [Fast-Paced Multiplayer](https://www.gabrielgambetta.com/client-server-game-architecture.html) — all four parts plus the **live demo** on the last page, which lets you toggle prediction, reconciliation, and interpolation with latency sliders. This is the lab's spine; read it twice.
+- Glenn Fiedler — [What Every Programmer Needs to Know About Game Networking](https://gafferongames.com/post/what_every_programmer_needs_to_know_about_game_networking/) (history and the authoritative model) and [Snapshot Interpolation](https://gafferongames.com/post/snapshot_interpolation/) (the details of buffering and interpolating, with numbers).
+- Valve — [Source Multiplayer Networking](https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking). How Counter-Strike does it: tick rates, interpolation delay, lag compensation — a production system described plainly.
+- Paul Bettner & Mark Terrano — [1500 Archers on a 28.8: Network Programming in Age of Empires and Beyond](https://www.gamedeveloper.com/programming/1500-archers-on-a-28-8-network-programming-in-age-of-empires-and-beyond). The *other* architecture — deterministic lockstep — and why it wasn't chosen here. Know the alternative.
+- MDN — [JavaScript typed arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays) and [`DataView`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView).
+- npm — [Workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces) for the `shared/` package setup.

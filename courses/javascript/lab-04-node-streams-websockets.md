@@ -133,25 +133,6 @@ Per-connection **rate limit** on messages (token bucket: N per second, then clos
 
 ---
 
-## Resources
-
-**Watch**
-
-- Bert Belder — [Everything You Need to Know About Node.js Event Loop (Node Interactive 2016, 25 min)](https://www.youtube.com/watch?v=PNa9OMajw9w). By a libuv maintainer: the phases, the diagram everyone copies, and the corrections to the myths. Section 1.
-- Hussein Nasser — [WebSockets Crash Course: Handshake, Use-cases, Pros & Cons (20 min)](https://www.youtube.com/watch?v=2Nt-ZrNP22A). The upgrade handshake, framing, and when WebSockets are the wrong tool. Section 6.
-- Fireship — [Node.js Ultimate Beginner's Guide in 7 Easy Steps (16 min)](https://www.youtube.com/watch?v=ENrzD9HAZK4). A fast, accurate orientation to the runtime, modules, npm, and events if Node is new to you. Watch first, then the two above.
-
-**Read**
-
-- Node.js — [Differences between Node.js and the browser](https://nodejs.org/en/learn/getting-started/differences-between-nodejs-and-the-browser) and [The Node.js event loop, timers, and `process.nextTick()`](https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick). The official guides; short and precise.
-- Node.js — [Backpressuring in streams](https://nodejs.org/en/learn/modules/backpressuring-in-streams). The best single explanation of why streams exist. Read before M3.
-- Node.js API — [`stream`](https://nodejs.org/api/stream.html) ("API for stream consumers" and "Implementing a transform stream"), [`events`](https://nodejs.org/api/events.html), [`process` signal events](https://nodejs.org/api/process.html#signal-events) for graceful shutdown.
-- [`ws` — README and docs](https://github.com/websockets/ws). Server API, `maxPayload`, ping/pong, `bufferedAmount`. And MDN's [WebSockets API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for the client.
-- [RFC 6455 — The WebSocket Protocol](https://datatracker.ietf.org/doc/html/rfc6455). Read §1 (Introduction) and §5 (Data Framing). You'll understand what `ws` is hiding — and you'll need it for Lab 5's binary frames.
-- npm — [`package.json` reference](https://docs.npmjs.com/cli/v10/configuring-npm/package-json) and [workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces).
-
----
-
 ## Deliverable checklist
 
 - [ ] npm workspaces: `client/`, `server/`; `"type": "module"`; `node:`-prefixed built-ins.
@@ -184,3 +165,22 @@ Per-connection **rate limit** on messages (token bucket: N per second, then clos
 ## Stretch
 
 Replace the JSON match log with a **gzip-compressed** one (`zlib.createGzip()` in the pipeline) and measure size and CPU; then build a **live spectator** endpoint that streams a room's events *as they happen* (`Readable.from(events.on(room, "event"))` piped to the response, with SSE framing) — a second consumer of the same stream, which is the real test of your event design. Finally, port `index.js` to **Fastify** and note precisely what it added and what it hid.
+
+---
+
+## Resources
+
+**Watch**
+
+- Bert Belder — [Everything You Need to Know About Node.js Event Loop (Node Interactive 2016, 25 min)](https://www.youtube.com/watch?v=PNa9OMajw9w). By a libuv maintainer: the phases, the diagram everyone copies, and the corrections to the myths. Section 1.
+- Hussein Nasser — [WebSockets Crash Course: Handshake, Use-cases, Pros & Cons (20 min)](https://www.youtube.com/watch?v=2Nt-ZrNP22A). The upgrade handshake, framing, and when WebSockets are the wrong tool. Section 6.
+- Fireship — [Node.js Ultimate Beginner's Guide in 7 Easy Steps (16 min)](https://www.youtube.com/watch?v=ENrzD9HAZK4). A fast, accurate orientation to the runtime, modules, npm, and events if Node is new to you. Watch first, then the two above.
+
+**Read**
+
+- Node.js — [Differences between Node.js and the browser](https://nodejs.org/en/learn/getting-started/differences-between-nodejs-and-the-browser) and [The Node.js event loop, timers, and `process.nextTick()`](https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick). The official guides; short and precise.
+- Node.js — [Backpressuring in streams](https://nodejs.org/en/learn/modules/backpressuring-in-streams). The best single explanation of why streams exist. Read before M3.
+- Node.js API — [`stream`](https://nodejs.org/api/stream.html) ("API for stream consumers" and "Implementing a transform stream"), [`events`](https://nodejs.org/api/events.html), [`process` signal events](https://nodejs.org/api/process.html#signal-events) for graceful shutdown.
+- [`ws` — README and docs](https://github.com/websockets/ws). Server API, `maxPayload`, ping/pong, `bufferedAmount`. And MDN's [WebSockets API](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for the client.
+- [RFC 6455 — The WebSocket Protocol](https://datatracker.ietf.org/doc/html/rfc6455). Read §1 (Introduction) and §5 (Data Framing). You'll understand what `ws` is hiding — and you'll need it for Lab 5's binary frames.
+- npm — [`package.json` reference](https://docs.npmjs.com/cli/v10/configuring-npm/package-json) and [workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces).

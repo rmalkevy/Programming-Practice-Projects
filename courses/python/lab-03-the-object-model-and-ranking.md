@@ -195,27 +195,6 @@ Write the parser tests as *trees*, not strings: `parse('a OR b c') == Or(Term('a
 
 ---
 
-## Resources
-
-**Watch**
-
-- Raymond Hettinger — [Python's Class Development Toolkit (PyCon 2013, 45 min)](https://www.youtube.com/watch?v=HTLu2DFOdTg). Live-builds a class the Pythonic way: `__init__`, `__repr__`, properties, class methods, `__slots__`, and when each is warranted. The best 45 minutes on writing classes in Python.
-- Raymond Hettinger — [Beyond PEP 8: Best Practices for Beautiful Intelligible Code (PyCon 2015, 50 min)](https://www.youtube.com/watch?v=wf-BqAjZb8M). Takes Java-flavored Python and transforms it using the data model — dunder methods, properties, context managers, named tuples. Watch this before refactoring `Index`.
-- James Powell — [So You Want to Be a Python Expert? (PyData 2017)](https://www.youtube.com/watch?v=cKPlPJyQrt4) — the data model, decorators, and context managers segments (you watched the generators part in Lab 1). Live-coded from the ground up.
-- Corey Schafer — [Decorators: Dynamically Alter the Functionality of Your Functions (30 min)](https://www.youtube.com/watch?v=FsAPt_9Bf3U). Closures → decorators → decorators with arguments → `wraps`, step by step, with a logging/timing example that is your `@timed`.
-
-**Read**
-
-- Python docs — [Data Model reference, §3.3 "Special method names"](https://docs.python.org/3/reference/datamodel.html). The authoritative list of every dunder and exactly when it's called. Skim it once; return to it forever.
-- Real Python — [Primer on Python Decorators](https://realpython.com/primer-on-python-decorators/). Long, thorough, and covers every pattern including class decorators and stateful decorators.
-- Python docs — [Descriptor HOWTO](https://docs.python.org/3/howto/descriptor.html) by Raymond Hettinger. How `property`, methods, `classmethod` and `staticmethod` actually work. Read the first half.
-- Python docs — [`functools`](https://docs.python.org/3/library/functools.html) and [`contextlib`](https://docs.python.org/3/library/contextlib.html). Reference pages you should know exist.
-- Elastic — [Practical BM25, Part 2: The BM25 Algorithm and Its Variables](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables). The gentlest correct derivation of BM25, term by term, with intuition for `k1` and `b`.
-- Manning, Raghavan & Schütze — [IR book, Chapter 6: Scoring, term weighting and the vector space model](https://nlp.stanford.edu/IR-book/html/htmledition/scoring-term-weighting-and-the-vector-space-model-1.html), and Chapter 2 for phrase queries and positional indexes.
-- *Fluent Python*, 2nd ed. — Chapter 1 ("The Python Data Model"), Chapter 9 ("Decorators and Closures"), Chapter 12 ("Special Methods for Sequences"), Chapter 13 ("Interfaces, Protocols, and ABCs").
-
----
-
 ## Deliverable checklist
 
 - [ ] `Index` implements `__len__`, `__contains__`, `__getitem__`, `__iter__`, `__repr__`; `num_docs`, `avg_doc_length` (`cached_property`), `df`.
@@ -246,3 +225,24 @@ Write the parser tests as *trees*, not strings: `parse('a OR b c') == Or(Term('a
 ## Stretch
 
 Implement **`__getitem__` with slicing semantics** on your result list (so `results[:5]` works and returns a `ResultList`, not a plain list), then make `ResultList` a proper `collections.abc.Sequence`. Then implement a **`singledispatch`-based `explain(node)`** that pretty-prints any query tree node — and an `explain(scorer, doc)` that shows *why* a document got its score, term by term, the way Elasticsearch's `_explain` API does. A ranking you can explain is a ranking you can debug.
+
+---
+
+## Resources
+
+**Watch**
+
+- Raymond Hettinger — [Python's Class Development Toolkit (PyCon 2013, 45 min)](https://www.youtube.com/watch?v=HTLu2DFOdTg). Live-builds a class the Pythonic way: `__init__`, `__repr__`, properties, class methods, `__slots__`, and when each is warranted. The best 45 minutes on writing classes in Python.
+- Raymond Hettinger — [Beyond PEP 8: Best Practices for Beautiful Intelligible Code (PyCon 2015, 50 min)](https://www.youtube.com/watch?v=wf-BqAjZb8M). Takes Java-flavored Python and transforms it using the data model — dunder methods, properties, context managers, named tuples. Watch this before refactoring `Index`.
+- James Powell — [So You Want to Be a Python Expert? (PyData 2017)](https://www.youtube.com/watch?v=cKPlPJyQrt4) — the data model, decorators, and context managers segments (you watched the generators part in Lab 1). Live-coded from the ground up.
+- Corey Schafer — [Decorators: Dynamically Alter the Functionality of Your Functions (30 min)](https://www.youtube.com/watch?v=FsAPt_9Bf3U). Closures → decorators → decorators with arguments → `wraps`, step by step, with a logging/timing example that is your `@timed`.
+
+**Read**
+
+- Python docs — [Data Model reference, §3.3 "Special method names"](https://docs.python.org/3/reference/datamodel.html). The authoritative list of every dunder and exactly when it's called. Skim it once; return to it forever.
+- Real Python — [Primer on Python Decorators](https://realpython.com/primer-on-python-decorators/). Long, thorough, and covers every pattern including class decorators and stateful decorators.
+- Python docs — [Descriptor HOWTO](https://docs.python.org/3/howto/descriptor.html) by Raymond Hettinger. How `property`, methods, `classmethod` and `staticmethod` actually work. Read the first half.
+- Python docs — [`functools`](https://docs.python.org/3/library/functools.html) and [`contextlib`](https://docs.python.org/3/library/contextlib.html). Reference pages you should know exist.
+- Elastic — [Practical BM25, Part 2: The BM25 Algorithm and Its Variables](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables). The gentlest correct derivation of BM25, term by term, with intuition for `k1` and `b`.
+- Manning, Raghavan & Schütze — [IR book, Chapter 6: Scoring, term weighting and the vector space model](https://nlp.stanford.edu/IR-book/html/htmledition/scoring-term-weighting-and-the-vector-space-model-1.html), and Chapter 2 for phrase queries and positional indexes.
+- *Fluent Python*, 2nd ed. — Chapter 1 ("The Python Data Model"), Chapter 9 ("Decorators and Closures"), Chapter 12 ("Special Methods for Sequences"), Chapter 13 ("Interfaces, Protocols, and ABCs").

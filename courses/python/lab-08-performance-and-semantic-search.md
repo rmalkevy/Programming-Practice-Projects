@@ -132,27 +132,6 @@ The README rewrite from Section 6: first screen with live URL, GIF, headline num
 
 ---
 
-## Resources
-
-**Watch**
-
-- Jake VanderPlas — [Losing Your Loops: Fast Numerical Computing with NumPy (PyCon 2015, 30 min)](https://www.youtube.com/watch?v=EEUXKG97YRw). The four strategies (ufuncs, aggregations, broadcasting, fancy indexing) with timings. Section 3 is a summary of this talk; watch it before M2.
-- Anthony Shaw — [Why Is Python Slow? (PyCon 2020, 30 min)](https://www.youtube.com/watch?v=I4nkgJdVZFA). By the author of *CPython Internals*: what the interpreter does per operation, and which "slow" claims are true. Section 2.
-- Emery Berger — [Python Performance Matters (Strange Loop 2022, 40 min)](https://www.youtube.com/watch?v=vVUnCXKuNOg). Why separating Python-time from native-time is the profile you need, from the creator of Scalene. Also a fine tour of profiling methodology in general.
-
-**Read**
-
-- NumPy docs — [NumPy: the absolute basics for beginners](https://numpy.org/doc/stable/user/absolute_beginners.html) (skim; you know most of it) and [Broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) (read carefully; it's the one rule everyone gets wrong).
-- Python docs — [The Python Profilers](https://docs.python.org/3/library/profile.html) (`cProfile`, `pstats`); [`py-spy` README](https://github.com/benfred/py-spy); [Scalene README](https://github.com/plasma-umass/scalene); [`memray`](https://github.com/bloomberg/memray).
-- Itamar Turner-Trauring — [pythonspeed.com](https://pythonspeed.com/). Dozens of short, precise articles on Python and NumPy performance and memory. Browse the "Performance" and "Memory" sections.
-- Vicki Boykis — [*What Are Embeddings*](https://vickiboykis.com/what_are_embeddings/). A free, ~80-page book: history, intuition, and enough math. Chapters 1–3 for this lab.
-- [Sentence-Transformers documentation](https://www.sbert.net/) — quick start, "Semantic Search," and the pretrained model table (pick by size/speed/language).
-- Pinecone — [Learning Center](https://www.pinecone.io/learn/): the "Vector Search" and "Hybrid Search" series are clear, vendor-agnostic explanations. Elastic — [Reciprocal Rank Fusion](https://www.elastic.co/guide/en/elasticsearch/reference/current/rrf.html) for the RRF formula and rationale.
-- [FAISS](https://github.com/facebookresearch/faiss) — for when brute force isn't enough; read the wiki's "Getting started" to know what's there.
-- *Fluent Python*, 2nd ed. — Chapter 2, section on NumPy and memory views; and the *CPython Internals* book (Anthony Shaw) if Section 2 pulled you in.
-
----
-
 ## Deliverable checklist
 
 - [ ] `cProfile` + `py-spy` profiles of `index` and `search`; flame graph SVG in `docs/`; top-3 hotspots with Python-vs-native breakdown and hypotheses.
@@ -184,3 +163,24 @@ The README rewrite from Section 6: first screen with live URL, GIF, headline num
 ## Stretch
 
 Replace brute-force `E @ q` with an **HNSW index** (FAISS or `hnswlib`) and measure recall@10 against brute force at several `ef` values — the precision/speed trade-off of approximate search, quantified. Then make the embedding step **incremental** (only new/changed chunks) and run it as a background job from the Lab 7 API. Finally, close the loop with [Lab 31](../../labs/lab-31-llm-rag-app.md): put an LLM on top of your hybrid retriever so `findex ask "how does the scheduler work?"` returns an answer *with citations to your own documents*. Your search engine is now a RAG system — and you built every layer of it yourself.
+
+---
+
+## Resources
+
+**Watch**
+
+- Jake VanderPlas — [Losing Your Loops: Fast Numerical Computing with NumPy (PyCon 2015, 30 min)](https://www.youtube.com/watch?v=EEUXKG97YRw). The four strategies (ufuncs, aggregations, broadcasting, fancy indexing) with timings. Section 3 is a summary of this talk; watch it before M2.
+- Anthony Shaw — [Why Is Python Slow? (PyCon 2020, 30 min)](https://www.youtube.com/watch?v=I4nkgJdVZFA). By the author of *CPython Internals*: what the interpreter does per operation, and which "slow" claims are true. Section 2.
+- Emery Berger — [Python Performance Matters (Strange Loop 2022, 40 min)](https://www.youtube.com/watch?v=vVUnCXKuNOg). Why separating Python-time from native-time is the profile you need, from the creator of Scalene. Also a fine tour of profiling methodology in general.
+
+**Read**
+
+- NumPy docs — [NumPy: the absolute basics for beginners](https://numpy.org/doc/stable/user/absolute_beginners.html) (skim; you know most of it) and [Broadcasting](https://numpy.org/doc/stable/user/basics.broadcasting.html) (read carefully; it's the one rule everyone gets wrong).
+- Python docs — [The Python Profilers](https://docs.python.org/3/library/profile.html) (`cProfile`, `pstats`); [`py-spy` README](https://github.com/benfred/py-spy); [Scalene README](https://github.com/plasma-umass/scalene); [`memray`](https://github.com/bloomberg/memray).
+- Itamar Turner-Trauring — [pythonspeed.com](https://pythonspeed.com/). Dozens of short, precise articles on Python and NumPy performance and memory. Browse the "Performance" and "Memory" sections.
+- Vicki Boykis — [*What Are Embeddings*](https://vickiboykis.com/what_are_embeddings/). A free, ~80-page book: history, intuition, and enough math. Chapters 1–3 for this lab.
+- [Sentence-Transformers documentation](https://www.sbert.net/) — quick start, "Semantic Search," and the pretrained model table (pick by size/speed/language).
+- Pinecone — [Learning Center](https://www.pinecone.io/learn/): the "Vector Search" and "Hybrid Search" series are clear, vendor-agnostic explanations. Elastic — [Reciprocal Rank Fusion](https://www.elastic.co/guide/en/elasticsearch/reference/current/rrf.html) for the RRF formula and rationale.
+- [FAISS](https://github.com/facebookresearch/faiss) — for when brute force isn't enough; read the wiki's "Getting started" to know what's there.
+- *Fluent Python*, 2nd ed. — Chapter 2, section on NumPy and memory views; and the *CPython Internals* book (Anthony Shaw) if Section 2 pulled you in.

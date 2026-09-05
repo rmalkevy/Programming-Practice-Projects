@@ -235,25 +235,6 @@ Then one paragraph, in your own words, explaining *why* the numbers differ and w
 
 ---
 
-## Resources
-
-**Watch**
-
-- Ned Batchelder — [Loop Like a Native (PyCon 2013, 30 min)](https://www.youtube.com/watch?v=EnSu9hHGq5o). *The* talk on Python iteration: why you never write `for i in range(len(x))`, and how to think in iterables. Watch this first.
-- Corey Schafer — [Python Generators (11 min)](https://www.youtube.com/watch?v=bD05uGo_sVI). Short, concrete, with a memory comparison you can reproduce. Good as a quick second pass.
-- James Powell — [So you want to be a Python expert? (PyData 2017, 1h40)](https://www.youtube.com/watch?v=cKPlPJyQrt4). A live-coded tour of the data model, generators, decorators, and context managers — essentially the theory of Labs 1–3 in one sitting. Watch the generators section now; you'll come back for the rest.
-
-**Read**
-
-- Trey Hunner — [The Iterator Protocol: How `for` Loops Work in Python](https://treyhunner.com/2016/12/python-iterator-protocol-how-for-loops-work/). The cleanest written explanation of Section 1; ten minutes.
-- Real Python — [How to Use Generators and `yield` in Python](https://realpython.com/introduction-to-python-generators/). Thorough, with a large-CSV example that mirrors this lab exactly.
-- Python docs — [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html) (iterators, generators, `itertools` — read the first half) and the [Unicode HOWTO](https://docs.python.org/3/howto/unicode.html) (the encoding half of this lab).
-- David Beazley — *Generator Tricks for Systems Programmers*, via his [tutorials page](http://dabeaz.com/tutorials.html). The 2008 classic that taught a generation of Python programmers to build pipelines out of generators. Its log-file examples are your corpus pipeline with different nouns.
-- Joel Spolsky — [The Absolute Minimum Every Software Developer Must Know About Unicode](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/). Twenty years old and still the best 15-minute fix for "what even is an encoding."
-- *Fluent Python*, 2nd ed. — Chapter 17, "Iterators, Generators, and Classic Coroutines." If you own one Python book, it's [this one](https://www.fluentpython.com/).
-
----
-
 ## Deliverable checklist
 
 - [ ] Public repo, `src/` layout, `uv`-managed, `ruff` clean.
@@ -282,3 +263,22 @@ Then one paragraph, in your own words, explaining *why* the numbers differ and w
 ## Stretch
 
 Make `iter_documents` handle **compressed corpora without extracting them** — `gzip.open` / `bz2.open` / a `zipfile` — and streaming JSON-lines from a `.jsonl.gz`. Then benchmark tokenizing with `re.finditer` against `str.split()` + manual cleanup, and against splitting on the [`regex`](https://pypi.org/project/regex/) module's `\p{L}+` (Unicode letter class). Which is fastest? Which is *right*? Put the answer in your README.
+
+---
+
+## Resources
+
+**Watch**
+
+- Ned Batchelder — [Loop Like a Native (PyCon 2013, 30 min)](https://www.youtube.com/watch?v=EnSu9hHGq5o). *The* talk on Python iteration: why you never write `for i in range(len(x))`, and how to think in iterables. Watch this first.
+- Corey Schafer — [Python Generators (11 min)](https://www.youtube.com/watch?v=bD05uGo_sVI). Short, concrete, with a memory comparison you can reproduce. Good as a quick second pass.
+- James Powell — [So you want to be a Python expert? (PyData 2017, 1h40)](https://www.youtube.com/watch?v=cKPlPJyQrt4). A live-coded tour of the data model, generators, decorators, and context managers — essentially the theory of Labs 1–3 in one sitting. Watch the generators section now; you'll come back for the rest.
+
+**Read**
+
+- Trey Hunner — [The Iterator Protocol: How `for` Loops Work in Python](https://treyhunner.com/2016/12/python-iterator-protocol-how-for-loops-work/). The cleanest written explanation of Section 1; ten minutes.
+- Real Python — [How to Use Generators and `yield` in Python](https://realpython.com/introduction-to-python-generators/). Thorough, with a large-CSV example that mirrors this lab exactly.
+- Python docs — [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html) (iterators, generators, `itertools` — read the first half) and the [Unicode HOWTO](https://docs.python.org/3/howto/unicode.html) (the encoding half of this lab).
+- David Beazley — *Generator Tricks for Systems Programmers*, via his [tutorials page](http://dabeaz.com/tutorials.html). The 2008 classic that taught a generation of Python programmers to build pipelines out of generators. Its log-file examples are your corpus pipeline with different nouns.
+- Joel Spolsky — [The Absolute Minimum Every Software Developer Must Know About Unicode](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/). Twenty years old and still the best 15-minute fix for "what even is an encoding."
+- *Fluent Python*, 2nd ed. — Chapter 17, "Iterators, Generators, and Classic Coroutines." If you own one Python book, it's [this one](https://www.fluentpython.com/).

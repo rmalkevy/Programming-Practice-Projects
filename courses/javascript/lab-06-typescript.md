@@ -121,24 +121,6 @@ Convert `server/` (run with Node's native type stripping or `tsx`; avoid `enum`)
 
 ---
 
-## Resources
-
-**Watch**
-
-- Fireship — [TypeScript in 100 Seconds](https://www.youtube.com/watch?v=zQnBQ4tB3ZA). Two minutes of orientation, if you've never touched it.
-- Franziska Hinkelmann — [JavaScript engines: how do they even? (JSConf EU 2017)](https://www.youtube.com/watch?v=p-iiEDtpy6I) — optional preview for Lab 7, relevant here because it explains why *type stability* (objects keeping the same shape) makes JavaScript fast — which TypeScript nudges you toward.
-
-**Read**
-
-- [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) — "The Basics" through "Object Types," then "Narrowing," "Generics," and "Modules." The official reference; well written; the spine of Sections 1–5.
-- Matt Pocock — [Total TypeScript Essentials](https://www.totaltypescript.com/books/total-typescript-essentials) (free online book). The modern, opinionated path through the language; chapters on unions and narrowing, objects, `unknown`/`never`, and "Designing your types." Also his [tsconfig cheat sheet](https://www.totaltypescript.com/tsconfig-cheat-sheet) and [Discriminated Unions are a Frontend Dev's Best Friend](https://www.totaltypescript.com/discriminated-unions-are-a-devs-best-friend).
-- Basarat Ali Syed — [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) (free). Older but excellent on *why*: structural typing, type guards, `never`, and the "types stop at the runtime" boundary.
-- [Zod documentation](https://zod.dev). Schemas, `z.infer`, `safeParse`, discriminated unions (`z.discriminatedUnion`). Section 6.
-- Node.js — [Running TypeScript natively](https://nodejs.org/en/learn/typescript/run-natively). Type stripping, what's erasable, and the limits.
-- [Type Challenges](https://github.com/type-challenges/type-challenges) — when you want to go deeper; do the "easy" set and a few "medium" (e.g., `Pick`, `Readonly`, `TupleToObject`, `DeepReadonly`).
-
----
-
 ## Deliverable checklist
 
 - [ ] Root + per-package `tsconfig`; `strict`, `noUncheckedIndexedAccess`, `verbatimModuleSyntax`; `npm run typecheck` at root; CI runs it.
@@ -170,3 +152,21 @@ Convert `server/` (run with Node's native type stripping or `tsx`; avoid `enum`)
 ## Stretch
 
 Make the **binary protocol layout type-driven**: describe each message's fields as a `const` schema (`[["tick", "u32"], ["x", "f32"], …] as const`) and derive both the TypeScript message type (via mapped and conditional types) and the `DataView` encoder/decoder from that one definition — so adding a field changes the type and the codec together. Then add **`tsc -b` project references** across the workspaces with incremental builds, and measure typecheck time before and after. Finally, write **five Type Challenges** of your own drawn from the codebase (e.g., "extract all message types whose payload has a `seq`") and solve them.
+
+---
+
+## Resources
+
+**Watch**
+
+- Fireship — [TypeScript in 100 Seconds](https://www.youtube.com/watch?v=zQnBQ4tB3ZA). Two minutes of orientation, if you've never touched it.
+- Franziska Hinkelmann — [JavaScript engines: how do they even? (JSConf EU 2017)](https://www.youtube.com/watch?v=p-iiEDtpy6I) — optional preview for Lab 7, relevant here because it explains why *type stability* (objects keeping the same shape) makes JavaScript fast — which TypeScript nudges you toward.
+
+**Read**
+
+- [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) — "The Basics" through "Object Types," then "Narrowing," "Generics," and "Modules." The official reference; well written; the spine of Sections 1–5.
+- Matt Pocock — [Total TypeScript Essentials](https://www.totaltypescript.com/books/total-typescript-essentials) (free online book). The modern, opinionated path through the language; chapters on unions and narrowing, objects, `unknown`/`never`, and "Designing your types." Also his [tsconfig cheat sheet](https://www.totaltypescript.com/tsconfig-cheat-sheet) and [Discriminated Unions are a Frontend Dev's Best Friend](https://www.totaltypescript.com/discriminated-unions-are-a-devs-best-friend).
+- Basarat Ali Syed — [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) (free). Older but excellent on *why*: structural typing, type guards, `never`, and the "types stop at the runtime" boundary.
+- [Zod documentation](https://zod.dev). Schemas, `z.infer`, `safeParse`, discriminated unions (`z.discriminatedUnion`). Section 6.
+- Node.js — [Running TypeScript natively](https://nodejs.org/en/learn/typescript/run-natively). Type stripping, what's erasable, and the limits.
+- [Type Challenges](https://github.com/type-challenges/type-challenges) — when you want to go deeper; do the "easy" set and a few "medium" (e.g., `Pick`, `Readonly`, `TupleToObject`, `DeepReadonly`).

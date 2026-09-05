@@ -100,25 +100,6 @@ Instrument `simulate`, `render`, `decode`, `reconcile` with `performance.mark/me
 
 ---
 
-## Resources
-
-**Watch**
-
-- Franziska Hinkelmann — [JavaScript engines: how do they even? (JSConf EU 2017, 30 min)](https://www.youtube.com/watch?v=p-iiEDtpy6I). By a former V8 engineer: parsing, bytecode, JIT tiers, hidden classes, inline caches, deopts — the whole of Sections 1–2 in one talk, with humor.
-
-**Read**
-
-- Lydia Hallie — [JavaScript Visualized: the JavaScript Engine](https://dev.to/lydiahallie/javascript-visualized-the-javascript-engine-4cdf). The illustrated pipeline; read before the talk.
-- Mathias Bynens & Benedikt Meurer — [JavaScript engine fundamentals: Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics). The definitive explanation of Section 2, with diagrams of shape transitions across engines. Read slowly.
-- V8 team — [Trash talk: the Orinoco garbage collector](https://v8.dev/blog/trash-talk). Generational GC, scavenging, parallel/concurrent marking — and why pauses still happen.
-- Robert Nystrom — [Game Programming Patterns: Object Pool](https://gameprogrammingpatterns.com/object-pool.html). The pattern, the free-list trick, and when *not* to pool.
-- Chrome for Developers — [Analyze runtime performance](https://developer.chrome.com/docs/devtools/performance) and [Fix memory problems](https://developer.chrome.com/docs/devtools/memory-problems). Hands-on guides to the two panels you'll live in. Also web.dev's [RAIL model](https://web.dev/articles/rail) for the frame budgets.
-- MDN — [Using Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers), [`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas), and [`Performance`](https://developer.mozilla.org/en-US/docs/Web/API/Performance) (mark/measure). Node: [`worker_threads`](https://nodejs.org/api/worker_threads.html).
-- [Vitest](https://vitest.dev) (guide: getting started, mocking, fake timers, coverage), [fast-check](https://fast-check.dev) (introduction and "Why property-based?"), [Playwright](https://playwright.dev) (getting started, `webServer`, multiple contexts).
-- [ESLint flat configuration](https://eslint.org/docs/latest/use/configure/configuration-files) with [typescript-eslint](https://typescript-eslint.io/), or [Biome](https://biomejs.dev). GitHub — [Building and testing Node.js](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs).
-
----
-
 ## Deliverable checklist
 
 - [ ] Root `npm test` runs Vitest in all packages; ≥ 60 tests; ≥ 5 fast-check properties (codec round-trip, length, garbage-safety, in-arena, parser accept/reject).
@@ -151,3 +132,22 @@ Instrument `simulate`, `render`, `decode`, `reconcile` with `performance.mark/me
 ## Stretch
 
 Move the **entire simulation** to a structure-of-arrays layout (`Float32Array` per field, integer entity handles, free-list allocation) and re-run every benchmark and every test — the tests should pass unchanged if your API held, which is the point of having them. Then try **`SharedArrayBuffer` + `Atomics`** to share the render state between the main thread and a simulation worker with no copying (set the COOP/COEP headers in Vite and on the server); measure frame time and input latency. Finally, run the server load test against **Node with `--jitless`** and under **Bun** or **Deno** — a small but real experiment in "how much of my performance is the engine?"
+
+---
+
+## Resources
+
+**Watch**
+
+- Franziska Hinkelmann — [JavaScript engines: how do they even? (JSConf EU 2017, 30 min)](https://www.youtube.com/watch?v=p-iiEDtpy6I). By a former V8 engineer: parsing, bytecode, JIT tiers, hidden classes, inline caches, deopts — the whole of Sections 1–2 in one talk, with humor.
+
+**Read**
+
+- Lydia Hallie — [JavaScript Visualized: the JavaScript Engine](https://dev.to/lydiahallie/javascript-visualized-the-javascript-engine-4cdf). The illustrated pipeline; read before the talk.
+- Mathias Bynens & Benedikt Meurer — [JavaScript engine fundamentals: Shapes and Inline Caches](https://mathiasbynens.be/notes/shapes-ics). The definitive explanation of Section 2, with diagrams of shape transitions across engines. Read slowly.
+- V8 team — [Trash talk: the Orinoco garbage collector](https://v8.dev/blog/trash-talk). Generational GC, scavenging, parallel/concurrent marking — and why pauses still happen.
+- Robert Nystrom — [Game Programming Patterns: Object Pool](https://gameprogrammingpatterns.com/object-pool.html). The pattern, the free-list trick, and when *not* to pool.
+- Chrome for Developers — [Analyze runtime performance](https://developer.chrome.com/docs/devtools/performance) and [Fix memory problems](https://developer.chrome.com/docs/devtools/memory-problems). Hands-on guides to the two panels you'll live in. Also web.dev's [RAIL model](https://web.dev/articles/rail) for the frame budgets.
+- MDN — [Using Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers), [`OffscreenCanvas`](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas), and [`Performance`](https://developer.mozilla.org/en-US/docs/Web/API/Performance) (mark/measure). Node: [`worker_threads`](https://nodejs.org/api/worker_threads.html).
+- [Vitest](https://vitest.dev) (guide: getting started, mocking, fake timers, coverage), [fast-check](https://fast-check.dev) (introduction and "Why property-based?"), [Playwright](https://playwright.dev) (getting started, `webServer`, multiple contexts).
+- [ESLint flat configuration](https://eslint.org/docs/latest/use/configure/configuration-files) with [typescript-eslint](https://typescript-eslint.io/), or [Biome](https://biomejs.dev). GitHub — [Building and testing Node.js](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs).

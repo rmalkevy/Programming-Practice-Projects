@@ -131,28 +131,6 @@ Replace every diagnostic `print` with `logging`. Add `.github/workflows/ci.yml` 
 
 ---
 
-## Resources
-
-**Watch**
-
-- Carl Meyer — [Type-checked Python in the Real World (PyCon 2018, 30 min)](https://www.youtube.com/watch?v=pMgmKJyWKn8). From Instagram's migration of a multi-million-line codebase: what gradual typing buys, how to adopt it incrementally, and the gotchas. Section 1 with battle scars.
-- Hillel Wayne — [Beyond Unit Tests: Taking Your Testing to the Next Level (PyCon 2018, 30 min)](https://www.youtube.com/watch?v=MYucYon2-lk). Property-based testing with Hypothesis, and *how to think of properties*. Will change how you test.
-- Brandon Rhodes — [Hoist Your I/O (PyWaw Summit 2015, 45 min)](https://www.youtube.com/watch?v=PBQN62oUnN8). Why separating pure logic from I/O makes code testable, with a refactoring done live. Read before M2.
-
-**Read**
-
-- mypy docs — [Type hints cheat sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html). One page; the syntax for everything. (Applies to pyright too.)
-- [pyright docs](https://microsoft.github.io/pyright/) — configuration and the strict-mode rule list. Also the [`typing` module reference](https://docs.python.org/3/library/typing.html) and [PEP 695](https://peps.python.org/pep-0695/) for the new generics syntax.
-- pytest docs — [How to use fixtures](https://docs.pytest.org/en/stable/how-to/fixtures.html). The one concept in pytest worth reading the docs for.
-- [Hypothesis documentation](https://hypothesis.readthedocs.io/) — quick start, then "What you can generate and how."
-- Hynek Schlawack — [Testing & Packaging](https://hynek.me/articles/testing-packaging/). The essay that made the `src/` layout standard, and why. Short and sharp.
-- Python Packaging Authority — [Packaging User Guide](https://packaging.python.org/) — specifically "Writing your pyproject.toml." And [uv — Working on projects](https://docs.astral.sh/uv/guides/projects/), the uv guide you'll follow.
-- [typer docs](https://typer.tiangolo.com/) (tutorial, then "Testing") and [rich docs](https://rich.readthedocs.io/) (tables, progress, console markup).
-- Python docs — [Logging HOWTO](https://docs.python.org/3/howto/logging.html). Read the basic and advanced tutorials; skip the cookbook until you need it.
-- GitHub — [Actions quickstart](https://docs.github.com/en/actions/writing-workflows/quickstart) and [uv in GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/).
-
----
-
 ## Deliverable checklist
 
 - [ ] `pyproject.toml` (PEP 621) with deps, `dev` group, `[project.scripts]`, and tool config; `uv.lock` committed.
@@ -183,3 +161,25 @@ Replace every diagnostic `print` with `logging`. Add `.github/workflows/ci.yml` 
 ## Stretch
 
 Add **shell completion** (`findex --install-completion`) and a **`findex config`** subcommand backed by a `TypedDict`/Pydantic settings file in the user's config directory (`platformdirs`). Then make the test suite run under **both** the GIL and free-threaded Python 3.13 in a CI matrix — you'll want that in place for Lab 5. Finally, publish to **TestPyPI** with `uv publish` so `uvx --index testpypi findex` works for anyone.
+
+---
+
+## Resources
+
+**Watch**
+
+- Carl Meyer — [Type-checked Python in the Real World (PyCon 2018, 30 min)](https://www.youtube.com/watch?v=pMgmKJyWKn8). From Instagram's migration of a multi-million-line codebase: what gradual typing buys, how to adopt it incrementally, and the gotchas. Section 1 with battle scars.
+- Hillel Wayne — [Beyond Unit Tests: Taking Your Testing to the Next Level (PyCon 2018, 30 min)](https://www.youtube.com/watch?v=MYucYon2-lk). Property-based testing with Hypothesis, and *how to think of properties*. Will change how you test.
+- Brandon Rhodes — [Hoist Your I/O (PyWaw Summit 2015, 45 min)](https://www.youtube.com/watch?v=PBQN62oUnN8). Why separating pure logic from I/O makes code testable, with a refactoring done live. Read before M2.
+
+**Read**
+
+- mypy docs — [Type hints cheat sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html). One page; the syntax for everything. (Applies to pyright too.)
+- [pyright docs](https://microsoft.github.io/pyright/) — configuration and the strict-mode rule list. Also the [`typing` module reference](https://docs.python.org/3/library/typing.html) and [PEP 695](https://peps.python.org/pep-0695/) for the new generics syntax.
+- pytest docs — [How to use fixtures](https://docs.pytest.org/en/stable/how-to/fixtures.html). The one concept in pytest worth reading the docs for.
+- [Hypothesis documentation](https://hypothesis.readthedocs.io/) — quick start, then "What you can generate and how."
+- Hynek Schlawack — [Testing & Packaging](https://hynek.me/articles/testing-packaging/). The essay that made the `src/` layout standard, and why. Short and sharp.
+- Python Packaging Authority — [Packaging User Guide](https://packaging.python.org/) — specifically "Writing your pyproject.toml." And [uv — Working on projects](https://docs.astral.sh/uv/guides/projects/), the uv guide you'll follow.
+- [typer docs](https://typer.tiangolo.com/) (tutorial, then "Testing") and [rich docs](https://rich.readthedocs.io/) (tables, progress, console markup).
+- Python docs — [Logging HOWTO](https://docs.python.org/3/howto/logging.html). Read the basic and advanced tutorials; skip the cookbook until you need it.
+- GitHub — [Actions quickstart](https://docs.github.com/en/actions/writing-workflows/quickstart) and [uv in GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/).

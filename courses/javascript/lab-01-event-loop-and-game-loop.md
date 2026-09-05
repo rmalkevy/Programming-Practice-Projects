@@ -176,27 +176,6 @@ Three experiments, each with a screenshot or a number in the README:
 
 ---
 
-## Resources
-
-**Watch**
-
-- Philip Roberts — [What the heck is the event loop anyway? (JSConf EU 2014, 27 min)](https://www.youtube.com/watch?v=8aGhZQkoFbQ). The most-watched JavaScript talk ever, deservedly: the call stack, Web APIs, the task queue, and a live visualizer. Watch this first, before anything else.
-- Jake Archibald — [In the Loop (JSConf.Asia 2018, 35 min)](https://www.youtube.com/watch?v=cCOL7MC4Pl0). The sequel: where `requestAnimationFrame`, microtasks, and rendering sit in the loop, with animations. Section 3 comes from this talk.
-- Lydia Hallie — [JavaScript Visualized: Event Loop, Web APIs, (Micro)task Queue (13 min)](https://www.youtube.com/watch?v=eiC58R16hb8). A crisp, modern, diagram-driven recap. Watch after the two above to consolidate.
-
-**Read**
-
-- Jake Archibald — [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/). The definitive written explanation, with an interactive step-through. Do the exercises.
-- javascript.info — [Event loop: microtasks and macrotasks](https://javascript.info/event-loop). Concise and correct; a good second angle.
-- MDN — [JavaScript execution model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model) (agents, the loop, run-to-completion) and [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame).
-- Glenn Fiedler — [Fix Your Timestep!](https://gafferongames.com/post/fix_your_timestep/). The essay every game programmer has read. Ten minutes; Section 4 is a summary.
-- Robert Nystrom — [Game Programming Patterns: Game Loop](https://gameprogrammingpatterns.com/game-loop.html) and MDN's [Anatomy of a video game](https://developer.mozilla.org/en-US/docs/Games/Anatomy). Same topic, two more angles.
-- MDN — [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) and the [Canvas tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) (first four sections).
-- Kyle Simpson — [*You Don't Know JS Yet: Scope & Closures*](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/README.md), Chapters 1–3 and 7 ("Using Closures"). Free.
-- [Vite — Getting Started](https://vite.dev/guide/). Ten minutes; you'll live in it all semester.
-
----
-
 ## Deliverable checklist
 
 - [ ] Vite project, `"type": "module"`, ESLint/Prettier or Biome, `.nvmrc`.
@@ -225,3 +204,24 @@ Three experiments, each with a screenshot or a number in the README:
 ## Stretch
 
 Add **gamepad support** via the [Gamepad API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API) (polled in the loop, not event-driven — think about why that fits the loop better) and **touch controls** for phones. Then build a tiny **frame-time histogram** overlay (a canvas strip showing the last 120 frame durations, red above 16.7 ms) — you've just written the first tool of Lab 7. Finally, make the simulation run in a **Web Worker** with the main thread only rendering: which of your modules move, which stay, and how does the interpolation change when state arrives by message?
+
+---
+
+## Resources
+
+**Watch**
+
+- Philip Roberts — [What the heck is the event loop anyway? (JSConf EU 2014, 27 min)](https://www.youtube.com/watch?v=8aGhZQkoFbQ). The most-watched JavaScript talk ever, deservedly: the call stack, Web APIs, the task queue, and a live visualizer. Watch this first, before anything else.
+- Jake Archibald — [In the Loop (JSConf.Asia 2018, 35 min)](https://www.youtube.com/watch?v=cCOL7MC4Pl0). The sequel: where `requestAnimationFrame`, microtasks, and rendering sit in the loop, with animations. Section 3 comes from this talk.
+- Lydia Hallie — [JavaScript Visualized: Event Loop, Web APIs, (Micro)task Queue (13 min)](https://www.youtube.com/watch?v=eiC58R16hb8). A crisp, modern, diagram-driven recap. Watch after the two above to consolidate.
+
+**Read**
+
+- Jake Archibald — [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/). The definitive written explanation, with an interactive step-through. Do the exercises.
+- javascript.info — [Event loop: microtasks and macrotasks](https://javascript.info/event-loop). Concise and correct; a good second angle.
+- MDN — [JavaScript execution model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model) (agents, the loop, run-to-completion) and [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame).
+- Glenn Fiedler — [Fix Your Timestep!](https://gafferongames.com/post/fix_your_timestep/). The essay every game programmer has read. Ten minutes; Section 4 is a summary.
+- Robert Nystrom — [Game Programming Patterns: Game Loop](https://gameprogrammingpatterns.com/game-loop.html) and MDN's [Anatomy of a video game](https://developer.mozilla.org/en-US/docs/Games/Anatomy). Same topic, two more angles.
+- MDN — [JavaScript modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) and the [Canvas tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) (first four sections).
+- Kyle Simpson — [*You Don't Know JS Yet: Scope & Closures*](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/README.md), Chapters 1–3 and 7 ("Using Closures"). Free.
+- [Vite — Getting Started](https://vite.dev/guide/). Ten minutes; you'll live in it all semester.

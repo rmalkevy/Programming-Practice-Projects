@@ -122,25 +122,6 @@ In the README: (a) five microtask/task ordering puzzles you wrote yourself, with
 
 ---
 
-## Resources
-
-**Watch**
-
-- Lydia Hallie — [JavaScript Visualized: Promise Execution (13 min)](https://www.youtube.com/watch?v=Xs1EMmBLpn4). Frame-by-frame animation of `.then`, `await`, and the microtask queue. Watch before Section 3; it makes the ordering puzzles obvious.
-- Fun Fun Function — [Promises (Functional Programming in JavaScript, 20 min)](https://www.youtube.com/watch?v=2d7s3spWAzo). Promises built up from the callback problem, live-coded. Older but exactly right about *why*.
-- Jake Archibald — [In the Loop (JSConf.Asia 2018)](https://www.youtube.com/watch?v=cCOL7MC4Pl0) — rewatch the microtask section now that you're writing promise code.
-
-**Read**
-
-- javascript.info — [Promises, async/await](https://javascript.info/async) — all seven articles, especially "Promises chaining," "Error handling with promises," "Microtasks," and "Async/await." The textbook for this lab.
-- MDN — [Using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) (the guide) and [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).
-- Jake Archibald — [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/) — the "promises" section, now that you can read it fluently.
-- Lydia Hallie — [JavaScript Visualized: Promises & Async/Await](https://dev.to/lydiahallie/javascript-visualized-promises-async-await-5gke). The article version, with diagrams you can pause on.
-- Kyle Simpson — [*You Don't Know JS: Async & Performance* (1st ed.)](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/README.md). Chapters 2 ("Callbacks") and 3 ("Promises") explain *why* promises are designed the way they are — trust, inversion of control, and the "once" guarantee. The deepest treatment available.
-- MDN — [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) — "Using the Web Audio API" and "Advanced techniques" for decoding and playback.
-
----
-
 ## Deliverable checklist
 
 - [ ] `loadImage` / `loadAudio` / `loadJson` with `AbortSignal` support; `fetchJson` checks `ok`; `withRetry` with backoff + jitter, no retry on 4xx.
@@ -169,3 +150,22 @@ In the README: (a) five microtask/task ordering puzzles you wrote yourself, with
 ## Stretch
 
 Stream the largest asset with `response.body` and `for await`, reporting **real byte-level progress** from `Content-Length`. Then implement a **priority loader**: critical assets (ship, arena) load first and the game becomes playable while decorative assets (music, particle sprites) continue in the background — an `async` generator yielding assets as they land, consumed by a `for await` that swaps placeholders. Finally, write **`Promise.all` from scratch** (using only `new Promise` and `.then`), then `allSettled`, and test them against the built-ins — the fastest way to prove you understand the state machine.
+
+---
+
+## Resources
+
+**Watch**
+
+- Lydia Hallie — [JavaScript Visualized: Promise Execution (13 min)](https://www.youtube.com/watch?v=Xs1EMmBLpn4). Frame-by-frame animation of `.then`, `await`, and the microtask queue. Watch before Section 3; it makes the ordering puzzles obvious.
+- Fun Fun Function — [Promises (Functional Programming in JavaScript, 20 min)](https://www.youtube.com/watch?v=2d7s3spWAzo). Promises built up from the callback problem, live-coded. Older but exactly right about *why*.
+- Jake Archibald — [In the Loop (JSConf.Asia 2018)](https://www.youtube.com/watch?v=cCOL7MC4Pl0) — rewatch the microtask section now that you're writing promise code.
+
+**Read**
+
+- javascript.info — [Promises, async/await](https://javascript.info/async) — all seven articles, especially "Promises chaining," "Error handling with promises," "Microtasks," and "Async/await." The textbook for this lab.
+- MDN — [Using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) (the guide) and [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).
+- Jake Archibald — [Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/) — the "promises" section, now that you can read it fluently.
+- Lydia Hallie — [JavaScript Visualized: Promises & Async/Await](https://dev.to/lydiahallie/javascript-visualized-promises-async-await-5gke). The article version, with diagrams you can pause on.
+- Kyle Simpson — [*You Don't Know JS: Async & Performance* (1st ed.)](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/README.md). Chapters 2 ("Callbacks") and 3 ("Promises") explain *why* promises are designed the way they are — trust, inversion of control, and the "once" guarantee. The deepest treatment available.
+- MDN — [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) — "Using the Web Audio API" and "Advanced techniques" for decoding and playback.

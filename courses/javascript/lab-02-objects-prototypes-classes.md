@@ -130,23 +130,6 @@ Add two features that would break a class hierarchy, and implement them with com
 
 ---
 
-## Resources
-
-**Watch**
-
-- Fun Fun Function — [Prototypes in JavaScript (15 min)](https://www.youtube.com/watch?v=riDVvXZ_Kb4). Builds the prototype chain from `Object.create` up, live, with no `class` in sight. Watch first so `class` has something to be sugar *for*.
-- Fun Fun Function — [Composition over Inheritance (11 min)](https://www.youtube.com/watch?v=wfMtDGfHWpA). The dog-that-can-also-clean-the-house problem; the clearest short argument for Section 4, in JavaScript.
-
-**Read**
-
-- Lydia Hallie — [JavaScript Visualized: Prototypal Inheritance](https://dev.to/lydiahallie/javascript-visualized-prototypal-inheritance-47co). Animated diagrams of exactly what `new`, `class`, and `extends` build. Ten minutes; read before Section 2.
-- javascript.info — [Prototypes, inheritance](https://javascript.info/prototypes) (all four articles) and [Classes](https://javascript.info/classes) (all articles, especially "Class inheritance" and "Private and protected properties"). This is the textbook for the lab.
-- MDN — [Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain) (the reference), [`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) (read the whole page once), and [Iterators and generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators).
-- Kyle Simpson — [*You Don't Know JS Yet: Objects & Classes*](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/objects-classes/README.md). Chapters 1–4 for objects and `this` in depth; the source of the four rules.
-- Robert Nystrom — [Game Programming Patterns: Component](https://gameprogrammingpatterns.com/component.html). Why game engines abandoned deep hierarchies, with code. The design rationale for M4.
-
----
-
 ## Deliverable checklist
 
 - [ ] `Vector2` with pure methods; `Entity` base with private static id counter; `Ship extends Entity` (one level).
@@ -175,3 +158,20 @@ Add two features that would break a class hierarchy, and implement them with com
 ## Stretch
 
 Replace the ad-hoc composition with a **tiny data-oriented ECS**: components stored as parallel typed arrays (`Float32Array` for positions and velocities), entities as integer indices, systems as functions over ranges. Measure `World.step` time at 5,000 entities against the object-based version (you'll revisit this in Lab 7 with a profiler — write the number down now). Then implement a **spatial hash** for the collision system and show the O(n²) → ~O(n) change on the same benchmark.
+
+---
+
+## Resources
+
+**Watch**
+
+- Fun Fun Function — [Prototypes in JavaScript (15 min)](https://www.youtube.com/watch?v=riDVvXZ_Kb4). Builds the prototype chain from `Object.create` up, live, with no `class` in sight. Watch first so `class` has something to be sugar *for*.
+- Fun Fun Function — [Composition over Inheritance (11 min)](https://www.youtube.com/watch?v=wfMtDGfHWpA). The dog-that-can-also-clean-the-house problem; the clearest short argument for Section 4, in JavaScript.
+
+**Read**
+
+- Lydia Hallie — [JavaScript Visualized: Prototypal Inheritance](https://dev.to/lydiahallie/javascript-visualized-prototypal-inheritance-47co). Animated diagrams of exactly what `new`, `class`, and `extends` build. Ten minutes; read before Section 2.
+- javascript.info — [Prototypes, inheritance](https://javascript.info/prototypes) (all four articles) and [Classes](https://javascript.info/classes) (all articles, especially "Class inheritance" and "Private and protected properties"). This is the textbook for the lab.
+- MDN — [Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain) (the reference), [`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) (read the whole page once), and [Iterators and generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators).
+- Kyle Simpson — [*You Don't Know JS Yet: Objects & Classes*](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/objects-classes/README.md). Chapters 1–4 for objects and `this` in depth; the source of the four rules.
+- Robert Nystrom — [Game Programming Patterns: Component](https://gameprogrammingpatterns.com/component.html). Why game engines abandoned deep hierarchies, with code. The design rationale for M4.

@@ -145,27 +145,6 @@ Plus a paragraph connecting the numbers to Labs 5–6: which of the GIL, thread-
 
 ---
 
-## Resources
-
-**Watch**
-
-- Sebastián Ramírez — [Behind the Scenes of FastAPI and Friends for Developers and Builders (EuroPython 2025 keynote, 45 min)](https://www.youtube.com/watch?v=mwvmfl8nN_U). The creator of FastAPI, typer, and SQLModel on the design ideas behind them — type hints as the single source of truth, editor support as a feature, and how to build tools people love. The *why* behind everything in this lab.
-- Sanjeev Thiyagarajan / freeCodeCamp — [Python API Development — Comprehensive Course for Beginners (19 h)](https://www.youtube.com/watch?v=0sOvCWFmrtA). You do not need all 19 hours. The first ~3 hours are the FastAPI fundamentals (path operations, Pydantic schemas, validation, docs); the deployment and Docker chapters near the end are worth it too. Use the chapter markers.
-
-**Read**
-
-- [FastAPI — Tutorial / User Guide](https://fastapi.tiangolo.com/tutorial/). Read in order through "Dependencies," then "Bigger Applications," "Testing," and the ["Concurrency and async / await"](https://fastapi.tiangolo.com/async/) page — the last one is Section 5 and it's the one people skip and regret.
-- [Pydantic documentation](https://docs.pydantic.dev/latest/) — Models, Validators, and [Settings management](https://docs.pydantic.dev/latest/concepts/pydantic_settings/).
-- [ASGI specification — Introduction](https://asgi.readthedocs.io/) and [Uvicorn docs](https://uvicorn.dev/) (deployment page: workers, `--proxy-headers`, graceful shutdown).
-- MDN — [An overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview). Status codes, headers, methods — the vocabulary.
-- [The Twelve-Factor App](https://12factor.net/). Twelve short pages; rules III (config), VI (processes), IX (disposability), XI (logs) are this lab.
-- [uv — Using uv in Docker](https://docs.astral.sh/uv/guides/integration/docker/) — the Dockerfile template to start from — and Docker's [Python language guide](https://docs.docker.com/guides/python/).
-- [htmx documentation](https://htmx.org/) — the "Introduction" and "Docs" pages; two hours to fluency.
-- Deployment: [Render — Deploy a FastAPI app](https://render.com/docs/deploy-fastapi), [Fly.io — FastAPI](https://fly.io/docs/python/frameworks/fastapi/).
-- Load testing: [`oha`](https://github.com/hatoo/oha) (recommended, has a live TUI) or [`hey`](https://github.com/rakyll/hey).
-
----
-
 ## Deliverable checklist
 
 - [ ] `GET /search` (validated `q`, `k`, `scorer`, `page`; pagination), `GET /docs/{id}`, `GET /stats`, `GET /health`; `/docs` OpenAPI page works.
@@ -198,3 +177,24 @@ Plus a paragraph connecting the numbers to Labs 5–6: which of the GIL, thread-
 ## Stretch
 
 Add **authentication** for a write path: `POST /documents` (adds a document to a pending set that a background job indexes) protected by an API key header, with **rate limiting** per key (a token bucket in memory, or Redis). Add **caching headers** (`ETag`, `Cache-Control`) to `/search` and prove with `oha` that a repeated query is served in under a millisecond. Then wire **OpenTelemetry** tracing so a single request shows up as spans (parse → score → render) in a free Grafana Cloud or Jaeger instance — and screenshot the trace for the README.
+
+---
+
+## Resources
+
+**Watch**
+
+- Sebastián Ramírez — [Behind the Scenes of FastAPI and Friends for Developers and Builders (EuroPython 2025 keynote, 45 min)](https://www.youtube.com/watch?v=mwvmfl8nN_U). The creator of FastAPI, typer, and SQLModel on the design ideas behind them — type hints as the single source of truth, editor support as a feature, and how to build tools people love. The *why* behind everything in this lab.
+- Sanjeev Thiyagarajan / freeCodeCamp — [Python API Development — Comprehensive Course for Beginners (19 h)](https://www.youtube.com/watch?v=0sOvCWFmrtA). You do not need all 19 hours. The first ~3 hours are the FastAPI fundamentals (path operations, Pydantic schemas, validation, docs); the deployment and Docker chapters near the end are worth it too. Use the chapter markers.
+
+**Read**
+
+- [FastAPI — Tutorial / User Guide](https://fastapi.tiangolo.com/tutorial/). Read in order through "Dependencies," then "Bigger Applications," "Testing," and the ["Concurrency and async / await"](https://fastapi.tiangolo.com/async/) page — the last one is Section 5 and it's the one people skip and regret.
+- [Pydantic documentation](https://docs.pydantic.dev/latest/) — Models, Validators, and [Settings management](https://docs.pydantic.dev/latest/concepts/pydantic_settings/).
+- [ASGI specification — Introduction](https://asgi.readthedocs.io/) and [Uvicorn docs](https://uvicorn.dev/) (deployment page: workers, `--proxy-headers`, graceful shutdown).
+- MDN — [An overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview). Status codes, headers, methods — the vocabulary.
+- [The Twelve-Factor App](https://12factor.net/). Twelve short pages; rules III (config), VI (processes), IX (disposability), XI (logs) are this lab.
+- [uv — Using uv in Docker](https://docs.astral.sh/uv/guides/integration/docker/) — the Dockerfile template to start from — and Docker's [Python language guide](https://docs.docker.com/guides/python/).
+- [htmx documentation](https://htmx.org/) — the "Introduction" and "Docs" pages; two hours to fluency.
+- Deployment: [Render — Deploy a FastAPI app](https://render.com/docs/deploy-fastapi), [Fly.io — FastAPI](https://fly.io/docs/python/frameworks/fastapi/).
+- Load testing: [`oha`](https://github.com/hatoo/oha) (recommended, has a live TUI) or [`hey`](https://github.com/rakyll/hey).

@@ -138,25 +138,6 @@ Bonus honesty: also parallelize a genuinely **I/O-bound** step (reading files of
 
 ---
 
-## Resources
-
-**Watch**
-
-- David Beazley — [Understanding the Python GIL (PyCon 2010, 45 min)](https://www.youtube.com/watch?v=Obt-vMVdM8s). The talk that made the GIL legible: what it is, how thread switching works, and the famous demonstration of two threads running *slower* than one. Still the best explanation fifteen years later; the 3.2 "new GIL" it discusses is what you're running.
-- Raymond Hettinger — [Keynote on Concurrency (PyBay 2017, 1h)](https://www.youtube.com/watch?v=9zinZmE3Ogk). Threads vs processes vs async, when to use each, and a set of rules for writing correct threaded code (queue everything, lock nothing) that you should adopt wholesale.
-- David Beazley — [Python Concurrency From the Ground Up: LIVE! (PyCon 2015, 45 min)](https://www.youtube.com/watch?v=MCs5OvhV9S4). Builds a server with threads, then with an event loop, then with coroutines — live, from nothing. The bridge between this lab and Lab 6. Watch it now; watch it again after Lab 6.
-
-**Read**
-
-- Real Python — [What Is the Python Global Interpreter Lock (GIL)?](https://realpython.com/python-gil/). The clearest written explanation, with the reference-counting motivation and a threads-vs-processes benchmark you should reproduce.
-- Real Python — [Speed Up Your Python Program With Concurrency](https://realpython.com/python-concurrency/). I/O-bound vs CPU-bound, `threading` vs `asyncio` vs `multiprocessing`, with the same problem solved each way and timed. The structure of your M3 benchmark.
-- Python docs — [`concurrent.futures`](https://docs.python.org/3/library/concurrent.futures.html) and the [`multiprocessing` programming guidelines](https://docs.python.org/3/library/multiprocessing.html#programming-guidelines) (read the guidelines, especially about start methods and `__main__`).
-- [PEP 703 — Making the Global Interpreter Lock Optional in CPython](https://peps.python.org/pep-0703/). Read the Motivation and the Overview of the design; skip the implementation details unless they pull you in. Then the [Python 3.13 "What's New" section on free-threaded CPython](https://docs.python.org/3/whatsnew/3.13.html).
-- [Python free-threading guide](https://py-free-threading.github.io/) — how to install, what's compatible, how to write code that's correct without the GIL.
-- *Fluent Python*, 2nd ed. — Chapter 19 ("Concurrency Models in Python") and Chapter 20 ("Concurrent Executors").
-
----
-
 ## Deliverable checklist
 
 - [ ] `build_partial` / `merge` split; serial and parallel builds produce identical indexes (test).
@@ -187,3 +168,22 @@ Bonus honesty: also parallelize a genuinely **I/O-bound** step (reading files of
 ## Stretch
 
 Share the read-only corpus text between workers with **`multiprocessing.shared_memory`** (or by `mmap`-ing the corpus file in each worker) and measure how much of the pickling tax disappears. Then try **sub-interpreters** (`concurrent.futures.InterpreterPoolExecutor`, Python 3.14) as a fourth executor: each sub-interpreter has its own GIL but lives in one process — cheaper than processes, isolated unlike threads. Add the row. You'll have benchmarked every concurrency model CPython offers on one real workload — a genuinely rare thing to have on a CV.
+
+---
+
+## Resources
+
+**Watch**
+
+- David Beazley — [Understanding the Python GIL (PyCon 2010, 45 min)](https://www.youtube.com/watch?v=Obt-vMVdM8s). The talk that made the GIL legible: what it is, how thread switching works, and the famous demonstration of two threads running *slower* than one. Still the best explanation fifteen years later; the 3.2 "new GIL" it discusses is what you're running.
+- Raymond Hettinger — [Keynote on Concurrency (PyBay 2017, 1h)](https://www.youtube.com/watch?v=9zinZmE3Ogk). Threads vs processes vs async, when to use each, and a set of rules for writing correct threaded code (queue everything, lock nothing) that you should adopt wholesale.
+- David Beazley — [Python Concurrency From the Ground Up: LIVE! (PyCon 2015, 45 min)](https://www.youtube.com/watch?v=MCs5OvhV9S4). Builds a server with threads, then with an event loop, then with coroutines — live, from nothing. The bridge between this lab and Lab 6. Watch it now; watch it again after Lab 6.
+
+**Read**
+
+- Real Python — [What Is the Python Global Interpreter Lock (GIL)?](https://realpython.com/python-gil/). The clearest written explanation, with the reference-counting motivation and a threads-vs-processes benchmark you should reproduce.
+- Real Python — [Speed Up Your Python Program With Concurrency](https://realpython.com/python-concurrency/). I/O-bound vs CPU-bound, `threading` vs `asyncio` vs `multiprocessing`, with the same problem solved each way and timed. The structure of your M3 benchmark.
+- Python docs — [`concurrent.futures`](https://docs.python.org/3/library/concurrent.futures.html) and the [`multiprocessing` programming guidelines](https://docs.python.org/3/library/multiprocessing.html#programming-guidelines) (read the guidelines, especially about start methods and `__main__`).
+- [PEP 703 — Making the Global Interpreter Lock Optional in CPython](https://peps.python.org/pep-0703/). Read the Motivation and the Overview of the design; skip the implementation details unless they pull you in. Then the [Python 3.13 "What's New" section on free-threaded CPython](https://docs.python.org/3/whatsnew/3.13.html).
+- [Python free-threading guide](https://py-free-threading.github.io/) — how to install, what's compatible, how to write code that's correct without the GIL.
+- *Fluent Python*, 2nd ed. — Chapter 19 ("Concurrency Models in Python") and Chapter 20 ("Concurrent Executors").
