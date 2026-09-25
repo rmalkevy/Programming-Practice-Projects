@@ -130,6 +130,24 @@ console.log(6)
 
 **Навіщо в грі:** код після `await` — це вже інший поворот. Прапорець «лобі ще на екрані», виставлений після `await`, може бути пізно: гравець уже натиснув «вийти».
 
+Те саме на черзі повідомлень. Прийшло `arrivedEvent`. Дешева перевірка — з `await`, важка робота — лише якщо перевірка пройшла, підтвердження «успіх» — після неї:
+
+```js
+async function onMessage(arrivedEvent) {
+  const eventStatus = await lightProcess(arrivedEvent)
+  if (eventStatus !== true) {
+    acknowledgment(arrivedEvent.id, false)
+    return
+  }
+  heavyProcess(arrivedEvent)
+  acknowledgment(arrivedEvent.id, true)
+}
+```
+
+`await lightProcess` віддає цикл. Поки перевірка висить, черга може віддати наступне повідомлення в свій `onMessage`. Два обробники живуть одночасно, хоча кожен виглядає як прямий список кроків.
+
+Гілка `false` підтверджує одразу і виходить: `heavyProcess` не стартує. Гілка `true` кличе `heavyProcess` без `await`. Якщо він синхронний, він тримає потік до кінця (Lab 1), і лише потім `acknowledgment(..., true)`. Підтвердження «успіх» стоїть після роботи, не до неї.
+
 ---
 
 ## 3. Ланцюжок: поверни, не вкладай
