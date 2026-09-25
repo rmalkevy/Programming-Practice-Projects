@@ -198,7 +198,7 @@ grep -rn "TODO(lab-01)" src/
 
 ### Basic — «коробка чесна» (~6–8 годин)
 - [Скелет](starter/README.md) збирається на C++17 з `-Werror` і санітайзерами на Debug.
-- Усі чотири мітки `TODO(lab-01)` зникли: `mem_get`, `mem_set`, ASCII-колонка, `show_byte`.
+- Чотири коментарі `TODO(lab-01)` у скелеті замінені кодом: `mem_get`, `mem_set`, ASCII-колонка в `dump`, `show_byte`. `grep -rn "TODO(lab-01)" src/` більше нічого не знаходить.
 - `dump`, `get`, `set`, `quit` працюють; адреси поза межами відхиляються з повідомленням.
 - У README є ваша таблиця `sizeof` і вставлений вивід `dump` / `get`.
 - Тег `lab-01`.

@@ -68,7 +68,7 @@ int main() {
 #include <cstdint>
 int main() {
     std::int8_t a = 5;
-    std::int8_t n = static_cast<std::int8_t>(~a + 1);
+    std::int8_t n = (std::int8_t)(~a + 1);
     std::cout << (int)n << '\n';                 // -5
 
     std::uint8_t u = 5;
@@ -146,7 +146,7 @@ std::uint8_t add8(std::uint8_t a, std::uint8_t b, bool& carry) {
         bool ab = (a >> i) & 1, bb = (b >> i) & 1;
         bool t = ab ^ bb ^ carry;
         carry = (ab && bb) || (ab && carry) || (bb && carry);
-        if (t) s = static_cast<std::uint8_t>(s | (1u << i));
+        if (t) s = (std::uint8_t)(s | (1u << i));
     }
     return s;
 }
@@ -154,7 +154,7 @@ int main() {
     bool c = false;
     auto r = add8(200, 100, c);
     std::cout << (int)r << ' ' << c << ' '
-              << (int)std::uint8_t(200 + 100) << '\n';
+              << (int)(std::uint8_t)(200 + 100) << '\n';
 }
 ```
 

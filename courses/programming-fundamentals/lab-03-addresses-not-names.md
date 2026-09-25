@@ -146,7 +146,7 @@ a = *p;
 std::uint16_t get16(const Memory& mem, std::size_t addr) {
     Byte lo = mem_get(mem, addr);
     Byte hi = mem_get(mem, addr + 1);
-    return static_cast<std::uint16_t>(lo | (hi << 8));
+    return (std::uint16_t)(lo | (hi << 8));
 }
 
 // ВАШЕ. Записати `value` двома байтами, молодший перший. Відхилити addr + 1 >= MEM_SIZE.

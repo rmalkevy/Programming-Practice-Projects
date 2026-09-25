@@ -70,8 +70,8 @@ enum class Op : unsigned char { Halt = 0, Add = 0x10 };
 int main() {
     Op o = Op::Add;
     // o = 1;            // розкоментуй: c++ … має впасти на компіляції
-    o = static_cast<Op>(0x10);
-    std::cout << static_cast<int>(o) << '\n';
+    o = (Op)0x10;
+    std::cout << (int)o << '\n';
 }
 ```
 

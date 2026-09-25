@@ -28,7 +28,7 @@ void dump(const Memory& mem) {
         // The hex column: 16 bytes, two digits each.
         for (std::size_t col = 0; col < BYTES_PER_LINE; ++col) {
             Byte b = mem.data[row + col];
-            std::cout << std::setw(2) << static_cast<int>(b) << ' ';
+            std::cout << std::setw(2) << (int)b << ' ';
         }
 
         std::cout << " |";
@@ -61,7 +61,7 @@ void show_byte(Byte b) {
     //
     //   1. b as a decimal number          -> 65
     //      Careful: `std::cout << b` prints a CHARACTER, because Byte is a
-    //      one-byte type. Use static_cast<int>(b) to print the number.
+    //      one-byte type. Use (int)b to print the number.
     //   2. b as hex, with a 0x prefix     -> 0x41
     //      std::hex switches the stream; std::dec switches it back.
     //   3. b as 8 binary digits, 0b first -> 0b01000001
@@ -73,5 +73,5 @@ void show_byte(Byte b) {
     // Expected for `set 0 65` then `get 0`:
     //   65  0x41  0b01000001  'A'
     std::cout << "show_byte: not implemented yet (byte was "
-              << static_cast<int>(b) << ")\n";
+              << (int)b << ")\n";
 }

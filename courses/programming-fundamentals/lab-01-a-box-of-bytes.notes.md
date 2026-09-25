@@ -85,7 +85,7 @@ Unsigned 8-bit: після 255 йде 0. Це **визначено**. Signed `in
 #include <cstdint>
 int main() {
     std::uint8_t u = 255;
-    u = static_cast<std::uint8_t>(u + 1);
+    u = (std::uint8_t)(u + 1);
     std::cout << (int)u << '\n';          // 0
 
     int s = 2147483647;
@@ -130,9 +130,9 @@ ASCII `'A'` = 65 = `0x41`.
 #include <iostream>
 int main() {
     std::cout << 65 << ' ' << 0x41 << ' '
-              << static_cast<int>('A') << ' '
-              << static_cast<char>(65) << '\n';
-    std::cout << static_cast<char>('A' + 1) << '\n';
+              << (int)'A' << ' '
+              << (char)65 << '\n';
+    std::cout << (char)('A' + 1) << '\n';
     std::cout << 5 / 2 << ' ' << 5 / 2.0 << '\n';
 }
 ```

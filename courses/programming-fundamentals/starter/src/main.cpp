@@ -72,7 +72,7 @@ int main() {
             } else if (addr < 0) {
                 std::cout << "address must not be negative\n";
             } else {
-                show_byte(mem_get(mem, static_cast<std::size_t>(addr)));
+                show_byte(mem_get(mem, (std::size_t)addr));
             }
         } else if (cmd == "set") {
             std::string a, v;
@@ -85,8 +85,7 @@ int main() {
             } else if (value < 0 || value > 255) {
                 // A cell holds ONE byte. 256 does not fit. Lab 1, theory 3.
                 std::cout << "a byte is 0..255, got " << value << '\n';
-            } else if (!mem_set(mem, static_cast<std::size_t>(addr),
-                                static_cast<Byte>(value))) {
+            } else if (!mem_set(mem, (std::size_t)addr, (Byte)value)) {
                 std::cout << "address " << addr << " is outside 0.." << MEM_SIZE - 1
                           << '\n';
             }
