@@ -67,6 +67,23 @@ Nothing enforces these boundaries — a program *can* `STORE` into its own code.
 That is not a bug in `ember`; that is what "von Neumann machine" means, and it is
 why real operating systems spend so much effort on memory protection.
 
+### Output port and timer (*opt*, Lab 5)
+
+Two addresses in the spare region can behave like hardware instead of memory. This
+is optional: required programs never touch them, and before Lab 5 they are plain
+bytes.
+
+| Address | Name | What it does |
+|---|---|---|
+| `0xB00` | `PORT_OUT` | a guest write (`STORE [0x0B00], A`, `STORE [H], A`, …) prints the byte as a character **immediately**. The byte also stays in memory |
+| `0xB01` | `TICKS` | a guest read (`LOAD A, [0x0B01]`, `LOAD A, [H]`) returns how many instructions have run, including this one, modulo 256 |
+
+Only a **guest** write is a port write: the host's `set` command prints nothing. The
+difference from video memory is that writing VRAM is just a write, and you need
+`SHOW` to see anything. Writing the port *is* the action. That is how the
+peripherals of real microcontrollers work ([HARDWARE.md](HARDWARE.md#lab-3--адреси-а-не-імена),
+in Ukrainian), and it is why C and C++ mark such addresses `volatile`.
+
 Heap and stack grow **towards each other**: the heap bumps upward from `0xC00`,
 `SP` walks downward from `0xFFF`. `ember` puts a fixed fence between them at
 `0xF00`, so each one runs out on its own. A real machine has no fence — the two

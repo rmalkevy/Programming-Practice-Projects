@@ -185,6 +185,8 @@ and every repetition reads as new information until they work out that it isn't.
 | memory map, instruction set, calling convention | [ISA.md](ISA.md) |
 | the numbers to check against | [CHECKS.md](CHECKS.md) |
 | how the defense runs, trace variants, break-it tasks | [DEFENSE.md](DEFENSE.md) |
+| a class exercise: two students run a program by hand, no laptop | [PAPER-CPU.md](PAPER-CPU.md) |
+| where each idea lives in real hardware, and why it matters for defense and embedded work (in Ukrainian) | [HARDWARE.md](HARDWARE.md) |
 | terminology, Ukrainian and English | [GLOSSARY.md](GLOSSARY.md) |
 
 The lab says **what you should come away with** from each experiment; the notes hold
@@ -211,7 +213,7 @@ Standard. On a fixed 16-week semester, plan the group around Standard and expect
 a real tail at Basic.
 
 Some work is **given as code you read rather than write** — Lab 1's prompt and
-dump, Lab 2's `cpu.hpp`, `step()` shape and `reg` command, Lab 3's `get16`, Lab 5's `show()`, Lab 7's `fact` listing, Lab 8's token
+dump, Lab 2's `cpu.hpp`, `step()` shape and `reg` command, Lab 3's `get16`, Lab 5's `show()`, Lab 7's `fact` listing, Lab 8's lexer skeleton and token
 list. In every case what is given is scaffolding and what is left is the lab's
 actual idea. Reading working code is a skill the course teaches on purpose.
 

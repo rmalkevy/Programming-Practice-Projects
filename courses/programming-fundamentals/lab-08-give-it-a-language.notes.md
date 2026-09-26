@@ -93,7 +93,7 @@ flowchart LR
 
 ```cpp
 struct Token {
-    enum class Kind { Ident, Number, Comma, Colon, Newline, Eof };
+    enum class Kind { Ident, Number, Comma, Colon, LBracket, RBracket, Newline, Eof };
     Kind kind;
     std::string text;
     int line;
