@@ -184,6 +184,7 @@ and every repetition reads as new information until they work out that it isn't.
 | code snippets, the build line, expected output, "if you're short on time" | **the notes** |
 | memory map, instruction set, calling convention | [ISA.md](ISA.md) |
 | the numbers to check against | [CHECKS.md](CHECKS.md) |
+| how the defense runs, trace variants, break-it tasks | [DEFENSE.md](DEFENSE.md) |
 | terminology, Ukrainian and English | [GLOSSARY.md](GLOSSARY.md) |
 
 The lab says **what you should come away with** from each experiment; the notes hold
@@ -225,7 +226,7 @@ The three Levels map onto the program-wide rubric in [`INSTRUCTOR_HANDBOOK.md`](
 - **One repository, from day one.** Public GitHub. Commit as you go. Tag each lab (`lab-01`, `lab-02`, …).
 - **README is part of every deliverable.** Each lab adds a section: what you built, pasted terminal output, what surprised you. By Lab 8 that README is the story of a computer.
 - **Terminal only.** Compile, run, and check from a shell. Notes snippets → `c++ … scratch.cpp`. `ember` → a prompt you type into. Evidence is **pasted stdout** (and sanitizer reports).
-- **Every lab ends in a 5-minute defense.** Demo the increment; answer 2–3 Reflection questions. If you can't explain a line, it doesn't count.
+- **Every lab ends in a 5-minute defense.** Run the lab's checks, trace a few bytes on paper with numbers you have not seen, predict what one changed line will break, answer one Reflection question. If you can't explain a line, it doesn't count. The format is in [DEFENSE.md](DEFENSE.md).
 - **AI assistants** — follow the [program-wide policy](../../README.md). Use them to learn faster, not to skip understanding.
 - **Sanitizers stay on.** A program that is undefined behaviour is not “working,” even if it printed something.
 
