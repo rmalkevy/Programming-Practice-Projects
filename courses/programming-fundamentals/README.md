@@ -227,8 +227,38 @@ The three Levels map onto the program-wide rubric in [`INSTRUCTOR_HANDBOOK.md`](
 - **README is part of every deliverable.** Each lab adds a section: what you built, pasted terminal output, what surprised you. By Lab 8 that README is the story of a computer.
 - **Terminal only.** Compile, run, and check from a shell. Notes snippets → `c++ … scratch.cpp`. `ember` → a prompt you type into. Evidence is **pasted stdout** (and sanitizer reports).
 - **Every lab ends in a 5-minute defense.** Run the lab's checks, trace a few bytes on paper with numbers you have not seen, predict what one changed line will break, answer one Reflection question. If you can't explain a line, it doesn't count. The format is in [DEFENSE.md](DEFENSE.md).
-- **AI assistants** — follow the [program-wide policy](../../README.md). Use them to learn faster, not to skip understanding.
+- **AI assistants are allowed.** How to use them without skipping the understanding is [its own section below](#ai-assistants).
 - **Sanitizers stay on.** A program that is undefined behaviour is not “working,” even if it printed something.
+
+---
+
+## AI assistants
+
+Honestly: an assistant can write `ember` in an evening. [ISA.md](ISA.md) and
+[CHECKS.md](CHECKS.md) specify the machine so precisely that one prompt passes
+every check. So code and pasted output show that the machine works, not that you
+understand it. The defense shows that: a paper trace with numbers you have not
+seen, and one line the instructor changes ([DEFENSE.md](DEFENSE.md)). The
+assistant is not in the room.
+
+A lab is yours if you can change any line of it and say in advance what will
+happen. Who typed the line does not matter.
+
+| Hand to the assistant | Do yourself |
+|---|---|
+| plumbing: command parsing, output formatting, `CMakeLists.txt`, splitting files | the lines the lab exists for: the mask in `decode`, the flags, how far `PC` moves, the `plot` formula, byte order in `CALL`/`RET`, labels in the assembler |
+| explaining a compiler error or an ASan report | the prediction before every run: what it prints, and why |
+| "explain this line" about the code a lab gives you | the paper trace |
+| checking: "does my `step` match the ISA table?" | the conclusion when the prediction and the machine disagree |
+
+One habit that pays off: when an assistant hands you code, predict what it will
+print on `checks/` before you run it. Assistants make plausible mistakes — `PC`
+moves by the wrong amount, carry comes from the wrong bit, bytes land in the
+wrong order — exactly the bugs a trace and the checks catch. And passing the
+checks does not mean correct: [DEFENSE.md](DEFENSE.md#lab-2--біти-не-брешуть)
+(Lab 2, break 4) has a broken `step` that almost passes them.
+
+The program-wide rules are in the [repository README](../../README.md#using-ai-assistants).
 
 ---
 
