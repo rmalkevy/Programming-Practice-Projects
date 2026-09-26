@@ -223,8 +223,9 @@ The three Levels map onto the program-wide rubric in [`INSTRUCTOR_HANDBOOK.md`](
 
 Next to every lab sits a **Sandbox** file (`lab-0N-….sandbox.md`, in Ukrainian) — a
 simpler variant for students who cannot build the machine yet. There is no project:
-seven independent 20–40-minute tasks on the same theory, each one predict first, then
-run and explain. Missing one task does not block the next. The Levels are the same —
+six independent 30–50-minute tasks on the same theory. Each has two halves: predict what
+a short ready program prints, then write 5–15 lines of your own code, with the expected
+output given for self-checking. Missing one task does not block the next. The Levels are the same —
 Basic / Standard / Advanced — and weigh the same.
 
 Students choose a track **once, at the start of the semester**: `ember` grows from lab
