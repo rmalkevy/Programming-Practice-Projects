@@ -219,6 +219,17 @@ actual idea. Reading working code is a skill the course teaches on purpose.
 
 The three Levels map onto the program-wide rubric in [`INSTRUCTOR_HANDBOOK.md`](../../INSTRUCTOR_HANDBOOK.md) §6: Basic passes, Standard is the target, Advanced is distinction.
 
+### Two tracks: the project and the Sandbox
+
+Next to every lab sits a **Sandbox** file (`lab-0N-….sandbox.md`, in Ukrainian) — a
+simpler variant for students who cannot build the machine yet. There is no project:
+seven independent 20–40-minute tasks on the same theory, each one predict first, then
+run and explain. Missing one task does not block the next. The Levels are the same —
+Basic / Standard / Advanced — and weigh the same.
+
+Students choose a track **once, at the start of the semester**: `ember` grows from lab
+to lab, so it cannot be joined midway.
+
 ---
 
 ## Rules of the course
