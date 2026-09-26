@@ -6,3 +6,6 @@ courses/programming-fundamentals/experiments/
 
 # Local Python practice files.
 courses/python/practice/
+
+# Editor settings.
+.vscode/
