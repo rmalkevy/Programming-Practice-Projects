@@ -1,2 +1,8 @@
 # Reference ember for instructors: local only, never published to students.
 courses/programming-fundamentals/reference/
+
+# Local scratch experiments for the PF notes.
+courses/programming-fundamentals/experiments/
+
+# Local Python practice files.
+courses/python/practice/
