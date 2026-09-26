@@ -133,13 +133,123 @@ std::uint8_t src    =  ins       & 0x03;  // 0b01
 
 ```txt
 src/
-  cpu.hpp      # struct Flags { bool z, n, c; }; struct CPU { Memory* mem; uint16_t pc; uint8_t a, b; Flags f; };
-  cpu.cpp      # step(), dump_regs()
-  alu.hpp/cpp  # add/sub/and/or/xor/not/shl/shr над uint8_t, повертають значення + прапорці
-  opcodes.hpp  # enum class Op : uint8_t { Halt = 0x00, ... }
+  cpu.hpp      # ДАНО нижче: коди операцій, Flags, CPU
+  cpu.cpp      # форма step() ДАНА нижче; ВАШЕ: case для групи 0x1_, dump_regs()
+  alu.hpp/cpp  # ВАШЕ: add/sub/and/or/xor/not/shl/shr над uint8_t, повертають значення + прапорці
 ```
 
+Нові `cpu.cpp` і `alu.cpp` допишіть в `add_executable` у `CMakeLists.txt`, інакше
+лінкер їх не побачить ([errors.notes.md §4](errors.notes.md)).
+
 Регістрів `A` і `B` вистачить. `PC` — це `uint16_t`, індекс у коробці на 4 КБ. Прапорці: **Z** (результат нульовий), **N** (старший біт результату одиниця), **C** (перенесення із сьомого біта при додаванні або зсуві).
+
+`cpu.hpp` **дано**. Як і `main.cpp` у першій лабі, він трохи забігає наперед:
+`Memory*` пояснює Lab 3, а свою власну `struct` ви розбиратимете в Lab 6. Цього
+тижня ви його **читаєте**, а не пишете:
+
+```cpp
+// cpu.hpp — ДАНО. Прочитайте кожен рядок, як memory.hpp у першій лабі.
+#pragma once
+#include <cstdint>
+#include "memory.hpp"
+
+// Коди операцій — рівно з ISA.uk.md, свого не вигадуйте.
+// Поки це звичайні константи (Lab 1, `const`). У Lab 6 вони стануть `enum class Op`.
+const Byte OP_HALT = 0x00;
+const Byte OP_NOP  = 0x01;
+const Byte OP_ADD  = 0x10;
+const Byte OP_SUB  = 0x11;
+const Byte OP_AND  = 0x12;
+const Byte OP_OR   = 0x13;
+const Byte OP_XOR  = 0x14;
+const Byte OP_NOT  = 0x15;
+const Byte OP_SHL  = 0x16;
+const Byte OP_SHR  = 0x17;
+const Byte OP_INC  = 0x18;
+const Byte OP_DEC  = 0x19;
+
+struct Flags {
+    bool z = false;   // результат нульовий
+    bool n = false;   // старший біт результату — одиниця
+    bool c = false;   // біт, який виїхав за межу восьми
+};
+
+struct CPU {
+    Memory* mem = nullptr;   // де лежить коробка. Що таке `*`, пояснює Lab 3;
+                             // поки читайте як «процесор знає, де його пам'ять»
+    std::uint16_t pc = 0;    // адреса НАСТУПНОЇ інструкції
+    Byte a = 0;
+    Byte b = 0;
+    Flags f;
+    bool halted = false;     // після HALT наступні step відмовляють
+};
+
+void step(CPU& cpu);
+void dump_regs(const CPU& cpu);
+```
+
+Форма `step()` теж **дана** — дві інструкції вже зроблені, щоб було видно, як
+виглядає одна гілка. `switch` — це той самий ланцюжок `else if` з `main.cpp`,
+тільки записаний коротше; повністю його розбирає Lab 4.
+
+```cpp
+// cpu.cpp — ДАНО форму. Ваші — case для групи 0x1_ і dump_regs().
+#include "cpu.hpp"
+
+#include <iostream>
+
+void step(CPU& cpu) {
+    if (cpu.halted) {
+        std::cout << "halted\n";
+        return;
+    }
+    // *cpu.mem — «пам'ять, на яку вказує cpu.mem». Докладно — Lab 3.
+    Byte op = mem_get(*cpu.mem, cpu.pc);
+
+    switch (op) {
+    case OP_HALT:
+        cpu.halted = true;
+        cpu.pc += 1;          // розмір HALT з таблиці — 1
+        break;
+    case OP_NOP:
+        cpu.pc += 1;
+        break;
+
+    // ВАШЕ: case OP_ADD і решта групи 0x1_. Кожен — виклик функції з alu.cpp,
+    // прапорці в cpu.f і cpu.pc += розмір із ISA.uk.md.
+
+    default:
+        cpu.pc += 1;          // поки що як NOP; у Lab 4 це стане помилкою
+        break;
+    }
+}
+```
+
+Щоб програмі було з чим рахувати, регістрам потрібні значення. `LOADI` з'явиться
+лише в Lab 3, тому поки що їх кладе команда `reg` — це `set`, тільки для процесора,
+а не для пам'яті. Вона **дана**; вставте її в диспетчер `main.cpp` поруч із `set`,
+а на початку `main` заведіть процесор:
+
+```cpp
+// ДАНО. Одразу після `Memory mem;`:
+CPU cpu;
+cpu.mem = &mem;   // «ось твоя пам'ять» — `&` теж розбирає Lab 3
+
+// ДАНО. Ще одна гілка диспетчера: `reg a 200`, `reg b 100`.
+} else if (cmd == "reg") {
+    std::string r, v;
+    long value = 0;
+    if (!(words >> r) || !(words >> v) || !parse_number(v, value) || value < 0 ||
+        value > 255) {
+        std::cout << "usage: reg <a|b> <0..255>\n";
+    } else if (r == "a") {
+        cpu.a = (Byte)value;
+    } else if (r == "b") {
+        cpu.b = (Byte)value;
+    } else {
+        std::cout << "unknown register: " << r << '\n';
+    }
+```
 
 ### Етапи
 
@@ -147,10 +257,10 @@ src/
 `alu.cpp` реалізує операції над `uint8_t` і повертає прапорці. Команда `alu add 200 100` (або одноразовий `test_alu`) друкує `result=44  Z=0 N=0 C=1`: 200 + 100 = 300 = 256 + 44, перенесення виставлений. Те саме зробіть для `AND` і `SHL`. Два розібрані приклади покладіть у README.
 
 **M2 — закодувати, завантажити, `step`.**
-Через `set` покладіть кілька байтів програми за адресою 0 (скажімо, `ADD`, потім `HALT`). Команда `regs` друкує `PC A B Z N C`. Команда `step` виконує одну інструкцію. `ADD` бере `A` і `B`; `HALT` виставляє ознаку зупинки, після якої наступні `step` відмовляють. Після `ADD` `PC` зсунувся на 1 (або на 2, коли з'являться безпосередні операнди).
+`reg a 200` і `reg b 100` дають регістрам значення. Через `set` покладіть кілька байтів програми за адресою 0 (скажімо, `ADD`, потім `HALT`). Команда `regs` друкує `PC A B Z N C`. Команда `step` виконує одну інструкцію. `ADD` бере `A` і `B`; `HALT` виставляє ознаку зупинки, після якої наступні `step` відмовляють. Після `ADD` `PC` зсунувся на 1 (або на 2, коли з'являться безпосередні операнди).
 
 **M3 — програма, яку видно.**
-Покладіть `A=7`, `B=1`, байти `[AND, HALT]`, зробіть `step` двічі. Виведіть регістри. Потім своя послідовність із трьох інструкцій (наприклад, `SHL`, поки не з'явиться перенесення). Запишіть трейс у README: у кожному рядку `PC`, `mem[PC]` → нові `A` і прапорці.
+`reg a 7`, `reg b 1`, байти `[AND, HALT]`, зробіть `step` двічі. Виведіть регістри. Потім своя послідовність із трьох інструкцій (наприклад, `SHL`, поки не з'явиться перенесення). Запишіть трейс у README: у кожному рядку `PC`, `mem[PC]` → нові `A` і прапорці.
 
 **M4 — розбирати масками, а не магією.**
 Напишіть `decode(Byte)`, який ділить опкод на **групу** (старший півбайт) і **індекс** (молодший) через `>>` і `&`, і за групою розводьте `switch`: `0x0_` сюди, `0x1_` туди. Не магічне число на кожну інструкцію, а **поле**. Дослід §3 з notes має з'явитись саме в `cpu.cpp`, а не лише у чернетці.

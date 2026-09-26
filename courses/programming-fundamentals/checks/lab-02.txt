@@ -1,10 +1,11 @@
-set 0 0x20
-set 1 0xC8
-set 2 0x21
-set 3 0x64
-set 4 0x10
-set 5 0x00
+reg a 200
+reg b 100
+set 0 0x10
+set 1 0x00
 regs
-run
+step
+regs
+step
+step
 regs
 quit

@@ -86,9 +86,9 @@ std::memcpy(&bits, &f, sizeof(bits));   // визначений спосіб
 
 `PC` тримає адресу гостя. `step`:
 
-1. `Byte op = mem.get(cpu.pc);`
+1. `Byte op = mem_get(*cpu.mem, cpu.pc);` — `*cpu.mem` і є та пам'ять, на яку вказує `cpu.mem`;
 2. розібрати опкод;
-3. якщо в інструкції є безпосередній операнд — `Byte imm = mem.get(cpu.pc + 1);`
+3. якщо в інструкції є безпосередній операнд — `Byte imm = mem_get(*cpu.mem, cpu.pc + 1);`
 4. виконати;
 5. `cpu.pc += розмір_цієї_інструкції` — розмір із [ISA.uk.md](ISA.uk.md), а не на око.
 

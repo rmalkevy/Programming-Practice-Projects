@@ -210,7 +210,7 @@ Standard. On a fixed 16-week semester, plan the group around Standard and expect
 a real tail at Basic.
 
 Some work is **given as code you read rather than write** — Lab 1's prompt and
-dump, Lab 3's `get16`, Lab 5's `show()`, Lab 7's `fact` listing, Lab 8's token
+dump, Lab 2's `cpu.hpp`, `step()` shape and `reg` command, Lab 3's `get16`, Lab 5's `show()`, Lab 7's `fact` listing, Lab 8's token
 list. In every case what is given is scaffolding and what is left is the lab's
 actual idea. Reading working code is a skill the course teaches on purpose.
 
