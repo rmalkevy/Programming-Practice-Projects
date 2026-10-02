@@ -1,0 +1,7 @@
+{
+  "name": "lab-03-practice",
+  "private": true,
+  "type": "module",
+  "description": "Експерименти до Lab 03 (Promise, async/await, fetch, AbortController, події)",
+  "engines": { "node": ">=20" }
+}

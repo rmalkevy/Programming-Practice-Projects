@@ -1,0 +1,12 @@
+{
+  "name": "lab-04-practice",
+  "private": true,
+  "type": "module",
+  "description": "Експерименти до Lab 04 (Node: event loop, EventEmitter, Buffer, streams, WebSocket)",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
+}
