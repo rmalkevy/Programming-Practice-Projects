@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 690" width="1080" height="690" role="img" aria-labelledby="title desc">
+  <title id="title">The ember machine</title>
+  <desc id="desc">A CPU with registers A, B, PC, H, SP, a heap pointer and flags Z, N, C reads and writes 4096 bytes of memory one byte at a time. The address registers point into memory regions: PC into code, H into data, the heap pointer into the heap, SP into the stack. Video memory and the output port go to the terminal. Each part is tagged with the lab that adds it.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --code:#ddf4ff; --code-s:#0969da; --data:#dafbe1; --data-s:#1a7f37; --vram:#fbefff; --vram-s:#8250df;
+          --res:#f6f8fa; --res-s:#818b98; --heap:#fff1e5; --heap-s:#bc4c00; --stack:#ffebe9; --stack-s:#cf222e; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --code:#0d2c4f; --code-s:#4493f8; --data:#0f2d1a; --data-s:#3fb950; --vram:#271b45; --vram-s:#ab7df8;
+            --res:#151b23; --res-s:#9198a1; --heap:#3a2111; --heap-s:#f0883e; --stack:#3d1418; --stack-s:#f85149; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .muted { fill: var(--muted); }
+    .reg { font-size: 15px; font-weight: 700; }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .cell { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .code { fill: var(--code); stroke: var(--code-s); }
+    .data { fill: var(--data); stroke: var(--data-s); }
+    .vram { fill: var(--vram); stroke: var(--vram-s); }
+    .res { fill: var(--res); stroke: var(--res-s); stroke-dasharray: 5 3; }
+    .heap { fill: var(--heap); stroke: var(--heap-s); }
+    .stack { fill: var(--stack); stroke: var(--stack-s); }
+    .region { stroke-width: 1.5; }
+    .r-pc { stroke: var(--code-s); stroke-width: 2; fill: var(--bg); }
+    .r-h { stroke: var(--data-s); stroke-width: 2; fill: var(--bg); }
+    .r-heap { stroke: var(--heap-s); stroke-width: 2; fill: var(--bg); }
+    .r-sp { stroke: var(--stack-s); stroke-width: 2; fill: var(--bg); }
+    .arrow { fill: none; stroke-width: 2; }
+    .a-pc { stroke: var(--code-s); }  .m-pc { fill: var(--code-s); }
+    .a-h { stroke: var(--data-s); }   .m-h { fill: var(--data-s); }
+    .a-heap { stroke: var(--heap-s); } .m-heap { fill: var(--heap-s); }
+    .a-sp { stroke: var(--stack-s); } .m-sp { fill: var(--stack-s); }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .bus { fill: none; stroke: var(--muted); stroke-width: 3; }
+    .dashed { stroke-dasharray: 5 3; }
+  </style>
+  <defs>
+    <marker id="m-pc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-pc" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-h" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-heap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-heap" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-sp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-sp" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1080" height="690" rx="12"/>
+
+  <!-- Title and legend -->
+  <text class="h1" x="24" y="38">The <tspan class="mono">ember</tspan> machine</text>
+  <text class="muted" x="24" y="60">What is in it and where it lives</text>
+  <g class="chip" transform="translate(760,26)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L5</text></g>
+  <text class="sm muted" x="796" y="39">— the lab that adds this part</text>
+  <rect x="762" y="50" width="24" height="12" rx="2" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text class="sm muted" x="796" y="60">— optional part</text>
+
+  <!-- CPU -->
+  <rect class="box" x="24" y="84" width="360" height="440" rx="10"/>
+  <text class="h2" x="44" y="110">CPU</text>
+  <g class="chip" transform="translate(336,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L2</text></g>
+
+  <text class="sm" x="44" y="132"><tspan class="b">Working registers</tspan><tspan class="muted"> — hold values</tspan></text>
+  <rect class="cell" x="44" y="138" width="150" height="32" rx="6"/>
+  <text class="reg mono" x="58" y="159">A</text><text class="sm muted" x="80" y="159">8 bits</text>
+  <rect class="cell" x="214" y="138" width="150" height="32" rx="6"/>
+  <text class="reg mono" x="228" y="159">B</text><text class="sm muted" x="250" y="159">8 bits</text>
+  <text class="sm" x="44" y="190"><tspan class="b">ALU</tspan>: <tspan class="mono">A ∘ B → A</tspan>, sets the flags</text>
+
+  <text class="sm" x="44" y="212"><tspan class="b">Hold addresses</tspan><tspan class="muted"> — arrows into memory</tspan></text>
+  <rect class="r-pc" x="44" y="218" width="320" height="32" rx="6"/>
+  <text class="reg mono" x="58" y="239">PC</text><text class="sm muted" x="96" y="239">16 bits</text><text class="sm" x="146" y="239">address of the next instruction</text>
+  <g class="chip" transform="translate(328,225)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L2</text></g>
+
+  <rect class="r-h" x="44" y="258" width="320" height="32" rx="6"/>
+  <text class="reg mono" x="58" y="279">H</text><text class="sm muted" x="96" y="279">16 bits</text><text class="sm" x="146" y="279">the program's pointer</text>
+  <g class="chip" transform="translate(328,265)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L3</text></g>
+
+  <rect class="r-heap" x="44" y="298" width="320" height="32" rx="6"/>
+  <text class="mono b" x="58" y="319" font-size="13">heap_ptr</text><text class="sm" x="146" y="319">top of the heap, for ALLOC</text>
+  <g class="chip" transform="translate(328,305)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L6</text></g>
+
+  <rect class="r-sp" x="44" y="338" width="320" height="32" rx="6"/>
+  <text class="reg mono" x="58" y="359">SP</text><text class="sm muted" x="96" y="359">16 bits</text><text class="sm" x="146" y="359">top of the stack</text>
+  <g class="chip" transform="translate(328,345)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L7</text></g>
+
+  <text class="sm" x="44" y="392"><tspan class="b">Flags</tspan><tspan class="muted"> — one bit each, read by conditional jumps</tspan></text>
+  <rect class="cell" x="44" y="398" width="96" height="32" rx="6"/>
+  <text class="reg mono" x="56" y="419">Z</text><text class="sm muted" x="74" y="419">zero</text>
+  <rect class="cell" x="148" y="398" width="96" height="32" rx="6"/>
+  <text class="reg mono" x="160" y="419">N</text><text class="sm muted" x="178" y="419">sign</text>
+  <rect class="cell" x="252" y="398" width="112" height="32" rx="6"/>
+  <text class="reg mono" x="264" y="419">C</text><text class="sm muted" x="282" y="419">carry</text>
+
+  <rect class="cell" x="44" y="444" width="320" height="66" rx="6"/>
+  <text class="sm" x="58" y="464"><tspan class="mono b">step()</tspan>, again and again:</text>
+  <text class="sm" x="58" y="482">read the byte <tspan class="mono">mem[PC]</tspan> → decode →</text>
+  <text class="sm" x="58" y="499">execute → <tspan class="mono">PC +=</tspan> instruction size</text>
+
+  <!-- Bus between CPU and memory -->
+  <path class="bus" d="M390,128 L554,128" marker-start="url(#m-io)" marker-end="url(#m-io)"/>
+  <text class="sm muted" x="472" y="118" text-anchor="middle">reads and writes, byte by byte</text>
+
+  <!-- Arrows from address registers into memory -->
+  <path class="arrow a-pc" d="M366,234 C460,234 470,150 556,150" marker-end="url(#m-pc)"/>
+  <path class="arrow a-h" d="M366,274 C460,274 470,386 556,386" marker-end="url(#m-h)"/>
+  <path class="arrow a-heap" d="M366,314 C460,314 470,484 556,484" marker-end="url(#m-heap)"/>
+  <path class="arrow a-sp" d="M366,354 C460,354 470,592 556,592" marker-end="url(#m-sp)"/>
+
+  <!-- Memory: heights proportional to region sizes -->
+  <text class="h2" x="560" y="100">Memory, 4096 bytes</text>
+  <g class="chip" transform="translate(772,86)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L1</text></g>
+
+  <rect class="region code" x="560" y="116" width="240" height="240"/>
+  <text class="b" x="574" y="142">Code</text>
+  <text class="sm" x="574" y="162">the program; <tspan class="mono">PC</tspan> starts at <tspan class="mono">0x000</tspan></text>
+  <text class="sm muted" x="574" y="182">instructions and data are the same</text>
+  <text class="sm muted" x="574" y="198">bytes in one box</text>
+  <text class="sm b" x="574" y="226">Opcode groups <tspan class="muted" font-weight="400">(high nibble)</tspan></text>
+  <text class="sm" x="574" y="244"><tspan class="mono">0x0_</tspan>  control and output</text><text class="sm b muted" x="790" y="244" text-anchor="end">L2</text>
+  <text class="sm" x="574" y="260"><tspan class="mono">0x1_</tspan>  ALU</text><text class="sm b muted" x="790" y="260" text-anchor="end">L2</text>
+  <text class="sm" x="574" y="276"><tspan class="mono">0x2_</tspan>  data movement</text><text class="sm b muted" x="790" y="276" text-anchor="end">L3</text>
+  <text class="sm" x="574" y="292"><tspan class="mono">0x3_</tspan>  jumps</text><text class="sm b muted" x="790" y="292" text-anchor="end">L4</text>
+  <text class="sm" x="574" y="308"><tspan class="mono">0x4_</tspan>  display</text><text class="sm b muted" x="790" y="308" text-anchor="end">L5</text>
+  <text class="sm" x="574" y="324"><tspan class="mono">0x5_</tspan>  stack and calls</text><text class="sm b muted" x="790" y="324" text-anchor="end">L7</text>
+  <text class="sm" x="574" y="340"><tspan class="mono">0x6_</tspan>  system: ALLOC</text><text class="sm b muted" x="790" y="340" text-anchor="end">L6</text>
+  <g class="chip" transform="translate(764,126)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L2</text></g>
+
+  <rect class="region data" x="560" y="356" width="240" height="60"/>
+  <text class="b" x="574" y="380">Data</text>
+  <text class="sm" x="574" y="400">strings, arrays, counters</text>
+  <g class="chip" transform="translate(764,366)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L3</text></g>
+
+  <rect class="region vram" x="560" y="416" width="240" height="30"/>
+  <text class="sm" x="574" y="435"><tspan class="b">Video memory</tspan> · 64 × 32 display</text>
+  <g class="chip" transform="translate(764,422)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L5</text></g>
+
+  <rect class="region res" x="560" y="446" width="240" height="30"/>
+  <text class="sm" x="574" y="465"><tspan class="b">Spare</tspan> · port and timer</text>
+  <g class="chip" transform="translate(764,452)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L5</text></g>
+
+  <rect class="region heap" x="560" y="476" width="240" height="90"/>
+  <text class="b" x="574" y="500">Heap ▼</text>
+  <text class="sm" x="574" y="520"><tspan class="mono">ALLOC</tspan> cuts blocks from <tspan class="mono">0xC00</tspan></text>
+  <g class="chip" transform="translate(764,486)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L6</text></g>
+
+  <rect class="region stack" x="560" y="566" width="240" height="30"/>
+  <text class="sm" x="574" y="585"><tspan class="b">Stack ▲</tspan> · <tspan class="mono">PUSH</tspan>, <tspan class="mono">CALL</tspan></text>
+  <g class="chip" transform="translate(764,572)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L7</text></g>
+
+  <g class="sm muted mono">
+    <text x="808" y="120">0x000</text>
+    <text x="808" y="360">0x800</text>
+    <text x="808" y="420">0xA00</text>
+    <text x="808" y="450">0xB00</text>
+    <text x="808" y="480">0xC00</text>
+    <text x="808" y="570">0xF00</text>
+    <text x="808" y="600">0xFFF</text>
+  </g>
+
+  <!-- Terminal -->
+  <rect class="box" x="880" y="116" width="176" height="186" rx="10"/>
+  <text class="h2" x="896" y="142">Terminal</text>
+  <text class="sm mono" x="896" y="170">OUT · OUTN · OUTS</text>
+  <text class="sm muted" x="896" y="186">text from the CPU</text>
+  <text class="sm mono" x="896" y="214">SHOW</text>
+  <text class="sm muted" x="896" y="230">draws video memory</text>
+  <text class="sm mono" x="896" y="258">a write to 0xB00</text>
+  <text class="sm muted" x="896" y="274">prints a character at once</text>
+
+  <path class="arrow a-io" d="M204,84 L204,74 L968,74 L968,110" marker-end="url(#m-io)"/>
+  <text class="sm muted mono" x="586" y="68" text-anchor="middle">OUT · OUTN · OUTS</text>
+  <path class="arrow a-io" d="M802,431 L852,431 C868,431 862,222 876,222" marker-end="url(#m-io)"/>
+  <path class="arrow a-io dashed" d="M802,461 L852,461 C872,461 864,266 876,266" marker-end="url(#m-io)"/>
+
+  <!-- Host -->
+  <rect class="box" x="24" y="620" width="1032" height="56" rx="10"/>
+  <text class="sm" x="44" y="643"><tspan class="b">Host:</tspan> all of this is one C++ program. <tspan class="mono">struct CPU</tspan> holds a <tspan class="mono">Memory*</tspan> — the address of the whole box — while <tspan class="mono">PC</tspan>, <tspan class="mono">H</tspan> and <tspan class="mono">SP</tspan> are guest addresses, numbers <tspan class="mono">0x000</tspan>–<tspan class="mono">0xFFF</tspan>.</text>
+  <text class="sm" x="44" y="664">You drive it from the prompt: <tspan class="mono">dump · get · set · reg · step · run</tspan>. The assembler <tspan class="b muted">L8</tspan> turns program text into code bytes.</text>
+  <g class="chip" transform="translate(1016,628)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L1</text></g>
+</svg>
