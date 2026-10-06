@@ -2,9 +2,9 @@
 
 [English](ISA.md) · [Українською](ISA.uk.md) · Course: [EN](README.md) · [UK](README.uk.md)
 
-> Це довідник, а не текст для читання підряд. Тримайте його відкритим у сусідній
-> вкладці весь семестр. Кожна лаба додає сюди кілька рядків — і жодна не змінює
-> те, що вже є.
+> This is a reference, not something to read start to finish. Keep it open in a
+> neighbouring tab all semester. Each lab adds a few rows here, and none of them
+> changes what is already there.
 
 This page is the **contract** between your CPU and your assembler. Lab 2 freezes
 it; Labs 3–8 each add a few rows. Nothing already in the table ever changes
