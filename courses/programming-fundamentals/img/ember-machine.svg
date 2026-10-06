@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 690" width="1080" height="690" role="img" aria-labelledby="title desc">
   <title id="title">The ember machine</title>
-  <desc id="desc">A CPU with registers A, B, PC, H, SP, a heap pointer and flags Z, N, C reads and writes 4096 bytes of memory one byte at a time. The address registers point into memory regions: PC into code, H into data, the heap pointer into the heap, SP into the stack. Video memory and the output port go to the terminal. Each part is tagged with the lab that adds it.</desc>
+  <desc id="desc">A CPU with registers A, B, PC, H, SP, a heap pointer and flags Z, N, C reads and writes 4096 bytes of memory one byte at a time. The address registers point into memory regions: PC into code, H into data, the heap pointer into the heap, SP into the stack. The assembler turns program text into the bytes of the code region. Video memory and the output port go to the terminal. Each part is tagged with the lab that adds it.</desc>
   <style>
     svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
           --code:#ddf4ff; --code-s:#0969da; --data:#dafbe1; --data-s:#1a7f37; --vram:#fbefff; --vram-s:#8250df;
@@ -164,24 +164,43 @@
     <text x="808" y="600">0xFFF</text>
   </g>
 
-  <!-- Terminal -->
-  <rect class="box" x="880" y="116" width="176" height="186" rx="10"/>
-  <text class="h2" x="896" y="142">Terminal</text>
-  <text class="sm mono" x="896" y="170">OUT · OUTN · OUTS</text>
-  <text class="sm muted" x="896" y="186">text from the CPU</text>
-  <text class="sm mono" x="896" y="214">SHOW</text>
-  <text class="sm muted" x="896" y="230">draws video memory</text>
-  <text class="sm mono" x="896" y="258">a write to 0xB00</text>
-  <text class="sm muted" x="896" y="274">prints a character at once</text>
+  <!-- Assembler: program text becomes code bytes -->
+  <rect class="box" x="872" y="116" width="176" height="220" rx="10"/>
+  <text class="h2" x="888" y="142">Assembler</text>
+  <g class="chip" transform="translate(1008,128)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L8</text></g>
+  <text class="sm muted mono" x="888" y="162">countdown.asm</text>
+  <rect class="cell" x="888" y="170" width="144" height="86" rx="6"/>
+  <text class="sm mono" x="898" y="187">LOADI A, 3</text>
+  <text class="sm mono" x="898" y="202">loop: OUTN</text>
+  <text class="sm mono" x="939" y="217">DEC A</text>
+  <text class="sm mono" x="939" y="232">JNZ loop</text>
+  <text class="sm mono" x="939" y="247">HALT</text>
+  <path class="arrow a-io" d="M910,260 L910,280" marker-end="url(#m-io)"/>
+  <text class="sm muted" x="922" y="274">via tokens</text>
+  <rect class="region code" x="888" y="284" width="144" height="40" rx="6"/>
+  <text class="sm mono" x="898" y="300">20 03 03 19</text>
+  <text class="sm mono" x="898" y="316">32 02 00 00</text>
+  <path class="arrow a-pc" d="M886,304 L804,304" marker-end="url(#m-pc)"/>
+  <text class="sm muted mono" x="837" y="296" text-anchor="middle">at 0x000</text>
 
-  <path class="arrow a-io" d="M204,84 L204,74 L968,74 L968,110" marker-end="url(#m-io)"/>
+  <!-- Terminal -->
+  <rect class="box" x="872" y="350" width="176" height="144" rx="10"/>
+  <text class="h2" x="888" y="372">Terminal</text>
+  <text class="sm mono" x="888" y="394">OUT · OUTN · OUTS</text>
+  <text class="sm muted" x="888" y="409">text from the CPU</text>
+  <text class="sm mono" x="888" y="435">SHOW</text>
+  <text class="sm muted" x="888" y="450">draws video memory</text>
+  <text class="sm mono" x="888" y="466">a write to 0xB00</text>
+  <text class="sm muted" x="888" y="481">prints a character at once</text>
+
+  <path class="arrow a-io" d="M204,84 L204,74 L1064,74 L1064,390 L1050,390" marker-end="url(#m-io)"/>
   <text class="sm muted mono" x="586" y="68" text-anchor="middle">OUT · OUTN · OUTS</text>
-  <path class="arrow a-io" d="M802,431 L852,431 C868,431 862,222 876,222" marker-end="url(#m-io)"/>
-  <path class="arrow a-io dashed" d="M802,461 L852,461 C872,461 864,266 876,266" marker-end="url(#m-io)"/>
+  <path class="arrow a-io" d="M802,431 L868,431" marker-end="url(#m-io)"/>
+  <path class="arrow a-io dashed" d="M802,461 L868,461" marker-end="url(#m-io)"/>
 
   <!-- Host -->
   <rect class="box" x="24" y="620" width="1032" height="56" rx="10"/>
   <text class="sm" x="44" y="643"><tspan class="b">Host:</tspan> all of this is one C++ program. <tspan class="mono">struct CPU</tspan> holds a <tspan class="mono">Memory*</tspan> — the address of the whole box — while <tspan class="mono">PC</tspan>, <tspan class="mono">H</tspan> and <tspan class="mono">SP</tspan> are guest addresses, numbers <tspan class="mono">0x000</tspan>–<tspan class="mono">0xFFF</tspan>.</text>
-  <text class="sm" x="44" y="664">You drive it from the prompt: <tspan class="mono">dump · get · set · reg · step · run</tspan>. The assembler <tspan class="b muted">L8</tspan> turns program text into code bytes.</text>
+  <text class="sm" x="44" y="664">You drive it from the prompt: <tspan class="mono">dump · get · set · reg · step · run</tspan>. The assembler <tspan class="b muted">L8</tspan> is host code too.</text>
   <g class="chip" transform="translate(1016,628)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L1</text></g>
 </svg>

@@ -17,7 +17,7 @@ table wins** and both are wrong.
 
 ## 1. The machine at a glance
 
-![Diagram of the ember machine: the CPU with its registers and flags, 4096 bytes of memory with its regions, and the terminal; each part is tagged with the lab that adds it](img/ember-machine.svg)
+![Diagram of the ember machine: the CPU with its registers and flags, 4096 bytes of memory with its regions, the assembler that writes program bytes into code, and the terminal; each part is tagged with the lab that adds it](img/ember-machine.svg)
 
 Arrows lead from `PC`, `H`, `heap_ptr` and `SP` into memory because those registers
 hold addresses. `A` and `B` have no arrows: they hold values. A tag such as `L5` marks

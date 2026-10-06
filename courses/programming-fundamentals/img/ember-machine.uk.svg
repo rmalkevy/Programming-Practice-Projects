@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 690" width="1080" height="690" role="img" aria-labelledby="title desc">
   <title id="title">Машина ember</title>
-  <desc id="desc">Процесор з регістрами A, B, PC, H, SP, вказівником купи і прапорцями Z, N, C читає й пише пам'ять на 4096 байтів по одному байту. Регістри-адреси вказують у регіони пам'яті: PC у код, H у дані, вказівник купи в купу, SP у стек. Відеопам'ять і порт виводу йдуть у термінал. Біля кожної частини — номер лаби, яка її додає.</desc>
+  <desc id="desc">Процесор з регістрами A, B, PC, H, SP, вказівником купи і прапорцями Z, N, C читає й пише пам'ять на 4096 байтів по одному байту. Регістри-адреси вказують у регіони пам'яті: PC у код, H у дані, вказівник купи в купу, SP у стек. Асемблер перетворює текст програми на байти регіону коду. Відеопам'ять і порт виводу йдуть у термінал. Біля кожної частини — номер лаби, яка її додає.</desc>
   <style>
     svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
           --code:#ddf4ff; --code-s:#0969da; --data:#dafbe1; --data-s:#1a7f37; --vram:#fbefff; --vram-s:#8250df;
@@ -164,24 +164,43 @@
     <text x="808" y="600">0xFFF</text>
   </g>
 
-  <!-- Термінал -->
-  <rect class="box" x="880" y="116" width="176" height="186" rx="10"/>
-  <text class="h2" x="896" y="142">Термінал</text>
-  <text class="sm mono" x="896" y="170">OUT · OUTN · OUTS</text>
-  <text class="sm muted" x="896" y="186">текст від процесора</text>
-  <text class="sm mono" x="896" y="214">SHOW</text>
-  <text class="sm muted" x="896" y="230">малює відеопам'ять</text>
-  <text class="sm mono" x="896" y="258">запис у 0xB00</text>
-  <text class="sm muted" x="896" y="274">символ одразу</text>
+  <!-- Асемблер: текст програми стає байтами коду -->
+  <rect class="box" x="872" y="116" width="176" height="220" rx="10"/>
+  <text class="h2" x="888" y="142">Асемблер</text>
+  <g class="chip" transform="translate(1008,128)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L8</text></g>
+  <text class="sm muted mono" x="888" y="162">countdown.asm</text>
+  <rect class="cell" x="888" y="170" width="144" height="86" rx="6"/>
+  <text class="sm mono" x="898" y="187">LOADI A, 3</text>
+  <text class="sm mono" x="898" y="202">loop: OUTN</text>
+  <text class="sm mono" x="939" y="217">DEC A</text>
+  <text class="sm mono" x="939" y="232">JNZ loop</text>
+  <text class="sm mono" x="939" y="247">HALT</text>
+  <path class="arrow a-io" d="M910,260 L910,280" marker-end="url(#m-io)"/>
+  <text class="sm muted" x="922" y="274">через токени</text>
+  <rect class="region code" x="888" y="284" width="144" height="40" rx="6"/>
+  <text class="sm mono" x="898" y="300">20 03 03 19</text>
+  <text class="sm mono" x="898" y="316">32 02 00 00</text>
+  <path class="arrow a-pc" d="M886,304 L804,304" marker-end="url(#m-pc)"/>
+  <text class="sm muted mono" x="837" y="296" text-anchor="middle">з 0x000</text>
 
-  <path class="arrow a-io" d="M204,84 L204,74 L968,74 L968,110" marker-end="url(#m-io)"/>
+  <!-- Термінал -->
+  <rect class="box" x="872" y="350" width="176" height="144" rx="10"/>
+  <text class="h2" x="888" y="372">Термінал</text>
+  <text class="sm mono" x="888" y="394">OUT · OUTN · OUTS</text>
+  <text class="sm muted" x="888" y="409">текст від процесора</text>
+  <text class="sm mono" x="888" y="435">SHOW</text>
+  <text class="sm muted" x="888" y="450">малює відеопам'ять</text>
+  <text class="sm mono" x="888" y="466">запис у 0xB00</text>
+  <text class="sm muted" x="888" y="481">символ одразу</text>
+
+  <path class="arrow a-io" d="M204,84 L204,74 L1064,74 L1064,390 L1050,390" marker-end="url(#m-io)"/>
   <text class="sm muted mono" x="586" y="68" text-anchor="middle">OUT · OUTN · OUTS</text>
-  <path class="arrow a-io" d="M802,431 L852,431 C868,431 862,222 876,222" marker-end="url(#m-io)"/>
-  <path class="arrow a-io dashed" d="M802,461 L852,461 C872,461 864,266 876,266" marker-end="url(#m-io)"/>
+  <path class="arrow a-io" d="M802,431 L868,431" marker-end="url(#m-io)"/>
+  <path class="arrow a-io dashed" d="M802,461 L868,461" marker-end="url(#m-io)"/>
 
   <!-- Хост -->
   <rect class="box" x="24" y="620" width="1032" height="56" rx="10"/>
   <text class="sm" x="44" y="643"><tspan class="b">Хост:</tspan> усе це — одна програма C++. <tspan class="mono">struct CPU</tspan> тримає <tspan class="mono">Memory*</tspan> — адресу всієї коробки, а <tspan class="mono">PC</tspan>, <tspan class="mono">H</tspan> і <tspan class="mono">SP</tspan> — адреси гостя, числа <tspan class="mono">0x000</tspan>–<tspan class="mono">0xFFF</tspan>.</text>
-  <text class="sm" x="44" y="664">Керуєте нею з prompt: <tspan class="mono">dump · get · set · reg · step · run</tspan>. Асемблер <tspan class="b muted">L8</tspan> перекладає текст програми в байти коду.</text>
+  <text class="sm" x="44" y="664">Керуєте нею з prompt: <tspan class="mono">dump · get · set · reg · step · run</tspan>. Асемблер <tspan class="b muted">L8</tspan> — теж частина хоста.</text>
   <g class="chip" transform="translate(1016,628)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">L1</text></g>
 </svg>
