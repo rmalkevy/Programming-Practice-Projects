@@ -1,0 +1,262 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 942" width="1080" height="942" role="img" aria-labelledby="title desc">
+  <title id="title">Control: checks and jumps</title>
+  <desc id="desc">Five panels for the Lab 04 theory. 1: the countdown from ISA §9: eight bytes of code, JNZ jumps back to 0x0002 while Z = 0, and three iterations print 3, 2, 1. 2: if/else, while and do … while as blocks with conditional jumps forward and unconditional jumps back. 3: &amp;&amp; and || skip the right side once the answer is known; 1 &amp;&amp; 2 is true, 1 &amp; 2 is 0. 4: a linear search for 0x41 in the data 10 20 41 30: H walks the cells, CMP finds a match at 0x0802, output 2; what happens without a match is a question for M4. 5: switch without break: INC falls through into DEC and A stays 5.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --a:#ddf4ff; --a-s:#0969da; --b:#fbefff; --b-s:#8250df; --c:#fff1e5; --c-s:#bc4c00;
+          --val:#dafbe1; --val-s:#1a7f37; --pad:#f6f8fa; --pad-s:#818b98; --bad:#ffebe9; --bad-s:#cf222e; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --a:#0d2c4f; --a-s:#4493f8; --b:#271b45; --b-s:#ab7df8; --c:#3a2111; --c-s:#f0883e;
+            --val:#0f2d1a; --val-s:#3fb950; --pad:#151b23; --pad-s:#9198a1; --bad:#3d1418; --bad-s:#f85149; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .xs { font-size: 10.5px; }
+    .muted { fill: var(--muted); }
+    .ok { fill: var(--val-s); font-weight: 700; }
+    .err { fill: var(--bad-s); font-weight: 700; }
+    .tb { fill: var(--b-s); font-weight: 700; }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .cell { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .rule { stroke: var(--line); stroke-width: 1.2; }
+    .ga { fill: var(--a); stroke: var(--a-s); stroke-width: 1.2; }
+    .gb { fill: var(--b); stroke: var(--b-s); stroke-width: 1.2; }
+    .gc { fill: var(--c); stroke: var(--c-s); stroke-width: 1.2; }
+    .gv { fill: var(--val); stroke: var(--val-s); stroke-width: 1.2; }
+    .zero { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .pad { fill: var(--pad); stroke: var(--pad-s); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .bad { fill: var(--bad); stroke: var(--bad-s); stroke-width: 1.5; }
+    .ghost { fill: var(--pad); stroke: var(--pad-s); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .brace { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .arrow { fill: none; stroke-width: 2; }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .a-b { stroke: var(--b-s); }      .m-b { fill: var(--b-s); }
+    .a-val { stroke: var(--val-s); }  .m-val { fill: var(--val-s); }
+    .a-bad { stroke: var(--bad-s); }  .m-bad { fill: var(--bad-s); }
+    .dashed { stroke-dasharray: 5 3; }
+  </style>
+  <defs>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-b" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-val" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-val" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-bad" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+<rect class="bg" x="0" y="0" width="1080" height="942" rx="12"/>
+
+<!-- Title and legend -->
+<text class="h1" x="24" y="38">Control: checks and jumps</text>
+<text class="muted" x="24" y="60"><tspan class="mono">if</tspan>, <tspan class="mono">while</tspan>, <tspan class="mono">for</tspan> are comparisons and jumps. A loop is a jump back.</text>
+<g class="chip" transform="translate(700,24)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm muted" x="736" y="37">— section of the Lab 04 theory</text>
+<path class="arrow a-b" d="M702,55 L726,55" marker-end="url(#m-b)"/>
+<text class="sm muted" x="736" y="59">jump back</text>
+<path class="arrow a-io" d="M884,55 L908,55" marker-end="url(#m-io)"/>
+<text class="sm muted" x="918" y="59">jump forward</text>
+
+<!-- 1. Countdown in ember -->
+<rect class="box" x="24" y="84" width="1032" height="246" rx="10"/>
+<text class="h2" x="44" y="110">1. A loop is a jump back: counting 3, 2, 1 in <tspan class="mono">ember</tspan></text>
+<g class="chip" transform="translate(982,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<g class="chip" transform="translate(1016,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">ISA</text></g>
+<text class="sm muted" x="44" y="130">The program from ISA §9. Trace: <tspan class="mono">./run.sh 08</tspan> in the Lab 04 practice, 11 steps.</text>
+<rect class="ga" x="64" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="89" y="219" text-anchor="middle">20</text>
+<text class="xs mono muted" x="89" y="246" text-anchor="middle">0000</text>
+<rect class="ga" x="114" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="139" y="219" text-anchor="middle">03</text>
+<text class="xs mono muted" x="139" y="246" text-anchor="middle">0001</text>
+<rect class="gv" x="164" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="189" y="219" text-anchor="middle">03</text>
+<text class="xs mono muted" x="189" y="246" text-anchor="middle">0002</text>
+<rect class="gc" x="214" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="239" y="219" text-anchor="middle">19</text>
+<text class="xs mono muted" x="239" y="246" text-anchor="middle">0003</text>
+<rect class="gb" x="264" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="289" y="219" text-anchor="middle">32</text>
+<text class="xs mono muted" x="289" y="246" text-anchor="middle">0004</text>
+<rect class="gb" x="314" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="339" y="219" text-anchor="middle">02</text>
+<text class="xs mono muted" x="339" y="246" text-anchor="middle">0005</text>
+<rect class="gb" x="364" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="389" y="219" text-anchor="middle">00</text>
+<text class="xs mono muted" x="389" y="246" text-anchor="middle">0006</text>
+<rect class="zero" x="414" y="196" width="50" height="36" rx="0"/>
+<text class="mono b" x="439" y="219" text-anchor="middle">00</text>
+<text class="xs mono muted" x="439" y="246" text-anchor="middle">0007</text>
+<path class="brace" d="M67,252 v6 H161 v-6"/>
+<text class="sm mono" x="114" y="274" text-anchor="middle">LOADI A, 3</text>
+<path class="brace" d="M167,252 v6 H211 v-6"/>
+<text class="sm mono" x="189" y="274" text-anchor="middle">OUTN</text>
+<path class="brace" d="M217,252 v6 H261 v-6"/>
+<text class="sm mono" x="239" y="274" text-anchor="middle">DEC A</text>
+<path class="brace" d="M267,252 v6 H411 v-6"/>
+<text class="sm mono" x="339" y="274" text-anchor="middle">JNZ loop</text>
+<path class="brace" d="M417,252 v6 H461 v-6"/>
+<text class="sm mono" x="439" y="274" text-anchor="middle">HALT</text>
+<path class="arrow a-b" d="M289,194 C289,150 189,150 189,192" marker-end="url(#m-b)"/>
+<text class="sm tb" x="239" y="154" text-anchor="middle">Z = 0: PC = 0x0002</text>
+<path class="arrow a-io dashed" d="M389,194 C389,170 439,170 439,192" marker-end="url(#m-io)"/>
+<text class="xs muted" x="444" y="174">Z = 1</text>
+<text class="xs mono muted" x="189" y="188" text-anchor="middle"> </text>
+<text class="sm" x="44" y="300">The <tspan class="mono">JNZ</tspan> operand <tspan class="mono">02 00</tspan> is <tspan class="mono">0x0002</tspan>, low byte first.</text>
+<text class="sm muted" x="44" y="318">Jump taken: <tspan class="mono">PC</tspan> = operand, the size is not added. Not taken: <tspan class="mono">PC += 3</tspan>.</text>
+<line class="rule" x1="504" y1="144" x2="504" y2="318"/>
+<text class="sm b" x="520" y="164">iteration</text>
+<text class="sm b" x="596" y="164">OUTN prints</text>
+<text class="sm b" x="696" y="164">A after DEC</text>
+<text class="sm b" x="796" y="164">Z</text>
+<text class="sm b" x="826" y="164">JNZ</text>
+<line class="rule" x1="520" y1="172" x2="1036" y2="172"/>
+<text class="sm mono" x="544" y="192">1</text>
+<text class="sm mono b" x="630" y="192">3</text>
+<text class="sm mono" x="730" y="192">2</text>
+<text class="sm mono" x="798" y="192">0</text>
+<text class="sm tb" x="826" y="192">back to 0x0002</text>
+<text class="sm mono" x="544" y="214">2</text>
+<text class="sm mono b" x="630" y="214">2</text>
+<text class="sm mono" x="730" y="214">1</text>
+<text class="sm mono" x="798" y="214">0</text>
+<text class="sm tb" x="826" y="214">back to 0x0002</text>
+<text class="sm mono" x="544" y="236">3</text>
+<text class="sm mono b" x="630" y="236">1</text>
+<text class="sm mono" x="730" y="236">0</text>
+<text class="sm mono" x="798" y="236">1</text>
+<text class="sm" x="826" y="236">on to 0x0007, HALT</text>
+<text class="sm" x="520" y="272">The same in C++, with the check at the end:</text>
+<text class="sm mono" x="520" y="292">a = 3; do { print(a); --a; } while (a != 0);</text>
+<text class="sm muted" x="520" y="312">Output <tspan class="mono">3 2 1</tspan>. <tspan class="mono">LOADI</tspan> leaves the flags alone; <tspan class="mono">DEC</tspan> sets <tspan class="mono">Z</tspan>.</text>
+
+<!-- 2. Control forms -->
+<rect class="box" x="24" y="346" width="508" height="320" rx="10"/>
+<text class="h2" x="44" y="372">2. The forms are checks and jumps</text>
+<g class="chip" transform="translate(492,358)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="sm mono b" x="44" y="400">if / else</text>
+<rect class="gb" x="44" y="412" width="112" height="26" rx="4"/>
+<text class="xs mono" x="100" y="430" text-anchor="middle">CMP; JZ else</text>
+<rect class="zero" x="44" y="450" width="112" height="26" rx="4"/>
+<text class="xs mono" x="100" y="468" text-anchor="middle">then branch</text>
+<rect class="gb" x="44" y="488" width="112" height="26" rx="4"/>
+<text class="xs mono" x="100" y="506" text-anchor="middle">JMP end</text>
+<rect class="zero" x="44" y="526" width="112" height="26" rx="4"/>
+<text class="xs mono" x="100" y="544" text-anchor="middle">else: else branch</text>
+<text class="sm mono muted" x="50" y="581">end:</text>
+<path class="arrow a-io" d="M156,425 C178,425 178,539 159,539" marker-end="url(#m-io)"/>
+<path class="arrow a-io" d="M156,501 C190,501 190,577 159,577" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="212" y="400">while</text>
+<rect class="gb" x="212" y="412" width="112" height="26" rx="4"/>
+<text class="xs mono" x="268" y="430" text-anchor="middle">top: CMP; JZ end</text>
+<rect class="zero" x="212" y="450" width="112" height="26" rx="4"/>
+<text class="xs mono" x="268" y="468" text-anchor="middle">body</text>
+<rect class="gb" x="212" y="488" width="112" height="26" rx="4"/>
+<text class="xs mono" x="268" y="506" text-anchor="middle">JMP top</text>
+<text class="sm mono muted" x="218" y="543">end:</text>
+<path class="arrow a-io" d="M324,425 C346,425 346,539 327,539" marker-end="url(#m-io)"/>
+<path class="arrow a-b" d="M212,501 C186,501 186,425 209,425" marker-end="url(#m-b)"/>
+<text class="sm mono b" x="380" y="400">do … while</text>
+<rect class="zero" x="380" y="412" width="112" height="26" rx="4"/>
+<text class="xs mono" x="436" y="430" text-anchor="middle">top: body</text>
+<rect class="gb" x="380" y="450" width="112" height="26" rx="4"/>
+<text class="xs mono" x="436" y="468" text-anchor="middle">CMP; JNZ top</text>
+<text class="sm mono muted" x="386" y="505">end:</text>
+<path class="arrow a-b" d="M380,463 C354,463 354,425 377,425" marker-end="url(#m-b)"/>
+<text class="sm muted" x="44" y="638"><tspan class="mono">for</tspan> is a <tspan class="mono">while</tspan> with a counter. <tspan class="mono">for (;;)</tspan> is a <tspan class="mono">JMP</tspan> with no condition,</text>
+<text class="sm muted" x="44" y="654">which is why <tspan class="mono">run</tspan> has a step limit.</text>
+
+<!-- 3. Short-circuit -->
+<rect class="box" x="548" y="346" width="508" height="320" rx="10"/>
+<text class="h2" x="568" y="372">3. <tspan class="mono">&amp;&amp;</tspan> and <tspan class="mono">||</tspan> may skip the right side</text>
+<g class="chip" transform="translate(1016,358)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<rect class="zero" x="568" y="406" width="150" height="30" rx="4"/>
+<text class="sm mono" x="643" y="426" text-anchor="middle">p != nullptr</text>
+<text class="mono b" x="738" y="426" text-anchor="middle">&amp;&amp;</text>
+<rect class="zero" x="760" y="406" width="120" height="30" rx="4"/>
+<text class="sm mono" x="820" y="426" text-anchor="middle">*p == 3</text>
+<text class="xs muted" x="820" y="400" text-anchor="middle">read only if the left is true</text>
+<path class="arrow a-val" d="M643,438 C643,462 960,462 960,440" marker-end="url(#m-val)"/>
+<rect class="gv" x="912" y="406" width="96" height="30" rx="4"/>
+<text class="sm mono b" x="960" y="426" text-anchor="middle">false</text>
+<text class="xs ok" x="800" y="472" text-anchor="middle">left false → false at once, *p is never read</text>
+<rect class="zero" x="568" y="510" width="150" height="30" rx="4"/>
+<text class="sm mono" x="643" y="530" text-anchor="middle">a</text>
+<text class="mono b" x="738" y="530" text-anchor="middle">||</text>
+<rect class="zero" x="760" y="510" width="120" height="30" rx="4"/>
+<text class="sm mono" x="820" y="530" text-anchor="middle">b</text>
+<text class="xs muted" x="820" y="504" text-anchor="middle">evaluated only if the left is false</text>
+<path class="arrow a-val" d="M643,542 C643,566 960,566 960,544" marker-end="url(#m-val)"/>
+<rect class="gv" x="912" y="510" width="96" height="30" rx="4"/>
+<text class="sm mono b" x="960" y="530" text-anchor="middle">true</text>
+<text class="xs ok" x="800" y="576" text-anchor="middle">left true → true at once, b is never evaluated</text>
+<text class="sm b" x="568" y="602">Logical is not bitwise:</text>
+<text class="sm mono" x="568" y="622" style="white-space:pre">1 &amp;&amp; 2 → true      1 &amp; 2 → 0   <tspan class="muted">(01 &amp; 10 = 00)</tspan></text>
+<text class="sm" x="568" y="644"><tspan class="mono err">if (x = 0)</tspan> is an assignment, not a comparison;</text>
+<text class="sm muted" x="568" y="660">with <tspan class="mono">-Werror</tspan> it does not compile.</text>
+
+<!-- 4. Linear search -->
+<rect class="box" x="24" y="682" width="508" height="244" rx="10"/>
+<text class="h2" x="44" y="708">4. Linear search: <tspan class="mono">H</tspan> is <tspan class="mono">i</tspan></text>
+<g class="chip" transform="translate(492,694)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<text class="xs mono" x="44" y="730">loop: LOAD A, [H] · CMP A, B · JZ found · INCH · JMP loop</text>
+<text class="xs muted" x="44" y="746"><tspan class="mono">H</tspan> is <tspan class="mono">i</tspan>, <tspan class="mono">INCH</tspan> is <tspan class="mono">++i</tspan>, <tspan class="mono">CMP</tspan> is <tspan class="mono">==</tspan>, <tspan class="mono">JZ</tspan> is <tspan class="mono">if</tspan>. We look for <tspan class="mono">B = 0x41</tspan>.</text>
+<rect class="zero" x="64" y="792" width="56" height="34" rx="0"/>
+<text class="mono" x="92" y="814" text-anchor="middle">10</text>
+<text class="xs mono muted" x="92" y="840" text-anchor="middle">0800</text>
+<rect class="zero" x="120" y="792" width="56" height="34" rx="0"/>
+<text class="mono" x="148" y="814" text-anchor="middle">20</text>
+<text class="xs mono muted" x="148" y="840" text-anchor="middle">0801</text>
+<rect class="gv" x="176" y="792" width="56" height="34" rx="0"/>
+<text class="mono b" x="204" y="814" text-anchor="middle">41</text>
+<text class="xs mono muted" x="204" y="840" text-anchor="middle">0802</text>
+<rect class="zero" x="232" y="792" width="56" height="34" rx="0"/>
+<text class="mono" x="260" y="814" text-anchor="middle">30</text>
+<text class="xs mono muted" x="260" y="840" text-anchor="middle">0803</text>
+<text class="xs mono b" x="92" y="764" text-anchor="middle">H</text>
+<path class="arrow a-io" d="M92,768 L92,789" marker-end="url(#m-io)"/>
+<text class="xs muted" x="100" y="782">≠</text>
+<text class="xs mono b" x="148" y="764" text-anchor="middle">H</text>
+<path class="arrow a-io" d="M148,768 L148,789" marker-end="url(#m-io)"/>
+<text class="xs muted" x="156" y="782">≠</text>
+<text class="xs mono b" x="204" y="764" text-anchor="middle">H</text>
+<path class="arrow a-val" d="M204,768 L204,789" marker-end="url(#m-val)"/>
+<text class="xs ok" x="212" y="782">= 0x41</text>
+<rect class="ghost" x="288" y="792" width="56" height="34" rx="0"/>
+<text class="mono muted" x="316" y="814" text-anchor="middle">…</text>
+<rect class="ghost" x="344" y="792" width="56" height="34" rx="0"/>
+<text class="mono err" x="372" y="814" text-anchor="middle">?</text>
+<text class="sm" x="412" y="806"><tspan class="mono">HLOW</tspan> → <tspan class="mono">A = 2</tspan></text>
+<text class="sm" x="412" y="824"><tspan class="mono">OUTN</tspan> prints <tspan class="mono ok">2</tspan></text>
+<text class="sm b" x="44" y="874">And if <tspan class="mono">0x41</tspan> is not in the data?</text>
+<text class="sm muted" x="44" y="892"><tspan class="mono">H</tspan> keeps going: <tspan class="mono">0x0804</tspan>, <tspan class="mono">0x0805</tspan>, … How to stop the loop at <tspan class="mono">hi</tspan></text>
+<text class="sm muted" x="44" y="908">and how to report a miss is your call in M4.</text>
+
+<!-- 5. switch -->
+<rect class="box" x="548" y="682" width="508" height="244" rx="10"/>
+<text class="h2" x="568" y="708">5. <tspan class="mono">switch</tspan>: without <tspan class="mono">break</tspan>, execution falls through</text>
+<g class="chip" transform="translate(1016,694)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="xs mono muted" x="568" y="730">op = 0x18 (INC A), A = 5</text>
+<text class="sm b" x="568" y="756">without break</text>
+<rect class="gb" x="568" y="766" width="220" height="30" rx="4"/>
+<text class="sm mono" x="678" y="786" text-anchor="middle">case 0x18: a++;</text>
+<rect class="gb" x="568" y="826" width="220" height="30" rx="4"/>
+<text class="sm mono" x="678" y="846" text-anchor="middle">case 0x19: a--; break;</text>
+<path class="arrow a-bad" d="M678,798 L678,824" marker-end="url(#m-bad)"/>
+<text class="xs err" x="686" y="816">no break, keeps going</text>
+<text class="sm mono err" x="568" y="882">A = 5</text>
+<text class="sm b" x="812" y="756">with break</text>
+<rect class="gb" x="812" y="766" width="220" height="30" rx="4"/>
+<text class="sm mono" x="922" y="786" text-anchor="middle">case 0x18: a++; break;</text>
+<rect class="ghost" x="812" y="826" width="220" height="30" rx="4"/>
+<text class="sm mono muted" x="922" y="846" text-anchor="middle">case 0x19: a--; break;</text>
+<path class="arrow a-val" d="M1034,781 C1048,781 1048,878 872,878" marker-end="url(#m-val)"/>
+<text class="xs muted" x="922" y="816" text-anchor="middle">not executed</text>
+<text class="sm mono ok" x="812" y="882">A = 6</text>
+<text class="sm muted" x="568" y="910"><tspan class="mono">default:</tspan> an unknown opcode (<tspan class="mono">0x77</tspan>) is an error, not silence.</text>
+</svg>

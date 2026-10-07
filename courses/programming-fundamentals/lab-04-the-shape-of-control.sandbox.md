@@ -1,6 +1,6 @@
 # Пісочниця 04 — Форма керування: шість маленьких задач
 
-**Тижні:** 7–8 · **Лаба:** [Lab 04](lab-04-the-shape-of-control.md) · **Notes:** [досліди](lab-04-the-shape-of-control.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md)
+**Тижні:** 7–8 · **Лаба:** [Lab 04](lab-04-the-shape-of-control.md) · **Notes:** [досліди](lab-04-the-shape-of-control.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md) · **Схема:** [UK](img/control.uk.svg) · [EN](img/control.svg)
 
 > **Що це.** Пісочниця — одна з двох стежок курсу, простіший варіант. На основній ви
 > лабу за лабою будуєте `ember`. Тут проєкту немає: замість нього шість незалежних
