@@ -1,6 +1,6 @@
 # Пісочниця 03 — Адреси, а не імена: шість маленьких задач
 
-**Тижні:** 5–6 · **Лаба:** [Lab 03](lab-03-addresses-not-names.md) · **Notes:** [досліди](lab-03-addresses-not-names.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md)
+**Тижні:** 5–6 · **Лаба:** [Lab 03](lab-03-addresses-not-names.md) · **Notes:** [досліди](lab-03-addresses-not-names.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md) · **Схема:** [UK](img/pointers.uk.svg) · [EN](img/pointers.svg)
 
 > **Що це.** Пісочниця — одна з двох стежок курсу, простіший варіант. На основній ви
 > лабу за лабою будуєте `ember`. Тут проєкту немає: замість нього шість незалежних

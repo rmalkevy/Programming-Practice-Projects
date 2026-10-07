@@ -95,8 +95,8 @@ C++ тут потрібен, щоб бачити байти. Беремо нев
 | Лаба | Ідея | У `ember` |
 |---|---|---|
 | 1. [Коробка байтів](lab-01-a-box-of-bytes.md) · [notes](lab-01-a-box-of-bytes.notes.md) | Компіляція, типи як розмір, переповнення, `const`, символи як числа | CMake, 4 КБ, `dump`, `get`/`set` |
-| 2. [Біти не брешуть](lab-02-bits-dont-lie.md) · [notes](lab-02-bits-dont-lie.notes.md) | Двійкова й шістнадцяткова системи, доповняльний код, прапорці, бітові операції | ALU, прапорці, розбір опкода, `step` |
-| 3. [Адреси, а не імена](lab-03-addresses-not-names.md) · [notes](lab-03-addresses-not-names.notes.md) | Вказівники, `&`/`*`, `void*`, `sizeof` | `LOAD`/`STORE`, адресний регістр `H`, лічильник команд по пам'яті |
+| 2. [Біти не брешуть](lab-02-bits-dont-lie.md) · [notes](lab-02-bits-dont-lie.notes.md) · [схема](img/bits.uk.svg) | Двійкова й шістнадцяткова системи, доповняльний код, прапорці, бітові операції | ALU, прапорці, розбір опкода, `step` |
+| 3. [Адреси, а не імена](lab-03-addresses-not-names.md) · [notes](lab-03-addresses-not-names.notes.md) · [схема](img/pointers.uk.svg) | Вказівники, `&`/`*`, `void*`, `sizeof` | `LOAD`/`STORE`, адресний регістр `H`, лічильник команд по пам'яті |
 | 4. [Форма керування](lab-04-the-shape-of-control.md) · [notes](lab-04-the-shape-of-control.notes.md) | Булеві, `if`/`switch`/`while`/`for`, коротке замикання, блоки | `JMP`/`JZ`, цикл у байткоді, лінійний пошук |
 | 5. [Багато однакового](lab-05-many-of-one-thing.md) · [notes](lab-05-many-of-one-thing.notes.md) | Масиви, індекс у сітці, рядки, пошук, прості сортування | Екран 64×32 всередині пам'яті, `PLOT`, сортування шматка пам'яті, друк рядка |
 | 6. [Іменовані набори](lab-06-named-bundles.md) · [notes](lab-06-named-bundles.notes.md) | `struct`, `enum`, час життя, стек і купа, витоки | `CPU` як `struct`, купа, спрайти |

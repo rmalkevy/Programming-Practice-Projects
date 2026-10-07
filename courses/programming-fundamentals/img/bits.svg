@@ -1,0 +1,683 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1120" width="1080" height="1120" role="img" aria-labelledby="title desc">
+  <title id="title">Bits, operators and masks</title>
+  <desc id="desc">Four panels for the Lab 02 theory. 1: the byte 0x2F as eight bits with weights 128…1, two hex digits of four bits each, decimal 47. 2: −5 in two's complement: 5, flip the bits, add 1, giving 0xFB; the same byte is 251 as uint8_t and −5 as int8_t because bit 7 weighs −128. 3: a = 0xCA and b = 0xA6 bit by bit through &amp;, |, ^, ~; the shifts a &lt;&lt; 1 and a &gt;&gt; 1, where the bit that drops out goes into flag C; the precedence trap x &amp; 1 == 0. 4: the byte 0b1011'10'01 split into opcode, dest and src fields by a shift and a mask; set, clear and test a flag bit; the high nibble of an ember opcode is its group.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --one:#dafbe1; --one-s:#1a7f37; --code:#ddf4ff; --code-s:#0969da; --ptr:#fbefff; --ptr-s:#8250df;
+          --heap:#fff1e5; --heap-s:#bc4c00; --pad:#f6f8fa; --pad-s:#818b98; --bad:#ffebe9; --bad-s:#cf222e; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --one:#0f2d1a; --one-s:#3fb950; --code:#0d2c4f; --code-s:#4493f8; --ptr:#271b45; --ptr-s:#ab7df8;
+            --heap:#3a2111; --heap-s:#f0883e; --pad:#151b23; --pad-s:#9198a1; --bad:#3d1418; --bad-s:#f85149; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .big { font-size: 20px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .xs { font-size: 10.5px; }
+    .muted { fill: var(--muted); }
+    .ok { fill: var(--one-s); font-weight: 700; }
+    .err { fill: var(--bad-s); font-weight: 700; }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .cell { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .rule { stroke: var(--line); stroke-width: 1.2; }
+    .one { fill: var(--one); stroke: var(--one-s); stroke-width: 1.2; }
+    .zero { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .pad { fill: var(--pad); stroke: var(--pad-s); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .f-op { fill: var(--code); stroke: var(--code-s); stroke-width: 1.2; }
+    .f-dst { fill: var(--ptr); stroke: var(--ptr-s); stroke-width: 1.2; }
+    .f-src { fill: var(--heap); stroke: var(--heap-s); stroke-width: 1.2; }
+    .hit { stroke: var(--fg); stroke-width: 2.5; }
+    .flag { fill: var(--bad); stroke: var(--bad-s); stroke-width: 2; }
+    .trap { fill: var(--bad); stroke: var(--bad-s); stroke-width: 1.2; }
+    .band { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .brace { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .arrow { fill: none; stroke-width: 2; }
+    .thin { fill: none; stroke: var(--muted); stroke-width: 1.3; }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .a-bad { stroke: var(--bad-s); }  .m-bad { fill: var(--bad-s); }
+    .dashed { stroke-dasharray: 4 3; }
+  </style>
+  <defs>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-bad" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+<rect class="bg" x="0" y="0" width="1080" height="1120" rx="12"/>
+
+<!-- Title and legend -->
+<text class="h1" x="24" y="38">Bits: <tspan class="mono">&amp; | ^ ~ &lt;&lt; &gt;&gt;</tspan> and masks</text>
+<text class="muted" x="24" y="60">A byte is eight bits. A bitwise operator works on each bit separately.</text>
+<g class="chip" transform="translate(700,24)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm muted" x="736" y="37">— section of the Lab 02 theory</text>
+<rect class="one" x="924" y="26" width="22" height="14" rx="2"/>
+<text class="sm muted" x="954" y="37">bit = 1</text>
+<rect class="zero" x="702" y="48" width="22" height="14" rx="2"/>
+<text class="sm muted" x="736" y="59">bit = 0</text>
+<rect class="pad" x="924" y="48" width="22" height="14" rx="2"/>
+<text class="sm muted" x="954" y="59">a zero shifted in</text>
+
+<!-- 1. One byte, three notations -->
+<rect class="box" x="24" y="84" width="508" height="246" rx="10"/>
+<text class="h2" x="44" y="110">1. One byte, three notations</text>
+<g class="chip" transform="translate(492,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="xs mono muted" x="82" y="138" text-anchor="middle">7</text>
+<text class="xs mono" x="82" y="156" text-anchor="middle">128</text>
+<text class="xs mono muted" x="118" y="138" text-anchor="middle">6</text>
+<text class="xs mono" x="118" y="156" text-anchor="middle">64</text>
+<text class="xs mono muted" x="154" y="138" text-anchor="middle">5</text>
+<text class="xs mono" x="154" y="156" text-anchor="middle">32</text>
+<text class="xs mono muted" x="190" y="138" text-anchor="middle">4</text>
+<text class="xs mono" x="190" y="156" text-anchor="middle">16</text>
+<text class="xs mono muted" x="226" y="138" text-anchor="middle">3</text>
+<text class="xs mono" x="226" y="156" text-anchor="middle">8</text>
+<text class="xs mono muted" x="262" y="138" text-anchor="middle">2</text>
+<text class="xs mono" x="262" y="156" text-anchor="middle">4</text>
+<text class="xs mono muted" x="298" y="138" text-anchor="middle">1</text>
+<text class="xs mono" x="298" y="156" text-anchor="middle">2</text>
+<text class="xs mono muted" x="334" y="138" text-anchor="middle">0</text>
+<text class="xs mono" x="334" y="156" text-anchor="middle">1</text>
+<text class="sm muted" x="362" y="138">bit number</text>
+<text class="sm muted" x="362" y="156">weight</text>
+<rect class="zero" x="64" y="164" width="36" height="34"/>
+<text class="mono muted" x="82" y="186" text-anchor="middle">0</text>
+<rect class="zero" x="100" y="164" width="36" height="34"/>
+<text class="mono muted" x="118" y="186" text-anchor="middle">0</text>
+<rect class="one" x="136" y="164" width="36" height="34"/>
+<text class="mono b" x="154" y="186" text-anchor="middle">1</text>
+<rect class="zero" x="172" y="164" width="36" height="34"/>
+<text class="mono muted" x="190" y="186" text-anchor="middle">0</text>
+<rect class="one" x="208" y="164" width="36" height="34"/>
+<text class="mono b" x="226" y="186" text-anchor="middle">1</text>
+<rect class="one" x="244" y="164" width="36" height="34"/>
+<text class="mono b" x="262" y="186" text-anchor="middle">1</text>
+<rect class="one" x="280" y="164" width="36" height="34"/>
+<text class="mono b" x="298" y="186" text-anchor="middle">1</text>
+<rect class="one" x="316" y="164" width="36" height="34"/>
+<text class="mono b" x="334" y="186" text-anchor="middle">1</text>
+<text class="sm muted" x="362" y="186">high bit on the left</text>
+<path class="brace" d="M66,204 v6 H206 v-6"/>
+<path class="brace" d="M210,204 v6 H350 v-6"/>
+<text class="big mono" x="136" y="232" text-anchor="middle">2</text>
+<text class="big mono" x="280" y="232" text-anchor="middle">F</text>
+<text class="sm muted" x="362" y="226">4 bits = 1 digit</text>
+<text class="mono b" x="44" y="268">0b0010'1111</text><text class="sm muted" x="160" y="268">binary: the bits themselves</text>
+<text class="mono b" x="44" y="290">0x2F</text><text class="sm muted" x="160" y="290">hexadecimal: <tspan class="mono">2·16 + 15</tspan></text>
+<text class="mono b" x="44" y="312">47</text><text class="sm muted" x="160" y="312">decimal: <tspan class="mono">32 + 8 + 4 + 2 + 1</tspan>, the weights of the ones</text>
+
+<!-- 2. Two's complement -->
+<rect class="box" x="548" y="84" width="508" height="246" rx="10"/>
+<text class="h2" x="568" y="110">2. Two's complement: how to write −5</text>
+<g class="chip" transform="translate(1016,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="mono b" x="568" y="142">5</text>
+<rect class="zero" x="660" y="124" width="28" height="26"/>
+<text class="mono muted" x="674" y="142" text-anchor="middle">0</text>
+<rect class="zero" x="688" y="124" width="28" height="26"/>
+<text class="mono muted" x="702" y="142" text-anchor="middle">0</text>
+<rect class="zero" x="716" y="124" width="28" height="26"/>
+<text class="mono muted" x="730" y="142" text-anchor="middle">0</text>
+<rect class="zero" x="744" y="124" width="28" height="26"/>
+<text class="mono muted" x="758" y="142" text-anchor="middle">0</text>
+<rect class="zero" x="772" y="124" width="28" height="26"/>
+<text class="mono muted" x="786" y="142" text-anchor="middle">0</text>
+<rect class="one" x="800" y="124" width="28" height="26"/>
+<text class="mono b" x="814" y="142" text-anchor="middle">1</text>
+<rect class="zero" x="828" y="124" width="28" height="26"/>
+<text class="mono muted" x="842" y="142" text-anchor="middle">0</text>
+<rect class="one" x="856" y="124" width="28" height="26"/>
+<text class="mono b" x="870" y="142" text-anchor="middle">1</text>
+<text class="sm muted" x="896" y="142">five</text>
+<text class="mono b" x="568" y="174">~5</text>
+<rect class="one" x="660" y="156" width="28" height="26"/>
+<text class="mono b" x="674" y="174" text-anchor="middle">1</text>
+<rect class="one" x="688" y="156" width="28" height="26"/>
+<text class="mono b" x="702" y="174" text-anchor="middle">1</text>
+<rect class="one" x="716" y="156" width="28" height="26"/>
+<text class="mono b" x="730" y="174" text-anchor="middle">1</text>
+<rect class="one" x="744" y="156" width="28" height="26"/>
+<text class="mono b" x="758" y="174" text-anchor="middle">1</text>
+<rect class="one" x="772" y="156" width="28" height="26"/>
+<text class="mono b" x="786" y="174" text-anchor="middle">1</text>
+<rect class="zero" x="800" y="156" width="28" height="26"/>
+<text class="mono muted" x="814" y="174" text-anchor="middle">0</text>
+<rect class="one" x="828" y="156" width="28" height="26"/>
+<text class="mono b" x="842" y="174" text-anchor="middle">1</text>
+<rect class="zero" x="856" y="156" width="28" height="26"/>
+<text class="mono muted" x="870" y="174" text-anchor="middle">0</text>
+<text class="sm muted" x="896" y="174">flip every bit</text>
+<text class="mono b" x="568" y="206">~5 + 1</text>
+<rect class="one" x="660" y="188" width="28" height="26"/>
+<text class="mono b" x="674" y="206" text-anchor="middle">1</text>
+<rect class="one" x="688" y="188" width="28" height="26"/>
+<text class="mono b" x="702" y="206" text-anchor="middle">1</text>
+<rect class="one" x="716" y="188" width="28" height="26"/>
+<text class="mono b" x="730" y="206" text-anchor="middle">1</text>
+<rect class="one" x="744" y="188" width="28" height="26"/>
+<text class="mono b" x="758" y="206" text-anchor="middle">1</text>
+<rect class="one" x="772" y="188" width="28" height="26"/>
+<text class="mono b" x="786" y="206" text-anchor="middle">1</text>
+<rect class="zero" x="800" y="188" width="28" height="26"/>
+<text class="mono muted" x="814" y="206" text-anchor="middle">0</text>
+<rect class="one" x="828" y="188" width="28" height="26"/>
+<text class="mono b" x="842" y="206" text-anchor="middle">1</text>
+<rect class="one" x="856" y="188" width="28" height="26"/>
+<text class="mono b" x="870" y="206" text-anchor="middle">1</text>
+<text class="sm ok" x="896" y="206">= −5, byte 0xFB</text>
+<text class="sm" x="568" y="242">The same byte <tspan class="mono">0xFB</tspan>, two readings. Only the weight of bit 7 differs:</text>
+<text class="sm mono b" x="568" y="266">uint8_t</text>
+<text class="xs mono" x="674" y="266" text-anchor="middle">128</text>
+<text class="xs mono" x="702" y="266" text-anchor="middle">64</text>
+<text class="xs mono" x="730" y="266" text-anchor="middle">32</text>
+<text class="xs mono" x="758" y="266" text-anchor="middle">16</text>
+<text class="xs mono" x="786" y="266" text-anchor="middle">8</text>
+<text class="xs mono" x="814" y="266" text-anchor="middle">·</text>
+<text class="xs mono" x="842" y="266" text-anchor="middle">2</text>
+<text class="xs mono" x="870" y="266" text-anchor="middle">1</text>
+<text class="sm mono b" x="896" y="266">= 251</text>
+<text class="sm mono b" x="568" y="288">int8_t</text>
+<text class="xs mono err" x="674" y="288" text-anchor="middle">−128</text>
+<text class="xs mono" x="702" y="288" text-anchor="middle">64</text>
+<text class="xs mono" x="730" y="288" text-anchor="middle">32</text>
+<text class="xs mono" x="758" y="288" text-anchor="middle">16</text>
+<text class="xs mono" x="786" y="288" text-anchor="middle">8</text>
+<text class="xs mono" x="814" y="288" text-anchor="middle">·</text>
+<text class="xs mono" x="842" y="288" text-anchor="middle">2</text>
+<text class="xs mono" x="870" y="288" text-anchor="middle">1</text>
+<text class="sm mono ok" x="896" y="288">= −5</text>
+<text class="sm muted" x="568" y="314">Likewise <tspan class="mono">0xFF</tspan>: 255 as <tspan class="mono">uint8_t</tspan>, −1 as <tspan class="mono">int8_t</tspan>.</text>
+
+<!-- 3. Six operators -->
+<rect class="box" x="24" y="346" width="1032" height="378" rx="10"/>
+<text class="h2" x="44" y="372">3. Six operators, each bit on its own</text>
+<g class="chip" transform="translate(1016,358)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<rect class="band" x="176" y="380" width="38" height="222" rx="4"/>
+<text class="mono b" x="44" y="405">a</text>
+<rect class="one" x="150" y="386" width="30" height="28"/>
+<text class="mono b" x="165" y="405" text-anchor="middle">1</text>
+<rect class="one" x="180" y="386" width="30" height="28"/>
+<text class="mono b" x="195" y="405" text-anchor="middle">1</text>
+<rect class="zero" x="210" y="386" width="30" height="28"/>
+<text class="mono muted" x="225" y="405" text-anchor="middle">0</text>
+<rect class="zero" x="240" y="386" width="30" height="28"/>
+<text class="mono muted" x="255" y="405" text-anchor="middle">0</text>
+<rect class="one" x="270" y="386" width="30" height="28"/>
+<text class="mono b" x="285" y="405" text-anchor="middle">1</text>
+<rect class="zero" x="300" y="386" width="30" height="28"/>
+<text class="mono muted" x="315" y="405" text-anchor="middle">0</text>
+<rect class="one" x="330" y="386" width="30" height="28"/>
+<text class="mono b" x="345" y="405" text-anchor="middle">1</text>
+<rect class="zero" x="360" y="386" width="30" height="28"/>
+<text class="mono muted" x="375" y="405" text-anchor="middle">0</text>
+<text class="mono" x="404" y="405">0xCA</text>
+<text class="mono b" x="44" y="439">b</text>
+<rect class="one" x="150" y="420" width="30" height="28"/>
+<text class="mono b" x="165" y="439" text-anchor="middle">1</text>
+<rect class="zero" x="180" y="420" width="30" height="28"/>
+<text class="mono muted" x="195" y="439" text-anchor="middle">0</text>
+<rect class="one" x="210" y="420" width="30" height="28"/>
+<text class="mono b" x="225" y="439" text-anchor="middle">1</text>
+<rect class="zero" x="240" y="420" width="30" height="28"/>
+<text class="mono muted" x="255" y="439" text-anchor="middle">0</text>
+<rect class="zero" x="270" y="420" width="30" height="28"/>
+<text class="mono muted" x="285" y="439" text-anchor="middle">0</text>
+<rect class="one" x="300" y="420" width="30" height="28"/>
+<text class="mono b" x="315" y="439" text-anchor="middle">1</text>
+<rect class="one" x="330" y="420" width="30" height="28"/>
+<text class="mono b" x="345" y="439" text-anchor="middle">1</text>
+<rect class="zero" x="360" y="420" width="30" height="28"/>
+<text class="mono muted" x="375" y="439" text-anchor="middle">0</text>
+<text class="mono" x="404" y="439">0xA6</text>
+<line class="rule" x1="44" y1="458" x2="690" y2="458"/>
+<text class="mono b" x="44" y="485">a &amp; b</text>
+<rect class="one" x="150" y="466" width="30" height="28"/>
+<text class="mono b" x="165" y="485" text-anchor="middle">1</text>
+<rect class="zero" x="180" y="466" width="30" height="28"/>
+<text class="mono muted" x="195" y="485" text-anchor="middle">0</text>
+<rect class="zero" x="210" y="466" width="30" height="28"/>
+<text class="mono muted" x="225" y="485" text-anchor="middle">0</text>
+<rect class="zero" x="240" y="466" width="30" height="28"/>
+<text class="mono muted" x="255" y="485" text-anchor="middle">0</text>
+<rect class="zero" x="270" y="466" width="30" height="28"/>
+<text class="mono muted" x="285" y="485" text-anchor="middle">0</text>
+<rect class="zero" x="300" y="466" width="30" height="28"/>
+<text class="mono muted" x="315" y="485" text-anchor="middle">0</text>
+<rect class="one" x="330" y="466" width="30" height="28"/>
+<text class="mono b" x="345" y="485" text-anchor="middle">1</text>
+<rect class="zero" x="360" y="466" width="30" height="28"/>
+<text class="mono muted" x="375" y="485" text-anchor="middle">0</text>
+<text class="mono" x="404" y="485">0x82</text>
+<text class="sm" x="456" y="485">1 only if both are 1 → <tspan class="b">mask</tspan></text>
+<text class="mono b" x="44" y="519">a | b</text>
+<rect class="one" x="150" y="500" width="30" height="28"/>
+<text class="mono b" x="165" y="519" text-anchor="middle">1</text>
+<rect class="one" x="180" y="500" width="30" height="28"/>
+<text class="mono b" x="195" y="519" text-anchor="middle">1</text>
+<rect class="one" x="210" y="500" width="30" height="28"/>
+<text class="mono b" x="225" y="519" text-anchor="middle">1</text>
+<rect class="zero" x="240" y="500" width="30" height="28"/>
+<text class="mono muted" x="255" y="519" text-anchor="middle">0</text>
+<rect class="one" x="270" y="500" width="30" height="28"/>
+<text class="mono b" x="285" y="519" text-anchor="middle">1</text>
+<rect class="one" x="300" y="500" width="30" height="28"/>
+<text class="mono b" x="315" y="519" text-anchor="middle">1</text>
+<rect class="one" x="330" y="500" width="30" height="28"/>
+<text class="mono b" x="345" y="519" text-anchor="middle">1</text>
+<rect class="zero" x="360" y="500" width="30" height="28"/>
+<text class="mono muted" x="375" y="519" text-anchor="middle">0</text>
+<text class="mono" x="404" y="519">0xEE</text>
+<text class="sm" x="456" y="519">1 if either is 1 → <tspan class="b">set</tspan></text>
+<text class="mono b" x="44" y="553">a ^ b</text>
+<rect class="zero" x="150" y="534" width="30" height="28"/>
+<text class="mono muted" x="165" y="553" text-anchor="middle">0</text>
+<rect class="one" x="180" y="534" width="30" height="28"/>
+<text class="mono b" x="195" y="553" text-anchor="middle">1</text>
+<rect class="one" x="210" y="534" width="30" height="28"/>
+<text class="mono b" x="225" y="553" text-anchor="middle">1</text>
+<rect class="zero" x="240" y="534" width="30" height="28"/>
+<text class="mono muted" x="255" y="553" text-anchor="middle">0</text>
+<rect class="one" x="270" y="534" width="30" height="28"/>
+<text class="mono b" x="285" y="553" text-anchor="middle">1</text>
+<rect class="one" x="300" y="534" width="30" height="28"/>
+<text class="mono b" x="315" y="553" text-anchor="middle">1</text>
+<rect class="zero" x="330" y="534" width="30" height="28"/>
+<text class="mono muted" x="345" y="553" text-anchor="middle">0</text>
+<rect class="zero" x="360" y="534" width="30" height="28"/>
+<text class="mono muted" x="375" y="553" text-anchor="middle">0</text>
+<text class="mono" x="404" y="553">0x6C</text>
+<text class="sm" x="456" y="553">1 if they differ → <tspan class="b">toggle</tspan></text>
+<text class="mono b" x="44" y="587">~a</text>
+<rect class="zero" x="150" y="568" width="30" height="28"/>
+<text class="mono muted" x="165" y="587" text-anchor="middle">0</text>
+<rect class="zero" x="180" y="568" width="30" height="28"/>
+<text class="mono muted" x="195" y="587" text-anchor="middle">0</text>
+<rect class="one" x="210" y="568" width="30" height="28"/>
+<text class="mono b" x="225" y="587" text-anchor="middle">1</text>
+<rect class="one" x="240" y="568" width="30" height="28"/>
+<text class="mono b" x="255" y="587" text-anchor="middle">1</text>
+<rect class="zero" x="270" y="568" width="30" height="28"/>
+<text class="mono muted" x="285" y="587" text-anchor="middle">0</text>
+<rect class="one" x="300" y="568" width="30" height="28"/>
+<text class="mono b" x="315" y="587" text-anchor="middle">1</text>
+<rect class="zero" x="330" y="568" width="30" height="28"/>
+<text class="mono muted" x="345" y="587" text-anchor="middle">0</text>
+<rect class="one" x="360" y="568" width="30" height="28"/>
+<text class="mono b" x="375" y="587" text-anchor="middle">1</text>
+<text class="mono" x="404" y="587">0x35</text>
+<text class="sm" x="456" y="587">flip every bit</text>
+<text class="sm muted" x="44" y="622">Each column ignores its neighbours. Bit 6: <tspan class="mono">a = 1</tspan>, <tspan class="mono">b = 0</tspan> → <tspan class="mono">&amp;</tspan> gives 0, <tspan class="mono">|</tspan> and <tspan class="mono">^</tspan> give 1.</text>
+<line class="rule" x1="706" y1="384" x2="706" y2="630"/>
+<text x="720" y="388"><tspan class="mono b">a &lt;&lt; 1</tspan><tspan class="sm muted">  SHL A: bit 7 drops into C</tspan></text>
+<rect class="one" x="772" y="398" width="28" height="28"/>
+<text class="mono b" x="786" y="417" text-anchor="middle">1</text>
+<rect class="one" x="800" y="398" width="28" height="28"/>
+<text class="mono b" x="814" y="417" text-anchor="middle">1</text>
+<rect class="zero" x="828" y="398" width="28" height="28"/>
+<text class="mono muted" x="842" y="417" text-anchor="middle">0</text>
+<rect class="zero" x="856" y="398" width="28" height="28"/>
+<text class="mono muted" x="870" y="417" text-anchor="middle">0</text>
+<rect class="one" x="884" y="398" width="28" height="28"/>
+<text class="mono b" x="898" y="417" text-anchor="middle">1</text>
+<rect class="zero" x="912" y="398" width="28" height="28"/>
+<text class="mono muted" x="926" y="417" text-anchor="middle">0</text>
+<rect class="one" x="940" y="398" width="28" height="28"/>
+<text class="mono b" x="954" y="417" text-anchor="middle">1</text>
+<rect class="zero" x="968" y="398" width="28" height="28"/>
+<text class="mono muted" x="982" y="417" text-anchor="middle">0</text>
+<rect class="one" x="772" y="458" width="28" height="28"/>
+<text class="mono b" x="786" y="477" text-anchor="middle">1</text>
+<rect class="zero" x="800" y="458" width="28" height="28"/>
+<text class="mono muted" x="814" y="477" text-anchor="middle">0</text>
+<rect class="zero" x="828" y="458" width="28" height="28"/>
+<text class="mono muted" x="842" y="477" text-anchor="middle">0</text>
+<rect class="one" x="856" y="458" width="28" height="28"/>
+<text class="mono b" x="870" y="477" text-anchor="middle">1</text>
+<rect class="zero" x="884" y="458" width="28" height="28"/>
+<text class="mono muted" x="898" y="477" text-anchor="middle">0</text>
+<rect class="one" x="912" y="458" width="28" height="28"/>
+<text class="mono b" x="926" y="477" text-anchor="middle">1</text>
+<rect class="zero" x="940" y="458" width="28" height="28"/>
+<text class="mono muted" x="954" y="477" text-anchor="middle">0</text>
+<rect class="pad" x="968" y="458" width="28" height="28"/>
+<text class="mono muted" x="982" y="477" text-anchor="middle">0</text>
+<rect class="flag" x="720" y="458" width="36" height="28" rx="4"/>
+<text class="mono b" x="738" y="477" text-anchor="middle">1</text>
+<text class="sm b" x="738" y="502" text-anchor="middle">C</text>
+<path class="thin" d="M786,428 L738,456" marker-end="url(#m-io)"/>
+<path class="thin" d="M814,428 L786,456" marker-end="url(#m-io)"/>
+<path class="thin" d="M842,428 L814,456" marker-end="url(#m-io)"/>
+<path class="thin" d="M870,428 L842,456" marker-end="url(#m-io)"/>
+<path class="thin" d="M898,428 L870,456" marker-end="url(#m-io)"/>
+<path class="thin" d="M926,428 L898,456" marker-end="url(#m-io)"/>
+<path class="thin" d="M954,428 L926,456" marker-end="url(#m-io)"/>
+<path class="thin" d="M982,428 L954,456" marker-end="url(#m-io)"/>
+<text class="xs muted" x="1000" y="502" text-anchor="end">0 shifts in</text>
+<text x="720" y="520"><tspan class="mono b">a &gt;&gt; 1</tspan><tspan class="sm muted">  SHR A: bit 0 drops into C</tspan></text>
+<rect class="one" x="772" y="530" width="28" height="28"/>
+<text class="mono b" x="786" y="549" text-anchor="middle">1</text>
+<rect class="one" x="800" y="530" width="28" height="28"/>
+<text class="mono b" x="814" y="549" text-anchor="middle">1</text>
+<rect class="zero" x="828" y="530" width="28" height="28"/>
+<text class="mono muted" x="842" y="549" text-anchor="middle">0</text>
+<rect class="zero" x="856" y="530" width="28" height="28"/>
+<text class="mono muted" x="870" y="549" text-anchor="middle">0</text>
+<rect class="one" x="884" y="530" width="28" height="28"/>
+<text class="mono b" x="898" y="549" text-anchor="middle">1</text>
+<rect class="zero" x="912" y="530" width="28" height="28"/>
+<text class="mono muted" x="926" y="549" text-anchor="middle">0</text>
+<rect class="one" x="940" y="530" width="28" height="28"/>
+<text class="mono b" x="954" y="549" text-anchor="middle">1</text>
+<rect class="zero" x="968" y="530" width="28" height="28"/>
+<text class="mono muted" x="982" y="549" text-anchor="middle">0</text>
+<rect class="pad" x="772" y="590" width="28" height="28"/>
+<text class="mono muted" x="786" y="609" text-anchor="middle">0</text>
+<rect class="one" x="800" y="590" width="28" height="28"/>
+<text class="mono b" x="814" y="609" text-anchor="middle">1</text>
+<rect class="one" x="828" y="590" width="28" height="28"/>
+<text class="mono b" x="842" y="609" text-anchor="middle">1</text>
+<rect class="zero" x="856" y="590" width="28" height="28"/>
+<text class="mono muted" x="870" y="609" text-anchor="middle">0</text>
+<rect class="zero" x="884" y="590" width="28" height="28"/>
+<text class="mono muted" x="898" y="609" text-anchor="middle">0</text>
+<rect class="one" x="912" y="590" width="28" height="28"/>
+<text class="mono b" x="926" y="609" text-anchor="middle">1</text>
+<rect class="zero" x="940" y="590" width="28" height="28"/>
+<text class="mono muted" x="954" y="609" text-anchor="middle">0</text>
+<rect class="one" x="968" y="590" width="28" height="28"/>
+<text class="mono b" x="982" y="609" text-anchor="middle">1</text>
+<rect class="flag" x="1006" y="590" width="36" height="28" rx="4"/>
+<text class="mono b" x="1024" y="609" text-anchor="middle">0</text>
+<text class="sm b" x="1024" y="634" text-anchor="middle">C</text>
+<path class="thin" d="M786,560 L814,588" marker-end="url(#m-io)"/>
+<path class="thin" d="M814,560 L842,588" marker-end="url(#m-io)"/>
+<path class="thin" d="M842,560 L870,588" marker-end="url(#m-io)"/>
+<path class="thin" d="M870,560 L898,588" marker-end="url(#m-io)"/>
+<path class="thin" d="M898,560 L926,588" marker-end="url(#m-io)"/>
+<path class="thin" d="M926,560 L954,588" marker-end="url(#m-io)"/>
+<path class="thin" d="M954,560 L982,588" marker-end="url(#m-io)"/>
+<path class="thin" d="M982,560 L1024,588" marker-end="url(#m-io)"/>
+<text class="xs muted" x="772" y="634">0 shifts in</text>
+<text class="sm muted" x="720" y="652">For unsigned: <tspan class="mono">x &lt;&lt; n</tspan> = <tspan class="mono">x · 2ⁿ</tspan>, <tspan class="mono">x &gt;&gt; n</tspan> = <tspan class="mono">x / 2ⁿ</tspan></text>
+<rect class="trap" x="44" y="664" width="992" height="48" rx="6"/>
+<text class="sm" x="58" y="684"><tspan class="b">Precedence:</tspan> <tspan class="mono">x &amp; 1 == 0</tspan> parses as <tspan class="mono">x &amp; (1 == 0)</tspan> = <tspan class="mono">x &amp; 0</tspan> = 0, always false. Write <tspan class="mono b">(x &amp; 1) == 0</tspan>.</text>
+<text class="sm" x="58" y="702"><tspan class="b">Width:</tspan> <tspan class="mono">1 &lt;&lt; 31</tspan> on an <tspan class="mono">int</tspan> lands in the sign bit, <tspan class="mono">1 &lt;&lt; 32</tspan> is UB. For bits, use unsigned: <tspan class="mono b">1u &lt;&lt; n</tspan>.</text>
+
+<!-- 4. Shift and mask -->
+<rect class="box" x="24" y="740" width="1032" height="364" rx="10"/>
+<text class="h2" x="44" y="766">4. Shift and mask: split a byte into fields</text>
+<g class="chip" transform="translate(982,752)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§4</text></g>
+<g class="chip" transform="translate(1016,752)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§5</text></g>
+<text class="sm mono" x="44" y="790">std::uint8_t ins = 0b1011'10'01;   // 0xB9 = opcode:4 | dest:2 | src:2</text>
+<text class="sm muted" x="190" y="814">ins</text>
+<text class="sm muted" x="470" y="814">1. shift the field down to bit 0</text>
+<text class="sm muted" x="750" y="814">2. mask: keep only the field</text>
+<text class="sm muted" x="942" y="814">field</text>
+<rect class="f-op" x="44" y="830" width="14" height="14" rx="2"/>
+<text class="mono b" x="66" y="842">opcode</text>
+<rect class="f-op" x="190" y="824" width="22" height="26"/>
+<text class="mono b" x="201" y="842" text-anchor="middle">1</text>
+<rect class="f-op" x="212" y="824" width="22" height="26"/>
+<text class="mono muted" x="223" y="842" text-anchor="middle">0</text>
+<rect class="f-op" x="234" y="824" width="22" height="26"/>
+<text class="mono b" x="245" y="842" text-anchor="middle">1</text>
+<rect class="f-op" x="256" y="824" width="22" height="26"/>
+<text class="mono b" x="267" y="842" text-anchor="middle">1</text>
+<rect class="f-dst" x="278" y="824" width="22" height="26"/>
+<text class="mono b" x="289" y="842" text-anchor="middle">1</text>
+<rect class="f-dst" x="300" y="824" width="22" height="26"/>
+<text class="mono muted" x="311" y="842" text-anchor="middle">0</text>
+<rect class="f-src" x="322" y="824" width="22" height="26"/>
+<text class="mono muted" x="333" y="842" text-anchor="middle">0</text>
+<rect class="f-src" x="344" y="824" width="22" height="26"/>
+<text class="mono b" x="355" y="842" text-anchor="middle">1</text>
+<rect class="pad" x="470" y="824" width="22" height="26"/>
+<text class="mono muted" x="481" y="842" text-anchor="middle">0</text>
+<rect class="pad" x="492" y="824" width="22" height="26"/>
+<text class="mono muted" x="503" y="842" text-anchor="middle">0</text>
+<rect class="pad" x="514" y="824" width="22" height="26"/>
+<text class="mono muted" x="525" y="842" text-anchor="middle">0</text>
+<rect class="pad" x="536" y="824" width="22" height="26"/>
+<text class="mono muted" x="547" y="842" text-anchor="middle">0</text>
+<rect class="f-op" x="558" y="824" width="22" height="26"/>
+<text class="mono b" x="569" y="842" text-anchor="middle">1</text>
+<rect class="f-op" x="580" y="824" width="22" height="26"/>
+<text class="mono muted" x="591" y="842" text-anchor="middle">0</text>
+<rect class="f-op" x="602" y="824" width="22" height="26"/>
+<text class="mono b" x="613" y="842" text-anchor="middle">1</text>
+<rect class="f-op" x="624" y="824" width="22" height="26"/>
+<text class="mono b" x="635" y="842" text-anchor="middle">1</text>
+<rect class="pad" x="750" y="824" width="22" height="26"/>
+<text class="mono muted" x="761" y="842" text-anchor="middle">0</text>
+<rect class="pad" x="772" y="824" width="22" height="26"/>
+<text class="mono muted" x="783" y="842" text-anchor="middle">0</text>
+<rect class="pad" x="794" y="824" width="22" height="26"/>
+<text class="mono muted" x="805" y="842" text-anchor="middle">0</text>
+<rect class="pad" x="816" y="824" width="22" height="26"/>
+<text class="mono muted" x="827" y="842" text-anchor="middle">0</text>
+<rect class="f-op" x="838" y="824" width="22" height="26"/>
+<text class="mono b" x="849" y="842" text-anchor="middle">1</text>
+<rect class="f-op" x="860" y="824" width="22" height="26"/>
+<text class="mono muted" x="871" y="842" text-anchor="middle">0</text>
+<rect class="f-op" x="882" y="824" width="22" height="26"/>
+<text class="mono b" x="893" y="842" text-anchor="middle">1</text>
+<rect class="f-op" x="904" y="824" width="22" height="26"/>
+<text class="mono b" x="915" y="842" text-anchor="middle">1</text>
+<path class="arrow a-io" d="M374,837 L462,837" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="418" y="832" text-anchor="middle">&gt;&gt; 4</text>
+<path class="arrow a-io" d="M654,837 L742,837" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="698" y="832" text-anchor="middle">&amp; 0x0F</text>
+<text class="mono b" x="942" y="842">0b1011 = 11</text>
+<rect class="f-dst" x="44" y="870" width="14" height="14" rx="2"/>
+<text class="mono b" x="66" y="882">dest</text>
+<rect class="f-op" x="190" y="864" width="22" height="26"/>
+<text class="mono b" x="201" y="882" text-anchor="middle">1</text>
+<rect class="f-op" x="212" y="864" width="22" height="26"/>
+<text class="mono muted" x="223" y="882" text-anchor="middle">0</text>
+<rect class="f-op" x="234" y="864" width="22" height="26"/>
+<text class="mono b" x="245" y="882" text-anchor="middle">1</text>
+<rect class="f-op" x="256" y="864" width="22" height="26"/>
+<text class="mono b" x="267" y="882" text-anchor="middle">1</text>
+<rect class="f-dst" x="278" y="864" width="22" height="26"/>
+<text class="mono b" x="289" y="882" text-anchor="middle">1</text>
+<rect class="f-dst" x="300" y="864" width="22" height="26"/>
+<text class="mono muted" x="311" y="882" text-anchor="middle">0</text>
+<rect class="f-src" x="322" y="864" width="22" height="26"/>
+<text class="mono muted" x="333" y="882" text-anchor="middle">0</text>
+<rect class="f-src" x="344" y="864" width="22" height="26"/>
+<text class="mono b" x="355" y="882" text-anchor="middle">1</text>
+<rect class="pad" x="470" y="864" width="22" height="26"/>
+<text class="mono muted" x="481" y="882" text-anchor="middle">0</text>
+<rect class="pad" x="492" y="864" width="22" height="26"/>
+<text class="mono muted" x="503" y="882" text-anchor="middle">0</text>
+<rect class="f-op" x="514" y="864" width="22" height="26"/>
+<text class="mono b" x="525" y="882" text-anchor="middle">1</text>
+<rect class="f-op" x="536" y="864" width="22" height="26"/>
+<text class="mono muted" x="547" y="882" text-anchor="middle">0</text>
+<rect class="f-op" x="558" y="864" width="22" height="26"/>
+<text class="mono b" x="569" y="882" text-anchor="middle">1</text>
+<rect class="f-op" x="580" y="864" width="22" height="26"/>
+<text class="mono b" x="591" y="882" text-anchor="middle">1</text>
+<rect class="f-dst" x="602" y="864" width="22" height="26"/>
+<text class="mono b" x="613" y="882" text-anchor="middle">1</text>
+<rect class="f-dst" x="624" y="864" width="22" height="26"/>
+<text class="mono muted" x="635" y="882" text-anchor="middle">0</text>
+<rect class="pad" x="750" y="864" width="22" height="26"/>
+<text class="mono muted" x="761" y="882" text-anchor="middle">0</text>
+<rect class="pad" x="772" y="864" width="22" height="26"/>
+<text class="mono muted" x="783" y="882" text-anchor="middle">0</text>
+<rect class="pad" x="794" y="864" width="22" height="26"/>
+<text class="mono muted" x="805" y="882" text-anchor="middle">0</text>
+<rect class="pad" x="816" y="864" width="22" height="26"/>
+<text class="mono muted" x="827" y="882" text-anchor="middle">0</text>
+<rect class="pad" x="838" y="864" width="22" height="26"/>
+<text class="mono muted" x="849" y="882" text-anchor="middle">0</text>
+<rect class="pad" x="860" y="864" width="22" height="26"/>
+<text class="mono muted" x="871" y="882" text-anchor="middle">0</text>
+<rect class="f-dst" x="882" y="864" width="22" height="26"/>
+<text class="mono b" x="893" y="882" text-anchor="middle">1</text>
+<rect class="f-dst" x="904" y="864" width="22" height="26"/>
+<text class="mono muted" x="915" y="882" text-anchor="middle">0</text>
+<path class="arrow a-io" d="M374,877 L462,877" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="418" y="872" text-anchor="middle">&gt;&gt; 2</text>
+<path class="arrow a-io" d="M654,877 L742,877" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="698" y="872" text-anchor="middle">&amp; 0x03</text>
+<text class="mono b" x="942" y="882">0b10 = 2</text>
+<rect class="f-src" x="44" y="910" width="14" height="14" rx="2"/>
+<text class="mono b" x="66" y="922">src</text>
+<rect class="f-op" x="190" y="904" width="22" height="26"/>
+<text class="mono b" x="201" y="922" text-anchor="middle">1</text>
+<rect class="f-op" x="212" y="904" width="22" height="26"/>
+<text class="mono muted" x="223" y="922" text-anchor="middle">0</text>
+<rect class="f-op" x="234" y="904" width="22" height="26"/>
+<text class="mono b" x="245" y="922" text-anchor="middle">1</text>
+<rect class="f-op" x="256" y="904" width="22" height="26"/>
+<text class="mono b" x="267" y="922" text-anchor="middle">1</text>
+<rect class="f-dst" x="278" y="904" width="22" height="26"/>
+<text class="mono b" x="289" y="922" text-anchor="middle">1</text>
+<rect class="f-dst" x="300" y="904" width="22" height="26"/>
+<text class="mono muted" x="311" y="922" text-anchor="middle">0</text>
+<rect class="f-src" x="322" y="904" width="22" height="26"/>
+<text class="mono muted" x="333" y="922" text-anchor="middle">0</text>
+<rect class="f-src" x="344" y="904" width="22" height="26"/>
+<text class="mono b" x="355" y="922" text-anchor="middle">1</text>
+<rect class="f-op" x="470" y="904" width="22" height="26"/>
+<text class="mono b" x="481" y="922" text-anchor="middle">1</text>
+<rect class="f-op" x="492" y="904" width="22" height="26"/>
+<text class="mono muted" x="503" y="922" text-anchor="middle">0</text>
+<rect class="f-op" x="514" y="904" width="22" height="26"/>
+<text class="mono b" x="525" y="922" text-anchor="middle">1</text>
+<rect class="f-op" x="536" y="904" width="22" height="26"/>
+<text class="mono b" x="547" y="922" text-anchor="middle">1</text>
+<rect class="f-dst" x="558" y="904" width="22" height="26"/>
+<text class="mono b" x="569" y="922" text-anchor="middle">1</text>
+<rect class="f-dst" x="580" y="904" width="22" height="26"/>
+<text class="mono muted" x="591" y="922" text-anchor="middle">0</text>
+<rect class="f-src" x="602" y="904" width="22" height="26"/>
+<text class="mono muted" x="613" y="922" text-anchor="middle">0</text>
+<rect class="f-src" x="624" y="904" width="22" height="26"/>
+<text class="mono b" x="635" y="922" text-anchor="middle">1</text>
+<rect class="pad" x="750" y="904" width="22" height="26"/>
+<text class="mono muted" x="761" y="922" text-anchor="middle">0</text>
+<rect class="pad" x="772" y="904" width="22" height="26"/>
+<text class="mono muted" x="783" y="922" text-anchor="middle">0</text>
+<rect class="pad" x="794" y="904" width="22" height="26"/>
+<text class="mono muted" x="805" y="922" text-anchor="middle">0</text>
+<rect class="pad" x="816" y="904" width="22" height="26"/>
+<text class="mono muted" x="827" y="922" text-anchor="middle">0</text>
+<rect class="pad" x="838" y="904" width="22" height="26"/>
+<text class="mono muted" x="849" y="922" text-anchor="middle">0</text>
+<rect class="pad" x="860" y="904" width="22" height="26"/>
+<text class="mono muted" x="871" y="922" text-anchor="middle">0</text>
+<rect class="f-src" x="882" y="904" width="22" height="26"/>
+<text class="mono muted" x="893" y="922" text-anchor="middle">0</text>
+<rect class="f-src" x="904" y="904" width="22" height="26"/>
+<text class="mono b" x="915" y="922" text-anchor="middle">1</text>
+<path class="arrow a-io" d="M374,917 L462,917" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="418" y="912" text-anchor="middle">no shift</text>
+<path class="arrow a-io" d="M654,917 L742,917" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="698" y="912" text-anchor="middle">&amp; 0x03</text>
+<text class="mono b" x="942" y="922">0b01 = 1</text>
+<text class="sm mono" x="44" y="962">opcode = (ins &gt;&gt; 4) &amp; 0x0F;   dest = (ins &gt;&gt; 2) &amp; 0x03;   src = ins &amp; 0x03;</text>
+<line class="rule" x1="44" y1="976" x2="1036" y2="976"/>
+<text class="sm b" x="44" y="998">A flag bit: set, clear, test</text>
+<text class="sm mono" x="44" y="1023">flags</text>
+<rect class="zero" x="190" y="1008" width="22" height="20"/>
+<text class="mono muted" x="201" y="1023" text-anchor="middle">0</text>
+<rect class="zero" x="212" y="1008" width="22" height="20"/>
+<text class="mono muted" x="223" y="1023" text-anchor="middle">0</text>
+<rect class="zero" x="234" y="1008" width="22" height="20"/>
+<text class="mono muted" x="245" y="1023" text-anchor="middle">0</text>
+<rect class="zero" x="256" y="1008" width="22" height="20"/>
+<text class="mono muted" x="267" y="1023" text-anchor="middle">0</text>
+<rect class="zero" x="278" y="1008" width="22" height="20"/>
+<text class="mono muted" x="289" y="1023" text-anchor="middle">0</text>
+<rect class="one" x="300" y="1008" width="22" height="20"/>
+<text class="mono b" x="311" y="1023" text-anchor="middle">1</text>
+<rect class="zero" x="322" y="1008" width="22" height="20"/>
+<text class="mono muted" x="333" y="1023" text-anchor="middle">0</text>
+<rect class="one" x="344" y="1008" width="22" height="20"/>
+<text class="mono b" x="355" y="1023" text-anchor="middle">1</text>
+<text class="sm muted" x="378" y="1023"></text>
+<text class="sm mono" x="44" y="1045">flags | (1u &lt;&lt; 3)</text>
+<rect class="zero" x="190" y="1030" width="22" height="20"/>
+<text class="mono muted" x="201" y="1045" text-anchor="middle">0</text>
+<rect class="zero" x="212" y="1030" width="22" height="20"/>
+<text class="mono muted" x="223" y="1045" text-anchor="middle">0</text>
+<rect class="zero" x="234" y="1030" width="22" height="20"/>
+<text class="mono muted" x="245" y="1045" text-anchor="middle">0</text>
+<rect class="zero" x="256" y="1030" width="22" height="20"/>
+<text class="mono muted" x="267" y="1045" text-anchor="middle">0</text>
+<rect class="one hit" x="278" y="1030" width="22" height="20"/>
+<text class="mono b" x="289" y="1045" text-anchor="middle">1</text>
+<rect class="one" x="300" y="1030" width="22" height="20"/>
+<text class="mono b" x="311" y="1045" text-anchor="middle">1</text>
+<rect class="zero" x="322" y="1030" width="22" height="20"/>
+<text class="mono muted" x="333" y="1045" text-anchor="middle">0</text>
+<rect class="one" x="344" y="1030" width="22" height="20"/>
+<text class="mono b" x="355" y="1045" text-anchor="middle">1</text>
+<text class="sm" x="378" y="1045">set bit 3</text>
+<text class="sm mono" x="44" y="1067">flags &amp; ~(1u &lt;&lt; 0)</text>
+<rect class="zero" x="190" y="1052" width="22" height="20"/>
+<text class="mono muted" x="201" y="1067" text-anchor="middle">0</text>
+<rect class="zero" x="212" y="1052" width="22" height="20"/>
+<text class="mono muted" x="223" y="1067" text-anchor="middle">0</text>
+<rect class="zero" x="234" y="1052" width="22" height="20"/>
+<text class="mono muted" x="245" y="1067" text-anchor="middle">0</text>
+<rect class="zero" x="256" y="1052" width="22" height="20"/>
+<text class="mono muted" x="267" y="1067" text-anchor="middle">0</text>
+<rect class="zero" x="278" y="1052" width="22" height="20"/>
+<text class="mono muted" x="289" y="1067" text-anchor="middle">0</text>
+<rect class="one" x="300" y="1052" width="22" height="20"/>
+<text class="mono b" x="311" y="1067" text-anchor="middle">1</text>
+<rect class="zero" x="322" y="1052" width="22" height="20"/>
+<text class="mono muted" x="333" y="1067" text-anchor="middle">0</text>
+<rect class="zero hit" x="344" y="1052" width="22" height="20"/>
+<text class="mono muted" x="355" y="1067" text-anchor="middle">0</text>
+<text class="sm" x="378" y="1067">clear bit 0</text>
+<text class="sm mono" x="44" y="1089">flags &amp; (1u &lt;&lt; 2)</text>
+<rect class="zero" x="190" y="1074" width="22" height="20"/>
+<text class="mono muted" x="201" y="1089" text-anchor="middle">0</text>
+<rect class="zero" x="212" y="1074" width="22" height="20"/>
+<text class="mono muted" x="223" y="1089" text-anchor="middle">0</text>
+<rect class="zero" x="234" y="1074" width="22" height="20"/>
+<text class="mono muted" x="245" y="1089" text-anchor="middle">0</text>
+<rect class="zero" x="256" y="1074" width="22" height="20"/>
+<text class="mono muted" x="267" y="1089" text-anchor="middle">0</text>
+<rect class="zero" x="278" y="1074" width="22" height="20"/>
+<text class="mono muted" x="289" y="1089" text-anchor="middle">0</text>
+<rect class="one hit" x="300" y="1074" width="22" height="20"/>
+<text class="mono b" x="311" y="1089" text-anchor="middle">1</text>
+<rect class="zero" x="322" y="1074" width="22" height="20"/>
+<text class="mono muted" x="333" y="1089" text-anchor="middle">0</text>
+<rect class="zero" x="344" y="1074" width="22" height="20"/>
+<text class="mono muted" x="355" y="1089" text-anchor="middle">0</text>
+<text class="sm ok" x="378" y="1089">≠ 0 → bit 2 is set</text>
+<line class="rule" x1="580" y1="988" x2="580" y2="1092"/>
+<text class="sm b" x="600" y="998">In <tspan class="mono">ember</tspan>: the high nibble of an opcode is its group</text>
+<text class="sm mono b" x="600" y="1026">0x16</text>
+<rect class="f-op" x="648" y="1010" width="26" height="24"/>
+<text class="mono muted" x="661" y="1027" text-anchor="middle">0</text>
+<rect class="f-op" x="674" y="1010" width="26" height="24"/>
+<text class="mono muted" x="687" y="1027" text-anchor="middle">0</text>
+<rect class="f-op" x="700" y="1010" width="26" height="24"/>
+<text class="mono muted" x="713" y="1027" text-anchor="middle">0</text>
+<rect class="f-op" x="726" y="1010" width="26" height="24"/>
+<text class="mono b" x="739" y="1027" text-anchor="middle">1</text>
+<rect class="zero" x="752" y="1010" width="26" height="24"/>
+<text class="mono muted" x="765" y="1027" text-anchor="middle">0</text>
+<rect class="zero" x="778" y="1010" width="26" height="24"/>
+<text class="mono b" x="791" y="1027" text-anchor="middle">1</text>
+<rect class="zero" x="804" y="1010" width="26" height="24"/>
+<text class="mono b" x="817" y="1027" text-anchor="middle">1</text>
+<rect class="zero" x="830" y="1010" width="26" height="24"/>
+<text class="mono muted" x="843" y="1027" text-anchor="middle">0</text>
+<text class="sm mono" x="866" y="1026">SHL A</text>
+<text class="sm" x="600" y="1056"><tspan class="mono">(op &gt;&gt; 4) &amp; 0x0F</tspan> = 1 → group <tspan class="mono">0x1_</tspan>, the ALU</text>
+<text class="sm muted" x="600" y="1076"><tspan class="mono">0x10 ADD</tspan> · <tspan class="mono">0x11 SUB</tspan> · … · <tspan class="mono">0x16 SHL A</tspan> · <tspan class="mono">0x17 SHR A</tspan></text>
+<text class="sm muted" x="600" y="1094">The whole byte says which instruction it is; see the ISA table.</text>
+</svg>
