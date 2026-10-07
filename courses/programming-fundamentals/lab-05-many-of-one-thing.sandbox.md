@@ -1,6 +1,6 @@
 # Пісочниця 05 — Багато однакового: шість маленьких задач
 
-**Тижні:** 9–10 · **Лаба:** [Lab 05](lab-05-many-of-one-thing.md) · **Notes:** [досліди](lab-05-many-of-one-thing.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md)
+**Тижні:** 9–10 · **Лаба:** [Lab 05](lab-05-many-of-one-thing.md) · **Notes:** [досліди](lab-05-many-of-one-thing.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md) · **Схема:** [UK](img/arrays.uk.svg) · [EN](img/arrays.svg)
 
 > **Що це.** Пісочниця — одна з двох стежок курсу, простіший варіант. На основній ви
 > лабу за лабою будуєте `ember`. Тут проєкту немає: замість нього шість незалежних

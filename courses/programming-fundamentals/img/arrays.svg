@@ -1,0 +1,460 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 852" width="1080" height="852" role="img" aria-labelledby="title desc">
+  <title id="title">Arrays, the screen and strings</title>
+  <desc id="desc">Five panels for the Lab 05 theory. 1: Byte buf[8] = {1, 2, 3}, eight cells with the rest zero; buf[i] is *(buf + i); buf[8] is past the end. 2: int m[3][4] as a table and as memory, k = r * 4 + c, m[1][2] is k = 6. 3: a 64 × 32 screen in 256 bytes from 0xA00: pixel (13, 2) is byte 0xA11, bit 2, mask 0x04; without “7 −” x = 10 lights up instead. 4: char s[4] = "HI" and strlen up to the first zero; "ABCD" with no room for the zero. 5: bubble sort on 4 1 3 2: six comparisons, four swaps.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --r0:#ddf4ff; --r0-s:#0969da; --r1:#fbefff; --r1-s:#8250df; --r2:#fff1e5; --r2-s:#bc4c00;
+          --val:#dafbe1; --val-s:#1a7f37; --pad:#f6f8fa; --pad-s:#818b98; --bad:#ffebe9; --bad-s:#cf222e; --row:#ddf4ff; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --r0:#0d2c4f; --r0-s:#4493f8; --r1:#271b45; --r1-s:#ab7df8; --r2:#3a2111; --r2-s:#f0883e;
+            --val:#0f2d1a; --val-s:#3fb950; --pad:#151b23; --pad-s:#9198a1; --bad:#3d1418; --bad-s:#f85149; --row:#0d2c4f; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .xs { font-size: 10.5px; }
+    .muted { fill: var(--muted); }
+    .ok { fill: var(--val-s); font-weight: 700; }
+    .err { fill: var(--bad-s); font-weight: 700; }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .cell { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .rule { stroke: var(--line); stroke-width: 1.2; }
+    .faint { stroke: var(--line); stroke-width: 0.6; }
+    .zero { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .val { fill: var(--val); stroke: var(--val-s); stroke-width: 1.2; }
+    .r0 { fill: var(--r0); stroke: var(--r0-s); stroke-width: 1.2; }
+    .r1 { fill: var(--r1); stroke: var(--r1-s); stroke-width: 1.2; }
+    .r2 { fill: var(--r2); stroke: var(--r2-s); stroke-width: 1.2; }
+    .pad { fill: var(--pad); stroke: var(--pad-s); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .bad { fill: var(--bad); stroke: var(--bad-s); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .hit { stroke: var(--fg); stroke-width: 2.5; }
+    .screen { fill: var(--bg); stroke: var(--muted); stroke-width: 1.5; }
+    .rowband { fill: var(--row); }
+    .bytebox { fill: none; stroke: var(--fg); stroke-width: 2; }
+    .pixel { fill: var(--fg); }
+    .zoom { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+    .arrow { fill: none; stroke-width: 2; }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .a-ptr { stroke: var(--r1-s); }   .m-ptr { fill: var(--r1-s); }
+    .a-bad { stroke: var(--bad-s); }  .m-bad { fill: var(--bad-s); }
+    .dashed { stroke-dasharray: 5 3; }
+  </style>
+  <defs>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-ptr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-ptr" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-bad" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+<rect class="bg" x="0" y="0" width="1080" height="852" rx="12"/>
+
+<!-- Title and legend -->
+<text class="h1" x="24" y="38">Arrays, the screen and strings</text>
+<text class="muted" x="24" y="60">An array is memory in a row plus a rule for where element i lives. The rest follows from that rule.</text>
+<g class="chip" transform="translate(700,24)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm muted" x="736" y="37">— section of the Lab 05 theory</text>
+<rect class="val" x="924" y="26" width="22" height="14" rx="2"/>
+<text class="sm muted" x="954" y="37">value</text>
+<rect class="bad" x="702" y="48" width="22" height="14" rx="2"/>
+<text class="sm muted" x="736" y="59">past the end</text>
+<rect class="zero" x="924" y="48" width="22" height="14" rx="2"/>
+<text class="sm muted" x="954" y="59">zero</text>
+
+<!-- 1. Array -->
+<rect class="box" x="24" y="84" width="508" height="228" rx="10"/>
+<text class="h2" x="44" y="110">1. An array is memory plus a rule</text>
+<g class="chip" transform="translate(492,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm mono" x="44" y="134">Byte buf[8] = {1, 2, 3};   <tspan class="muted">// the rest are zeros</tspan></text>
+<rect class="val" x="44" y="172" width="48" height="34"/>
+<text class="mono b" x="68" y="194" text-anchor="middle">1</text>
+<text class="xs mono muted" x="68" y="222" text-anchor="middle">[0]</text>
+<rect class="val" x="92" y="172" width="48" height="34"/>
+<text class="mono b" x="116" y="194" text-anchor="middle">2</text>
+<text class="xs mono muted" x="116" y="222" text-anchor="middle">[1]</text>
+<rect class="val" x="140" y="172" width="48" height="34"/>
+<text class="mono b" x="164" y="194" text-anchor="middle">3</text>
+<text class="xs mono muted" x="164" y="222" text-anchor="middle">[2]</text>
+<rect class="zero" x="188" y="172" width="48" height="34"/>
+<text class="mono muted" x="212" y="194" text-anchor="middle">0</text>
+<text class="xs mono muted" x="212" y="222" text-anchor="middle">[3]</text>
+<rect class="zero" x="236" y="172" width="48" height="34"/>
+<text class="mono muted" x="260" y="194" text-anchor="middle">0</text>
+<text class="xs mono muted" x="260" y="222" text-anchor="middle">[4]</text>
+<rect class="zero" x="284" y="172" width="48" height="34"/>
+<text class="mono muted" x="308" y="194" text-anchor="middle">0</text>
+<text class="xs mono muted" x="308" y="222" text-anchor="middle">[5]</text>
+<rect class="zero" x="332" y="172" width="48" height="34"/>
+<text class="mono muted" x="356" y="194" text-anchor="middle">0</text>
+<text class="xs mono muted" x="356" y="222" text-anchor="middle">[6]</text>
+<rect class="zero" x="380" y="172" width="48" height="34"/>
+<text class="mono muted" x="404" y="194" text-anchor="middle">0</text>
+<text class="xs mono muted" x="404" y="222" text-anchor="middle">[7]</text>
+<rect class="bad" x="428" y="172" width="48" height="34"/>
+<text class="mono err" x="452" y="194" text-anchor="middle">?</text>
+<text class="xs mono err" x="452" y="222" text-anchor="middle">[8]</text>
+<text class="sm mono b" x="68" y="152" text-anchor="middle">buf</text>
+<path class="arrow a-ptr" d="M68,156 L68,170" marker-end="url(#m-ptr)"/>
+<text class="sm mono b" x="308" y="152" text-anchor="middle">buf + 5</text>
+<path class="arrow a-ptr" d="M308,156 L308,170" marker-end="url(#m-ptr)"/>
+<text class="sm" x="44" y="248"><tspan class="mono">buf[i]</tspan> is <tspan class="mono">*(buf + i)</tspan>: the address of the first element plus <tspan class="mono">i</tspan> steps (Lab 3).</text>
+<text class="sm" x="44" y="268"><tspan class="mono err">buf[8]</tspan> is no longer the array: ASan stops the program.</text>
+<text class="sm muted" x="44" y="288">Passed to a function, <tspan class="mono">buf</tspan> arrives as a pointer, so the size is passed separately:</text>
+<text class="sm mono muted" x="44" y="304">f(buf, 8)</text>
+
+<!-- 2. Two dimensions -->
+<rect class="box" x="548" y="84" width="508" height="228" rx="10"/>
+<text class="h2" x="568" y="110">2. Two dimensions are one dimension and a stride</text>
+<g class="chip" transform="translate(1016,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="xs mono muted" x="617" y="134" text-anchor="middle">0</text>
+<text class="xs mono muted" x="651" y="134" text-anchor="middle">1</text>
+<text class="xs mono muted" x="685" y="134" text-anchor="middle">2</text>
+<text class="xs mono muted" x="719" y="134" text-anchor="middle">3</text>
+<text class="xs mono muted" x="592" y="155" text-anchor="end">0</text>
+<rect class="r0" x="600" y="140" width="34" height="22"/>
+<text class="sm mono" x="617" y="156" text-anchor="middle">0</text>
+<rect class="r0" x="634" y="140" width="34" height="22"/>
+<text class="sm mono" x="651" y="156" text-anchor="middle">1</text>
+<rect class="r0" x="668" y="140" width="34" height="22"/>
+<text class="sm mono" x="685" y="156" text-anchor="middle">2</text>
+<rect class="r0" x="702" y="140" width="34" height="22"/>
+<text class="sm mono" x="719" y="156" text-anchor="middle">3</text>
+<text class="xs mono muted" x="592" y="177" text-anchor="end">1</text>
+<rect class="r1" x="600" y="162" width="34" height="22"/>
+<text class="sm mono" x="617" y="178" text-anchor="middle">10</text>
+<rect class="r1" x="634" y="162" width="34" height="22"/>
+<text class="sm mono" x="651" y="178" text-anchor="middle">11</text>
+<rect class="r1 hit" x="668" y="162" width="34" height="22"/>
+<text class="sm mono b" x="685" y="178" text-anchor="middle">12</text>
+<rect class="r1" x="702" y="162" width="34" height="22"/>
+<text class="sm mono" x="719" y="178" text-anchor="middle">13</text>
+<text class="xs mono muted" x="592" y="199" text-anchor="end">2</text>
+<rect class="r2" x="600" y="184" width="34" height="22"/>
+<text class="sm mono" x="617" y="200" text-anchor="middle">20</text>
+<rect class="r2" x="634" y="184" width="34" height="22"/>
+<text class="sm mono" x="651" y="200" text-anchor="middle">21</text>
+<rect class="r2" x="668" y="184" width="34" height="22"/>
+<text class="sm mono" x="685" y="200" text-anchor="middle">22</text>
+<rect class="r2" x="702" y="184" width="34" height="22"/>
+<text class="sm mono" x="719" y="200" text-anchor="middle">23</text>
+<text class="xs muted" x="668" y="220" text-anchor="middle">int m[3][4]</text>
+<text class="mono b" x="770" y="158">k = r * 4 + c</text>
+<text class="sm" x="770" y="180"><tspan class="mono">m[1][2]</tspan> → <tspan class="mono">k = 1·4 + 2 = 6</tspan></text>
+<text class="sm muted" x="770" y="200">a row sits together in memory</text>
+<text class="sm muted" x="568" y="240">in memory:</text>
+<rect class="r0" x="632" y="228" width="34" height="22"/>
+<text class="sm mono" x="649" y="244" text-anchor="middle">0</text>
+<text class="xs mono muted" x="649" y="264" text-anchor="middle">0</text>
+<rect class="r0" x="666" y="228" width="34" height="22"/>
+<text class="sm mono" x="683" y="244" text-anchor="middle">1</text>
+<text class="xs mono muted" x="683" y="264" text-anchor="middle">1</text>
+<rect class="r0" x="700" y="228" width="34" height="22"/>
+<text class="sm mono" x="717" y="244" text-anchor="middle">2</text>
+<text class="xs mono muted" x="717" y="264" text-anchor="middle">2</text>
+<rect class="r0" x="734" y="228" width="34" height="22"/>
+<text class="sm mono" x="751" y="244" text-anchor="middle">3</text>
+<text class="xs mono muted" x="751" y="264" text-anchor="middle">3</text>
+<rect class="r1" x="768" y="228" width="34" height="22"/>
+<text class="sm mono" x="785" y="244" text-anchor="middle">10</text>
+<text class="xs mono muted" x="785" y="264" text-anchor="middle">4</text>
+<rect class="r1" x="802" y="228" width="34" height="22"/>
+<text class="sm mono" x="819" y="244" text-anchor="middle">11</text>
+<text class="xs mono muted" x="819" y="264" text-anchor="middle">5</text>
+<rect class="r1 hit" x="836" y="228" width="34" height="22"/>
+<text class="sm mono b" x="853" y="244" text-anchor="middle">12</text>
+<text class="xs mono muted" x="853" y="264" text-anchor="middle">6</text>
+<rect class="r1" x="870" y="228" width="34" height="22"/>
+<text class="sm mono" x="887" y="244" text-anchor="middle">13</text>
+<text class="xs mono muted" x="887" y="264" text-anchor="middle">7</text>
+<rect class="r2" x="904" y="228" width="34" height="22"/>
+<text class="sm mono" x="921" y="244" text-anchor="middle">20</text>
+<text class="xs mono muted" x="921" y="264" text-anchor="middle">8</text>
+<rect class="r2" x="938" y="228" width="34" height="22"/>
+<text class="sm mono" x="955" y="244" text-anchor="middle">21</text>
+<text class="xs mono muted" x="955" y="264" text-anchor="middle">9</text>
+<rect class="r2" x="972" y="228" width="34" height="22"/>
+<text class="sm mono" x="989" y="244" text-anchor="middle">22</text>
+<text class="xs mono muted" x="989" y="264" text-anchor="middle">10</text>
+<rect class="r2" x="1006" y="228" width="34" height="22"/>
+<text class="sm mono" x="1023" y="244" text-anchor="middle">23</text>
+<text class="xs mono muted" x="1023" y="264" text-anchor="middle">11</text>
+<text class="xs muted" x="620" y="264" text-anchor="end">k</text>
+<text class="sm muted" x="568" y="286">Walking by rows goes in order; by columns it jumps 4 elements</text>
+<text class="sm muted" x="568" y="302">(16 bytes for <tspan class="mono">int</tspan>). The swapped formula <tspan class="mono">c * 3 + r</tspan> gives a different element.</text>
+
+<!-- 3. Screen -->
+<rect class="box" x="24" y="328" width="1032" height="268" rx="10"/>
+<text class="h2" x="44" y="354">3. A pixel is a bit: a 64 × 32 screen in 256 bytes</text>
+<g class="chip" transform="translate(1016,340)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="sm muted" x="44" y="374">Pixel <tspan class="mono">(13, 2)</tspan>. Formulas from ISA §7; the same numbers come from <tspan class="mono">./run.sh 03 13 2</tspan> in the Lab 05 practice.</text>
+<text class="xs mono muted" x="64" y="394">x = 0</text>
+<text class="xs mono muted" x="384" y="394" text-anchor="end">63</text>
+<text class="xs mono muted" x="58" y="408" text-anchor="end">0</text>
+<text class="xs mono muted" x="58" y="560" text-anchor="end">31</text>
+<rect class="screen" x="64" y="400" width="320" height="160"/>
+<rect class="rowband" x="64" y="410" width="320" height="5"/>
+<line class="faint" x1="64" y1="405" x2="384" y2="405"/>
+<line class="faint" x1="64" y1="410" x2="384" y2="410"/>
+<line class="faint" x1="64" y1="415" x2="384" y2="415"/>
+<line class="faint" x1="64" y1="420" x2="384" y2="420"/>
+<line class="faint" x1="64" y1="425" x2="384" y2="425"/>
+<line class="faint" x1="64" y1="430" x2="384" y2="430"/>
+<line class="faint" x1="64" y1="435" x2="384" y2="435"/>
+<line class="faint" x1="64" y1="440" x2="384" y2="440"/>
+<line class="faint" x1="64" y1="445" x2="384" y2="445"/>
+<line class="faint" x1="64" y1="450" x2="384" y2="450"/>
+<line class="faint" x1="64" y1="455" x2="384" y2="455"/>
+<line class="faint" x1="64" y1="460" x2="384" y2="460"/>
+<line class="faint" x1="64" y1="465" x2="384" y2="465"/>
+<line class="faint" x1="64" y1="470" x2="384" y2="470"/>
+<line class="faint" x1="64" y1="475" x2="384" y2="475"/>
+<line class="faint" x1="64" y1="480" x2="384" y2="480"/>
+<line class="faint" x1="64" y1="485" x2="384" y2="485"/>
+<line class="faint" x1="64" y1="490" x2="384" y2="490"/>
+<line class="faint" x1="64" y1="495" x2="384" y2="495"/>
+<line class="faint" x1="64" y1="500" x2="384" y2="500"/>
+<line class="faint" x1="64" y1="505" x2="384" y2="505"/>
+<line class="faint" x1="64" y1="510" x2="384" y2="510"/>
+<line class="faint" x1="64" y1="515" x2="384" y2="515"/>
+<line class="faint" x1="64" y1="520" x2="384" y2="520"/>
+<line class="faint" x1="64" y1="525" x2="384" y2="525"/>
+<line class="faint" x1="64" y1="530" x2="384" y2="530"/>
+<line class="faint" x1="64" y1="535" x2="384" y2="535"/>
+<line class="faint" x1="64" y1="540" x2="384" y2="540"/>
+<line class="faint" x1="64" y1="545" x2="384" y2="545"/>
+<line class="faint" x1="64" y1="550" x2="384" y2="550"/>
+<line class="faint" x1="64" y1="555" x2="384" y2="555"/>
+<line class="rule" x1="104" y1="400" x2="104" y2="560"/>
+<line class="rule" x1="144" y1="400" x2="144" y2="560"/>
+<line class="rule" x1="184" y1="400" x2="184" y2="560"/>
+<line class="rule" x1="224" y1="400" x2="224" y2="560"/>
+<line class="rule" x1="264" y1="400" x2="264" y2="560"/>
+<line class="rule" x1="304" y1="400" x2="304" y2="560"/>
+<line class="rule" x1="344" y1="400" x2="344" y2="560"/>
+<rect class="pixel" x="129" y="410" width="5" height="5"/>
+<rect class="bytebox" x="104" y="410" width="40" height="5"/>
+<path class="arrow a-io" d="M131.5,444 L131.5,418" marker-end="url(#m-io)"/>
+<text class="sm" x="121" y="458" style="paint-order:stroke" stroke="var(--bg)" stroke-width="5">pixel <tspan class="mono">(13, 2)</tspan>: row 2, byte 1 of that row</text>
+<text class="sm muted" x="64" y="580">8 bytes per row × 32 rows, from <tspan class="mono">0xA00</tspan></text>
+<text x="440" y="390"><tspan class="mono b">mem[0xA11]</tspan><tspan class="sm muted"> — pixels x = 8…15 of row 2</tspan></text>
+<line class="zoom" x1="144" y1="410" x2="440" y2="414"/>
+<line class="zoom" x1="144" y1="415" x2="440" y2="450"/>
+<rect class="zero" x="440" y="414" width="40" height="36"/>
+<text class="mono muted" x="460" y="437" text-anchor="middle">0</text>
+<text class="xs mono muted" x="460" y="408" text-anchor="middle">7</text>
+<text class="xs mono" x="460" y="464" text-anchor="middle">8</text>
+<rect class="zero" x="480" y="414" width="40" height="36"/>
+<text class="mono muted" x="500" y="437" text-anchor="middle">0</text>
+<text class="xs mono muted" x="500" y="408" text-anchor="middle">6</text>
+<text class="xs mono" x="500" y="464" text-anchor="middle">9</text>
+<rect class="zero" x="520" y="414" width="40" height="36"/>
+<text class="mono muted" x="540" y="437" text-anchor="middle">0</text>
+<text class="xs mono muted" x="540" y="408" text-anchor="middle">5</text>
+<text class="xs mono" x="540" y="464" text-anchor="middle">10</text>
+<rect class="zero" x="560" y="414" width="40" height="36"/>
+<text class="mono muted" x="580" y="437" text-anchor="middle">0</text>
+<text class="xs mono muted" x="580" y="408" text-anchor="middle">4</text>
+<text class="xs mono" x="580" y="464" text-anchor="middle">11</text>
+<rect class="zero" x="600" y="414" width="40" height="36"/>
+<text class="mono muted" x="620" y="437" text-anchor="middle">0</text>
+<text class="xs mono muted" x="620" y="408" text-anchor="middle">3</text>
+<text class="xs mono" x="620" y="464" text-anchor="middle">12</text>
+<rect class="val" x="640" y="414" width="40" height="36"/>
+<text class="mono b" x="660" y="437" text-anchor="middle">1</text>
+<text class="xs mono muted" x="660" y="408" text-anchor="middle">2</text>
+<text class="xs mono" x="660" y="464" text-anchor="middle">13</text>
+<rect class="zero" x="680" y="414" width="40" height="36"/>
+<text class="mono muted" x="700" y="437" text-anchor="middle">0</text>
+<text class="xs mono muted" x="700" y="408" text-anchor="middle">1</text>
+<text class="xs mono" x="700" y="464" text-anchor="middle">14</text>
+<rect class="zero" x="720" y="414" width="40" height="36"/>
+<text class="mono muted" x="740" y="437" text-anchor="middle">0</text>
+<text class="xs mono muted" x="740" y="408" text-anchor="middle">0</text>
+<text class="xs mono" x="740" y="464" text-anchor="middle">15</text>
+<text class="xs muted" x="434" y="408" text-anchor="end">bit</text>
+<text class="xs muted" x="434" y="464" text-anchor="end">x</text>
+<text class="sm mono" x="440" y="484" style="white-space:pre">address = 0xA00 + y·8 + x/8</text>
+<text class="sm mono" x="440" y="501" style="white-space:pre">        = 0xA00 + 16 + 1 = 0xA11</text>
+<text class="sm mono" x="440" y="518" style="white-space:pre">bit     = 7 − x%8 = 7 − 5 = 2</text>
+<text class="sm mono" x="440" y="535" style="white-space:pre">mask    = 1 &lt;&lt; 2 = 0x04</text>
+<text class="sm mono" x="440" y="552" style="white-space:pre">lit     = (mem[0xA11] &gt;&gt; 2) &amp; 1</text>
+<text class="sm muted" x="440" y="580">Set <tspan class="mono">|= 0x04</tspan>, clear <tspan class="mono">&amp;= ~0x04</tspan>: the Lab 2 trio.</text>
+<line class="rule" x1="780" y1="388" x2="780" y2="580"/>
+<text class="sm b" x="800" y="398">Forgot the “7 −”: bit 5 instead of 2</text>
+<rect class="zero" x="800" y="408" width="28" height="22"/>
+<text class="sm mono muted" x="814" y="424" text-anchor="middle">·</text>
+<rect class="zero" x="828" y="408" width="28" height="22"/>
+<text class="sm mono muted" x="842" y="424" text-anchor="middle">·</text>
+<rect class="zero" x="856" y="408" width="28" height="22"/>
+<text class="sm mono muted" x="870" y="424" text-anchor="middle">·</text>
+<rect class="zero" x="884" y="408" width="28" height="22"/>
+<text class="sm mono muted" x="898" y="424" text-anchor="middle">·</text>
+<rect class="zero" x="912" y="408" width="28" height="22"/>
+<text class="sm mono muted" x="926" y="424" text-anchor="middle">·</text>
+<rect class="val" x="940" y="408" width="28" height="22"/>
+<text class="sm mono b" x="954" y="424" text-anchor="middle">#</text>
+<rect class="zero" x="968" y="408" width="28" height="22"/>
+<text class="sm mono muted" x="982" y="424" text-anchor="middle">·</text>
+<rect class="zero" x="996" y="408" width="28" height="22"/>
+<text class="sm mono muted" x="1010" y="424" text-anchor="middle">·</text>
+<text class="sm ok" x="800" y="446">with “7 −”: x = 13 lights up</text>
+<rect class="zero" x="800" y="466" width="28" height="22"/>
+<text class="sm mono muted" x="814" y="482" text-anchor="middle">·</text>
+<rect class="zero" x="828" y="466" width="28" height="22"/>
+<text class="sm mono muted" x="842" y="482" text-anchor="middle">·</text>
+<rect class="bad" x="856" y="466" width="28" height="22"/>
+<text class="sm mono b" x="870" y="482" text-anchor="middle">#</text>
+<rect class="zero" x="884" y="466" width="28" height="22"/>
+<text class="sm mono muted" x="898" y="482" text-anchor="middle">·</text>
+<rect class="zero" x="912" y="466" width="28" height="22"/>
+<text class="sm mono muted" x="926" y="482" text-anchor="middle">·</text>
+<rect class="zero" x="940" y="466" width="28" height="22"/>
+<text class="sm mono muted" x="954" y="482" text-anchor="middle">·</text>
+<rect class="zero" x="968" y="466" width="28" height="22"/>
+<text class="sm mono muted" x="982" y="482" text-anchor="middle">·</text>
+<rect class="zero" x="996" y="466" width="28" height="22"/>
+<text class="sm mono muted" x="1010" y="482" text-anchor="middle">·</text>
+<text class="sm err" x="800" y="504">without: x = 10, mirrored in its byte</text>
+<text class="sm" x="800" y="542">Row 2 in the dump, from <tspan class="mono">0xA10</tspan>:</text>
+<text class="sm mono" x="800" y="562">00 <tspan class="ok">04</tspan> 00 00 00 00 00 00</text>
+
+<!-- 4. Strings -->
+<rect class="box" x="24" y="612" width="508" height="224" rx="10"/>
+<text class="h2" x="44" y="638">4. A string: length by convention</text>
+<g class="chip" transform="translate(492,624)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<text class="sm mono" x="44" y="664">char s[4] = "HI";</text>
+<rect class="val" x="64" y="674" width="48" height="40"/>
+<text class="mono b" x="88" y="692" text-anchor="middle">H</text>
+<text class="xs mono muted" x="88" y="707" text-anchor="middle">72</text>
+<rect class="val" x="112" y="674" width="48" height="40"/>
+<text class="mono b" x="136" y="692" text-anchor="middle">I</text>
+<text class="xs mono muted" x="136" y="707" text-anchor="middle">73</text>
+<rect class="zero" x="160" y="674" width="48" height="40"/>
+<text class="mono b" x="184" y="692" text-anchor="middle">\0</text>
+<text class="xs mono muted" x="184" y="707" text-anchor="middle">0</text>
+<rect class="zero" x="208" y="674" width="48" height="40"/>
+<text class="mono b" x="232" y="692" text-anchor="middle">\0</text>
+<text class="xs mono muted" x="232" y="707" text-anchor="middle">0</text>
+<path class="arrow a-io" d="M70,724 L184,724" marker-end="url(#m-io)"/>
+<text class="xs muted" x="194" y="728">strlen walks to the first 0</text>
+<text class="sm mono ok" x="316" y="692">strlen(s) = 2</text>
+<text class="sm" x="316" y="710">sizeof(s) = 4, the buffer</text>
+<text class="sm mono" x="44" y="748">"ABCD" in char s[4]</text>
+<rect class="val" x="64" y="758" width="48" height="40"/>
+<text class="mono b" x="88" y="776" text-anchor="middle">A</text>
+<text class="xs mono muted" x="88" y="791" text-anchor="middle">65</text>
+<rect class="val" x="112" y="758" width="48" height="40"/>
+<text class="mono b" x="136" y="776" text-anchor="middle">B</text>
+<text class="xs mono muted" x="136" y="791" text-anchor="middle">66</text>
+<rect class="val" x="160" y="758" width="48" height="40"/>
+<text class="mono b" x="184" y="776" text-anchor="middle">C</text>
+<text class="xs mono muted" x="184" y="791" text-anchor="middle">67</text>
+<rect class="val" x="208" y="758" width="48" height="40"/>
+<text class="mono b" x="232" y="776" text-anchor="middle">D</text>
+<text class="xs mono muted" x="232" y="791" text-anchor="middle">68</text>
+<rect class="bad" x="256" y="758" width="48" height="40"/>
+<text class="mono err" x="280" y="783" text-anchor="middle">?</text>
+<path class="arrow a-bad" d="M70,808 L308.79999999999995,808" marker-end="url(#m-bad)"/>
+<text class="sm err" x="316" y="776">no zero</text>
+<text class="sm" x="316" y="794">strlen walks off the end: ASan</text>
+
+<!-- 5. Bubble sort -->
+<rect class="box" x="548" y="612" width="508" height="224" rx="10"/>
+<text class="h2" x="568" y="638">5. Bubble sort: swap neighbours</text>
+<g class="chip" transform="translate(1016,624)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§4</text></g>
+<text class="sm b" x="568" y="669">pass 1</text>
+<rect class="zero hit" x="650" y="654" width="30" height="21"/>
+<text class="sm mono b" x="665" y="669.5" text-anchor="middle">4</text>
+<rect class="zero hit" x="680" y="654" width="30" height="21"/>
+<text class="sm mono b" x="695" y="669.5" text-anchor="middle">1</text>
+<rect class="zero" x="710" y="654" width="30" height="21"/>
+<text class="sm mono" x="725" y="669.5" text-anchor="middle">3</text>
+<rect class="zero" x="740" y="654" width="30" height="21"/>
+<text class="sm mono" x="755" y="669.5" text-anchor="middle">2</text>
+<text class="sm b" x="784" y="669">swap →</text>
+<rect class="zero" x="850" y="654" width="30" height="21"/>
+<text class="sm mono" x="865" y="669.5" text-anchor="middle">1</text>
+<rect class="zero" x="880" y="654" width="30" height="21"/>
+<text class="sm mono" x="895" y="669.5" text-anchor="middle">4</text>
+<rect class="zero" x="910" y="654" width="30" height="21"/>
+<text class="sm mono" x="925" y="669.5" text-anchor="middle">3</text>
+<rect class="zero" x="940" y="654" width="30" height="21"/>
+<text class="sm mono" x="955" y="669.5" text-anchor="middle">2</text>
+<rect class="zero" x="650" y="679" width="30" height="21"/>
+<text class="sm mono" x="665" y="694.5" text-anchor="middle">1</text>
+<rect class="zero hit" x="680" y="679" width="30" height="21"/>
+<text class="sm mono b" x="695" y="694.5" text-anchor="middle">4</text>
+<rect class="zero hit" x="710" y="679" width="30" height="21"/>
+<text class="sm mono b" x="725" y="694.5" text-anchor="middle">3</text>
+<rect class="zero" x="740" y="679" width="30" height="21"/>
+<text class="sm mono" x="755" y="694.5" text-anchor="middle">2</text>
+<text class="sm b" x="784" y="694">swap →</text>
+<rect class="zero" x="850" y="679" width="30" height="21"/>
+<text class="sm mono" x="865" y="694.5" text-anchor="middle">1</text>
+<rect class="zero" x="880" y="679" width="30" height="21"/>
+<text class="sm mono" x="895" y="694.5" text-anchor="middle">3</text>
+<rect class="zero" x="910" y="679" width="30" height="21"/>
+<text class="sm mono" x="925" y="694.5" text-anchor="middle">4</text>
+<rect class="zero" x="940" y="679" width="30" height="21"/>
+<text class="sm mono" x="955" y="694.5" text-anchor="middle">2</text>
+<rect class="zero" x="650" y="704" width="30" height="21"/>
+<text class="sm mono" x="665" y="719.5" text-anchor="middle">1</text>
+<rect class="zero" x="680" y="704" width="30" height="21"/>
+<text class="sm mono" x="695" y="719.5" text-anchor="middle">3</text>
+<rect class="zero hit" x="710" y="704" width="30" height="21"/>
+<text class="sm mono b" x="725" y="719.5" text-anchor="middle">4</text>
+<rect class="zero hit" x="740" y="704" width="30" height="21"/>
+<text class="sm mono b" x="755" y="719.5" text-anchor="middle">2</text>
+<text class="sm b" x="784" y="719">swap →</text>
+<rect class="zero" x="850" y="704" width="30" height="21"/>
+<text class="sm mono" x="865" y="719.5" text-anchor="middle">1</text>
+<rect class="zero" x="880" y="704" width="30" height="21"/>
+<text class="sm mono" x="895" y="719.5" text-anchor="middle">3</text>
+<rect class="zero" x="910" y="704" width="30" height="21"/>
+<text class="sm mono" x="925" y="719.5" text-anchor="middle">2</text>
+<rect class="val" x="940" y="704" width="30" height="21"/>
+<text class="sm mono" x="955" y="719.5" text-anchor="middle">4</text>
+<text class="sm b" x="568" y="744">pass 2</text>
+<rect class="zero hit" x="650" y="729" width="30" height="21"/>
+<text class="sm mono b" x="665" y="744.5" text-anchor="middle">1</text>
+<rect class="zero hit" x="680" y="729" width="30" height="21"/>
+<text class="sm mono b" x="695" y="744.5" text-anchor="middle">3</text>
+<rect class="zero" x="710" y="729" width="30" height="21"/>
+<text class="sm mono" x="725" y="744.5" text-anchor="middle">2</text>
+<rect class="val" x="740" y="729" width="30" height="21"/>
+<text class="sm mono" x="755" y="744.5" text-anchor="middle">4</text>
+<text class="sm muted" x="784" y="744">no swap</text>
+<rect class="zero" x="650" y="754" width="30" height="21"/>
+<text class="sm mono" x="665" y="769.5" text-anchor="middle">1</text>
+<rect class="zero hit" x="680" y="754" width="30" height="21"/>
+<text class="sm mono b" x="695" y="769.5" text-anchor="middle">3</text>
+<rect class="zero hit" x="710" y="754" width="30" height="21"/>
+<text class="sm mono b" x="725" y="769.5" text-anchor="middle">2</text>
+<rect class="val" x="740" y="754" width="30" height="21"/>
+<text class="sm mono" x="755" y="769.5" text-anchor="middle">4</text>
+<text class="sm b" x="784" y="769">swap →</text>
+<rect class="zero" x="850" y="754" width="30" height="21"/>
+<text class="sm mono" x="865" y="769.5" text-anchor="middle">1</text>
+<rect class="zero" x="880" y="754" width="30" height="21"/>
+<text class="sm mono" x="895" y="769.5" text-anchor="middle">2</text>
+<rect class="val" x="910" y="754" width="30" height="21"/>
+<text class="sm mono" x="925" y="769.5" text-anchor="middle">3</text>
+<rect class="val" x="940" y="754" width="30" height="21"/>
+<text class="sm mono" x="955" y="769.5" text-anchor="middle">4</text>
+<text class="sm b" x="568" y="794">pass 3</text>
+<rect class="zero hit" x="650" y="779" width="30" height="21"/>
+<text class="sm mono b" x="665" y="794.5" text-anchor="middle">1</text>
+<rect class="zero hit" x="680" y="779" width="30" height="21"/>
+<text class="sm mono b" x="695" y="794.5" text-anchor="middle">2</text>
+<rect class="val" x="710" y="779" width="30" height="21"/>
+<text class="sm mono" x="725" y="794.5" text-anchor="middle">3</text>
+<rect class="val" x="740" y="779" width="30" height="21"/>
+<text class="sm mono" x="755" y="794.5" text-anchor="middle">4</text>
+<text class="sm muted" x="784" y="794">no swap</text>
+<text class="sm" x="568" y="822">6 comparisons, 4 swaps. After each pass the largest of the rest is in place.</text>
+</svg>
