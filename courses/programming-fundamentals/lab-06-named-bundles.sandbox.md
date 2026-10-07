@@ -1,6 +1,6 @@
 # Пісочниця 06 — Іменовані набори: шість маленьких задач
 
-**Тижні:** 11–12 · **Лаба:** [Lab 06](lab-06-named-bundles.md) · **Notes:** [досліди](lab-06-named-bundles.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md)
+**Тижні:** 11–12 · **Лаба:** [Lab 06](lab-06-named-bundles.md) · **Notes:** [досліди](lab-06-named-bundles.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md) · **Схема:** [UK](img/bundles.uk.svg) · [EN](img/bundles.svg)
 
 > **Що це.** Пісочниця — одна з двох стежок курсу, простіший варіант. На основній ви
 > лабу за лабою будуєте `ember`. Тут проєкту немає: замість нього шість незалежних

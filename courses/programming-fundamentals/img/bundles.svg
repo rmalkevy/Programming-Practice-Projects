@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 910" width="1080" height="910" role="img" aria-labelledby="title desc">
+  <title id="title">Structs, lifetimes and the heap</title>
+  <desc id="desc">Five panels for the Lab 06 theory. 1: struct P { char c; int n; } takes 8 bytes though its fields take 5: three padding bytes sit between c and n; the same fields op, addr, imm in three orders take 6, 4 and 4 bytes. 2: enum class Op: the byte 0x18 becomes Op::Inc only through a cast. 3: three lifetimes, static, stack and heap, with addresses from the practice run and a timeline. 4: a dangling pointer is a pointer without an object, a leak is an object without a pointer. 5: the ember heap: ALLOC hands out 0x0C00 for 4 bytes and 0x0C04 for 2, the heap top is 0x0C06, and there is no FREE.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --a:#ddf4ff; --a-s:#0969da; --b:#fbefff; --b-s:#8250df; --c:#fff1e5; --c-s:#bc4c00;
+          --val:#dafbe1; --val-s:#1a7f37; --pad:#f6f8fa; --pad-s:#818b98; --bad:#ffebe9; --bad-s:#cf222e; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --a:#0d2c4f; --a-s:#4493f8; --b:#271b45; --b-s:#ab7df8; --c:#3a2111; --c-s:#f0883e;
+            --val:#0f2d1a; --val-s:#3fb950; --pad:#151b23; --pad-s:#9198a1; --bad:#3d1418; --bad-s:#f85149; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .xs { font-size: 10.5px; }
+    .muted { fill: var(--muted); }
+    .ok { fill: var(--val-s); font-weight: 700; }
+    .err { fill: var(--bad-s); font-weight: 700; }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .cell { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .rule { stroke: var(--line); stroke-width: 1.2; }
+    .guide { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3; }
+    .fa { fill: var(--a); stroke: var(--a-s); stroke-width: 1.2; }
+    .fb { fill: var(--b); stroke: var(--b-s); stroke-width: 1.2; }
+    .fc { fill: var(--c); stroke: var(--c-s); stroke-width: 1.2; }
+    .ra { fill: var(--a); stroke: var(--a-s); stroke-width: 1.5; }
+    .rb { fill: var(--b); stroke: var(--b-s); stroke-width: 1.5; }
+    .rc { fill: var(--c); stroke: var(--c-s); stroke-width: 1.5; }
+    .zero { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .pad { fill: var(--pad); stroke: var(--pad-s); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .bad { fill: var(--bad); stroke: var(--bad-s); stroke-width: 1.5; stroke-dasharray: 4 3; }
+    .ptr { fill: var(--b); stroke: var(--b-s); stroke-width: 2; }
+    .brace { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .x-bad { stroke: var(--bad-s); stroke-width: 2.5; stroke-linecap: round; }
+    .arrow { fill: none; stroke-width: 2; }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .a-b { stroke: var(--b-s); }      .m-b { fill: var(--b-s); }
+    .a-bad { stroke: var(--bad-s); }  .m-bad { fill: var(--bad-s); }
+    .a-val { stroke: var(--val-s); }  .m-val { fill: var(--val-s); }
+    .dashed { stroke-dasharray: 5 3; }
+  </style>
+  <defs>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-b" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-bad" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-val" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-val" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+<rect class="bg" x="0" y="0" width="1080" height="910" rx="12"/>
+
+<!-- Title and legend -->
+<text class="h1" x="24" y="38">Structs, lifetimes and the heap</text>
+<text class="muted" x="24" y="60">Fields sit side by side, with gaps for alignment. Where the variable itself lives depends on its lifetime.</text>
+<g class="chip" transform="translate(700,24)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm muted" x="736" y="37">— section of the Lab 06 theory</text>
+<rect class="pad" x="924" y="26" width="22" height="14" rx="2"/>
+<text class="sm muted" x="954" y="37">unowned bytes</text>
+<rect class="bad" x="702" y="48" width="22" height="14" rx="2"/>
+<text class="sm muted" x="736" y="59">freed memory</text>
+
+<!-- 1. struct -->
+<rect class="box" x="24" y="84" width="640" height="290" rx="10"/>
+<text class="h2" x="44" y="110">1. <tspan class="mono">struct</tspan>: fields side by side, with names</text>
+<g class="chip" transform="translate(624,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm mono" x="44" y="134">struct P { char c; int n; };   P p{'A', 300};</text>
+<text class="xs mono muted" x="70" y="158" text-anchor="middle">0</text>
+<rect class="fa" x="44" y="164" width="52" height="36"/>
+<text class="mono b" x="70" y="187" text-anchor="middle">41</text>
+<text class="xs mono b" x="70" y="216" text-anchor="middle">c</text>
+<text class="xs mono muted" x="122" y="158" text-anchor="middle">1</text>
+<rect class="pad" x="96" y="164" width="52" height="36"/>
+<text class="mono muted" x="122" y="187" text-anchor="middle">EE</text>
+<text class="xs mono muted" x="122" y="216" text-anchor="middle">··</text>
+<text class="xs mono muted" x="174" y="158" text-anchor="middle">2</text>
+<rect class="pad" x="148" y="164" width="52" height="36"/>
+<text class="mono muted" x="174" y="187" text-anchor="middle">EE</text>
+<text class="xs mono muted" x="174" y="216" text-anchor="middle">··</text>
+<text class="xs mono muted" x="226" y="158" text-anchor="middle">3</text>
+<rect class="pad" x="200" y="164" width="52" height="36"/>
+<text class="mono muted" x="226" y="187" text-anchor="middle">EE</text>
+<text class="xs mono muted" x="226" y="216" text-anchor="middle">··</text>
+<text class="xs mono muted" x="278" y="158" text-anchor="middle">4</text>
+<rect class="fb" x="252" y="164" width="52" height="36"/>
+<text class="mono b" x="278" y="187" text-anchor="middle">2C</text>
+<text class="xs mono b" x="278" y="216" text-anchor="middle">n</text>
+<text class="xs mono muted" x="330" y="158" text-anchor="middle">5</text>
+<rect class="fb" x="304" y="164" width="52" height="36"/>
+<text class="mono b" x="330" y="187" text-anchor="middle">01</text>
+<text class="xs mono b" x="330" y="216" text-anchor="middle">n</text>
+<text class="xs mono muted" x="382" y="158" text-anchor="middle">6</text>
+<rect class="fb" x="356" y="164" width="52" height="36"/>
+<text class="mono b" x="382" y="187" text-anchor="middle">00</text>
+<text class="xs mono b" x="382" y="216" text-anchor="middle">n</text>
+<text class="xs mono muted" x="434" y="158" text-anchor="middle">7</text>
+<rect class="fb" x="408" y="164" width="52" height="36"/>
+<text class="mono b" x="434" y="187" text-anchor="middle">00</text>
+<text class="xs mono b" x="434" y="216" text-anchor="middle">n</text>
+<text class="xs muted" x="468" y="158">offset</text>
+<text class="mono b" x="476" y="178">sizeof(P) = 8</text>
+<text class="sm" x="476" y="196">but the fields are 1 + 4 = 5</text>
+<text class="sm muted" x="476" y="216"><tspan class="mono">int</tspan> sits at an offset</text>
+<text class="sm muted" x="476" y="232">divisible by 4: <tspan class="mono">alignof(int)</tspan></text>
+<text class="sm muted" x="44" y="240">Padding bytes belong to no field: the dump still shows what was there (<tspan class="mono">EE</tspan>).</text>
+<text class="sm b" x="44" y="264">Field order changes the size:</text>
+<text class="xs mono" x="44" y="289">{ Byte op; uint16_t addr; Byte imm; }</text>
+<rect class="fa" x="296" y="274" width="40" height="22"/>
+<text class="xs mono" x="316" y="290" text-anchor="middle">op</text>
+<rect class="pad" x="336" y="274" width="40" height="22"/>
+<text class="xs mono muted" x="356" y="290" text-anchor="middle">··</text>
+<rect class="fb" x="376" y="274" width="40" height="22"/>
+<text class="xs mono" x="396" y="290" text-anchor="middle">addr</text>
+<rect class="fb" x="416" y="274" width="40" height="22"/>
+<text class="xs mono" x="436" y="290" text-anchor="middle">addr</text>
+<rect class="fc" x="456" y="274" width="40" height="22"/>
+<text class="xs mono" x="476" y="290" text-anchor="middle">imm</text>
+<rect class="pad" x="496" y="274" width="40" height="22"/>
+<text class="xs mono muted" x="516" y="290" text-anchor="middle">··</text>
+<text class="mono b" x="548" y="290">= 6</text>
+<text class="xs mono" x="44" y="315">{ uint16_t addr; Byte op; Byte imm; }</text>
+<rect class="fb" x="296" y="300" width="40" height="22"/>
+<text class="xs mono" x="316" y="316" text-anchor="middle">addr</text>
+<rect class="fb" x="336" y="300" width="40" height="22"/>
+<text class="xs mono" x="356" y="316" text-anchor="middle">addr</text>
+<rect class="fa" x="376" y="300" width="40" height="22"/>
+<text class="xs mono" x="396" y="316" text-anchor="middle">op</text>
+<rect class="fc" x="416" y="300" width="40" height="22"/>
+<text class="xs mono" x="436" y="316" text-anchor="middle">imm</text>
+<text class="mono b" x="548" y="316">= 4</text>
+<text class="xs mono" x="44" y="341">{ Byte op; Byte imm; uint16_t addr; }</text>
+<rect class="fa" x="296" y="326" width="40" height="22"/>
+<text class="xs mono" x="316" y="342" text-anchor="middle">op</text>
+<rect class="fc" x="336" y="326" width="40" height="22"/>
+<text class="xs mono" x="356" y="342" text-anchor="middle">imm</text>
+<rect class="fb" x="376" y="326" width="40" height="22"/>
+<text class="xs mono" x="396" y="342" text-anchor="middle">addr</text>
+<rect class="fb" x="416" y="326" width="40" height="22"/>
+<text class="xs mono" x="436" y="342" text-anchor="middle">addr</text>
+<text class="mono b" x="548" y="342">= 4</text>
+<text class="sm muted" x="44" y="366">An array of 8 such records: 48 bytes against 32.</text>
+
+<!-- 2. enum class -->
+<rect class="box" x="680" y="84" width="376" height="290" rx="10"/>
+<text class="h2" x="700" y="110">2. <tspan class="mono">enum class</tspan>: integers with a type</text>
+<g class="chip" transform="translate(1016,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="xs mono" x="700" y="134">enum class Op : std::uint8_t {</text>
+<text class="xs mono" x="700" y="150" style="white-space:pre">    Add = 0x10, Inc = 0x18, …</text>
+<text class="xs mono" x="700" y="166">};</text>
+<rect class="zero" x="700" y="186" width="104" height="32" rx="4"/>
+<text class="mono" x="752" y="207" text-anchor="middle">Byte 0x18</text>
+<path class="arrow a-io" d="M806,202 L880,202" marker-end="url(#m-io)"/>
+<text class="xs mono b" x="843" y="196" text-anchor="middle">(Op)b</text>
+<rect class="ra" x="884" y="186" width="150" height="32" rx="4"/>
+<text class="mono b" x="959" y="207" text-anchor="middle">Op::Inc</text>
+<text class="xs muted" x="700" y="234">raw byte</text><text class="xs muted" x="884" y="234">decoded opcode</text>
+<text class="sm" x="700" y="262"><tspan class="ok">✓</tspan> <tspan class="mono xs">switch (op) { case Op::Inc: … }</tspan></text>
+<text class="sm" x="700" y="282"><tspan class="err">✗</tspan> <tspan class="mono xs">Op op = 0x18;</tspan> <tspan class="xs muted">— does not compile</tspan></text>
+<text class="sm" x="700" y="302"><tspan class="err">✗</tspan> <tspan class="mono xs">Op::Add + 1</tspan> <tspan class="xs muted">— does not compile</tspan></text>
+<text class="sm" x="700" y="330"><tspan class="mono">(Op)0x77</tspan> checks nothing:</text>
+<text class="sm" x="700" y="348">an unknown byte is caught by <tspan class="mono">default:</tspan> —</text>
+<text class="sm" x="700" y="366">it is an error, not a silent <tspan class="mono">Nop</tspan>.</text>
+
+<!-- 3. Three lifetimes -->
+<rect class="box" x="24" y="390" width="1032" height="260" rx="10"/>
+<text class="h2" x="44" y="416">3. Three lifetimes: where a variable lives and for how long</text>
+<g class="chip" transform="translate(1016,402)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<text class="sm muted" x="44" y="436">Addresses from <tspan class="mono">./run.sh 05 3</tspan> in the Lab 06 practice. Yours will differ, but the three areas will be just as far apart.</text>
+<line class="guide" x1="566" y1="448" x2="566" y2="622"/>
+<text class="xs mono muted" x="566" y="638" text-anchor="middle">start</text>
+<line class="guide" x1="700" y1="448" x2="700" y2="622"/>
+<text class="xs mono muted" x="700" y="638" text-anchor="middle">{</text>
+<line class="guide" x1="760" y1="448" x2="760" y2="622"/>
+<text class="xs mono muted" x="760" y="638" text-anchor="middle">new</text>
+<line class="guide" x1="860" y1="448" x2="860" y2="622"/>
+<text class="xs mono muted" x="860" y="638" text-anchor="middle">}</text>
+<line class="guide" x1="940" y1="448" x2="940" y2="622"/>
+<text class="xs mono muted" x="940" y="638" text-anchor="middle">delete</text>
+<line class="guide" x1="1018" y1="448" x2="1018" y2="622"/>
+<text class="xs mono muted" x="1018" y="638" text-anchor="middle">end</text>
+<rect class="ra" x="44" y="450" width="480" height="50" rx="6"/>
+<text class="sm b" x="56" y="469">Static / global</text>
+<text class="xs muted" x="512" y="469" text-anchor="end">ember: Memory, if made global (don't)</text>
+<text class="xs mono" x="56" y="488">global_counter  0x102737f40</text>
+<rect class="ra" x="566" y="466" width="452" height="18" rx="4"/>
+<text class="xs" x="572" y="479">the whole run</text>
+<rect class="rb" x="44" y="508" width="480" height="50" rx="6"/>
+<text class="sm b" x="56" y="527">Automatic (stack)</text>
+<text class="xs muted" x="512" y="527" text-anchor="end">ember: CPU cpu in main</text>
+<text class="xs mono" x="56" y="546">in_main 0x16d6ea380 · dive(1) …9fe0 · dive(2) …9d80 · dive(3) …9b20</text>
+<rect class="rb" x="700" y="524" width="160" height="18" rx="4"/>
+<text class="xs" x="706" y="537">until the block ends</text>
+<rect class="rc" x="44" y="566" width="480" height="50" rx="6"/>
+<text class="sm b" x="56" y="585">Dynamic (heap)</text>
+<text class="xs muted" x="512" y="585" text-anchor="end">ember: the guest heap 0xC00–0xEFF</text>
+<text class="xs mono" x="56" y="604">new int 0x6020000000b0 · …0f0 · …130</text>
+<rect class="rc" x="760" y="582" width="180" height="18" rx="4"/>
+<text class="xs" x="766" y="595">until delete; the block has ended</text>
+
+<!-- 4. Dangling pointer and leak -->
+<rect class="box" x="24" y="666" width="576" height="228" rx="10"/>
+<text class="h2" x="44" y="692">4. A dangling pointer and a leak are opposites</text>
+<g class="chip" transform="translate(560,678)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<line class="rule" x1="310" y1="706" x2="310" y2="882"/>
+<text class="sm b" x="44" y="716">A pointer without an object</text>
+<text class="xs mono" x="44" y="732">int* p = new int{42};</text>
+<text class="xs mono" x="44" y="746">delete p;</text>
+<rect class="ptr" x="44" y="758" width="160" height="30" rx="6"/>
+<text class="mono b" x="56" y="778">p</text><text class="sm mono" x="80" y="778">0x6020000000b0</text>
+<path class="arrow a-b" d="M124,790 L124,814" marker-end="url(#m-b)"/>
+<rect class="bad" x="64" y="816" width="120" height="30" rx="4"/>
+<text class="mono err" x="124" y="836" text-anchor="middle">42?</text>
+<text class="xs muted" x="192" y="836">freed</text>
+<text class="xs mono err" x="44" y="864">*p → heap-use-after-free</text>
+<text class="xs mono err" x="44" y="880">delete p; again → double-free</text>
+<text class="sm b" x="326" y="716">An object without a pointer</text>
+<text class="xs mono" x="326" y="732">int* p = new int{1};</text>
+<text class="xs mono" x="326" y="746">p = new int{2};</text>
+<rect class="ptr" x="400" y="758" width="70" height="30" rx="6"/>
+<text class="mono b" x="435" y="778" text-anchor="middle">p</text>
+<rect class="rc" x="330" y="816" width="90" height="30" rx="4"/>
+<text class="mono b" x="375" y="836" text-anchor="middle">1</text>
+<rect class="rc" x="480" y="816" width="90" height="30" rx="4"/>
+<text class="mono b" x="525" y="836" text-anchor="middle">2</text>
+<path class="arrow a-io dashed" d="M420,790 L385,814"/>
+<path class="x-bad" d="M396,796 L408,808 M408,796 L396,808"/>
+<path class="arrow a-b" d="M455,790 L510,814" marker-end="url(#m-b)"/>
+<text class="xs err" x="326" y="864">leak: nothing points at 1 any more</text>
+<text class="xs muted" x="326" y="880">LeakSanitizer on Linux; macOS stays quiet</text>
+
+<!-- 5. The ember heap -->
+<rect class="box" x="616" y="666" width="440" height="228" rx="10"/>
+<text class="h2" x="636" y="692">5. The <tspan class="mono">ember</tspan> heap: <tspan class="mono">ALLOC</tspan> only moves forward</text>
+<g class="chip" transform="translate(1016,678)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">ISA</text></g>
+<text class="xs mono" x="636" y="716">LOADI A, 4 · ALLOC → H = 0x0C00, heap = 0x0C04</text>
+<text class="xs mono" x="636" y="732">LOADI A, 2 · ALLOC → H = 0x0C04, heap = 0x0C06</text>
+<rect class="fa" x="636" y="762" width="50" height="32"/>
+<text class="sm mono b" x="661" y="783" text-anchor="middle">11</text>
+<text class="xs mono muted" x="661" y="808" text-anchor="middle">0C00</text>
+<rect class="fa" x="686" y="762" width="50" height="32"/>
+<text class="sm mono b" x="711" y="783" text-anchor="middle">00</text>
+<text class="xs mono muted" x="711" y="808" text-anchor="middle">0C01</text>
+<rect class="fa" x="736" y="762" width="50" height="32"/>
+<text class="sm mono b" x="761" y="783" text-anchor="middle">00</text>
+<text class="xs mono muted" x="761" y="808" text-anchor="middle">0C02</text>
+<rect class="fa" x="786" y="762" width="50" height="32"/>
+<text class="sm mono b" x="811" y="783" text-anchor="middle">00</text>
+<text class="xs mono muted" x="811" y="808" text-anchor="middle">0C03</text>
+<rect class="fb" x="836" y="762" width="50" height="32"/>
+<text class="sm mono b" x="861" y="783" text-anchor="middle">22</text>
+<text class="xs mono muted" x="861" y="808" text-anchor="middle">0C04</text>
+<rect class="fb" x="886" y="762" width="50" height="32"/>
+<text class="sm mono b" x="911" y="783" text-anchor="middle">00</text>
+<text class="xs mono muted" x="911" y="808" text-anchor="middle">0C05</text>
+<rect class="pad" x="936" y="762" width="50" height="32"/>
+<text class="xs mono muted" x="961" y="808" text-anchor="middle">0C06</text>
+<rect class="pad" x="986" y="762" width="50" height="32"/>
+<text class="xs mono muted" x="1011" y="808" text-anchor="middle">0C07</text>
+<text class="xs mono b" x="861" y="750" text-anchor="middle">H</text>
+<path class="arrow a-io" d="M861,753 L861,760" marker-end="url(#m-io)"/>
+<text class="xs mono b" x="961" y="750" text-anchor="middle">heap</text>
+<path class="arrow a-io" d="M961,753 L961,760" marker-end="url(#m-io)"/>
+<path class="brace" d="M638,816 v6 H834 v-6"/>
+<path class="brace" d="M838,816 v6 H934 v-6"/>
+<path class="brace" d="M938,816 v6 H1034 v-6"/>
+<text class="xs" x="736" y="836" text-anchor="middle">first block, 4 bytes</text>
+<text class="xs" x="886" y="836" text-anchor="middle">second, 2</text>
+<text class="xs muted" x="986" y="836" text-anchor="middle">free up to 0xEFF</text>
+<text class="sm" x="636" y="864"><tspan class="mono">FREE</tspan> is missing on purpose: the heap top only grows.</text>
+<text class="sm muted" x="636" y="880">Doesn't fit: <tspan class="mono">C = 1</tspan>, and <tspan class="mono">H</tspan> stays the same.</text>
+</svg>
