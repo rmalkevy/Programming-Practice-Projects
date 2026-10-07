@@ -1,6 +1,6 @@
 # Пісочниця 07 — Виклик і повернення: шість маленьких задач
 
-**Тижні:** 13–14 · **Лаба:** [Lab 07](lab-07-call-and-return.md) · **Notes:** [досліди](lab-07-call-and-return.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md)
+**Тижні:** 13–14 · **Лаба:** [Lab 07](lab-07-call-and-return.md) · **Notes:** [досліди](lab-07-call-and-return.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md) · **Схема:** [UK](img/calls.uk.svg) · [EN](img/calls.svg)
 
 > **Що це.** Пісочниця — одна з двох стежок курсу, простіший варіант. На основній ви
 > лабу за лабою будуєте `ember`. Тут проєкту немає: замість нього шість незалежних

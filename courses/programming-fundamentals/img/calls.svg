@@ -1,0 +1,390 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1120" width="1080" height="1120" role="img" aria-labelledby="title desc">
+  <title id="title">Call, return and the stack</title>
+  <desc id="desc">Four panels for the Lab 07 theory. 1: fact(3) in ember from the ISA §6 listing: five snapshots of the stack 0xFFF…0xFF7 at trace steps 2, 11, 27, 30 and 34; CALL pushes the return address, PUSH A saves n, frames of fact(3), fact(2), fact(1); POP and RET only raise SP and the old bytes stay. 2: in C++ every call of fact has its own n, and the values come back as 1, 2, 6. 3: passing by value, by pointer and by reference. 4: the stack as a type: top is the last used slot, SP is the next free one.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --f3:#ddf4ff; --f3-s:#0969da; --f2:#fbefff; --f2-s:#8250df; --f1:#fff1e5; --f1-s:#bc4c00;
+          --val:#dafbe1; --val-s:#1a7f37; --pad:#f6f8fa; --pad-s:#818b98; --bad:#ffebe9; --bad-s:#cf222e; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --f3:#0d2c4f; --f3-s:#4493f8; --f2:#271b45; --f2-s:#ab7df8; --f1:#3a2111; --f1-s:#f0883e;
+            --val:#0f2d1a; --val-s:#3fb950; --pad:#151b23; --pad-s:#9198a1; --bad:#3d1418; --bad-s:#f85149; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .xs { font-size: 10.5px; }
+    .muted { fill: var(--muted); }
+    .ok { fill: var(--val-s); font-weight: 700; }
+    .err { fill: var(--bad-s); font-weight: 700; }
+    .t3 { fill: var(--f3-s); } .t2 { fill: var(--f2-s); } .t1 { fill: var(--f1-s); }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .cell { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .rule { stroke: var(--line); stroke-width: 1.2; }
+    .empty { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .f3 { fill: var(--f3); stroke: var(--f3-s); stroke-width: 1.2; }
+    .f2 { fill: var(--f2); stroke: var(--f2-s); stroke-width: 1.2; }
+    .f1 { fill: var(--f1); stroke: var(--f1-s); stroke-width: 1.2; }
+    .fr3 { fill: var(--f3); stroke: var(--f3-s); stroke-width: 2; }
+    .fr2 { fill: var(--f2); stroke: var(--f2-s); stroke-width: 2; }
+    .fr1 { fill: var(--f1); stroke: var(--f1-s); stroke-width: 2; }
+    .frm { fill: var(--bg); stroke: var(--muted); stroke-width: 2; }
+    .val { fill: var(--val); stroke: var(--val-s); stroke-width: 2; }
+    .pad { fill: var(--pad); stroke: var(--pad-s); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .hit { stroke: var(--fg); stroke-width: 2.5; }
+    .bar3 { stroke: var(--f3-s); stroke-width: 4; } .bar2 { stroke: var(--f2-s); stroke-width: 4; } .bar1 { stroke: var(--f1-s); stroke-width: 4; }
+    .arrow { fill: none; stroke-width: 2; }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .a-val { stroke: var(--val-s); }  .m-val { fill: var(--val-s); }
+    .a-f2 { stroke: var(--f2-s); }    .m-f2 { fill: var(--f2-s); }
+    .dashed { stroke-dasharray: 5 3; }
+  </style>
+  <defs>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-val" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-val" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-f2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-f2" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+<rect class="bg" x="0" y="0" width="1080" height="1120" rx="12"/>
+
+<!-- Title and legend -->
+<text class="h1" x="24" y="38">Call and return: the stack</text>
+<text class="muted" x="24" y="60"><tspan class="mono">CALL</tspan> is a jump that remembers where to come back to. It remembers on the stack.</text>
+<g class="chip" transform="translate(700,24)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm muted" x="736" y="37">— section of the Lab 07 theory</text>
+<rect class="pad" x="924" y="26" width="22" height="14" rx="2"/>
+<text class="sm muted" x="954" y="37">old byte</text>
+<rect class="f3" x="702" y="48" width="22" height="14" rx="2"/>
+<rect class="f2" x="728" y="48" width="22" height="14" rx="2"/>
+<rect class="f1" x="754" y="48" width="22" height="14" rx="2"/>
+<text class="sm muted" x="786" y="59">frames <tspan class="mono">fact(3)</tspan>, <tspan class="mono">fact(2)</tspan>, <tspan class="mono">fact(1)</tspan></text>
+
+<!-- 1. fact(3) in ember -->
+<rect class="box" x="24" y="84" width="1032" height="482" rx="10"/>
+<text class="h2" x="44" y="110">1. <tspan class="mono">fact(3)</tspan> in <tspan class="mono">ember</tspan>: the stack step by step</text>
+<g class="chip" transform="translate(982,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<g class="chip" transform="translate(1016,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<text class="sm muted" x="44" y="130">The listing from ISA §6, only with <tspan class="mono">LOADI A, 3</tspan>. Step numbers come from the trace of <tspan class="mono">./run.sh 09 a=3</tspan> in the Lab 07 practice.</text>
+<rect class="cell" x="44" y="142" width="320" height="346" rx="6"/>
+<text class="sm mono muted" x="56" y="162">0000</text>
+<text class="sm mono muted" x="92" y="162">20 03</text>
+<text class="sm mono" x="194" y="162">LOADI A, 3</text>
+<text class="sm mono muted" x="56" y="180">0002</text>
+<text class="sm mono muted" x="92" y="180">54 07 00</text>
+<text class="sm mono b" x="194" y="180">CALL  fact</text>
+<text class="sm mono muted" x="56" y="198">0005</text>
+<text class="sm mono muted" x="92" y="198">03</text>
+<text class="sm mono" x="194" y="198">OUTN</text>
+<text class="sm ok" x="280" y="198">← RET to here</text>
+<text class="sm mono muted" x="56" y="216">0006</text>
+<text class="sm mono muted" x="92" y="216">00</text>
+<text class="sm mono" x="194" y="216">HALT</text>
+<text class="sm mono muted" x="56" y="242">0007</text>
+<text class="sm mono muted" x="92" y="242">21 00</text>
+<text class="sm mono" x="154" y="242">fact:</text>
+<text class="sm mono" x="194" y="242">LOADI B, 0</text>
+<text class="sm mono muted" x="56" y="260">0009</text>
+<text class="sm mono muted" x="92" y="260">1A</text>
+<text class="sm mono" x="194" y="260">CMP   A, B</text>
+<text class="xs muted" x="280" y="260">n == 0 ?</text>
+<text class="sm mono muted" x="56" y="278">000A</text>
+<text class="sm mono muted" x="92" y="278">31 1B 00</text>
+<text class="sm mono" x="194" y="278">JZ    base</text>
+<text class="sm mono muted" x="56" y="296">000D</text>
+<text class="sm mono muted" x="92" y="296">21 01</text>
+<text class="sm mono" x="194" y="296">LOADI B, 1</text>
+<text class="sm mono muted" x="56" y="314">000F</text>
+<text class="sm mono muted" x="92" y="314">1A</text>
+<text class="sm mono" x="194" y="314">CMP   A, B</text>
+<text class="xs muted" x="280" y="314">n == 1 ?</text>
+<text class="sm mono muted" x="56" y="332">0010</text>
+<text class="sm mono muted" x="92" y="332">31 1B 00</text>
+<text class="sm mono" x="194" y="332">JZ    base</text>
+<text class="sm mono muted" x="56" y="350">0013</text>
+<text class="sm mono muted" x="92" y="350">50</text>
+<text class="sm mono b" x="194" y="350">PUSH  A</text>
+<text class="xs muted" x="280" y="350">save n</text>
+<text class="sm mono muted" x="56" y="368">0014</text>
+<text class="sm mono muted" x="92" y="368">19</text>
+<text class="sm mono" x="194" y="368">DEC   A</text>
+<text class="xs muted" x="280" y="368">n − 1</text>
+<text class="sm mono muted" x="56" y="386">0015</text>
+<text class="sm mono muted" x="92" y="386">54 07 00</text>
+<text class="sm mono b" x="194" y="386">CALL  fact</text>
+<text class="sm mono muted" x="56" y="404">0018</text>
+<text class="sm mono muted" x="92" y="404">53</text>
+<text class="sm mono b" x="194" y="404">POP   B</text>
+<text class="sm ok" x="280" y="404">← RET to here</text>
+<text class="sm mono muted" x="56" y="422">0019</text>
+<text class="sm mono muted" x="92" y="422">1B</text>
+<text class="sm mono" x="194" y="422">MUL   A, B</text>
+<text class="sm mono muted" x="56" y="440">001A</text>
+<text class="sm mono muted" x="92" y="440">55</text>
+<text class="sm mono b" x="194" y="440">RET</text>
+<text class="sm mono muted" x="56" y="458">001B</text>
+<text class="sm mono muted" x="92" y="458">20 01</text>
+<text class="sm mono" x="154" y="458">base:</text>
+<text class="sm mono" x="194" y="458">LOADI A, 1</text>
+<text class="sm mono muted" x="56" y="476">001D</text>
+<text class="sm mono muted" x="92" y="476">55</text>
+<text class="sm mono b" x="194" y="476">RET</text>
+<text class="xs mono muted" x="420" y="202" text-anchor="end">0xFFF</text>
+<text class="xs mono muted" x="420" y="230" text-anchor="end">0xFFE</text>
+<text class="xs mono muted" x="420" y="258" text-anchor="end">0xFFD</text>
+<text class="xs mono muted" x="420" y="286" text-anchor="end">0xFFC</text>
+<text class="xs mono muted" x="420" y="314" text-anchor="end">0xFFB</text>
+<text class="xs mono muted" x="420" y="342" text-anchor="end">0xFFA</text>
+<text class="xs mono muted" x="420" y="370" text-anchor="end">0xFF9</text>
+<text class="xs mono muted" x="420" y="398" text-anchor="end">0xFF8</text>
+<text class="xs mono muted" x="420" y="426" text-anchor="end">0xFF7</text>
+<text class="sm b" x="430" y="160">step 2</text>
+<text class="xs muted" x="430" y="175">call fact(3)</text>
+<rect class="f3" x="430" y="184" width="58" height="28"/>
+<text class="sm mono b" x="459" y="203" text-anchor="middle">05</text>
+<rect class="f3" x="430" y="212" width="58" height="28"/>
+<text class="sm mono b" x="459" y="231" text-anchor="middle">00</text>
+<rect class="empty" x="430" y="240" width="58" height="28"/>
+<rect class="empty" x="430" y="268" width="58" height="28"/>
+<rect class="empty" x="430" y="296" width="58" height="28"/>
+<rect class="empty" x="430" y="324" width="58" height="28"/>
+<rect class="empty" x="430" y="352" width="58" height="28"/>
+<rect class="empty" x="430" y="380" width="58" height="28"/>
+<rect class="empty" x="430" y="408" width="58" height="28"/>
+<text class="sm mono b" x="492" y="258">◀ SP</text>
+<text class="sm mono" x="430" y="456">A = 3</text>
+<text class="sm mono muted" x="430" y="474">B = 0</text>
+<text class="sm b" x="534" y="160">step 11</text>
+<text class="xs muted" x="534" y="175">call fact(2)</text>
+<rect class="f3" x="534" y="184" width="58" height="28"/>
+<text class="sm mono b" x="563" y="203" text-anchor="middle">05</text>
+<rect class="f3" x="534" y="212" width="58" height="28"/>
+<text class="sm mono b" x="563" y="231" text-anchor="middle">00</text>
+<rect class="f3" x="534" y="240" width="58" height="28"/>
+<text class="sm mono b" x="563" y="259" text-anchor="middle">03</text>
+<rect class="f2" x="534" y="268" width="58" height="28"/>
+<text class="sm mono b" x="563" y="287" text-anchor="middle">18</text>
+<rect class="f2" x="534" y="296" width="58" height="28"/>
+<text class="sm mono b" x="563" y="315" text-anchor="middle">00</text>
+<rect class="empty" x="534" y="324" width="58" height="28"/>
+<rect class="empty" x="534" y="352" width="58" height="28"/>
+<rect class="empty" x="534" y="380" width="58" height="28"/>
+<rect class="empty" x="534" y="408" width="58" height="28"/>
+<text class="sm mono b" x="596" y="342">◀ SP</text>
+<text class="sm mono" x="534" y="456">A = 2</text>
+<text class="sm mono muted" x="534" y="474">B = 1</text>
+<text class="sm b" x="638" y="160">step 27</text>
+<text class="xs muted" x="638" y="175">fact(1): base case</text>
+<rect class="f3" x="638" y="184" width="58" height="28"/>
+<text class="sm mono b" x="667" y="203" text-anchor="middle">05</text>
+<rect class="f3" x="638" y="212" width="58" height="28"/>
+<text class="sm mono b" x="667" y="231" text-anchor="middle">00</text>
+<rect class="f3" x="638" y="240" width="58" height="28"/>
+<text class="sm mono b" x="667" y="259" text-anchor="middle">03</text>
+<rect class="f2" x="638" y="268" width="58" height="28"/>
+<text class="sm mono b" x="667" y="287" text-anchor="middle">18</text>
+<rect class="f2" x="638" y="296" width="58" height="28"/>
+<text class="sm mono b" x="667" y="315" text-anchor="middle">00</text>
+<rect class="f2" x="638" y="324" width="58" height="28"/>
+<text class="sm mono b" x="667" y="343" text-anchor="middle">02</text>
+<rect class="f1" x="638" y="352" width="58" height="28"/>
+<text class="sm mono b" x="667" y="371" text-anchor="middle">18</text>
+<rect class="f1" x="638" y="380" width="58" height="28"/>
+<text class="sm mono b" x="667" y="399" text-anchor="middle">00</text>
+<rect class="empty" x="638" y="408" width="58" height="28"/>
+<text class="sm mono b" x="700" y="426">◀ SP</text>
+<text class="sm mono" x="638" y="456">A = 1</text>
+<text class="sm mono muted" x="638" y="474">B = 1</text>
+<text class="sm b" x="742" y="160">step 30</text>
+<text class="xs muted" x="742" y="175">fact(2): MUL</text>
+<rect class="f3" x="742" y="184" width="58" height="28"/>
+<text class="sm mono b" x="771" y="203" text-anchor="middle">05</text>
+<rect class="f3" x="742" y="212" width="58" height="28"/>
+<text class="sm mono b" x="771" y="231" text-anchor="middle">00</text>
+<rect class="f3" x="742" y="240" width="58" height="28"/>
+<text class="sm mono b" x="771" y="259" text-anchor="middle">03</text>
+<rect class="f2" x="742" y="268" width="58" height="28"/>
+<text class="sm mono b" x="771" y="287" text-anchor="middle">18</text>
+<rect class="f2" x="742" y="296" width="58" height="28"/>
+<text class="sm mono b" x="771" y="315" text-anchor="middle">00</text>
+<rect class="pad" x="742" y="324" width="58" height="28"/>
+<text class="sm mono muted" x="771" y="343" text-anchor="middle">02</text>
+<rect class="pad" x="742" y="352" width="58" height="28"/>
+<text class="sm mono muted" x="771" y="371" text-anchor="middle">18</text>
+<rect class="pad" x="742" y="380" width="58" height="28"/>
+<text class="sm mono muted" x="771" y="399" text-anchor="middle">00</text>
+<rect class="empty" x="742" y="408" width="58" height="28"/>
+<text class="sm mono b" x="804" y="342">◀ SP</text>
+<text class="sm mono" x="742" y="456">A = 2</text>
+<text class="sm mono muted" x="742" y="474">B = 2</text>
+<text class="sm b" x="846" y="160">step 34</text>
+<text class="xs muted" x="846" y="175">back in main</text>
+<rect class="pad" x="846" y="184" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="203" text-anchor="middle">05</text>
+<rect class="pad" x="846" y="212" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="231" text-anchor="middle">00</text>
+<rect class="pad" x="846" y="240" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="259" text-anchor="middle">03</text>
+<rect class="pad" x="846" y="268" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="287" text-anchor="middle">18</text>
+<rect class="pad" x="846" y="296" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="315" text-anchor="middle">00</text>
+<rect class="pad" x="846" y="324" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="343" text-anchor="middle">02</text>
+<rect class="pad" x="846" y="352" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="371" text-anchor="middle">18</text>
+<rect class="pad" x="846" y="380" width="58" height="28"/>
+<text class="sm mono muted" x="875" y="399" text-anchor="middle">00</text>
+<rect class="empty" x="846" y="408" width="58" height="28"/>
+<text class="sm mono b" x="908" y="202">◀ SP</text>
+<text class="sm mono" x="846" y="456">A = 6</text>
+<text class="sm mono muted" x="846" y="474">B = 3</text>
+<line class="bar3" x1="958" y1="187" x2="958" y2="265"/>
+<text class="sm b t3" x="966" y="202">frame<tspan class="mono"> fact(3)</tspan></text>
+<text class="xs mono" x="966" y="230">ret = 0x0005</text>
+<text class="xs mono" x="966" y="258">n = 3</text>
+<line class="bar2" x1="958" y1="271" x2="958" y2="349"/>
+<text class="sm b t2" x="966" y="286">frame<tspan class="mono"> fact(2)</tspan></text>
+<text class="xs mono" x="966" y="314">ret = 0x0018</text>
+<text class="xs mono" x="966" y="342">n = 2</text>
+<line class="bar1" x1="958" y1="355" x2="958" y2="405"/>
+<text class="sm b t1" x="966" y="370">frame<tspan class="mono"> fact(1)</tspan></text>
+<text class="xs mono" x="966" y="398">ret = 0x0018</text>
+<text class="sm" x="44" y="510"><tspan class="mono b">CALL</tspan> pushes the address <tspan class="b">after itself</tspan>: low byte first, then high (<tspan class="mono">05</tspan>, <tspan class="mono">00</tspan>). <tspan class="mono b">RET</tspan> pops them in reverse order. <tspan class="mono b">PUSH A</tspan> saves <tspan class="mono">n</tspan>: the next call will overwrite <tspan class="mono">A</tspan>.</text>
+<text class="sm" x="44" y="530"><tspan class="mono b">POP</tspan> and <tspan class="mono b">RET</tspan> erase nothing, they only raise <tspan class="mono">SP</tspan>. Grey cells are old values, to be overwritten by the next <tspan class="mono">PUSH</tspan>.</text>
+<text class="sm" x="44" y="550">After <tspan class="mono">fact(3)</tspan> <tspan class="mono">SP</tspan> is back at <tspan class="mono ok">0xFFF</tspan>: every <tspan class="mono">PUSH</tspan> has its <tspan class="mono">POP</tspan>, every <tspan class="mono">CALL</tspan> its <tspan class="mono">RET</tspan>. Convention: argument and result in <tspan class="mono">A</tspan>.</text>
+
+<!-- 2. Every call has its own n -->
+<rect class="box" x="24" y="582" width="508" height="326" rx="10"/>
+<text class="h2" x="44" y="608">2. Every call has its own <tspan class="mono">n</tspan></text>
+<g class="chip" transform="translate(492,594)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<text class="sm mono" x="44" y="632">int fact(int n) {</text>
+<text class="sm mono" x="60" y="648">if (n &lt;= 1) return 1;       <tspan class="muted">// base case</tspan></text>
+<text class="sm mono" x="60" y="664">return n * fact(n - 1);   <tspan class="muted">// smaller case</tspan></text>
+<text class="sm mono" x="44" y="680">}</text>
+<rect class="frm" x="64" y="696" width="250" height="34" rx="6"/>
+<text class="mono b" x="76" y="718">main</text>
+<text class="sm mono" x="146" y="718">fact(3)</text>
+<path class="arrow a-io" d="M82,732 L82,755 L84,755" marker-end="url(#m-io)"/>
+<rect class="fr3" x="86" y="738" width="250" height="34" rx="6"/>
+<text class="mono b" x="98" y="760">fact(3)</text>
+<text class="mono" x="168" y="760">n = 3</text>
+<text class="sm mono" x="236" y="760">3 * fact(2)</text>
+<path class="arrow a-io" d="M104,774 L104,797 L106,797" marker-end="url(#m-io)"/>
+<path class="arrow a-val" d="M338,755 C386,755 386,713 316,713" marker-end="url(#m-val)"/>
+<text class="sm ok" x="378" y="734">returns 6</text>
+<rect class="fr2" x="108" y="780" width="250" height="34" rx="6"/>
+<text class="mono b" x="120" y="802">fact(2)</text>
+<text class="mono" x="190" y="802">n = 2</text>
+<text class="sm mono" x="258" y="802">2 * fact(1)</text>
+<path class="arrow a-io" d="M126,816 L126,839 L128,839" marker-end="url(#m-io)"/>
+<path class="arrow a-val" d="M360,797 C408,797 408,755 338,755" marker-end="url(#m-val)"/>
+<text class="sm ok" x="400" y="776">returns 2</text>
+<rect class="fr1" x="130" y="822" width="250" height="34" rx="6"/>
+<text class="mono b" x="142" y="844">fact(1)</text>
+<text class="mono" x="212" y="844">n = 1</text>
+<text class="sm mono" x="280" y="844">base: 1</text>
+<path class="arrow a-val" d="M382,839 C430,839 430,797 360,797" marker-end="url(#m-val)"/>
+<text class="sm ok" x="422" y="818">returns 1</text>
+<text class="sm" x="44" y="882">Three different <tspan class="mono">n</tspan> in three different frames; each lives until its call returns.</text>
+<text class="sm muted" x="44" y="900">A global <tspan class="mono">g_n</tspan> instead of a parameter: one box for every call, and <tspan class="mono">fact(4) = 1</tspan>.</text>
+
+<!-- 3. Parameters -->
+<rect class="box" x="548" y="582" width="508" height="326" rx="10"/>
+<text class="h2" x="568" y="608">3. How values get in</text>
+<g class="chip" transform="translate(1016,594)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="sm muted" x="640" y="632" text-anchor="middle">frame <tspan class="mono">main</tspan></text>
+<text class="sm muted" x="835" y="632" text-anchor="middle">frame <tspan class="mono">inc</tspan></text>
+<text class="sm mono b" x="568" y="654">void inc(int x)</text><text class="sm mono muted" x="700" y="654">inc(a);</text>
+<text class="sm mono b" x="592" y="685">a</text>
+<rect class="val" x="604" y="664" width="72" height="32" rx="4"/>
+<text class="mono" x="640" y="685" text-anchor="middle">5</text>
+<path class="arrow a-io dashed" d="M678,680 L788,680" marker-end="url(#m-io)"/>
+<text class="xs muted" x="733" y="675" text-anchor="middle">copy</text>
+<rect class="f2" x="800" y="664" width="72" height="32" rx="4"/>
+<text class="mono" x="836" y="685" text-anchor="middle">5 → 6</text>
+<text class="sm mono b t2" x="878" y="685">x</text>
+<text class="sm mono err" x="1036" y="685" text-anchor="end">a = 5</text>
+<text class="sm mono b" x="568" y="738">void inc(int* p)</text><text class="sm mono muted" x="700" y="738">inc(&amp;a);</text>
+<text class="sm mono b" x="592" y="769">a</text>
+<rect class="val" x="604" y="748" width="72" height="32" rx="4"/>
+<text class="mono" x="640" y="769" text-anchor="middle">5 → 6</text>
+<rect class="f2" x="800" y="748" width="72" height="32" rx="4"/>
+<text class="mono" x="836" y="769" text-anchor="middle">&amp;a</text>
+<text class="sm mono b t2" x="878" y="769">p</text>
+<path class="arrow a-f2" d="M798,764 L680,764" marker-end="url(#m-f2)"/>
+<text class="xs muted" x="739" y="759" text-anchor="middle">address: <tspan class="mono">*p += 1</tspan></text>
+<text class="sm mono ok" x="1036" y="769" text-anchor="end">a = 6</text>
+<text class="sm mono b" x="568" y="822">void inc(int&amp; r)</text><text class="sm mono muted" x="700" y="822">inc(a);</text>
+<text class="sm mono b" x="592" y="853">a</text>
+<rect class="val" x="604" y="832" width="72" height="32" rx="4"/>
+<text class="mono" x="640" y="853" text-anchor="middle">5 → 6</text>
+<text class="sm mono b t2" x="682" y="853">r</text>
+<text class="xs muted" x="800" y="845">it has no box of its own:</text>
+<text class="xs muted" x="800" y="859"><tspan class="mono">r</tspan> is another name for <tspan class="mono">a</tspan></text>
+<text class="sm mono ok" x="1036" y="853" text-anchor="end">a = 6</text>
+<text class="sm muted" x="568" y="896"><tspan class="mono">const T&amp;</tspan> is like <tspan class="mono">T&amp;</tspan>, but read-only: writing through it does not compile.</text>
+
+<!-- 4. The stack as a type -->
+<rect class="box" x="24" y="924" width="1032" height="182" rx="10"/>
+<text class="h2" x="44" y="950">4. The stack as a type: the same LIFO, counted differently</text>
+<g class="chip" transform="translate(1016,936)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§5</text></g>
+<text class="sm mono b" x="44" y="981">Stack s;</text>
+<rect class="empty" x="150" y="964" width="44" height="24"/>
+<rect class="empty" x="194" y="964" width="44" height="24"/>
+<rect class="empty" x="238" y="964" width="44" height="24"/>
+<rect class="empty" x="282" y="964" width="44" height="24"/>
+<text class="sm mono" x="340" y="981">top = −1</text>
+<text class="sm muted" x="420" y="981">empty</text>
+<text class="sm mono b" x="44" y="1013">push(s, 5);</text>
+<rect class="f3 hit" x="150" y="996" width="44" height="24"/>
+<text class="sm mono b" x="172" y="1013" text-anchor="middle">5</text>
+<rect class="empty" x="194" y="996" width="44" height="24"/>
+<rect class="empty" x="238" y="996" width="44" height="24"/>
+<rect class="empty" x="282" y="996" width="44" height="24"/>
+<text class="sm mono" x="340" y="1013">top = 0</text>
+<text class="sm mono b" x="44" y="1045">push(s, 7);</text>
+<rect class="f3" x="150" y="1028" width="44" height="24"/>
+<text class="sm mono b" x="172" y="1045" text-anchor="middle">5</text>
+<rect class="f3 hit" x="194" y="1028" width="44" height="24"/>
+<text class="sm mono b" x="216" y="1045" text-anchor="middle">7</text>
+<rect class="empty" x="238" y="1028" width="44" height="24"/>
+<rect class="empty" x="282" y="1028" width="44" height="24"/>
+<text class="sm mono" x="340" y="1045">top = 1</text>
+<text class="sm mono b" x="44" y="1077">pop(s, out);</text>
+<rect class="f3 hit" x="150" y="1060" width="44" height="24"/>
+<text class="sm mono b" x="172" y="1077" text-anchor="middle">5</text>
+<rect class="pad" x="194" y="1060" width="44" height="24"/>
+<text class="sm mono muted" x="216" y="1077" text-anchor="middle">7</text>
+<rect class="empty" x="238" y="1060" width="44" height="24"/>
+<rect class="empty" x="282" y="1060" width="44" height="24"/>
+<text class="sm mono" x="340" y="1077">top = 0</text>
+<text class="sm ok" x="420" y="1077">out = 7</text>
+<text class="xs mono muted" x="172" y="1102" text-anchor="middle">[0]</text>
+<text class="xs mono muted" x="216" y="1102" text-anchor="middle">[1]</text>
+<text class="xs mono muted" x="260" y="1102" text-anchor="middle">[2]</text>
+<text class="xs mono muted" x="304" y="1102" text-anchor="middle">[3]</text>
+<text class="xs mono muted" x="144" y="1102" text-anchor="end">s.data</text>
+<line class="rule" x1="500" y1="940" x2="500" y2="1094"/>
+<text class="sm b" x="660" y="972">Stack (host)</text><text class="sm b" x="850" y="972"><tspan class="mono">SP</tspan> (ember)</text>
+<text class="sm muted" x="520" y="994">empty</text>
+<text class="sm" x="660" y="994">top = −1</text>
+<text class="sm" x="850" y="994">SP = 0xFFF</text>
+<text class="sm muted" x="520" y="1016">points to</text>
+<text class="sm" x="660" y="1016">last used</text>
+<text class="sm" x="850" y="1016">next free</text>
+<text class="sm muted" x="520" y="1038">grows</text>
+<text class="sm" x="660" y="1038">up: data[0], data[1]…</text>
+<text class="sm" x="850" y="1038">down: 0xFFF, 0xFFE…</text>
+<text class="sm muted" x="520" y="1060">overflow</text>
+<text class="sm" x="660" y="1060">push when top == CAP − 1</text>
+<text class="sm" x="850" y="1060">SP below 0xF00</text>
+<text class="sm muted" x="520" y="1082">underflow</text>
+<text class="sm" x="660" y="1082">pop when top == −1</text>
+<text class="sm" x="850" y="1082">pop at SP ≥ 0xFFF</text>
+</svg>
