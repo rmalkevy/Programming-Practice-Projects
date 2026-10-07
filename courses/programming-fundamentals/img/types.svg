@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 600" width="1080" height="600" role="img" aria-labelledby="title desc">
+  <title id="title">A box of bytes: errors and types</title>
+  <desc id="desc">Three panels for the Lab 01 theory. 1: the path from text to a run and where three kinds of errors stop it: a syntax error and a warning under -Werror stop in the compiler, so there is no program; a runtime error happens while it runs, like 10 / 0 under UBSan. 2: a type is a size: uint8_t, uint16_t, int, double and void* as 1, 2, 4, 8 and 8 bytes with their ranges; the byte 01000001 is 65, 0x41 and 'A', and 'A' ^ 32 is 'a'. 3: uint8_t wraps 255 → 0, int at INT_MAX + 1 is undefined behavior; 0.1 + 0.2 is not 0.3.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --a:#ddf4ff; --a-s:#0969da; --b:#fbefff; --b-s:#8250df; --c:#fff1e5; --c-s:#bc4c00;
+          --val:#dafbe1; --val-s:#1a7f37; --pad:#f6f8fa; --pad-s:#818b98; --bad:#ffebe9; --bad-s:#cf222e; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --a:#0d2c4f; --a-s:#4493f8; --b:#271b45; --b-s:#ab7df8; --c:#3a2111; --c-s:#f0883e;
+            --val:#0f2d1a; --val-s:#3fb950; --pad:#151b23; --pad-s:#9198a1; --bad:#3d1418; --bad-s:#f85149; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .xs { font-size: 10.5px; }
+    .muted { fill: var(--muted); }
+    .ok { fill: var(--val-s); font-weight: 700; }
+    .err { fill: var(--bad-s); font-weight: 700; }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .stage { fill: var(--bg); stroke: var(--muted); stroke-width: 1.5; }
+    .rule { stroke: var(--line); stroke-width: 1.2; }
+    .t1 { fill: var(--a); stroke: var(--a-s); stroke-width: 1.2; }
+    .t2 { fill: var(--b); stroke: var(--b-s); stroke-width: 1.2; }
+    .t4 { fill: var(--val); stroke: var(--val-s); stroke-width: 1.2; }
+    .t8 { fill: var(--c); stroke: var(--c-s); stroke-width: 1.2; }
+    .one { fill: var(--val); stroke: var(--val-s); stroke-width: 1.2; }
+    .zero { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .hit { stroke: var(--fg); stroke-width: 2.5; }
+    .bad { fill: var(--bad); stroke: var(--bad-s); stroke-width: 1.5; }
+    .x-bad { stroke: var(--bad-s); stroke-width: 2.5; stroke-linecap: round; }
+    .arrow { fill: none; stroke-width: 2; }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .a-val { stroke: var(--val-s); }  .m-val { fill: var(--val-s); }
+    .a-bad { stroke: var(--bad-s); }  .m-bad { fill: var(--bad-s); }
+  </style>
+  <defs>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-val" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-val" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-bad" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+<rect class="bg" x="0" y="0" width="1080" height="600" rx="12"/>
+
+<!-- Title and legend -->
+<text class="h1" x="24" y="38">A box of bytes: errors and types</text>
+<text class="muted" x="24" y="60">You write text; the machine runs bytes. A type says how many bytes and what you may do with them.</text>
+<g class="chip" transform="translate(700,24)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm muted" x="736" y="37">— section of the Lab 01 theory</text>
+
+<!-- 1. Three kinds of errors -->
+<rect class="box" x="24" y="84" width="1032" height="176" rx="10"/>
+<text class="h2" x="44" y="110">1. What runs is not the text you wrote</text>
+<g class="chip" transform="translate(1016,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<rect class="stage" x="44" y="124" width="150" height="44" rx="6"/>
+<text class="sm b mono" x="119" y="142" text-anchor="middle">source.cpp</text>
+<text class="xs muted" x="119" y="159" text-anchor="middle">text</text>
+<path class="arrow a-io" d="M197,146 L231,146" marker-end="url(#m-io)"/>
+<rect class="stage" x="234" y="124" width="200" height="44" rx="6"/>
+<text class="sm b" x="334" y="142" text-anchor="middle">compiler</text>
+<text class="xs mono muted" x="334" y="159" text-anchor="middle">-Wall -Wextra -Werror</text>
+<path class="arrow a-io" d="M437,146 L471,146" marker-end="url(#m-io)"/>
+<rect class="stage" x="474" y="124" width="170" height="44" rx="6"/>
+<text class="sm b" x="559" y="142" text-anchor="middle">program</text>
+<text class="xs muted" x="559" y="159" text-anchor="middle">machine code</text>
+<path class="arrow a-io" d="M647,146 L681,146" marker-end="url(#m-io)"/>
+<rect class="stage" x="684" y="124" width="190" height="44" rx="6"/>
+<text class="sm b" x="779" y="142" text-anchor="middle">run</text>
+<text class="xs muted" x="779" y="159" text-anchor="middle">ASan, UBSan watching</text>
+<path class="arrow a-io" d="M877,146 L911,146" marker-end="url(#m-io)"/>
+<rect class="stage" x="914" y="124" width="122" height="44" rx="6"/>
+<text class="sm b" x="975" y="151" text-anchor="middle">output</text>
+<text class="sm b" x="44" y="198">syntax error</text>
+<path class="x-bad" d="M329,189 L339,199 M339,189 L329,199"/>
+<text class="xs muted" x="348" y="198">the compiler refused to translate: no program</text>
+<text class="sm b" x="44" y="220">warning</text>
+<path class="x-bad" d="M329,211 L339,221 M339,211 L329,221"/>
+<text class="xs muted" x="348" y="220">with -Werror a suspicion is an error: no program either</text>
+<text class="sm b" x="44" y="242">runtime error</text>
+<path class="x-bad" d="M774,233 L784,243 M784,233 L774,243"/>
+<text class="xs muted" x="474" y="242">the program exists and runs; a sanitizer catches it</text>
+<text class="xs mono err" x="793" y="242">10 / 0 → division by zero</text>
+
+<!-- 2. A type is a size -->
+<rect class="box" x="24" y="276" width="508" height="308" rx="10"/>
+<text class="h2" x="44" y="302">2. A type is a size and a set of operations</text>
+<g class="chip" transform="translate(492,288)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="xs muted" x="44" y="322">Numbers from <tspan class="mono">./run.sh 02</tspan> on a 64-bit Mac. Print your own, don't memorise.</text>
+<text class="sm mono b" x="44" y="349">std::uint8_t</text>
+<rect class="t1" x="150" y="334" width="22" height="20" rx="0"/>
+<text class="xs mono muted" x="178" y="348">1</text>
+<text class="xs" x="352" y="348">0 … 255, an ember cell</text>
+<text class="sm mono b" x="44" y="377">std::uint16_t</text>
+<rect class="t2" x="150" y="362" width="22" height="20" rx="0"/>
+<rect class="t2" x="172" y="362" width="22" height="20" rx="0"/>
+<text class="xs mono muted" x="200" y="376">2</text>
+<text class="xs" x="352" y="376">0 … 65535, an ember address</text>
+<text class="sm mono b" x="44" y="405">int</text>
+<rect class="t4" x="150" y="390" width="22" height="20" rx="0"/>
+<rect class="t4" x="172" y="390" width="22" height="20" rx="0"/>
+<rect class="t4" x="194" y="390" width="22" height="20" rx="0"/>
+<rect class="t4" x="216" y="390" width="22" height="20" rx="0"/>
+<text class="xs mono muted" x="244" y="404">4</text>
+<text class="xs" x="352" y="404">−2147483648 … 2147483647</text>
+<text class="sm mono b" x="44" y="433">double</text>
+<rect class="t8" x="150" y="418" width="22" height="20" rx="0"/>
+<rect class="t8" x="172" y="418" width="22" height="20" rx="0"/>
+<rect class="t8" x="194" y="418" width="22" height="20" rx="0"/>
+<rect class="t8" x="216" y="418" width="22" height="20" rx="0"/>
+<rect class="t8" x="238" y="418" width="22" height="20" rx="0"/>
+<rect class="t8" x="260" y="418" width="22" height="20" rx="0"/>
+<rect class="t8" x="282" y="418" width="22" height="20" rx="0"/>
+<rect class="t8" x="304" y="418" width="22" height="20" rx="0"/>
+<text class="xs mono muted" x="332" y="432">8</text>
+<text class="xs" x="352" y="432">~15 decimal digits</text>
+<text class="sm mono b" x="44" y="461">void*</text>
+<rect class="t8" x="150" y="446" width="22" height="20" rx="0"/>
+<rect class="t8" x="172" y="446" width="22" height="20" rx="0"/>
+<rect class="t8" x="194" y="446" width="22" height="20" rx="0"/>
+<rect class="t8" x="216" y="446" width="22" height="20" rx="0"/>
+<rect class="t8" x="238" y="446" width="22" height="20" rx="0"/>
+<rect class="t8" x="260" y="446" width="22" height="20" rx="0"/>
+<rect class="t8" x="282" y="446" width="22" height="20" rx="0"/>
+<rect class="t8" x="304" y="446" width="22" height="20" rx="0"/>
+<text class="xs mono muted" x="332" y="460">8</text>
+<text class="xs" x="352" y="460">the width of an address (Lab 3)</text>
+<line class="rule" x1="44" y1="480" x2="512" y2="480"/>
+<text class="sm b" x="44" y="502">One byte, four notations:</text>
+<rect class="zero" x="44" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono muted" x="57" y="530" text-anchor="middle">0</text>
+<text class="xs mono muted" x="57" y="550" text-anchor="middle">7</text>
+<rect class="one" x="70" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono b" x="83" y="530" text-anchor="middle">1</text>
+<text class="xs mono muted" x="83" y="550" text-anchor="middle">6</text>
+<rect class="zero hit" x="96" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono muted" x="109" y="530" text-anchor="middle">0</text>
+<text class="xs mono muted" x="109" y="550" text-anchor="middle">5</text>
+<rect class="zero" x="122" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono muted" x="135" y="530" text-anchor="middle">0</text>
+<text class="xs mono muted" x="135" y="550" text-anchor="middle">4</text>
+<rect class="zero" x="148" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono muted" x="161" y="530" text-anchor="middle">0</text>
+<text class="xs mono muted" x="161" y="550" text-anchor="middle">3</text>
+<rect class="zero" x="174" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono muted" x="187" y="530" text-anchor="middle">0</text>
+<text class="xs mono muted" x="187" y="550" text-anchor="middle">2</text>
+<rect class="zero" x="200" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono muted" x="213" y="530" text-anchor="middle">0</text>
+<text class="xs mono muted" x="213" y="550" text-anchor="middle">1</text>
+<rect class="one" x="226" y="512" width="26" height="26" rx="0"/>
+<text class="sm mono b" x="239" y="530" text-anchor="middle">1</text>
+<text class="xs mono muted" x="239" y="550" text-anchor="middle">0</text>
+<text class="sm mono" x="270" y="530">65 · 0x41 · 'A'</text>
+<text class="xs muted" x="270" y="550">the same bits; the type tells the story</text>
+<text class="sm" x="44" y="572"><tspan class="mono">'A' ^ 32</tspan> = <tspan class="mono">'a'</tspan>: upper and lower case differ in one bit, bit 5.</text>
+
+<!-- 3. Overflow and floating point -->
+<rect class="box" x="548" y="276" width="508" height="308" rx="10"/>
+<text class="h2" x="568" y="302">3. Overflow, floating point and other lies</text>
+<g class="chip" transform="translate(1016,288)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<text class="sm b" x="568" y="328"><tspan class="mono">std::uint8_t</tspan>, +1: wraps around, and that is defined</text>
+<rect class="t1" x="568" y="338" width="52" height="26" rx="0"/>
+<text class="sm mono" x="594" y="356" text-anchor="middle">253</text>
+<rect class="t1" x="620" y="338" width="52" height="26" rx="0"/>
+<text class="sm mono" x="646" y="356" text-anchor="middle">254</text>
+<rect class="t1" x="672" y="338" width="52" height="26" rx="0"/>
+<text class="sm mono" x="698" y="356" text-anchor="middle">255</text>
+<rect class="t1" x="724" y="338" width="52" height="26" rx="0"/>
+<text class="sm mono" x="750" y="356" text-anchor="middle">0</text>
+<rect class="t1" x="776" y="338" width="52" height="26" rx="0"/>
+<text class="sm mono" x="802" y="356" text-anchor="middle">1</text>
+<rect class="t1" x="828" y="338" width="52" height="26" rx="0"/>
+<text class="sm mono" x="854" y="356" text-anchor="middle">2</text>
+<path class="arrow a-val" d="M698,366 C698,386 750,386 750,368" marker-end="url(#m-val)"/>
+<text class="xs ok" x="890" y="356">255 + 1 = 0</text>
+<text class="sm b" x="568" y="408"><tspan class="mono">int</tspan>, +1 past <tspan class="mono">INT_MAX</tspan>: undefined behavior</text>
+<rect class="t4" x="568" y="418" width="110" height="26" rx="0"/>
+<text class="sm mono" x="623" y="436" text-anchor="middle">2147483646</text>
+<rect class="t4" x="678" y="418" width="110" height="26" rx="0"/>
+<text class="sm mono" x="733" y="436" text-anchor="middle">2147483647</text>
+<rect class="bad" x="788" y="418" width="110" height="26" rx="0"/>
+<text class="sm mono err" x="843" y="436" text-anchor="middle">?</text>
+<text class="xs mono err" x="568" y="462">runtime error: signed integer overflow: 2147483647 + 1</text>
+<text class="xs muted" x="568" y="478">The compiler may assume it never happens: <tspan class="mono">x + 1 &gt; x</tspan> is “always true”.</text>
+<line class="rule" x1="568" y1="490" x2="1036" y2="490"/>
+<text class="sm b" x="568" y="512"><tspan class="mono">double</tspan>: most decimal fractions don't fit</text>
+<text class="sm mono" x="568" y="532">0.1 + 0.2 = 0.30000000000000004</text>
+<text class="sm mono" x="568" y="550" style="white-space:pre">0.3       = 0.29999999999999999</text>
+<text class="sm" x="568" y="572"><tspan class="mono">a + b == c</tspan> → <tspan class="err">false</tspan>; with a tolerance <tspan class="mono">|a + b − c| &lt; 1e-9</tspan> → <tspan class="ok">true</tspan></text>
+</svg>

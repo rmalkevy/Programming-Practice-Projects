@@ -94,7 +94,7 @@ C++ тут потрібен, щоб бачити байти. Беремо нев
 
 | Лаба | Ідея | У `ember` |
 |---|---|---|
-| 1. [Коробка байтів](lab-01-a-box-of-bytes.md) · [notes](lab-01-a-box-of-bytes.notes.md) | Компіляція, типи як розмір, переповнення, `const`, символи як числа | CMake, 4 КБ, `dump`, `get`/`set` |
+| 1. [Коробка байтів](lab-01-a-box-of-bytes.md) · [notes](lab-01-a-box-of-bytes.notes.md) · [схема](img/types.uk.svg) | Компіляція, типи як розмір, переповнення, `const`, символи як числа | CMake, 4 КБ, `dump`, `get`/`set` |
 | 2. [Біти не брешуть](lab-02-bits-dont-lie.md) · [notes](lab-02-bits-dont-lie.notes.md) · [схема](img/bits.uk.svg) | Двійкова й шістнадцяткова системи, доповняльний код, прапорці, бітові операції | ALU, прапорці, розбір опкода, `step` |
 | 3. [Адреси, а не імена](lab-03-addresses-not-names.md) · [notes](lab-03-addresses-not-names.notes.md) · [схема](img/pointers.uk.svg) | Вказівники, `&`/`*`, `void*`, `sizeof` | `LOAD`/`STORE`, адресний регістр `H`, лічильник команд по пам'яті |
 | 4. [Форма керування](lab-04-the-shape-of-control.md) · [notes](lab-04-the-shape-of-control.notes.md) · [схема](img/control.uk.svg) | Булеві, `if`/`switch`/`while`/`for`, коротке замикання, блоки | `JMP`/`JZ`, цикл у байткоді, лінійний пошук |
