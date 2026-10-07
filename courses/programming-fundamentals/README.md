@@ -139,7 +139,7 @@ The machine's reference — memory map, instruction set, calling convention — 
 | 5 | [Many of One Thing](lab-05-many-of-one-thing.md) | [notes](lab-05-many-of-one-thing.notes.md) · [diagram](img/arrays.svg) | Arrays, 2D indexing, strings, search, simple sorts | A 64×32 display, `PLOT`, sort a region, print a string |
 | 6 | [Named Bundles](lab-06-named-bundles.md) | [notes](lab-06-named-bundles.notes.md) · [diagram](img/bundles.svg) | `struct`, `enum`, lifetime, stack vs heap, leaks | `CPU`/`Instruction` as structs, a heap region, sprites |
 | 7 | [Call and Return](lab-07-call-and-return.md) | [notes](lab-07-call-and-return.notes.md) · [diagram](img/calls.svg) | Functions, value vs pointer, the call stack, recursion, headers | `SP`, `PUSH`/`POP`, `Stack` ADT, `CALL`/`RET`, recursive factorial |
-| 8 | [Give It a Language](lab-08-give-it-a-language.md) | [notes](lab-08-give-it-a-language.notes.md) | Tokens, scanners, linked lists, ADTs, syntax errors | A lexer + assembler; `hello`, `search`, `fib` as `.asm` |
+| 8 | [Give It a Language](lab-08-give-it-a-language.md) | [notes](lab-08-give-it-a-language.notes.md) · [diagram](img/language.svg) | Tokens, scanners, linked lists, ADTs, syntax errors | A lexer + assembler; `hello`, `search`, `fib` as `.asm` |
 
 Each lab is **two weeks**, checked at the end of that window. Eight defenses across the semester, not one showcase in week 16.
 

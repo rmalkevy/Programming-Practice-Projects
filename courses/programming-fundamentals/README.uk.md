@@ -101,7 +101,7 @@ C++ тут потрібен, щоб бачити байти. Беремо нев
 | 5. [Багато однакового](lab-05-many-of-one-thing.md) · [notes](lab-05-many-of-one-thing.notes.md) · [схема](img/arrays.uk.svg) | Масиви, індекс у сітці, рядки, пошук, прості сортування | Екран 64×32 всередині пам'яті, `PLOT`, сортування шматка пам'яті, друк рядка |
 | 6. [Іменовані набори](lab-06-named-bundles.md) · [notes](lab-06-named-bundles.notes.md) · [схема](img/bundles.uk.svg) | `struct`, `enum`, час життя, стек і купа, витоки | `CPU` як `struct`, купа, спрайти |
 | 7. [Виклик і повернення](lab-07-call-and-return.md) · [notes](lab-07-call-and-return.notes.md) · [схема](img/calls.uk.svg) | Функції, передача за значенням і за вказівником, стек викликів, рекурсія, заголовки | `SP`, `PUSH`/`POP`, стек як окремий тип, `CALL`/`RET`, рекурсивний факторіал |
-| 8. [Дайте їй мову](lab-08-give-it-a-language.md) · [notes](lab-08-give-it-a-language.notes.md) | Токени, сканер, списки, синтаксичні помилки | Лексер і асемблер; `hello`, `search`, `fib` у `.asm` |
+| 8. [Дайте їй мову](lab-08-give-it-a-language.md) · [notes](lab-08-give-it-a-language.notes.md) · [схема](img/language.uk.svg) | Токени, сканер, списки, синтаксичні помилки | Лексер і асемблер; `hello`, `search`, `fib` у `.asm` |
 
 Кожна лаба — **два тижні**; перевірка в кінці цього вікна. Вісім захистів за семестр, не один показ на 16-му тижні.
 

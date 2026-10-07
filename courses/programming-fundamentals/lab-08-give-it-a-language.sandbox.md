@@ -1,6 +1,6 @@
 # Пісочниця 08 — Дайте їй мову: шість маленьких задач
 
-**Тижні:** 15–16 · **Лаба:** [Lab 08](lab-08-give-it-a-language.md) · **Notes:** [досліди](lab-08-give-it-a-language.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md)
+**Тижні:** 15–16 · **Лаба:** [Lab 08](lab-08-give-it-a-language.md) · **Notes:** [досліди](lab-08-give-it-a-language.notes.md) · **Курс:** [EN](README.md) · [UK](README.uk.md) · **Схема:** [UK](img/language.uk.svg) · [EN](img/language.svg)
 
 > **Що це.** Пісочниця — одна з двох стежок курсу, простіший варіант. На основній ви
 > лабу за лабою будуєте `ember`. Тут проєкту немає: замість нього шість незалежних

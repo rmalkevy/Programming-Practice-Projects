@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 756" width="1080" height="756" role="img" aria-labelledby="title desc">
+  <title id="title">Від тексту до байтів</title>
+  <desc id="desc">Чотири панелі до теорії Lab 08. 1: конвеєр: файл .asm, лексер, список токенів, асемблер у два проходи, байти в Memory, CPU.run. 2: рядок LOADI A, 0x41 ; x — це байти, і курсор лексера класифікує кожен: літера, цифра, пунктуація, пробіл, коментар; рядок loop: JMP loop стає токенами Ident(loop) Colon Ident(JMP) Ident(loop) Newline Eof. 3: токени у зв'язному списку з head, tail і next. 4: програма forward: за один прохід операнд JMP done лишається ?? ??, бо мітка нижче; прохід 1 рахує done = 0x0004, прохід 2 видає 30 04 00.</desc>
+  <style>
+    svg { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#d1d9e0; --box:#f6f8fa; --chip:#e7ecf0;
+          --a:#ddf4ff; --a-s:#0969da; --b:#fbefff; --b-s:#8250df; --c:#fff1e5; --c-s:#bc4c00;
+          --val:#dafbe1; --val-s:#1a7f37; --pad:#f6f8fa; --pad-s:#818b98; --bad:#ffebe9; --bad-s:#cf222e; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#3d444d; --box:#151b23; --chip:#262c36;
+            --a:#0d2c4f; --a-s:#4493f8; --b:#271b45; --b-s:#ab7df8; --c:#3a2111; --c-s:#f0883e;
+            --val:#0f2d1a; --val-s:#3fb950; --pad:#151b23; --pad-s:#9198a1; --bad:#3d1418; --bad-s:#f85149; }
+    }
+    text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--fg); font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .h1 { font-size: 22px; font-weight: 700; }
+    .h2 { font-size: 15px; font-weight: 700; }
+    .b { font-weight: 700; }
+    .sm { font-size: 11.5px; }
+    .xs { font-size: 10.5px; }
+    .muted { fill: var(--muted); }
+    .ok { fill: var(--val-s); font-weight: 700; }
+    .err { fill: var(--bad-s); font-weight: 700; }
+    .chip rect { fill: var(--chip); }
+    .chip text { font-size: 10.5px; font-weight: 700; fill: var(--muted); text-anchor: middle; }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.5; }
+    .cell { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+    .rule { stroke: var(--line); stroke-width: 1.2; }
+    .letter { fill: var(--a); stroke: var(--a-s); stroke-width: 1.2; }
+    .digit { fill: var(--val); stroke: var(--val-s); stroke-width: 1.2; }
+    .punct { fill: var(--b); stroke: var(--b-s); stroke-width: 1.2; }
+    .comment { fill: var(--c); stroke: var(--c-s); stroke-width: 1.2; }
+    .space { fill: var(--pad); stroke: var(--pad-s); stroke-width: 1.2; stroke-dasharray: 4 3; }
+    .nl { fill: var(--bg); stroke: var(--muted); stroke-width: 1.2; }
+    .stage { fill: var(--bg); stroke: var(--muted); stroke-width: 1.5; }
+    .node { fill: var(--a); stroke: var(--a-s); stroke-width: 1.5; }
+    .nptr { fill: var(--b); stroke: var(--b-s); stroke-width: 1.5; }
+    .brace { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .arrow { fill: none; stroke-width: 2; }
+    .a-io { stroke: var(--muted); }   .m-io { fill: var(--muted); }
+    .a-b { stroke: var(--b-s); }      .m-b { fill: var(--b-s); }
+    .dashed { stroke-dasharray: 5 3; }
+  </style>
+  <defs>
+    <marker id="m-io" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-io" d="M0,0 L10,5 L0,10 z"/></marker>
+    <marker id="m-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m-b" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+<rect class="bg" x="0" y="0" width="1080" height="756" rx="12"/>
+
+<!-- Заголовок і легенда -->
+<text class="h1" x="24" y="38">Від тексту до байтів</text>
+<text class="muted" x="24" y="60">Текст програми — теж байти. Лексер робить із них токени, асемблер — байти коду.</text>
+<g class="chip" transform="translate(700,24)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<text class="sm muted" x="736" y="37">— розділ Теорії Lab 08</text>
+
+<!-- 1. Конвеєр -->
+<rect class="box" x="24" y="84" width="1032" height="130" rx="10"/>
+<text class="h2" x="44" y="110">1. Від тексту до <tspan class="mono">run</tspan></text>
+<g class="chip" transform="translate(1016,96)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§4</text></g>
+<rect class="stage" x="44" y="126" width="150" height="48" rx="6"/>
+<text class="sm b mono" x="119" y="146" text-anchor="middle">forward.asm</text>
+<text class="xs muted" x="119" y="164" text-anchor="middle">текст, байти символів</text>
+<path class="arrow a-io" d="M197,150 L221,150" marker-end="url(#m-io)"/>
+<rect class="stage" x="224" y="126" width="110" height="48" rx="6"/>
+<text class="sm b" x="279" y="146" text-anchor="middle">лексер</text>
+<text class="xs mono muted" x="279" y="164" text-anchor="middle">lex()</text>
+<path class="arrow a-io" d="M337,150 L361,150" marker-end="url(#m-io)"/>
+<rect class="stage" x="364" y="126" width="150" height="48" rx="6"/>
+<text class="sm b" x="439" y="146" text-anchor="middle">список токенів</text>
+<text class="xs mono muted" x="439" y="164" text-anchor="middle">Token* head</text>
+<path class="arrow a-io" d="M517,150 L541,150" marker-end="url(#m-io)"/>
+<rect class="stage" x="544" y="126" width="170" height="48" rx="6"/>
+<text class="sm b" x="629" y="146" text-anchor="middle">асемблер</text>
+<text class="xs muted" x="629" y="164" text-anchor="middle">прохід 1 · прохід 2</text>
+<path class="arrow a-io" d="M717,150 L741,150" marker-end="url(#m-io)"/>
+<rect class="stage" x="744" y="126" width="150" height="48" rx="6"/>
+<text class="sm b" x="819" y="146" text-anchor="middle">байти в Memory</text>
+<text class="xs mono muted" x="819" y="164" text-anchor="middle">30 04 00 01 00</text>
+<path class="arrow a-io" d="M897,150 L921,150" marker-end="url(#m-io)"/>
+<rect class="stage" x="924" y="126" width="112" height="48" rx="6"/>
+<text class="sm b mono" x="980" y="146" text-anchor="middle">CPU.run</text>
+<text class="xs mono muted" x="980" y="164" text-anchor="middle">step, step, …</text>
+<text class="sm muted" x="44" y="200"><tspan class="mono">./ember programs/hello.asm</tspan> збирає й виконує; просто <tspan class="mono">./ember</tspan> — REPL, як і раніше.</text>
+
+<!-- 2. Символи і токени -->
+<rect class="box" x="24" y="230" width="1032" height="240" rx="10"/>
+<text class="h2" x="44" y="256">2. Символи — це ще не токени</text>
+<g class="chip" transform="translate(982,242)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§1</text></g>
+<g class="chip" transform="translate(1016,242)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="sm" x="44" y="282">Курсор <tspan class="mono">i</tspan> іде байтами рядка <tspan class="mono">LOADI A, 0x41 ; x</tspan> і на кожному вирішує, куди далі:</text>
+<rect class="letter" x="44" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="59" y="312" text-anchor="middle" style="white-space:pre">L</text>
+<text class="xs mono muted" x="59" y="336" text-anchor="middle">4C</text>
+<rect class="letter" x="74" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="89" y="312" text-anchor="middle" style="white-space:pre">O</text>
+<text class="xs mono muted" x="89" y="336" text-anchor="middle">4F</text>
+<rect class="letter" x="104" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="119" y="312" text-anchor="middle" style="white-space:pre">A</text>
+<text class="xs mono muted" x="119" y="336" text-anchor="middle">41</text>
+<rect class="letter" x="134" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="149" y="312" text-anchor="middle" style="white-space:pre">D</text>
+<text class="xs mono muted" x="149" y="336" text-anchor="middle">44</text>
+<rect class="letter" x="164" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="179" y="312" text-anchor="middle" style="white-space:pre">I</text>
+<text class="xs mono muted" x="179" y="336" text-anchor="middle">49</text>
+<rect class="space" x="194" y="292" width="30" height="30" rx="0"/>
+<text class="mono muted" x="209" y="312" text-anchor="middle" style="white-space:pre">␣</text>
+<text class="xs mono muted" x="209" y="336" text-anchor="middle">20</text>
+<rect class="letter" x="224" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="239" y="312" text-anchor="middle" style="white-space:pre">A</text>
+<text class="xs mono muted" x="239" y="336" text-anchor="middle">41</text>
+<rect class="punct" x="254" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="269" y="312" text-anchor="middle" style="white-space:pre">,</text>
+<text class="xs mono muted" x="269" y="336" text-anchor="middle">2C</text>
+<rect class="space" x="284" y="292" width="30" height="30" rx="0"/>
+<text class="mono muted" x="299" y="312" text-anchor="middle" style="white-space:pre">␣</text>
+<text class="xs mono muted" x="299" y="336" text-anchor="middle">20</text>
+<rect class="digit" x="314" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="329" y="312" text-anchor="middle" style="white-space:pre">0</text>
+<text class="xs mono muted" x="329" y="336" text-anchor="middle">30</text>
+<rect class="letter" x="344" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="359" y="312" text-anchor="middle" style="white-space:pre">x</text>
+<text class="xs mono muted" x="359" y="336" text-anchor="middle">78</text>
+<rect class="digit" x="374" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="389" y="312" text-anchor="middle" style="white-space:pre">4</text>
+<text class="xs mono muted" x="389" y="336" text-anchor="middle">34</text>
+<rect class="digit" x="404" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="419" y="312" text-anchor="middle" style="white-space:pre">1</text>
+<text class="xs mono muted" x="419" y="336" text-anchor="middle">31</text>
+<rect class="space" x="434" y="292" width="30" height="30" rx="0"/>
+<text class="mono muted" x="449" y="312" text-anchor="middle" style="white-space:pre">␣</text>
+<text class="xs mono muted" x="449" y="336" text-anchor="middle">20</text>
+<rect class="comment" x="464" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="479" y="312" text-anchor="middle" style="white-space:pre">;</text>
+<text class="xs mono muted" x="479" y="336" text-anchor="middle">3B</text>
+<rect class="comment" x="494" y="292" width="30" height="30" rx="0"/>
+<text class="mono muted" x="509" y="312" text-anchor="middle" style="white-space:pre">␣</text>
+<text class="xs mono muted" x="509" y="336" text-anchor="middle">20</text>
+<rect class="comment" x="524" y="292" width="30" height="30" rx="0"/>
+<text class="mono" x="539" y="312" text-anchor="middle" style="white-space:pre">x</text>
+<text class="xs mono muted" x="539" y="336" text-anchor="middle">78</text>
+<rect class="nl" x="554" y="292" width="30" height="30" rx="0"/>
+<text class="xs mono" x="569" y="312" text-anchor="middle" style="white-space:pre">\n</text>
+<text class="xs mono muted" x="569" y="336" text-anchor="middle">0A</text>
+<rect class="letter" x="620" y="296" width="16" height="12" rx="2"/>
+<text class="xs" x="644" y="306">літера → ident()</text>
+<rect class="digit" x="830" y="296" width="16" height="12" rx="2"/>
+<text class="xs" x="854" y="306">цифра → number()</text>
+<rect class="punct" x="620" y="316" width="16" height="12" rx="2"/>
+<text class="xs" x="644" y="326">: , [ ] → свій токен</text>
+<rect class="space" x="830" y="316" width="16" height="12" rx="2"/>
+<text class="xs" x="854" y="326">пробіл → пропустити</text>
+<rect class="comment" x="620" y="336" width="16" height="12" rx="2"/>
+<text class="xs" x="644" y="346">; → коментар до кінця рядка</text>
+<rect class="nl" x="830" y="336" width="16" height="12" rx="2"/>
+<text class="xs" x="854" y="346">\n → Newline</text>
+<text class="xs muted" x="44" y="352">Окремо вирішується лише байт, з якого починається лексема: <tspan class="mono">0x41</tspan> цілком забере <tspan class="mono">number()</tspan>.</text>
+<text class="sm" x="44" y="370">Лексема за лексемою — токени рядка <tspan class="mono">loop: JMP loop</tspan>:</text>
+<rect class="letter" x="44" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="59" y="398" text-anchor="middle" style="white-space:pre">l</text>
+<rect class="letter" x="74" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="89" y="398" text-anchor="middle" style="white-space:pre">o</text>
+<rect class="letter" x="104" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="119" y="398" text-anchor="middle" style="white-space:pre">o</text>
+<rect class="letter" x="134" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="149" y="398" text-anchor="middle" style="white-space:pre">p</text>
+<rect class="punct" x="164" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="179" y="398" text-anchor="middle" style="white-space:pre">:</text>
+<rect class="space" x="194" y="378" width="30" height="30" rx="0"/>
+<text class="mono muted" x="209" y="398" text-anchor="middle" style="white-space:pre">␣</text>
+<rect class="letter" x="224" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="239" y="398" text-anchor="middle" style="white-space:pre">J</text>
+<rect class="letter" x="254" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="269" y="398" text-anchor="middle" style="white-space:pre">M</text>
+<rect class="letter" x="284" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="299" y="398" text-anchor="middle" style="white-space:pre">P</text>
+<rect class="space" x="314" y="378" width="30" height="30" rx="0"/>
+<text class="mono muted" x="329" y="398" text-anchor="middle" style="white-space:pre">␣</text>
+<rect class="letter" x="344" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="359" y="398" text-anchor="middle" style="white-space:pre">l</text>
+<rect class="letter" x="374" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="389" y="398" text-anchor="middle" style="white-space:pre">o</text>
+<rect class="letter" x="404" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="419" y="398" text-anchor="middle" style="white-space:pre">o</text>
+<rect class="letter" x="434" y="378" width="30" height="30" rx="0"/>
+<text class="mono" x="449" y="398" text-anchor="middle" style="white-space:pre">p</text>
+<rect class="nl" x="464" y="378" width="30" height="30" rx="0"/>
+<text class="xs mono" x="479" y="398" text-anchor="middle" style="white-space:pre">\n</text>
+<rect class="space" x="510" y="378" width="40" height="30" rx="0"/>
+<text class="xs mono muted" x="530" y="398" text-anchor="middle" style="white-space:pre">EOF</text>
+<path class="brace" d="M46,412 v6 H162 v-6"/>
+<text class="xs mono b" x="104" y="432" text-anchor="middle">Ident(loop)</text>
+<path class="brace" d="M166,412 v6 H192 v-6"/>
+<text class="xs mono b" x="179" y="432" text-anchor="middle">Colon</text>
+<path class="brace" d="M226,412 v6 H312 v-6"/>
+<text class="xs mono b" x="269" y="432" text-anchor="middle">Ident(JMP)</text>
+<path class="brace" d="M346,412 v6 H462 v-6"/>
+<text class="xs mono b" x="404" y="432" text-anchor="middle">Ident(loop)</text>
+<path class="brace" d="M466,412 v6 H492 v-6"/>
+<text class="xs mono b" x="479" y="432" text-anchor="middle">Newline</text>
+<text class="xs mono b" x="530" y="432" text-anchor="middle">Eof</text>
+<line class="rule" x1="604" y1="362" x2="604" y2="456"/>
+<text class="sm b" x="620" y="376">Граматика рядка</text>
+<text class="xs mono" x="620" y="394">line := [ ident ':' ] [ instruction ] [ comment ] newline</text>
+<text class="xs muted" x="620" y="412"><tspan class="mono">loop:</tspan> — мітка, <tspan class="mono">JMP</tspan> — мнемоніка, <tspan class="mono">loop</tspan> — операнд-мітка</text>
+<text class="xs muted" x="620" y="434">Вивід лексера, як у CHECKS.md:</text>
+<text class="xs mono" x="620" y="450">Ident(loop) Colon Ident(JMP) Ident(loop) Newline Eof</text>
+
+<!-- 3. Список токенів -->
+<rect class="box" x="24" y="486" width="508" height="254" rx="10"/>
+<text class="h2" x="44" y="512">3. Список: довжину не оголошують, а з'ясовують</text>
+<g class="chip" transform="translate(492,498)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§3</text></g>
+<text class="xs mono" x="44" y="536">Token* head = nullptr;  Token* tail = nullptr;</text>
+<rect class="node" x="44" y="578" width="70" height="44" rx="4"/>
+<text class="sm mono b" x="79" y="596" text-anchor="middle">Ident</text>
+<text class="xs mono" x="79" y="612" text-anchor="middle">loop</text>
+<rect class="nptr" x="114" y="578" width="20" height="44" rx="4"/>
+<circle cx="124" cy="600" r="3" fill="var(--b-s)"/>
+<path class="arrow a-b" d="M124,600 L152,600" marker-end="url(#m-b)"/>
+<rect class="node" x="154" y="578" width="70" height="44" rx="4"/>
+<text class="sm mono b" x="189" y="596" text-anchor="middle">Colon</text>
+<text class="xs mono" x="189" y="612" text-anchor="middle">·</text>
+<rect class="nptr" x="224" y="578" width="20" height="44" rx="4"/>
+<circle cx="234" cy="600" r="3" fill="var(--b-s)"/>
+<path class="arrow a-b" d="M234,600 L262,600" marker-end="url(#m-b)"/>
+<rect class="node" x="264" y="578" width="70" height="44" rx="4"/>
+<text class="sm mono b" x="299" y="596" text-anchor="middle">Ident</text>
+<text class="xs mono" x="299" y="612" text-anchor="middle">JMP</text>
+<rect class="nptr" x="334" y="578" width="20" height="44" rx="4"/>
+<circle cx="344" cy="600" r="3" fill="var(--b-s)"/>
+<path class="arrow a-b dashed" d="M344,600 L412,600" marker-end="url(#m-b)"/>
+<text class="sm muted" x="384" y="594" text-anchor="middle">…</text>
+<rect class="node" x="414" y="578" width="70" height="44" rx="4"/>
+<text class="sm mono b" x="449" y="596" text-anchor="middle">Eof</text>
+<text class="xs mono" x="449" y="612" text-anchor="middle">·</text>
+<rect class="nptr" x="484" y="578" width="20" height="44" rx="4"/>
+<text class="xs mono" x="494" y="604" text-anchor="middle">∅</text>
+<text class="xs mono muted" x="89" y="636" text-anchor="middle">рядок 1</text>
+<text class="xs muted" x="504" y="636" text-anchor="end">next = nullptr</text>
+<text class="sm mono b" x="79" y="560" text-anchor="middle">head</text>
+<path class="arrow a-io" d="M79,564 L79,575" marker-end="url(#m-io)"/>
+<text class="sm mono b" x="449" y="560" text-anchor="middle">tail</text>
+<path class="arrow a-io" d="M449,564 L449,575" marker-end="url(#m-io)"/>
+<text class="xs mono" x="44" y="666" style="white-space:pre">append:  tail-&gt;next = t; tail = t;    <tspan class="muted">// порожній: head = tail = t</tspan></text>
+<text class="xs mono" x="44" y="684" style="white-space:pre">обхід:   for (Token* t = head; t; t = t-&gt;next)</text>
+<text class="xs mono" x="44" y="702" style="white-space:pre">кінець:  пройти й delete кожен вузол</text>
+<text class="sm muted" x="44" y="726">Файл буває будь-якої довжини — тому список, а не масив. Забули <tspan class="mono">delete</tspan> — витік.</text>
+
+<!-- 4. Два проходи -->
+<rect class="box" x="548" y="486" width="508" height="254" rx="10"/>
+<text class="h2" x="568" y="512">4. Два проходи: мітка нижче за стрибок</text>
+<g class="chip" transform="translate(1016,498)"><rect width="28" height="17" rx="4"/><text x="14" y="12.5">§2</text></g>
+<text class="xs muted" x="568" y="534">Програма <tspan class="mono">forward</tspan> з Notes 08 §4; досліди <tspan class="mono">06</tspan> і <tspan class="mono">09</tspan> у практиці Lab 08.</text>
+<text class="xs b" x="568" y="558">адр.</text>
+<text class="xs b" x="616" y="558">текст</text>
+<text class="xs b" x="742" y="558">один прохід</text>
+<text class="xs b" x="892" y="558">два проходи</text>
+<line class="rule" x1="568" y1="564" x2="1036" y2="564"/>
+<text class="sm mono muted" x="568" y="584">0000</text>
+<text class="sm mono" x="616" y="584">JMP done</text>
+<text class="sm mono" x="742" y="584">30 <tspan class="err">?? ??</tspan></text>
+<text class="sm mono ok" x="892" y="584">30 04 00</text>
+<text class="sm mono muted" x="568" y="606">0003</text>
+<text class="sm mono" x="616" y="606">NOP</text>
+<text class="sm mono" x="742" y="606">01</text>
+<text class="sm mono" x="892" y="606">01</text>
+<text class="sm mono muted" x="568" y="628">0004</text>
+<text class="sm mono" x="616" y="628">done: HALT</text>
+<text class="sm mono" x="742" y="628">00</text>
+<text class="sm mono" x="892" y="628">00</text>
+<text class="sm" x="568" y="664"><tspan class="b">Прохід 1:</tspan> адреса = сума розмірів: <tspan class="mono">0 + 3 + 1</tspan> → <tspan class="mono">done = 0x0004</tspan>.</text>
+<text class="sm" x="568" y="684"><tspan class="b">Прохід 2:</tspan> видати байти, підставивши <tspan class="mono">0x0004</tspan>: <tspan class="mono ok">30 04 00</tspan>.</text>
+<text class="sm muted" x="568" y="708">Мітка вище стрибка відома одразу; нижче — лише після проходу 1.</text>
+<text class="sm muted" x="568" y="726">Вставте <tspan class="mono">NOP</tspan> вище <tspan class="mono">base</tspan> у <tspan class="mono">fact</tspan> — зсунуться обидва <tspan class="mono">JZ base</tspan>.</text>
+</svg>
